@@ -47,14 +47,11 @@ $.fn.editable = function(url, options) {
         h.value = self.id;
         h.name  = settings.id;
 
+        /* add created form to self */
         self.appendChild(f);
-        console.log(f);
 
         i.focus();
  
-        console.log(this);
-        console.log(self);
-
         $(i).keydown(function(e) {
 	    if (e.keyCode == 27) {
                 e.preventDefault();
@@ -71,9 +68,11 @@ $.fn.editable = function(url, options) {
             p[i.name] = $(i).val();
             p[h.name] = $(h).val();
 
-            reset();
-
-            console.log(e);
+            /* show the saving indicator */
+            $(self).html(options.saving);
+            $(self).load(settings.url, p, function(str) {
+                self.editing = false;
+            });
         });
 
         function reset() {
@@ -82,8 +81,5 @@ $.fn.editable = function(url, options) {
         };
 
     });
-
-    $.editable = function() {
-    };
 
 }
