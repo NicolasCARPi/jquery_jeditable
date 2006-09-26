@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>jQuery editable plugin test</title>
+<script src="jquery-latest.js" type="text/javascript"></script>
+<script src="editable-latest.js" type="text/javascript"></script>
+</head>
+<html>
+<h1 class="editable">Header text</h1>
+<p class="editable">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+Duis</p>
+
+<script type="text/javascript">
+// <![CDATA[
+$(document).ready(function() {
+    $(".editable").editable("http://www.appelsiini.net/~tuupola/jquery/editable.php", { 
+        saving : "<img src='img/indicator.gif'>"
+    });
+});
+// ]]>
+</script>
+</html>
+
