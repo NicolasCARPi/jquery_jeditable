@@ -28,7 +28,7 @@ $.fn.editable = function(url, options) {
         }
 
         self.editing = true;
-        self.revert  = this.textContent;
+        self.revert  = $(self).html();
         self.innerHTML = "";
 
         /* create the form object */
@@ -52,11 +52,17 @@ $.fn.editable = function(url, options) {
 
         i.focus();
  
+        /* discard changes if pressing esc */
         $(i).keydown(function(e) {
 	    if (e.keyCode == 27) {
                 e.preventDefault();
                 reset();
             }
+        });
+
+        /* discard changes if clicking outside of editable */
+        $(i).blur(function(e) {
+            reset();
         });
 
         $(f).submit(function(e) {
