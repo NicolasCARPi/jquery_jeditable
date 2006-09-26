@@ -41,21 +41,22 @@ $.fn.editable = function(url, options) {
         i.type  = "text";
         i.name  = settings.name;
 
-        if (settings.load) {
-            $.get(settings.load , function(str){
+        var l = {};
+        l[settings.id] = self.id;
+
+        if (settings.getload) {
+            $.get(settings.getload, l, function(str) {
                 i.value = str;
             });
-        } else {
+        } else if (settings.postload) {
+            $.post(settings.postload, l, function(str) {
+                i.value = str;
+            }); 
+        } else { 
             i.value = self.revert;
         }
 
         f.appendChild(i);
-
-        /* element containing id of element being edited*/
-        var h = document.createElement("input");
-        h.type = "hidden";
-        h.value = self.id;
-        h.name  = settings.id;
 
         /* add created form to self */
         self.appendChild(f);
@@ -82,7 +83,7 @@ $.fn.editable = function(url, options) {
             /* add edited content and id of edited element to POST */           
             var p = {};
             p[i.name] = $(i).val();
-            p[h.name] = $(h).val();
+            p[settings.id] = self.id;
 
             /* show the saving indicator */
             $(self).html(options.indicator);
