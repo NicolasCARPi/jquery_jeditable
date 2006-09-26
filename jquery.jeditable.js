@@ -1,7 +1,9 @@
 /**
 * jQuery inplace editor plugin.
 *
-* Base on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
+* Based on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
+*
+* $Id$
 */
 
 $.fn.editable = function(url, options) {
@@ -27,9 +29,9 @@ $.fn.editable = function(url, options) {
             return;
         }
 
-        self.editing = true;
-        self.revert  = $(self).html();
-        self.innerHTML = "";
+        self.editing    = true;
+        self.revert     = $(self).html();
+        self.innerHTML  = "";
 
         /* create the form object */
         var f = document.createElement("form");
@@ -38,7 +40,15 @@ $.fn.editable = function(url, options) {
         var i = document.createElement("input");
         i.type  = "text";
         i.name  = settings.name;
-        i.value = self.revert;
+
+        if (settings.load) {
+            $.get(settings.load , function(str){
+                i.value = str;
+            });
+        } else {
+            i.value = self.revert;
+        }
+
         f.appendChild(i);
 
         /* element containing id of element being edited*/
@@ -75,7 +85,7 @@ $.fn.editable = function(url, options) {
             p[h.name] = $(h).val();
 
             /* show the saving indicator */
-            $(self).html(options.saving);
+            $(self).html(options.indicator);
             $(self).load(settings.url, p, function(str) {
                 self.editing = false;
             });
