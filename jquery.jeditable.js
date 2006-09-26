@@ -3,6 +3,10 @@
 *
 * Based on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
 *
+* @param String url URL where to POST changes
+* @param Hash options additional options (name, id, type, getload, postload, 
+                      indicator)
+*             
 * $Id$
 */
 
@@ -12,7 +16,9 @@ $.fn.editable = function(url, options) {
         url    : url,
         name   : 'value',
         id     : 'id',
-        type   : 'text'
+        type   : 'text',
+        rows   : 5, 
+        cols   : 40
     };
 
     if(options) {
@@ -36,11 +42,20 @@ $.fn.editable = function(url, options) {
         /* create the form object */
         var f = document.createElement("form");
 
+
         /*  main input element */
-        var i = document.createElement("input");
-        i.type  = "text";
+        var i;
+        if ("textarea" == settings.type) {
+            i = document.createElement("textarea");
+            i.rows = settings.rows;
+            i.cols = settings.cols;
+        } else {
+            i = document.createElement("input");
+            i.type  = settings.type;
+        }
         i.name  = settings.name;
 
+        /* fetch input content via POST or GET */
         var l = {};
         l[settings.id] = self.id;
 
@@ -58,6 +73,13 @@ $.fn.editable = function(url, options) {
 
         f.appendChild(i);
 
+        if ("textarea" == settings.type) {
+            var b = document.createElement("input");
+            b.type = "submit";
+            b.value = "OK";
+            f.appendChild(b);
+        }
+
         /* add created form to self */
         self.appendChild(f);
 
@@ -72,11 +94,16 @@ $.fn.editable = function(url, options) {
         });
 
         /* discard changes if clicking outside of editable */
+        var t;
         $(i).blur(function(e) {
-            reset();
+            t = setTimeout(reset, 500)
         });
 
         $(f).submit(function(e) {
+            if (t) { 
+                clearTimeout(t);
+            }
+
             /* do no submit */
             e.preventDefault(); 
 
