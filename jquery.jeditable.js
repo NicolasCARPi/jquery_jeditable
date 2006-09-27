@@ -52,6 +52,7 @@ $.fn.editable = function(url, options) {
         } else {
             i = document.createElement("input");
             i.type  = settings.type;
+            i.setAttribute('autocomplete','off');
         }
         i.name  = settings.name;
 
