@@ -3,9 +3,16 @@
 *
 * Based on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
 *
-* @param String url URL where to POST changes
-* @param Hash options additional options (name, id, type, getload, postload, 
-                      indicator)
+* @param String  url                POST URL to send edited content
+* @param Hash    options            additional options 
+* @param String  options[name]      POST parameter name of edited content
+* @param String  options[id]        POST parameter name of edited div id
+* @param String  options[type]      text or textarea
+* @param Integer options[rows]      number of rows if using textarea
+* @param Integer options[cols]      number of columns if using textarea
+* @param String  options[postload]  POST URL to fetch content before editing
+* @param String  options[getload]   GET URL to fetch content before editing
+* @param String  options[indicator] indicator html to show when saving
 *             
 * $Id$
 */
@@ -52,6 +59,7 @@ $.fn.editable = function(url, options) {
         } else {
             i = document.createElement("input");
             i.type  = settings.type;
+            /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
             i.setAttribute('autocomplete','off');
         }
         i.name  = settings.name;
