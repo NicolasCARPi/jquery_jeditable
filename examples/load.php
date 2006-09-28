@@ -1,5 +1,7 @@
 <?php
 
+/* $Id$ */
+
 require_once 'dbConnection.php';
 require_once 'defaults.php';
 
