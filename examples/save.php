@@ -25,7 +25,7 @@ $renderer = $_GET['renderer'] ?  $_GET['renderer'] : $_POST['renderer'];
 if ('textile' == $renderer) {
     require_once './lib/Textile.php';
     $t = new Textile();
-    print $t->TextileThis($_POST['value']);
+    print $t->TextileThis(stripslashes($_POST['value']));
 } else {
     print $_POST['value'];
 }
