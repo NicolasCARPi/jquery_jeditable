@@ -10,4 +10,11 @@ $dsn = array(
 
 $dbh =& DB::connect($dsn);
 
+$dbh->query("
+CREATE TABLE config (id INTEGER primary key, 
+                     token VARCHAR(255),
+                     value TEXT,
+                     date DATETIME)
+");
+
 ?>
