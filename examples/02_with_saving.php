@@ -3,7 +3,8 @@
 /* $Id$ */
 
 /* No hardoced URL's in examples. Just copy the folder to server. */
-$url = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['SCRIPT_URI']);
+$folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+$url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 
 ?>
 <html>
