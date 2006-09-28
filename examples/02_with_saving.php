@@ -13,11 +13,11 @@ $url = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['SCRIPT_URI']);
 <script src="lib/jeditable.js" type="text/javascript"></script>
 </head>
 <html>
-<h1 class="editable" id="header_1"><?php print file_get_contents('http://www.appelsiini.net/~tuupola/jquery/editable/examples/load.php?id=header_1') ?></h1>
-<h2 class="editable" id="header_2"><?php print file_get_contents('http://www.appelsiini.net/~tuupola/jquery/editable/examples/load.php?id=header_2') ?></h2>
-<h3 class="editable" id="header_3"><?php print file_get_contents('http://www.appelsiini.net/~tuupola/jquery/editable/examples/load.php?id=header_3') ?></h3>
+<h1 class="editable" id="header_1"><?php print file_get_contents($url . 'load.php?id=header_1') ?></h1>
+<h2 class="editable" id="header_2"><?php print file_get_contents($url . 'load.php?id=header_2') ?></h2>
+<h3 class="editable" id="header_3"><?php print file_get_contents($url . 'load.php?id=header_3') ?></h3>
 <div class="editable_textarea" id="paragraph_1">
-<?php print file_get_contents('http://www.appelsiini.net/~tuupola/jquery/editable/examples/load.php?id=paragraph_1') ?>
+<?php print file_get_contents($url . 'load.php?id=paragraph_1') ?>
 </div>
 
 <script type="text/javascript">
