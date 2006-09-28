@@ -1,5 +1,9 @@
 <?php
 
+/* $Id$ */
+
+error_reporting(E_ALL ^ E_NOTICE);
+
 require_once 'DB.php';
 
 $dsn = array(
