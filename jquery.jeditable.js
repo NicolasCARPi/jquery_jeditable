@@ -39,6 +39,8 @@
   *
   * Based on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
   *
+  * @name  jEditable
+  * @type  jQuery
   * @param String  url                POST URL to send edited content
   * @param Hash    options            additional options 
   * @param String  options[name]      POST parameter name of edited content
