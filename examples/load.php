@@ -14,7 +14,7 @@ $query = sprintf("SELECT value
 
 $retval =  $dbh->getOne($query);
 if ('textile' == $renderer) {
-    require_once 'Textile.php';
+    require_once './lib/Textile.php';
     $t = new Textile();
     $retval = $t->TextileThis($retval);
 } 

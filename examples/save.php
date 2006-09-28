@@ -23,7 +23,7 @@ usleep(2000);
 
 $renderer = $_GET['renderer'] ?  $_GET['renderer'] : $_POST['renderer'];
 if ('textile' == $renderer) {
-    require_once 'Textile.php';
+    require_once './lib/Textile.php';
     $t = new Textile();
     print $t->TextileThis($_POST['value']);
 } else {
