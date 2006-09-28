@@ -8,7 +8,7 @@ $url = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['SCRIPT_URI']);
 ?>
 <html>
 <head>
-<title>jQuery editable plugin test</title>
+<title>jEditable jQuery in place editor plugin basic usage</title>
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script src="lib/jeditable.js" type="text/javascript"></script>
 </head>
