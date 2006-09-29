@@ -9,7 +9,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 ?>
 <html>
 <head>
-<title>jEditable jQuery in place editor with Textile callback</title>
+<title>jEditable - Textile callback and tooltips demo</title>
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script src="lib/jeditable.js" type="text/javascript"></script>
 </head>
