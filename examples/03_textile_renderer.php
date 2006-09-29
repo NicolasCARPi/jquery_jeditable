@@ -32,16 +32,12 @@ $(document).ready(function() {
     });
     $(".editable_textarea").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type      : "textarea",
-        rows      : 5,
-        cols      : 80
+        type      : "textarea"
     });
     $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
         indicator : "<img src='img/indicator.gif'>",
         postload  : "<?php print $url ?>load.php",
-        type      : "textarea",
-        rows      : 10,
-        cols      : 80
+        type      : "textarea"
     });
 });
 // ]]>
