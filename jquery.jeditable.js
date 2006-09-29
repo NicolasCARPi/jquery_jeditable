@@ -49,6 +49,7 @@
   * @param String  options[postload]  POST URL to fetch content before editing
   * @param String  options[getload]   GET URL to fetch content before editing
   * @param String  options[indicator] indicator html to show when saving
+  * @param String  options[tooltip]   optional tooltip text via title attribute
   *             
   */
 
@@ -66,6 +67,8 @@ $.fn.editable = function(url, options) {
     if(options) {
         $.extend(settings, options);
     };
+
+    $(this).attr("title", settings.tooltip);
 
     this.click(function(e) {
 
