@@ -184,4 +184,5 @@ $.fn.editable = function(url, options) {
 
     });
 
+    return(this);
 }
