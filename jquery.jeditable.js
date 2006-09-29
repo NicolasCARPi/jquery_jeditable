@@ -26,10 +26,6 @@
 | OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  |
 |                                                                       |
 +-----------------------------------------------------------------------+
-| Authors: Mika Tuupola <tuupola@appelsiini.net>                        |
-|          Dylan Verheul <dylan@dyve.net>                               |
-| Version: 0.9.0                                                        |
-+-----------------------------------------------------------------------+
 */
 
 /* $Id$ */
@@ -48,6 +44,8 @@
   * @param String  options[type]      text or textarea
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
+  * @param Mixed   options[height]    'auto' or height in pixels
+  * @param Mixed   options[width]     'auto' or width in pixels 
   * @param String  options[postload]  POST URL to fetch content before editing
   * @param String  options[getload]   GET URL to fetch content before editing
   * @param String  options[indicator] indicator html to show when saving
@@ -61,8 +59,8 @@ $.fn.editable = function(url, options) {
         name   : 'value',
         id     : 'id',
         type   : 'text',
-        rows   : 5, 
-        cols   : 40
+        width  : 'auto',
+        height : 'auto'
     };
 
     if(options) {
@@ -79,6 +77,12 @@ $.fn.editable = function(url, options) {
             return;
         }
 
+        /* figure out how wide and tall we are */
+        settings.width = 
+            ('auto' == settings.width)  ? $(self).width()  : settings.width;
+        settings.height = 
+            ('auto' == settings.height) ? $(self).height() : settings.height;
+
         self.editing    = true;
         self.revert     = $(self).html();
         self.innerHTML  = "";
@@ -86,13 +90,21 @@ $.fn.editable = function(url, options) {
         /* create the form object */
         var f = document.createElement("form");
 
-
         /*  main input element */
         var i;
         if ("textarea" == settings.type) {
             i = document.createElement("textarea");
-            i.rows = settings.rows;
-            i.cols = settings.cols;
+            if (settings.rows) {
+                i.rows = settings.rows;
+            } else {
+                $(i).height(settings.height);
+            }
+            if (settings.cols) {
+                i.cols = settings.cols;
+            } else {
+                $(i).width(settings.width);
+            }
+
         } else {
             i = document.createElement("input");
             i.type  = settings.type;
