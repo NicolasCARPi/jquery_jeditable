@@ -33,7 +33,8 @@
 /**
   * jQuery inplace editor plugin.  
   *
-  * Based on Dylan Verheul's editable: http://www.dyve.net/jquery/?editable
+  * Based on editable by Dylan Verheul <dylan@dyve.net>
+  * http://www.dyve.net/jquery/?editable
   *
   * @name  jEditable
   * @type  jQuery
