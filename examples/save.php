@@ -12,9 +12,9 @@ CREATE TABLE config (id INTEGER PRIMARY KEY,
 
 $id = $dbh->nextId('config');
 
-$query = sprintf('INSERT INTO config (id, token, value)
-                  VALUES (%d, "%s", "%s")',
-                  $id, $_POST['id'], $_POST['value']);
+$query = sprintf("INSERT INTO config (id, token, value)
+                  VALUES (%d, '%s', '%s')",
+                  $id, $_POST['id'], stripslashes($_POST['value']));
 
 $status = $dbh->query($query);
 
