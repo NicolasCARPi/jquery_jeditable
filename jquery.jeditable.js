@@ -54,7 +54,7 @@
   *             
   */
 
-$.fn.editable = function(url, options) {
+jQuery.fn.editable = function(url, options) {
 
     var settings = {
         url    : url,
@@ -66,7 +66,7 @@ $.fn.editable = function(url, options) {
     };
 
     if(options) {
-        $.extend(settings, options);
+        jQuery.extend(settings, options);
     };
 
     $(this).attr("title", settings.tooltip);
@@ -122,11 +122,11 @@ $.fn.editable = function(url, options) {
         l[settings.id] = self.id;
 
         if (settings.getload) {
-            $.get(settings.getload, l, function(str) {
+            jQuery.get(settings.getload, l, function(str) {
                 i.value = str;
             });
         } else if (settings.postload) {
-            $.post(settings.postload, l, function(str) {
+            jQuery.post(settings.postload, l, function(str) {
                 i.value = str;
             }); 
         } else { 
