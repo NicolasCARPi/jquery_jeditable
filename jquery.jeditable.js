@@ -51,6 +51,7 @@
   * @param String  options[getload]   GET URL to fetch content before editing
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
+  * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
   *             
   */
 
@@ -62,7 +63,8 @@ jQuery.fn.editable = function(url, options) {
         id     : 'id',
         type   : 'text',
         width  : 'auto',
-        height : 'auto'
+        height : 'auto',
+        event  : 'click'
     };
 
     if(options) {
@@ -71,7 +73,7 @@ jQuery.fn.editable = function(url, options) {
 
     $(this).attr("title", settings.tooltip);
 
-    this.click(function(e) {
+    $(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
         var self = this;
