@@ -11,7 +11,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <head>
 <title>jEditable - basic usage</title>
 <script src="lib/jquery.js" type="text/javascript"></script>
-<script src="lib/jeditable.js" type="text/javascript"></script>
+<script src="lib/jquery.jeditable.js" type="text/javascript"></script>
 </head>
 <html>
 <h1 class="editable" id="header_1">Header 1</h1>
