@@ -57,6 +57,11 @@
 
 jQuery.fn.editable = function(url, options) {
 
+    /* prevent elem has no properties error */
+    if ($(this).id() == null) { 
+       return false; 
+    };
+
     var settings = {
         url    : url,
         name   : 'value',
@@ -71,9 +76,9 @@ jQuery.fn.editable = function(url, options) {
         jQuery.extend(settings, options);
     };
 
-    $(this).attr("title", settings.tooltip);
+    jQuery(this).attr("title", settings.tooltip);
 
-    $(this)[settings.event](function(e) {
+    jQuery(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
         var self = this;
@@ -85,12 +90,12 @@ jQuery.fn.editable = function(url, options) {
 
         /* figure out how wide and tall we are */
         settings.width = 
-            ('auto' == settings.width)  ? $(self).width()  : settings.width;
+            ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
         settings.height = 
-            ('auto' == settings.height) ? $(self).height() : settings.height;
+            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
 
         self.editing    = true;
-        self.revert     = $(self).html();
+        self.revert     = jQuery(self).html();
         self.innerHTML  = "";
 
         /* create the form object */
@@ -103,12 +108,12 @@ jQuery.fn.editable = function(url, options) {
             if (settings.rows) {
                 i.rows = settings.rows;
             } else {
-                $(i).height(settings.height);
+                jQuery(i).height(settings.height);
             }
             if (settings.cols) {
                 i.cols = settings.cols;
             } else {
-                $(i).width(settings.width);
+                jQuery(i).width(settings.width);
             }
 
         } else {
@@ -150,7 +155,7 @@ jQuery.fn.editable = function(url, options) {
         i.focus();
  
         /* discard changes if pressing esc */
-        $(i).keydown(function(e) {
+        jQuery(i).keydown(function(e) {
 	    if (e.keyCode == 27) {
                 e.preventDefault();
                 reset();
@@ -159,11 +164,11 @@ jQuery.fn.editable = function(url, options) {
 
         /* discard changes if clicking outside of editable */
         var t;
-        $(i).blur(function(e) {
+        jQuery(i).blur(function(e) {
             t = setTimeout(reset, 500)
         });
 
-        $(f).submit(function(e) {
+        jQuery(f).submit(function(e) {
             if (t) { 
                 clearTimeout(t);
             }
@@ -173,12 +178,12 @@ jQuery.fn.editable = function(url, options) {
 
             /* add edited content and id of edited element to POST */           
             var p = {};
-            p[i.name] = $(i).val();
+            p[i.name] = jQuery(i).val();
             p[settings.id] = self.id;
 
             /* show the saving indicator */
-            $(self).html(options.indicator);
-            $(self).load(settings.url, p, function(str) {
+            jQuery(self).html(options.indicator);
+            jQuery(self).load(settings.url, p, function(str) {
                 self.editing = false;
             });
         });
