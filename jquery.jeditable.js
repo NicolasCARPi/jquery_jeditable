@@ -52,6 +52,7 @@
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
+  * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   *             
   */
 
@@ -63,14 +64,14 @@ jQuery.fn.editable = function(url, options) {
     };
 
     var settings = {
-        url          : url,
-        name         : 'value',
-        id           : 'id',
-        type         : 'text',
-        width        : 'auto',
-        height       : 'auto',
-        event        : 'click',
-        cancelonblur : true
+        url    : url,
+        name   : 'value',
+        id     : 'id',
+        type   : 'text',
+        width  : 'auto',
+        height : 'auto',
+        event  : 'click',
+        onblur : 'cancel'
     };
 
     if(options) {
@@ -116,9 +117,11 @@ jQuery.fn.editable = function(url, options) {
             } else {
                 jQuery(i).width(width + 'px');
             }
+/*
             if (jQuery.iExpander && settings.autoexpand) {
                 jQuery(i).Autoexpand(settings.autoexpand);
             }
+*/
 
         } else {
             i = document.createElement('input');
@@ -166,12 +169,15 @@ jQuery.fn.editable = function(url, options) {
             }
         });
 
-        /* discard changes if clicking outside of editable */
+        /* discard, submit or nothing with changes when clicking outside */
+        /* do nothing is usable when navigating with tab */
         var t;
-        if (settings.cancelonblur) {
+        if ('cancel' == settings.onblur) {
             jQuery(i).blur(function(e) {
                 t = setTimeout(reset, 500)
             });
+        } else if ('submit' == settings.onblur) {
+            jQuery(self).submit();
         }
 
         jQuery(f).submit(function(e) {
