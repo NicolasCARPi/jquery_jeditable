@@ -11,6 +11,9 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <head>
 <title>jEditable - Textile callback and tooltips demo</title>
 <script src="lib/jquery.js" type="text/javascript"></script>
+<!--
+<script type="text/javascript" src="http://jquery.com/src/latest/"></script>
+-->
 <script src="lib/jquery.jeditable.js" type="text/javascript"></script>
 </head>
 <html>
@@ -34,6 +37,11 @@ $(document).ready(function() {
         indicator : "<img src='img/indicator.gif'>",
         tooltip   : "Move mouseover to edit...",
         event     : "mouseover"
+    });
+    $(".editable4").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        tooltip   : "Doublelick to edit...",
+        event     : "dblclick"
     });
 });
 // ]]>
