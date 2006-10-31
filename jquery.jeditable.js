@@ -177,7 +177,14 @@ jQuery.fn.editable = function(url, options) {
                 t = setTimeout(reset, 500)
             });
         } else if ('submit' == settings.onblur) {
-            jQuery(self).submit();
+            jQuery(i).blur(function(e) {
+                t = setTimeout(reset, 500)
+                jQuery(f).submit();
+            });
+        } else {
+            jQuery(i).blur(function(e) {
+              /* TODO: maybe something here */
+            });
         }
 
         jQuery(f).submit(function(e) {
