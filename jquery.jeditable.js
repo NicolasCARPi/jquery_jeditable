@@ -70,7 +70,7 @@ jQuery.fn.editable = function(url, options) {
         width  : 'auto',
         height : 'auto',
         event  : 'click',
-        blurcancels: true
+        cancelonblur : true
     };
 
     if(options) {
@@ -168,7 +168,7 @@ jQuery.fn.editable = function(url, options) {
 
         /* discard changes if clicking outside of editable */
         var t;
-        if (settings.blurcancels) {
+        if (settings.cancelonblur) {
             jQuery(i).blur(function(e) {
                 t = setTimeout(reset, 500)
             });
