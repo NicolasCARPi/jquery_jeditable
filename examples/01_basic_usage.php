@@ -38,6 +38,10 @@ $(document).ready(function() {
         indicator : "<img src='img/indicator.gif'>",
         type : 'textarea'
     });
+    $("#nosuch").editable("<?php print $url ?>echo.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type : 'textarea'
+    });
 });
 // ]]>
 </script>
