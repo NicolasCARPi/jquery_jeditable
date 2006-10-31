@@ -63,13 +63,13 @@ jQuery.fn.editable = function(url, options) {
     };
 
     var settings = {
-        url    : url,
-        name   : 'value',
-        id     : 'id',
-        type   : 'text',
-        width  : 'auto',
-        height : 'auto',
-        event  : 'click',
+        url          : url,
+        name         : 'value',
+        id           : 'id',
+        type         : 'text',
+        width        : 'auto',
+        height       : 'auto',
+        event        : 'click',
         cancelonblur : true
     };
 
@@ -77,7 +77,7 @@ jQuery.fn.editable = function(url, options) {
         jQuery.extend(settings, options);
     };
 
-    jQuery(this).attr("title", settings.tooltip);
+    jQuery(this).attr('title', settings.tooltip);
 
     jQuery(this)[settings.event](function(e) {
 
@@ -97,31 +97,31 @@ jQuery.fn.editable = function(url, options) {
 
         self.editing    = true;
         self.revert     = jQuery(self).html();
-        self.innerHTML  = "";
+        self.innerHTML  = '';
 
         /* create the form object */
-        var f = document.createElement("form");
+        var f = document.createElement('form');
 
         /*  main input element */
         var i;
-        if ("textarea" == settings.type) {
-            i = document.createElement("textarea");
+        if ('textarea' == settings.type) {
+            i = document.createElement('textarea');
             if (settings.rows) {
                 i.rows = settings.rows;
             } else {
-                jQuery(i).height(height+'px');
+                jQuery(i).height(height + 'px');
             }
             if (settings.cols) {
                 i.cols = settings.cols;
             } else {
-                jQuery(i).width(width+'px');
+                jQuery(i).width(width + 'px');
             }
             if (jQuery.iExpander && settings.autoexpand) {
                 jQuery(i).Autoexpand(settings.autoexpand);
             }
 
         } else {
-            i = document.createElement("input");
+            i = document.createElement('input');
             i.type  = settings.type;
             /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
             i.setAttribute('autocomplete','off');
@@ -146,10 +146,10 @@ jQuery.fn.editable = function(url, options) {
 
         f.appendChild(i);
 
-        if ("textarea" == settings.type) {
-            var b = document.createElement("input");
-            b.type = "submit";
-            b.value = "OK";
+        if ('textarea' == settings.type) {
+            var b = document.createElement('input');
+            b.type = 'submit';
+            b.value = 'OK';
             f.appendChild(b);
         }
 
