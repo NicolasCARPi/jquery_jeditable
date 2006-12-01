@@ -126,6 +126,8 @@ jQuery.fn.editable = function(url, options) {
         } else {
             i = document.createElement('input');
             i.type  = settings.type;
+            jQuery(i).height(height + 'px');
+            jQuery(i).width(width + 'px');
             /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
             i.setAttribute('autocomplete','off');
         }
