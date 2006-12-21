@@ -1,6 +1,6 @@
 # $Id$
 
-VERSION = 1.0.0RC1
+VERSION = 1.0.0
 SHELL = /bin/sh
 DOWNLOAD = /export/home/tuupola/public_html/download
 JSPACKER = /export/home/tuupola/bin/jspacker
@@ -17,6 +17,10 @@ packed: jquery.jeditable.js
 latest: jquery.jeditable.js jquery.jeditable-packed.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable.js
 	cp jquery.jeditable.packed.js $(DOWNLOAD)/jquery.jeditable-packed.js
+
+tests: jquery.jeditable.js
+	rm examples/lib/jquery.jeditable.js
+	cp jquery.jeditable.js examples/lib/
 
 tarball: examples/index.html
 	rm examples/lib/jquery.jeditable.js
