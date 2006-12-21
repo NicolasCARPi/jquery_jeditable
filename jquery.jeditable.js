@@ -53,6 +53,7 @@
   * @param String  options[tooltip]   optional tooltip text via title attribute
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
+  * @param String  options[submit]    submit button value, empty means no button
   *             
   */
 
@@ -77,7 +78,11 @@ jQuery.fn.editable = function(url, options) {
     if(options) {
         jQuery.extend(settings, options);
     };
-
+      
+    if ('textarea' == settings.type && null == settings.submit) {
+        settings.submit = 'OK';
+    };
+    
     jQuery(this).attr('title', settings.tooltip);
 
     jQuery(this)[settings.event](function(e) {
@@ -151,10 +156,10 @@ jQuery.fn.editable = function(url, options) {
 
         f.appendChild(i);
 
-        if ('textarea' == settings.type) {
+        if (settings.submit) {
             var b = document.createElement('input');
             b.type = 'submit';
-            b.value = 'OK';
+            b.value = settings.submit;
             f.appendChild(b);
         }
 
