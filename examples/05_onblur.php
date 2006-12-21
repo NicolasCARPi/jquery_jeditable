@@ -21,10 +21,10 @@ onblur : 'cancel'<br />
 Clicking outside editable area cancels changes.<br />
 Clicking OK button submits changes.
 <h1 class="editable1" id="header_7"><?php print file_get_contents($url . 'load.php?id=header_7') ?></span></h1>
-onblur : 'cancel'<br />
+onblur : submit'<br />
 Clicking outside editable area submits changes.
 <h2 class="editable2" id="header_8"><?php print file_get_contents($url . 'load.php?id=header_8') ?></span></h2>
-onblur : 'cancel'<br />
+onblur : 'ignore'<br />
 Click outside editable area is ignored. <br />
 Pressing ESC cancels changes. <br />
 Clicking OK button submits changes.
