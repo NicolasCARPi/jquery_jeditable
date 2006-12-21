@@ -54,5 +54,5 @@ $(document).ready(function() {
 });
 // ]]>
 </script>
+<?php include '00_footer.php' ?>
 </html>
-
