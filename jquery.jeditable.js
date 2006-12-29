@@ -79,10 +79,6 @@ jQuery.fn.editable = function(url, options) {
         jQuery.extend(settings, options);
     };
       
-    if ('textarea' == settings.type && null == settings.submit) {
-        settings.submit = 'OK';
-    };
-    
     jQuery(this).attr('title', settings.tooltip);
 
     jQuery(this)[settings.event](function(e) {
