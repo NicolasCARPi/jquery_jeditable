@@ -23,11 +23,12 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 // <![CDATA[
 $(document).ready(function() {
     $(".editable").editable("<?php print $url ?>save.php", { 
-        indicator : "<img src='img/indicator.gif'>"
+        indicator : '<img src="img/indicator.gif">'
     });
-    $(".editable_textarea").editable("<?php print $url ?>save.php", { 
-        indicator : "<img src='img/indicator.gif'>",
-        type      : "textarea"
+    $(".editable_textarea").editable('<?php print $url ?>save.php', { 
+        indicator : '<img src="img/indicator.gif">',
+        type      : 'textarea',
+        submit    : 'OK'
     });
 });
 // ]]>

@@ -36,11 +36,13 @@ $(document).ready(function() {
     });
     $(".editable_textarea").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type : 'textarea'
+        type   : 'textarea',
+        submit : 'OK'
     });
     $("#nosuch").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type : 'textarea'
+        type   : 'textarea',
+        submit : 'OK'
     });
 });
 // ]]>
