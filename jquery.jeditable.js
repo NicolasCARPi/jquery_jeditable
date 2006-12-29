@@ -54,6 +54,7 @@
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
+  * @param String  options[cancel]    cancel button value, empty means no button
   *             
   */
 
@@ -156,6 +157,13 @@ jQuery.fn.editable = function(url, options) {
             var b = document.createElement('input');
             b.type = 'submit';
             b.value = settings.submit;
+            f.appendChild(b);
+        }
+
+        if (settings.cancel) {
+            var b = document.createElement('input');
+            b.type = 'button';
+            b.value = settings.cancel;
             f.appendChild(b);
         }
 
