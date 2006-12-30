@@ -107,31 +107,32 @@ jQuery.fn.editable = function(url, options) {
 
         /*  main input element */
         var i;
-        if ('textarea' == settings.type) {
-            i = document.createElement('textarea');
-            if (settings.rows) {
-                i.rows = settings.rows;
-            } else {
-                jQuery(i).height(height + 'px');
-            }
-            if (settings.cols) {
-                i.cols = settings.cols;
-            } else {
-                jQuery(i).width(width + 'px');
-            }
+        switch (settings.type) {
+            case 'textarea':
+                i = document.createElement('textarea');
+                if (settings.rows) {
+                    i.rows = settings.rows;
+                } else {
+                    jQuery(i).height(height + 'px');
+                }
+                if (settings.cols) {
+                    i.cols = settings.cols;
+                } else {
+                    jQuery(i).width(width + 'px');
+                }
 /*
-            if (jQuery.iExpander && settings.autoexpand) {
-                jQuery(i).Autoexpand(settings.autoexpand);
-            }
+                if (jQuery.iExpander && settings.autoexpand) {
+                    jQuery(i).Autoexpand(settings.autoexpand);
+                }
 */
-
-        } else {
-            i = document.createElement('input');
-            i.type  = settings.type;
-            jQuery(i).height(height + 'px');
-            jQuery(i).width(width + 'px');
-            /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
-            i.setAttribute('autocomplete','off');
+                break;
+            default:
+                i = document.createElement('input');
+                i.type  = settings.type;
+                jQuery(i).height(height + 'px');
+                jQuery(i).width(width + 'px');
+                /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
+                i.setAttribute('autocomplete','off');
         }
         i.name  = settings.name;
 
