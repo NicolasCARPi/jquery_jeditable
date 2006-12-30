@@ -40,7 +40,7 @@ $(document).ready(function() {
     $(".editable_textile").mouseout(function() { 
         $(this).highlightFade({end:'#fff', speed:200});
     });
-    $(".editable_textxile").editable("<?php print $url ?>save.php?renderer=textile", { 
+    $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
         indicator : "<img src='img/indicator.gif'>",
         postload  : "<?php print $url ?>load.php",
         type      : "textarea",
