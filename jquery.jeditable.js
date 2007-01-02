@@ -126,6 +126,15 @@ jQuery.fn.editable = function(url, options) {
                 }
 */
                 break;
+            /* select support not working yet */
+            case 'select':
+                i = document.createElement('select');
+                for (i=0; i < 3; i++) {
+                    o = document.createElement('option');
+                    o.value = i;
+                    i.appendChild(o);
+                }
+                break;
             default:
                 i = document.createElement('input');
                 i.type  = settings.type;
