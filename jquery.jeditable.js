@@ -139,34 +139,34 @@ jQuery.fn.editable = function(url, options) {
                 i.setAttribute('autocomplete','off');
         }
         
-		/* set input content via POST, GET, given data or existing value */
-		var url;
-		var type;
-				
-		if (settings.getload) {
-		    url = settings.getload;
-		    type = 'GET';
-		} else if (settings.postload) {
-		    url = settings.postload;
-		    type = 'POST';		
-		}
+        /* set input content via POST, GET, given data or existing value */
+        var url;
+        var type;
+                
+        if (settings.getload) {
+            url = settings.getload;
+            type = 'GET';
+        } else if (settings.postload) {
+            url = settings.postload;
+            type = 'POST';      
+        }
 
-		if (url) {
-	    	var data = {};
-		    data[settings.id] = self.id;
-			jQuery.ajax({
-			   type : type,
-			   url  : url,
-			   data : data,
-			   success: function(str) {
-				  setContent(str);
-			   }
-		    });
-		} else if (settings.data) {
-   		    setContent(settings.data);
-		} else { 
-    	    setContent(self.revert);
-		}
+        if (url) {
+            var data = {};
+            data[settings.id] = self.id;
+            jQuery.ajax({
+               type : type,
+               url  : url,
+               data : data,
+               success: function(str) {
+                  setContent(str);
+               }
+            });
+        } else if (settings.data) {
+            setContent(settings.data);
+        } else { 
+            setContent(self.revert);
+        }
 
         i.name  = settings.name;
         f.appendChild(i);
@@ -192,7 +192,7 @@ jQuery.fn.editable = function(url, options) {
  
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
-	    if (e.keyCode == 27) {
+        if (e.keyCode == 27) {
                 e.preventDefault();
                 reset();
             }
