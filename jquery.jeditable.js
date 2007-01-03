@@ -49,6 +49,7 @@
   * @param Mixed   options[width]     'auto' or width in pixels 
   * @param String  options[postload]  POST URL to fetch content before editing
   * @param String  options[getload]   GET URL to fetch content before editing
+  * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
@@ -126,12 +127,17 @@ jQuery.fn.editable = function(url, options) {
                 }
 */
                 break;
-            /* select support not working yet */
             case 'select':
+                /* Assumes string is valid JSON */
+                if (String == settings.data.constructor) {
+                    eval ("var json = " + settings.data);
+                }
+                console.log(json);
                 i = document.createElement('select');
-                for (i=0; i < 3; i++) {
+                for (var key in json) {
                     o = document.createElement('option');
-                    o.value = i;
+                    o.value = key;
+                    o.text  = json[key];
                     i.appendChild(o);
                 }
                 break;
