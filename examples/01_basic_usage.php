@@ -17,21 +17,17 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <h1 class="editable" id="header_1">Header 1</h1>
 <h2 class="editable" id="header_2">Header 2</h2>
 <h3 class="editable" id="header_3">Header 3</h3>
+<h3 class="editable_select" id="header_4">Header 4</h3>
 <p class="editable_textarea" id="paragraph_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
 volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
 ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 Duis</p>
-<div class="editable_textarea" id="div_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+<p class="editable_textarea" id="div_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
 volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
 ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-Duis</div>
-<div><i><span class="editable_select">Lorem</span></i> ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-Duis</div>
+Duis</p>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -45,7 +41,8 @@ $(document).ready(function() {
         submit : 'OK'
     });
     $(".editable_select").editable("<?php print $url ?>echo.php", { 
-        indicator : "<img src='img/indicator.gif'>",
+        indicator : '<img src="img/indicator.gif">',
+        data   : '{"Lorem":"Lorem","Ipsum":"Ipsum","Dolor":"Dolor"}',
         type   : 'select',
         submit : 'OK'
     });
