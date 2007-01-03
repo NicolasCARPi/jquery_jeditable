@@ -27,6 +27,11 @@ nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
 volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
 ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 Duis</div>
+<div><i><span class="editable_select">Lorem</span></i> ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+Duis</div>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -37,6 +42,11 @@ $(document).ready(function() {
     $(".editable_textarea").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
         type   : 'textarea',
+        submit : 'OK'
+    });
+    $(".editable_select").editable("<?php print $url ?>echo.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type   : 'select',
         submit : 'OK'
     });
     $("#nosuch").editable("<?php print $url ?>echo.php", { 
