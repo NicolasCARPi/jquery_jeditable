@@ -1,6 +1,6 @@
 /*
 +-----------------------------------------------------------------------+
-| Copyright (c) 2006 Mika Tuupola, Dylan Verheul                        |
+| Copyright (c) 2006-2007 Mika Tuupola, Dylan Verheul                   |
 | All rights reserved.                                                  |
 |                                                                       |
 | Redistribution and use in source and binary forms, with or without    |
@@ -125,21 +125,10 @@ jQuery.fn.editable = function(url, options) {
                 if (jQuery.iExpander && settings.autoexpand) {
                     jQuery(i).Autoexpand(settings.autoexpand);
                 }
-*/
+*/     
                 break;
             case 'select':
-                /* Assumes string is valid JSON */
-                if (String == settings.data.constructor) {
-                    eval ("var json = " + settings.data);
-                }
-                console.log(json);
                 i = document.createElement('select');
-                for (var key in json) {
-                    o = document.createElement('option');
-                    o.value = key;
-                    o.text  = json[key];
-                    i.appendChild(o);
-                }
                 break;
             default:
                 i = document.createElement('input');
@@ -149,24 +138,37 @@ jQuery.fn.editable = function(url, options) {
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
+        
+		/* set input content via POST, GET, given data or existing value */
+		var url;
+		var type;
+				
+		if (settings.getload) {
+		    url = settings.getload;
+		    type = 'GET';
+		} else if (settings.postload) {
+		    url = settings.postload;
+		    type = 'POST';		
+		}
+
+		if (url) {
+	    	var data = {};
+		    data[settings.id] = self.id;
+			jQuery.ajax({
+			   type : type,
+			   url  : url,
+			   data : data,
+			   success: function(str) {
+				  setContent(str);
+			   }
+		    });
+		} else if (settings.data) {
+   		    setContent(settings.data);
+		} else { 
+    	    setContent(self.revert);
+		}
+
         i.name  = settings.name;
-
-        /* fetch input content via POST or GET */
-        var l = {};
-        l[settings.id] = self.id;
-
-        if (settings.getload) {
-            jQuery.get(settings.getload, l, function(str) {
-                i.value = str;
-            });
-        } else if (settings.postload) {
-            jQuery.post(settings.postload, l, function(str) {
-                i.value = str;
-            }); 
-        } else { 
-            i.value = self.revert;
-        }
-
         f.appendChild(i);
 
         if (settings.submit) {
@@ -238,6 +240,25 @@ jQuery.fn.editable = function(url, options) {
             self.innerHTML = self.revert;
             self.editing   = false;
         };
+
+        function setContent(str) {
+            switch (settings.type) {
+                case 'select':
+                    if (String == str.constructor) {
+                        eval ("var json = " + str);
+                        for (var key in json) {
+                           o = document.createElement('option');
+                           o.value = key;
+                           o.text  = json[key];
+                           i.appendChild(o);
+                        }
+                    }
+                    break;
+                default:
+                    i.value = str;
+                    break;
+            }
+        }
 
     });
 
