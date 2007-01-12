@@ -192,7 +192,7 @@ jQuery.fn.editable = function(url, options) {
  
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
-        if (e.keyCode == 27) {
+            if (e.keyCode == 27) {
                 e.preventDefault();
                 reset();
             }
