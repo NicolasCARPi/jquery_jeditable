@@ -62,7 +62,8 @@
 jQuery.fn.editable = function(url, options) {
 
     /* prevent elem has no properties error */
-    if (jQuery(this).id() == null) { 
+
+    if (jQuery(this).attr('id') == null) { 
         return false; 
     };
 
@@ -95,9 +96,9 @@ jQuery.fn.editable = function(url, options) {
 
         /* figure out how wide and tall we are */
         var width = 
-            ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+            ('auto' == settings.width)  ? jQuery(self).css('width')  : settings.width;
         var height = 
-            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
+            ('auto' == settings.height) ? jQuery(self).css('height') : settings.height;
 
         self.editing    = true;
         self.revert     = jQuery(self).html();
@@ -114,18 +115,15 @@ jQuery.fn.editable = function(url, options) {
                 if (settings.rows) {
                     i.rows = settings.rows;
                 } else {
-                    jQuery(i).height(height + 'px');
+                    console.log(height);
+                    jQuery(i).css('height', height);
                 }
                 if (settings.cols) {
                     i.cols = settings.cols;
                 } else {
-                    jQuery(i).width(width + 'px');
-                }
-/*
-                if (jQuery.iExpander && settings.autoexpand) {
-                    jQuery(i).Autoexpand(settings.autoexpand);
-                }
-*/     
+                    console.log(width);
+                    jQuery(i).css('width', width);
+                }   
                 break;
             case 'select':
                 i = document.createElement('select');
@@ -133,8 +131,8 @@ jQuery.fn.editable = function(url, options) {
             default:
                 i = document.createElement('input');
                 i.type  = settings.type;
-                jQuery(i).height(height + 'px');
-                jQuery(i).width(width + 'px');
+                jQuery(i).css('width', width);
+                jQuery(i).css('height', height);
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
@@ -205,9 +203,9 @@ jQuery.fn.editable = function(url, options) {
             jQuery(i).blur(function(e) {
                 t = setTimeout(reset, 500)
             });
+        /* TODO: does not currently work */
         } else if ('submit' == settings.onblur) {
             jQuery(i).blur(function(e) {
-                t = setTimeout(reset, 500)
                 jQuery(f).submit();
             });
         } else {
@@ -217,6 +215,7 @@ jQuery.fn.editable = function(url, options) {
         }
 
         jQuery(f).submit(function(e) {
+            console.log('doing submit');
             if (t) { 
                 clearTimeout(t);
             }
@@ -234,6 +233,7 @@ jQuery.fn.editable = function(url, options) {
             jQuery(self).load(settings.url, p, function(str) {
                 self.editing = false;
             });
+            return false;
         });
 
         function reset() {
