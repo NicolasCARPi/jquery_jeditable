@@ -62,7 +62,6 @@
 jQuery.fn.editable = function(url, options) {
 
     /* prevent elem has no properties error */
-
     if (jQuery(this).attr('id') == null) { 
         return false; 
     };
@@ -230,7 +229,9 @@ jQuery.fn.editable = function(url, options) {
 
             /* show the saving indicator */
             jQuery(self).html(options.indicator);
-            jQuery(self).load(settings.url, p, function(str) {
+            // jQuery(self).load(settings.url, p, function(str) {
+            jQuery.post(settings.url, p, function(str) {
+                self.innerHTML = str;
                 self.editing = false;
             });
             return false;
