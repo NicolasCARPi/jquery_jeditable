@@ -114,13 +114,11 @@ jQuery.fn.editable = function(url, options) {
                 if (settings.rows) {
                     i.rows = settings.rows;
                 } else {
-                    console.log(height);
                     jQuery(i).css('height', height);
                 }
                 if (settings.cols) {
                     i.cols = settings.cols;
                 } else {
-                    console.log(width);
                     jQuery(i).css('width', width);
                 }   
                 break;
@@ -137,6 +135,7 @@ jQuery.fn.editable = function(url, options) {
         }
         
         /* set input content via POST, GET, given data or existing value */
+        /* this looks weird because it is for maintaining bc */
         var url;
         var type;
                 
@@ -156,13 +155,13 @@ jQuery.fn.editable = function(url, options) {
                url  : url,
                data : data,
                success: function(str) {
-                  setContent(str);
+                  i.value = str;
                }
             });
         } else if (settings.data) {
-            setContent(settings.data);
+            i.value = settings.data;
         } else { 
-            setContent(self.revert);
+            i.value = self.revert;
         }
 
         i.name  = settings.name;
@@ -214,7 +213,7 @@ jQuery.fn.editable = function(url, options) {
         }
 
         jQuery(f).submit(function(e) {
-            console.log('doing submit');
+
             if (t) { 
                 clearTimeout(t);
             }
@@ -241,25 +240,6 @@ jQuery.fn.editable = function(url, options) {
             self.innerHTML = self.revert;
             self.editing   = false;
         };
-
-        function setContent(str) {
-            switch (settings.type) {
-                case 'select':
-                    if (String == str.constructor) {
-                        eval ("var json = " + str);
-                        for (var key in json) {
-                           o = document.createElement('option');
-                           o.value = key;
-                           o.text  = json[key];
-                           i.appendChild(o);
-                        }
-                    }
-                    break;
-                default:
-                    i.value = str;
-                    break;
-            }
-        }
 
     });
 
