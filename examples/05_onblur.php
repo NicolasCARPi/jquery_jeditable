@@ -37,7 +37,8 @@ $(document).ready(function() {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'textarea',
         onblur    : 'cancel',
-        tooltip   : 'Click to edit...'
+        tooltip   : 'Click to edit...',
+        submit    : 'OK'
     });
     $(".editable2").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
@@ -49,7 +50,8 @@ $(document).ready(function() {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'textarea',
         onblur    : 'ignore',
-        tooltip   : "Click to edit..."
+        tooltip   : "Click to edit...",
+        submit    : 'OK'
     });
 });
 // ]]>
