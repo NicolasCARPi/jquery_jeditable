@@ -1,6 +1,6 @@
 <?php
 
-/* $Id */
+/* $Id$ */
 
 require_once 'dbConnection.php';
 
