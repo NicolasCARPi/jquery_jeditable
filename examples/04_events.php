@@ -38,11 +38,6 @@ $(document).ready(function() {
         tooltip   : "Move mouseover to edit...",
         event     : "mouseover"
     });
-    $(".editable4").editable("<?php print $url ?>save.php", { 
-        indicator : "<img src='img/indicator.gif'>",
-        tooltip   : "Doublelick to edit...",
-        event     : "dblclick"
-    });
 });
 // ]]>
 </script>
