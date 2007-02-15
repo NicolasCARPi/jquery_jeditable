@@ -178,6 +178,9 @@ jQuery.fn.editable = function(url, options) {
             var b = document.createElement('input');
             b.type = 'button';
             b.value = settings.cancel;
+            jQuery(b).click(function() {
+                reset();
+            });
             f.appendChild(b);
         }
 
