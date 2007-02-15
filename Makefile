@@ -1,6 +1,6 @@
 # $Id$
 
-VERSION = 1.1.0
+VERSION = 1.1.1
 SHELL = /bin/sh
 DOWNLOAD = /export/home/tuupola/public_html/download
 JSPACKER = /export/home/tuupola/bin/jspacker
