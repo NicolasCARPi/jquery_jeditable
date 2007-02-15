@@ -38,6 +38,7 @@ $(document).ready(function() {
         type      : 'textarea',
         onblur    : 'cancel',
         tooltip   : 'Click to edit...',
+        cancel    : 'Cancel',
         submit    : 'OK'
     });
     $(".editable2").editable("<?php print $url ?>save.php", { 
@@ -51,6 +52,7 @@ $(document).ready(function() {
         type      : 'textarea',
         onblur    : 'ignore',
         tooltip   : "Click to edit...",
+        cancel    : 'Cancel',
         submit    : 'OK'
     });
 });
