@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.1.0)  
+  * jQuery inplace editor plugin (version 1.1.1)  
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -63,7 +63,7 @@ jQuery.fn.editable = function(url, options) {
 
     /* prevent elem has no properties error */
     if (this.length == 0) { 
-        return false; 
+        return(this); 
     };
 
     var settings = {
