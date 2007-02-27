@@ -95,9 +95,9 @@ jQuery.fn.editable = function(url, options) {
 
         /* figure out how wide and tall we are */
         var width = 
-            ('auto' == settings.width)  ? jQuery(self).css('width')  : settings.width;
+            ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
         var height = 
-            ('auto' == settings.height) ? jQuery(self).css('height') : settings.height;
+            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
 
         self.editing    = true;
         self.revert     = jQuery(self).html();
@@ -114,12 +114,12 @@ jQuery.fn.editable = function(url, options) {
                 if (settings.rows) {
                     i.rows = settings.rows;
                 } else {
-                    jQuery(i).css('height', height);
+                    jQuery(i).height(height);
                 }
                 if (settings.cols) {
                     i.cols = settings.cols;
                 } else {
-                    jQuery(i).css('width', width);
+                    jQuery(i).width(width);
                 }   
                 break;
             case 'select':
@@ -128,8 +128,8 @@ jQuery.fn.editable = function(url, options) {
             default:
                 i = document.createElement('input');
                 i.type  = settings.type;
-                jQuery(i).css('width', width);
-                jQuery(i).css('height', height);
+                jQuery(i).width(width);
+                jQuery(i).height(height);
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
