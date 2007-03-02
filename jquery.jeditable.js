@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.1.1)  
+  * jQuery inplace editor plugin (version 1.2.x)  
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -47,8 +47,8 @@
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto' or height in pixels
   * @param Mixed   options[width]     'auto' or width in pixels 
-  * @param String  options[postload]  POST URL to fetch content before editing
-  * @param String  options[getload]   GET URL to fetch content before editing
+  * @param String  options[loadurl]   URL to fetch content before editing
+  * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
@@ -67,14 +67,15 @@ jQuery.fn.editable = function(url, options) {
     };
 
     var settings = {
-        url    : url,
-        name   : 'value',
-        id     : 'id',
-        type   : 'text',
-        width  : 'auto',
-        height : 'auto',
-        event  : 'click',
-        onblur : 'cancel'
+        url      : url,
+        name     : 'value',
+        id       : 'id',
+        type     : 'text',
+        width    : 'auto',
+        height   : 'auto',
+        event    : 'click',
+        onblur   : 'cancel',
+        loadtype : 'GET'
     };
 
     if(options) {
@@ -134,25 +135,22 @@ jQuery.fn.editable = function(url, options) {
                 i.setAttribute('autocomplete','off');
         }
         
-        /* set input content via POST, GET, given data or existing value */
-        /* this looks weird because it is for maintaining bc */
-        var url;
-        var type;
-                
+        /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
-            url = settings.getload;
-            type = 'GET';
+            settings.loadurl    = settings.getload;
+            settings.loadtype = 'GET';
         } else if (settings.postload) {
-            url = settings.postload;
-            type = 'POST';      
+            settings.loadurl    = settings.postload;
+            settings.loadtype = 'POST';
         }
 
-        if (url) {
+        /* set input content via POST, GET, given data or existing value */
+        if (settings.loadurl) {
             var data = {};
             data[settings.id] = self.id;
             jQuery.ajax({
-               type : type,
-               url  : url,
+               type : settings.loadtype,
+               url  : settings.loadurl,
                data : data,
                success: function(str) {
                   i.value = str;
