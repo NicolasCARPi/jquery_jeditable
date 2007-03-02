@@ -20,7 +20,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <!--
 <h3 class="editable_select" id="header_10"><?php print file_get_contents($url . 'load.php?id=header_10') ?></h3>
 -->
-<div class="editable_textarea" id="paragraph_1"><?php print file_get_contents($url . 'load.php?id=paragraph_1') ?></div>
+<div class="editable_textarea" id="paragraph_1" style="width:60%;"><?php print file_get_contents($url . 'load.php?id=paragraph_1') ?></div>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -28,14 +28,12 @@ $(document).ready(function() {
     $(".editable").editable("<?php print $url ?>save.php", { 
         indicator : '<img src="img/indicator.gif">'
     });
-/*
     $(".editable_select").editable("<?php print $url ?>echo.php", { 
         indicator : '<img src="img/indicator.gif">',
         data   : '{"Lorem":"Lorem","Ipsum":"Ipsum","Dolor":"Dolor"}',
         type   : 'select',
         submit : 'OK'
     });
-*/
     $(".editable_textarea").editable('<?php print $url ?>save.php', { 
         indicator : '<img src="img/indicator.gif">',
         type      : 'textarea',

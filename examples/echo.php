@@ -1,6 +1,6 @@
 <?php
 
-/* $Id */
+/* $Id$ */
 
 print $_POST['value'];
 

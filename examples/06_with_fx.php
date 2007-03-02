@@ -42,7 +42,7 @@ $(document).ready(function() {
     });
     $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
         indicator : "<img src='img/indicator.gif'>",
-        postload  : "<?php print $url ?>load.php",
+        loadurl   : "<?php print $url ?>load.php",
         type      : "textarea",
         submit    : "OK",
         cancel    : "Cancel",
