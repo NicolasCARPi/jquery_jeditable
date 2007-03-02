@@ -153,13 +153,13 @@ jQuery.fn.editable = function(url, options) {
                url  : settings.loadurl,
                data : data,
                success: function(str) {
-                  i.value = str;
+                  setInputContent(str);
                }
             });
         } else if (settings.data) {
-            i.value = settings.data;
+            setInputContent(settings.data);
         } else { 
-            i.value = self.revert;
+            setInputContent(self.revert);
         }
 
         i.name  = settings.name;
@@ -241,6 +241,31 @@ jQuery.fn.editable = function(url, options) {
             self.innerHTML = self.revert;
             self.editing   = false;
         };
+        
+        function setInputContent(str) {
+            switch (settings.type) { 	 
+                case 'select': 	 
+                    if (String == str.constructor) { 	 
+                        eval ("var json = " + str); 	 
+                        for (var key in json) {
+                            if ('selected' == key) {
+                                continue;
+                            } 
+                            o = document.createElement('option'); 	 
+                            o.value = key; 	 
+                            o.text  = json[key];
+                            if (key == json['selected']) {
+                                o.selected = true;
+                            }
+                            i.appendChild(o); 	 
+                        }
+                    } 	 
+                    break; 	 
+                default: 	 
+                    i.value = str; 	 
+                    break; 	 
+            } 	 
+        }
 
     });
 
