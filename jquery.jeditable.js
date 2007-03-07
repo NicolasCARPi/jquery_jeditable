@@ -42,7 +42,7 @@
   * @param Hash    options            additional options 
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
-  * @param String  options[type]      text or textarea
+  * @param String  options[type]      text, textarea or select
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto' or height in pixels
