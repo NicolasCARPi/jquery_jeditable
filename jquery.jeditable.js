@@ -56,8 +56,8 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
-  * @param String  options[class]     CSS class to apply to input form
-  * @param String  options[style]     Style to apply to input form
+  * @param String  options[class]     CSS class to apply to input form. 'inherit' to copy from parent.
+  * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
   * @param String  options[select]    true or false, when true text is highlighted
   *             
   */
@@ -249,7 +249,9 @@ jQuery.fn.editable = function(url, options) {
 
             /* check if given target is function */
             if (Function == settings.url.constructor) {
-                settings.url(jQuery(i).val());                
+                var str = settings.url(jQuery(i).val());                
+                self.innerHTML = str;
+                self.editing = false;
             } else {
                 /* add edited content and id of edited element to POST */           
                 var p = {};
