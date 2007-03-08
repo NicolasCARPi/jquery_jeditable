@@ -64,8 +64,6 @@
 
 jQuery.fn.editable = function(url, options) {
 
-    jQuery.apply();
-
     /* prevent elem has no properties error */
     if (this.length == 0) { 
         return(this); 
