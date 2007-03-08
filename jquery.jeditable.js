@@ -56,6 +56,8 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
+  * @param String  options[class]     CSS class to apply to input form
+  * @param String  options[style]     Style to apply to input form
   *             
   */
 
@@ -106,7 +108,24 @@ jQuery.fn.editable = function(url, options) {
 
         /* create the form object */
         var f = document.createElement('form');
-
+        
+        /* apply css or style or both */
+        if (settings.class) {
+            if ('inherit' == settings.class) {
+                jQuery(f).attr('class', jQuery(self).attr('class'));
+            } else {
+                jQuery(f).attr('class', settings.class);
+            }
+        }
+        
+        if (settings.style) {
+            if ('inherit' == settings.style) {
+                jQuery(f).attr('style', jQuery(self).attr('style'));
+            } else {
+                jQuery(f).attr('style', settings.style);
+            }
+        }
+        
         /*  main input element */
         var i;
         switch (settings.type) {
