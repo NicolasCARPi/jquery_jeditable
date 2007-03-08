@@ -58,10 +58,13 @@
   * @param String  options[cancel]    cancel button value, empty means no button
   * @param String  options[class]     CSS class to apply to input form
   * @param String  options[style]     Style to apply to input form
+  * @param String  options[select]    true or false, when true text is highlighted
   *             
   */
 
 jQuery.fn.editable = function(url, options) {
+
+    jQuery.apply();
 
     /* prevent elem has no properties error */
     if (this.length == 0) { 
@@ -205,7 +208,12 @@ jQuery.fn.editable = function(url, options) {
         self.appendChild(f);
 
         i.focus();
- 
+        
+        /* highlight input contents when requested */
+        if (settings.select) {
+            i.select();
+        }
+         
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
             if (e.keyCode == 27) {
@@ -241,18 +249,23 @@ jQuery.fn.editable = function(url, options) {
             /* do no submit */
             e.preventDefault(); 
 
-            /* add edited content and id of edited element to POST */           
-            var p = {};
-            p[i.name] = jQuery(i).val();
-            p[settings.id] = self.id;
+            /* check if given target is function */
+            if (Function == settings.url.constructor) {
+                settings.url(jQuery(i).val());                
+            } else {
+                /* add edited content and id of edited element to POST */           
+                var p = {};
+                p[i.name] = jQuery(i).val();
+                p[settings.id] = self.id;
 
-            /* show the saving indicator */
-            jQuery(self).html(options.indicator);
-            // jQuery(self).load(settings.url, p, function(str) {
-            jQuery.post(settings.url, p, function(str) {
-                self.innerHTML = str;
-                self.editing = false;
-            });
+                /* show the saving indicator */
+                jQuery(self).html(options.indicator);
+                // jQuery(self).load(settings.url, p, function(str) {
+                jQuery.post(settings.url, p, function(str) {
+                    self.innerHTML = str;
+                    self.editing = false;
+                });
+            }
             return false;
         });
 
