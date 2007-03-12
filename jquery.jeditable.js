@@ -38,7 +38,7 @@
   *
   * @name  jEditable
   * @type  jQuery
-  * @param String  url                POST URL to send edited content
+  * @param String  target             POST URL or function name to send edited content
   * @param Hash    options            additional options 
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
@@ -62,7 +62,7 @@
   *             
   */
 
-jQuery.fn.editable = function(url, options) {
+jQuery.fn.editable = function(target, options) {
 
     /* prevent elem has no properties error */
     if (this.length == 0) { 
@@ -70,7 +70,7 @@ jQuery.fn.editable = function(url, options) {
     };
 
     var settings = {
-        url      : url,
+        target   : target,
         name     : 'value',
         id       : 'id',
         type     : 'text',
@@ -248,9 +248,9 @@ jQuery.fn.editable = function(url, options) {
             e.preventDefault(); 
 
             /* check if given target is function */
-            if (Function == settings.url.constructor) {
-                var str = settings.url.apply(self, [jQuery(i).val()]);
-//                var str = settings.url(jQuery(i).val());
+            if (Function == settings.target.constructor) {
+                var str = settings.target.apply(self, [jQuery(i).val()]);
+//                var str = settings.target(jQuery(i).val());
                 self.innerHTML = str;
                 self.editing = false;
             } else {
@@ -261,8 +261,8 @@ jQuery.fn.editable = function(url, options) {
 
                 /* show the saving indicator */
                 jQuery(self).html(options.indicator);
-                // jQuery(self).load(settings.url, p, function(str) {
-                jQuery.post(settings.url, p, function(str) {
+                // jQuery(self).load(settings.target, p, function(str) {
+                jQuery.post(settings.target, p, function(str) {
                     self.innerHTML = str;
                     self.editing = false;
                 });
