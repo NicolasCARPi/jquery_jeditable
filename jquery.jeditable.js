@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.2.x)  
+  * jQuery inplace editor plugin (version 1.2.0)  
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -278,7 +278,7 @@ jQuery.fn.editable = function(url, options) {
             switch (settings.type) { 	 
                 case 'select': 	 
                     if (String == str.constructor) { 	 
-                        eval ("var json = " + str); 	 
+                        eval ("var json = " + str);
                         for (var key in json) {
                             if ('selected' == key) {
                                 continue;
