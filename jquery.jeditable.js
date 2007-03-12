@@ -249,7 +249,8 @@ jQuery.fn.editable = function(url, options) {
 
             /* check if given target is function */
             if (Function == settings.url.constructor) {
-                var str = settings.url(jQuery(i).val());                
+                var str = settings.url.apply(self, [jQuery(i).val()]);
+//                var str = settings.url(jQuery(i).val());
                 self.innerHTML = str;
                 self.editing = false;
             } else {
