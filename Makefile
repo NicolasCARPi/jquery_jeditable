@@ -1,8 +1,8 @@
 # $Id$
 
-VERSION = 1.1.1
+VERSION = 1.2.0
 SHELL = /bin/sh
-DOWNLOAD = /export/home/tuupola/public_html/download
+DOWNLOAD = /export/home/tuupola/old_public_html/download
 JSPACKER = /export/home/tuupola/bin/jspacker
 
 all: jeditable packed tarball latest
