@@ -56,7 +56,7 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
-  * @param String  options[class]     CSS class to apply to input form. 'inherit' to copy from parent.
+  * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
   * @param String  options[select]    true or false, when true text is highlighted
   *             
@@ -68,7 +68,7 @@ jQuery.fn.editable = function(target, options) {
     if (this.length == 0) { 
         return(this); 
     };
-
+        
     var settings = {
         target   : target,
         name     : 'value',
@@ -80,7 +80,7 @@ jQuery.fn.editable = function(target, options) {
         onblur   : 'cancel',
         loadtype : 'GET'
     };
-
+    
     if(options) {
         jQuery.extend(settings, options);
     };
@@ -111,11 +111,11 @@ jQuery.fn.editable = function(target, options) {
         var f = document.createElement('form');
         
         /* apply css or style or both */
-        if (settings.class) {
-            if ('inherit' == settings.class) {
+        if (settings.cssclass) {
+            if ('inherit' == settings.cssclass) {
                 jQuery(f).attr('class', jQuery(self).attr('class'));
             } else {
-                jQuery(f).attr('class', settings.class);
+                jQuery(f).attr('class', settings.cssclass);
             }
         }
         
