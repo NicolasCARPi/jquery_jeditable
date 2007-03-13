@@ -20,12 +20,16 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <h3 class="editable_select" id="header_4">Header 4</h3>
 <p class="editable_textarea" id="paragraph_1" style="width:50%;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis</p>
 <p class="editable_textarea" id="paragraph_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+<p><span class="editable_select" style="display: inline">Lorem</span> ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 
 <script type="text/javascript">
 // <![CDATA[
 $(document).ready(function() {
-    $(".editable").editable("<?php print $url ?>echo.php", { 
-        indicator : "<img src='img/indicator.gif'>"
+    $(".xeditable").editable("<?php print $url ?>echo.php", { 
+      indicator : "<img src='img/indicator.gif'>"
+    });
+    $(".editable").editable(test, { 
+          indicator : "<img src='img/indicator.gif'>"          
     });
     $(".editable_textarea").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
@@ -34,9 +38,10 @@ $(document).ready(function() {
     });
     $(".editable_select").editable("<?php print $url ?>echo.php", { 
         indicator : '<img src="img/indicator.gif">',
-        data   : '{"Lorem":"Lorem","Ipsum":"Ipsum","Dolor":"Dolor"}',
-        type   : 'select',
-        submit : 'OK'
+        data   : "{'Lorem':'Lorem','Ipsum':'Ipsum','Dolor':'Dolor'}",
+        type   : "select",
+        submit : "OK",
+        style  : "inherit",
     });
     $("#nosuch").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
@@ -44,6 +49,14 @@ $(document).ready(function() {
         submit : 'OK'
     });
 });
+
+
+function test(param) {
+    console.log(param);
+    console.log(this);
+    return param;
+}
+
 // ]]>
 </script>
 
