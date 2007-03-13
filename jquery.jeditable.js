@@ -250,7 +250,6 @@ jQuery.fn.editable = function(target, options) {
             /* check if given target is function */
             if (Function == settings.target.constructor) {
                 var str = settings.target.apply(self, [jQuery(i).val()]);
-//                var str = settings.target(jQuery(i).val());
                 self.innerHTML = str;
                 self.editing = false;
             } else {
@@ -261,7 +260,6 @@ jQuery.fn.editable = function(target, options) {
 
                 /* show the saving indicator */
                 jQuery(self).html(options.indicator);
-                // jQuery(self).load(settings.target, p, function(str) {
                 jQuery.post(settings.target, p, function(str) {
                     self.innerHTML = str;
                     self.editing = false;
