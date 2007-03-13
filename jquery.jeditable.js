@@ -56,7 +56,7 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
-  * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
+  * @param String  options[class]     CSS class to apply to input form. 'inherit' to copy from parent.
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
   * @param String  options[select]    true or false, when true text is highlighted
   *             
@@ -68,7 +68,13 @@ jQuery.fn.editable = function(target, options) {
     if (this.length == 0) { 
         return(this); 
     };
-        
+
+    /* IE does not like option named "class", but I like to have consistent api */    
+    if (options["class"]) {
+        options["cssclass"] = options["class"];
+        delete options["class"];
+    }
+    
     var settings = {
         target   : target,
         name     : 'value',
