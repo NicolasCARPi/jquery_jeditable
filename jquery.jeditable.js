@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.2.1)  
+  * jQuery inplace editor plugin (version 1.2.x)  
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -122,6 +122,8 @@ jQuery.fn.editable = function(target, options) {
         if (settings.style) {
             if ('inherit' == settings.style) {
                 jQuery(f).attr('style', jQuery(self).attr('style'));
+                /* IE needs the second line or display wont be inherited */
+                jQuery(f).css('display', jQuery(self).css('display'));                
             } else {
                 jQuery(f).attr('style', settings.style);
             }
@@ -154,7 +156,7 @@ jQuery.fn.editable = function(target, options) {
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
-        
+
         /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
             settings.loadurl    = settings.getload;
