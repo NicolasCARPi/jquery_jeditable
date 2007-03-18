@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.2.x)  
+  * jQuery inplace editor plugin (version 1.3.x)  
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -62,7 +62,7 @@
   *             
   */
 
-jQuery.fn.editable = function(target, options) {
+jQuery.fn.editable = function(target, options, callback) {
 
     /* prevent elem has no properties error */
     if (this.length == 0) { 
@@ -84,6 +84,8 @@ jQuery.fn.editable = function(target, options) {
     if(options) {
         jQuery.extend(settings, options);
     };
+    
+    var callback = callback || function() { };
       
     jQuery(this).attr('title', settings.tooltip);
 
@@ -229,7 +231,6 @@ jQuery.fn.editable = function(target, options) {
             jQuery(i).blur(function(e) {
                 t = setTimeout(reset, 500)
             });
-        /* TODO: does not currently work */
         } else if ('submit' == settings.onblur) {
             jQuery(i).blur(function(e) {
                 jQuery(f).submit();
@@ -267,6 +268,9 @@ jQuery.fn.editable = function(target, options) {
                     self.editing = false;
                 });
             }
+            
+            callback.apply(self, [self.innerHTML, settings]);
+            
             return false;
         });
 
