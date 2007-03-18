@@ -250,7 +250,7 @@ jQuery.fn.editable = function(target, options) {
             e.preventDefault(); 
 
             /* check if given target is function */
-            if (Function == settings.target.constructor) {
+            if (jQuery.isFunction(settings.target)) {
                 var str = settings.target.apply(self, [jQuery(i).val(), settings]);
                 self.innerHTML = str;
                 self.editing = false;
