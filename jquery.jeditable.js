@@ -262,7 +262,7 @@ jQuery.fn.editable = function(target, options, callback) {
                 p[settings.id] = self.id;
 
                 /* show the saving indicator */
-                jQuery(self).html(options.indicator);
+                jQuery(self).html(settings.indicator);
                 jQuery.post(settings.target, p, function(str) {
                     self.innerHTML = str;
                     self.editing = false;
