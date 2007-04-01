@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.3.x)  
+  * jQuery inplace editor plugin (version 1.3.x)
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -255,6 +255,7 @@ jQuery.fn.editable = function(target, options, callback) {
                 var str = settings.target.apply(self, [jQuery(i).val(), settings]);
                 self.innerHTML = str;
                 self.editing = false;
+                callback.apply(self, [self.innerHTML, settings]);
             } else {
                 /* add edited content and id of edited element to POST */           
                 var p = {};
@@ -266,11 +267,10 @@ jQuery.fn.editable = function(target, options, callback) {
                 jQuery.post(settings.target, p, function(str) {
                     self.innerHTML = str;
                     self.editing = false;
+                    callback.apply(self, [self.innerHTML, settings]);
                 });
             }
-            
-            callback.apply(self, [self.innerHTML, settings]);
-            
+                        
             return false;
         });
 
