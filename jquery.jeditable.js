@@ -280,6 +280,9 @@ jQuery.fn.editable = function(target, options, callback) {
         };
         
         function setInputContent(str) {
+            if (jQuery.isFunction(str)) {
+                var str = str.apply(self, [self.revert, settings]);
+            }
             switch (settings.type) { 	 
                 case 'select': 	 
                     if (String == str.constructor) { 	 
