@@ -42,6 +42,7 @@
   * @param Hash    options            additional options 
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
+  * @param Hash    options[submitdata] Extra parameters to send when submitting edited content.
   * @param String  options[type]      text, textarea or select
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
@@ -49,6 +50,7 @@
   * @param Mixed   options[width]     'auto' or width in pixels 
   * @param String  options[loadurl]   URL to fetch content before editing
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
+  * @param Hash    options[loaddata]  Extra parameters to pass when fetching content before editing.
   * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
@@ -70,17 +72,17 @@ jQuery.fn.editable = function(target, options, callback) {
     };
     
     var settings = {
-        target   : target,
-        name     : 'value',
-        id       : 'id',
-        type     : 'text',
-        width    : 'auto',
-        height   : 'auto',
-        event    : 'click',
-        onblur   : 'cancel',
-        loadtype : 'GET',
-        loaddata : {},
-        submitdata: {}
+        target     : target,
+        name       : 'value',
+        id         : 'id',
+        type       : 'text',
+        width      : 'auto',
+        height     : 'auto',
+        event      : 'click',
+        onblur     : 'cancel',
+        loadtype   : 'GET',
+        loaddata   : {},
+        submitdata : {}
     };
         
     if(options) {
