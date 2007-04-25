@@ -1,13 +1,28 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 <title>jEditable - jQuery in place editor plugin examples</title>
 </head>
-<html>
-<h1 class="editable" id="header_1">jEditable demo</h1>
-<p class="editable_textarea" id="paragraph_1">
-You can test how <a href="http://www.appelsiini.net/~tuupola/javascript/jEditable/">jEditable</a>
-works with the examples below. You need to have SQLite and PEAR::DB 
-installed if you want to run tests in your own server.
+<body>
+
+<div id="center">
+<div id="header">
+  <h1>jEditable demo</h1>
+  <h2>things that make you go umph</h2>
+</div>
+
+<!--	
+<div id="nav">
+  <ul>
+    <li><a href-"#" title="Home">Home</a></li>
+    <li><a href-"#" title="About">About</a></li>
+  </ul>
+</div>
+-->
+
+<p>You can test how <a href="http://www.appelsiini.net/~tuupola/javascript/jEditable/">jEditable</a>
+works with the examples below. Server saves data using SQLite and PEAR::DB.
 </p>
 <ol>
 <li><a href="01_basic_usage.php">Basic usage</a></li>
@@ -17,7 +32,12 @@ installed if you want to run tests in your own server.
 <li><a href="05_onblur.php">Using different onblur options</a></li>
 <li><a href="06_with_fx.php">Using jEditable with different fx</a></li>
 </ol>
+
+<div id="footer">
 <?php include '00_footer.php' ?>
+</div>
+
+</div>
+
+</body>
 </html>
-
-
