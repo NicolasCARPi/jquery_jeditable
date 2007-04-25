@@ -78,7 +78,9 @@ jQuery.fn.editable = function(target, options, callback) {
         height   : 'auto',
         event    : 'click',
         onblur   : 'cancel',
-        loadtype : 'GET'
+        loadtype : 'GET',
+        loaddata : {},
+        submitdata: {}
     };
         
     if(options) {
@@ -170,13 +172,17 @@ jQuery.fn.editable = function(target, options, callback) {
 
         /* set input content via POST, GET, given data or existing value */
         if (settings.loadurl) {
-            var data = {};
+            var timeout = window.setTimeout(function() {
+                    setInputContent('Loading...', true)
+                }, 100);
+            var data = settings.loaddata;
             data[settings.id] = self.id;
             jQuery.ajax({
                type : settings.loadtype,
                url  : settings.loadurl,
                data : data,
                success: function(str) {
+               	  window.clearTimeout(timeout);                
                   setInputContent(str);
                }
             });
@@ -258,7 +264,7 @@ jQuery.fn.editable = function(target, options, callback) {
                 callback.apply(self, [self.innerHTML, settings]);
             } else {
                 /* add edited content and id of edited element to POST */           
-                var p = {};
+                var p = settings.submitdata;
                 p[i.name] = jQuery(i).val();
                 p[settings.id] = self.id;
 
@@ -279,7 +285,9 @@ jQuery.fn.editable = function(target, options, callback) {
             self.editing   = false;
         };
         
-        function setInputContent(str) {
+        function setInputContent(str, disabled) {
+            i.disabled = disabled || false;
+            
             if (jQuery.isFunction(str)) {
                 var str = str.apply(self, [self.revert, settings]);
             }
