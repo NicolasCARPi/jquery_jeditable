@@ -274,19 +274,19 @@ jQuery.fn.editable = function(target, options, callback) {
                 callback.apply(self, [self.innerHTML, settings]);
             } else {
                 /* add edited content and id of edited element to POST */
-                var p = {};
-                p[i.name] = jQuery(i).val();
-                p[settings.id] = self.id;
+                var submitdata = {};
+                submitdata[i.name] = jQuery(i).val();
+                submitdata[settings.id] = self.id;
                 /* add extra data to be POST:ed */
                 if (jQuery.isFunction(settings.submitdata)) {
-                    jQuery.extend(p, settings.submitdata.apply(self, [self.revert, settings]));
+                    jQuery.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
                 } else {
-                    jQuery.extend(p, settings.submitdata);
+                    jQuery.extend(submitdata, settings.submitdata);
                 }          
 
                 /* show the saving indicator */
                 jQuery(self).html(settings.indicator);
-                jQuery.post(settings.target, p, function(str) {
+                jQuery.post(settings.target, submitdata, function(str) {
                     self.innerHTML = str;
                     self.editing = false;
                     callback.apply(self, [self.innerHTML, settings]);
