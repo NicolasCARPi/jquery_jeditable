@@ -51,6 +51,7 @@
   * @param String  options[loadurl]   URL to fetch content before editing
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param Hash    options[loaddata]  Extra parameters to pass when fetching content before editing.
+  * @param Hash    options[loadtext]  Text to display while fetching content.
   * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
@@ -81,6 +82,7 @@ jQuery.fn.editable = function(target, options, callback) {
         event      : 'click',
         onblur     : 'cancel',
         loadtype   : 'GET',
+        loadtext   : 'Loading...',
         loaddata   : {},
         submitdata : {}
     };
@@ -175,7 +177,7 @@ jQuery.fn.editable = function(target, options, callback) {
         /* set input content via POST, GET, given data or existing value */
         if (settings.loadurl) {
             var timeout = window.setTimeout(function() {
-                    setInputContent('Loading...', true)
+                    setInputContent(settings.loadtext, true)
                 }, 100);
             var data = settings.loaddata;
             data[settings.id] = self.id;
