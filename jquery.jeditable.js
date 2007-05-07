@@ -176,17 +176,24 @@ jQuery.fn.editable = function(target, options, callback) {
 
         /* set input content via POST, GET, given data or existing value */
         if (settings.loadurl) {
-            var timeout = window.setTimeout(function() {
+            var t = setTimeout(function() {
                     setInputContent(settings.loadtext, true)
                 }, 100);
-            var data = settings.loaddata;
-            data[settings.id] = self.id;
+                
+            var loaddata = {};
+            loaddata[settings.id] = self.id;
+            if (jQuery.isFunction(settings.loaddata)) {
+                jQuery.extend(loaddata, settings.loaddata.apply(self, [self.revert, settings]));
+            } else {
+                jQuery.extend(loaddata, settings.loaddata);
+            }
+            console.log(loaddata);
             jQuery.ajax({
                type : settings.loadtype,
                url  : settings.loadurl,
-               data : data,
+               data : loaddata,
                success: function(str) {
-               	  window.clearTimeout(timeout);                
+               	  window.clearTimeout(t);                
                   setInputContent(str);
                }
             });
