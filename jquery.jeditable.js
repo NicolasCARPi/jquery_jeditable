@@ -187,7 +187,6 @@ jQuery.fn.editable = function(target, options, callback) {
             } else {
                 jQuery.extend(loaddata, settings.loaddata);
             }
-            console.log(loaddata);
             jQuery.ajax({
                type : settings.loadtype,
                url  : settings.loadurl,
@@ -274,10 +273,16 @@ jQuery.fn.editable = function(target, options, callback) {
                 self.editing = false;
                 callback.apply(self, [self.innerHTML, settings]);
             } else {
-                /* add edited content and id of edited element to POST */           
-                var p = settings.submitdata;
+                /* add edited content and id of edited element to POST */
+                var p = {};
                 p[i.name] = jQuery(i).val();
                 p[settings.id] = self.id;
+                /* add extra data to be POST:ed */
+                if (jQuery.isFunction(settings.submitdata)) {
+                    jQuery.extend(p, settings.submitdata.apply(self, [self.revert, settings]));
+                } else {
+                    jQuery.extend(p, settings.submitdata);
+                }          
 
                 /* show the saving indicator */
                 jQuery(self).html(settings.indicator);
