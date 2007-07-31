@@ -170,7 +170,7 @@ jQuery.fn.editable = function(target, options, callback) {
                type : settings.loadtype,
                url  : settings.loadurl,
                data : loaddata,
-               success: function(str) {
+               success: function(string) {
                	  window.clearTimeout(t);                
                   jQuery.editable.types[settings.type].content.apply(i, [string, settings]);
                   i.disabled = false;
