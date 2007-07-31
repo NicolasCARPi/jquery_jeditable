@@ -28,5 +28,4 @@ if ('textile' == $renderer) {
 
 print $retval;
 
-
 ?>
