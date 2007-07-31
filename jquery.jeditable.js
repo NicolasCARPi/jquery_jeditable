@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.3.x)
+  * jQuery inplace editor plugin (version 1.4.x)
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -48,10 +48,10 @@
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto' or height in pixels
   * @param Mixed   options[width]     'auto' or width in pixels 
-  * @param String  options[loadurl]   URL to fetch content before editing
+  * @param String  options[loadurl]   URL to fetch external content before editing
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
+  * @param String  options[loadtext]  Text to display while loading external content.
   * @param Hash    options[loaddata]  Extra parameters to pass when fetching content before editing.
-  * @param Hash    options[loadtext]  Text to display while fetching content.
   * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
@@ -106,11 +106,14 @@ jQuery.fn.editable = function(target, options, callback) {
         }
 
         /* figure out how wide and tall we are */
-        var width = 
+        /* TODO: this is a bit of PHPism */
+        // var width =         
+        settings.width = 
             ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
-        var height = 
+        // var height = 
+        settings.height = 
             ('auto' == settings.height) ? jQuery(self).height() : settings.height;
-
+            
         self.editing    = true;
         self.revert     = jQuery(self).html();
         self.innerHTML  = '';
@@ -138,32 +141,7 @@ jQuery.fn.editable = function(target, options, callback) {
         }
         
         /*  main input element */
-        var i;
-        switch (settings.type) {
-            case 'textarea':
-                i = document.createElement('textarea');
-                if (settings.rows) {
-                    i.rows = settings.rows;
-                } else {
-                    jQuery(i).height(height);
-                }
-                if (settings.cols) {
-                    i.cols = settings.cols;
-                } else {
-                    jQuery(i).width(width);
-                }   
-                break;
-            case 'select':
-                i = document.createElement('select');
-                break;
-            default:
-                i = document.createElement('input');
-                i.type  = settings.type;
-                jQuery(i).width(width);
-                jQuery(i).height(height);
-                /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
-                i.setAttribute('autocomplete','off');
-        }
+        var i = jQuery.editable.types[settings.type].element.apply(self, [settings]);
 
         /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
@@ -177,8 +155,9 @@ jQuery.fn.editable = function(target, options, callback) {
         /* set input content via POST, GET, given data or existing value */
         if (settings.loadurl) {
             var t = setTimeout(function() {
-                    setInputContent(settings.loadtext, true)
-                }, 100);
+                i.disabled = true;
+                jQuery.editable.types[settings.type].content.apply(i, [settings.loadtext, settings]);
+            }, 100);
                 
             var loaddata = {};
             loaddata[settings.id] = self.id;
@@ -193,13 +172,14 @@ jQuery.fn.editable = function(target, options, callback) {
                data : loaddata,
                success: function(str) {
                	  window.clearTimeout(t);                
-                  setInputContent(str);
+                  jQuery.editable.types[settings.type].content.apply(i, [string, settings]);
+                  i.disabled = false;
                }
             });
         } else if (settings.data) {
-            setInputContent(settings.data);
+            jQuery.editable.types[settings.type].content.apply(i, [settings.data, settings]);
         } else { 
-            setInputContent(self.revert);
+            jQuery.editable.types[settings.type].content.apply(i, [self.revert, settings]);
         }
 
         i.name  = settings.name;
@@ -232,6 +212,10 @@ jQuery.fn.editable = function(target, options, callback) {
             i.select();
         }
          
+        if (jQuery.isFunction(jQuery.editable.types[settings.type].plugin)) {
+            jQuery.editable.types[settings.type].plugin.apply(i, [settings]);            
+        }
+        
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
             if (e.keyCode == 27) {
@@ -265,6 +249,11 @@ jQuery.fn.editable = function(target, options, callback) {
 
             /* do no submit */
             e.preventDefault(); 
+            
+            /* if this input type has a call before submit hook, call it */
+            if (jQuery.isFunction(jQuery.editable.types[settings.type].submit)) {
+                jQuery.editable.types[settings.type].submit.apply(i, [settings]);            
+            }
 
             /* check if given target is function */
             if (jQuery.isFunction(settings.target)) {
@@ -300,39 +289,86 @@ jQuery.fn.editable = function(target, options, callback) {
             self.innerHTML = self.revert;
             self.editing   = false;
         };
-        
-        function setInputContent(str, disabled) {
-            i.disabled = disabled || false;
-            
-            if (jQuery.isFunction(str)) {
-                var str = str.apply(self, [self.revert, settings]);
-            }
-            switch (settings.type) { 	 
-                case 'select': 	 
-                    if (String == str.constructor) { 	 
-                        eval ("var json = " + str);
-                        for (var key in json) {
-                            if ('selected' == key) {
-                                continue;
-                            } 
-                            o = document.createElement('option'); 	 
-                            o.value = key;
-                            var text = document.createTextNode(json[key]);
-                            o.appendChild(text)
-                            if (key == json['selected']) {
-                                o.selected = true;
-                            }
-                            i.appendChild(o); 	 
-                        }
-                    } 	 
-                    break; 	 
-                default: 	 
-                    i.value = str; 	 
-                    break; 	 
-            } 	 
-        }
 
     });
-
+    
     return(this);
 }
+
+/**
+  *
+  */
+ 
+jQuery.editable = {
+    types: {
+        text: {
+            element : function(settings) {
+                var i = document.createElement('input');
+                i.type  = settings.type;
+                jQuery(i).width(settings.width);
+                jQuery(i).height(settings.height);
+                /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
+                i.setAttribute('autocomplete','off');
+                return(i);
+            },
+            content : function(string) {
+                this.value = string;        
+            }
+        },
+        textarea: {
+            element : function(settings) {
+                var i = document.createElement('textarea');
+                if (settings.rows) {
+                    i.rows = settings.rows;
+                } else {
+                    jQuery(i).height(settings.height);
+                }
+                if (settings.cols) {
+                    i.cols = settings.cols;
+                } else {
+                    jQuery(i).width(settings.width);
+                }
+                return(i);
+            },
+            content : function(string) {
+                this.value = string;
+            }
+        },
+        select: {
+            element : function(settings) {
+                var i = document.createElement('select');
+                return(i);
+            },
+            content : function(string) {
+                if (String == string.constructor) { 	 
+                    eval ("var json = " + string);
+                    for (var key in json) {
+                        if ('selected' == key) {
+                            continue;
+                        } 
+                        o = document.createElement('option'); 	 
+                        o.value = key;
+                        var text = document.createTextNode(json[key]);
+                        o.appendChild(text)
+                        if (key == json['selected']) {
+                            o.selected = true;
+                        }
+                        this.appendChild(o); 	 
+                    }
+                }
+            }
+        }
+    },
+    
+    /* Add new input type */
+    addInputType: function(name, element, content, submit, plugin) {
+        var type = {
+            element : element,
+            content : content,
+            submit  : submit,
+            plugin  : plugin
+        }
+        jQuery.editable.types[name] = type;
+    }
+}
+
