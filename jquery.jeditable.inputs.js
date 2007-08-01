@@ -84,7 +84,8 @@ $.editable.addInputType('date',
             function(e, selectedDate, $td) {
                 $(this).parent().submit();
             }
-        );
+        )
+        .trigger('change');
         $(this).click();
     }
 );
