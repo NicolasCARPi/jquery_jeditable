@@ -24,6 +24,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <script type="text/javascript" src="lib/jquery.timepicker.js"></script>
 
 <script type="text/javascript" src="lib/date.js"></script>
+<script type="text/javascript" src="lib/jquery.bgigframe.js"></script>
 <script type="text/javascript" src="lib/jquery.dimensions.js"></script>
 <script type="text/javascript" src="lib/jquery.datePicker.js"></script>
 
