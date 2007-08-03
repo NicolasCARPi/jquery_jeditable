@@ -68,7 +68,7 @@ $(document).ready(function() {
 <h2 class="time" id="header_12"><?php print file_get_contents($url . 'load.php?id=header_12') ?></h2>
 <p>Custom input which uses <a href="http://jquery.com/plugins/project/timepicker">Timepicker Plugin</a> by Jason Huck.
 <h2 class="date" id="header_13"><?php print file_get_contents($url . 'load.php?id=header_13') ?></h2>
-<p>Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker Plugin</a> by Kelvin Luck.
+<p>Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker Plugin</a> by Kelvin Luck. This input still has some bugs.
 
 <div id="footer">
 <?php include '00_footer.php' ?>
