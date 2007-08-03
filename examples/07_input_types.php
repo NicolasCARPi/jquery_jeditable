@@ -62,6 +62,8 @@ $(document).ready(function() {
   <h2>Custom input types (Masked Input, Timepicker, Datepicker).</h2>
 </div>
 
+NOTE! These demos use jEditable version which still only exists in <a href="http://svn.appelsiini.net/svn/javascript/trunk/jquery_jeditable/">svn</a>.
+
 <h2 class="masked" id="header_11"><?php print file_get_contents($url . 'load.php?id=header_11') ?></h2>
 <p>Custom input which uses 
 <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input Plugin</a> by Josh Bush.</p>
