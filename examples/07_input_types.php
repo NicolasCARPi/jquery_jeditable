@@ -8,11 +8,14 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" debug="true">
 <head>
   <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
   <link rel="stylesheet" type="text/css" href="css/datePicker.css" media="screen" />
 <title>jEditable - Additional Input Types (Plugins)</title>
+
+<script language="javascript" type="text/javascript" src="lib/firebug/firebug.js"></script>
+
 <script type="text/javascript" src="lib/jquery.js"></script>
 <script type="text/javascript" src="lib/jquery.jeditable.js"></script>
 <script type="text/javascript" src="lib/jquery.jeditable.inputs.js"></script>
