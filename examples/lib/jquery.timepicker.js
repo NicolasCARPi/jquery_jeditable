@@ -63,7 +63,7 @@
 				m = parseInt(v.substr(3,2));
 				p = v.substr(5);
 			}
-			
+		    
 			// build the new DOM objects
 			var output = '';
 			
@@ -89,11 +89,15 @@
 				if(ap[pp] == p) output += ' selected';
 				output += '>' + ap[pp] + '</option>';
 			}
-			output += '</select>';				
-	
+			output += '</select>';
+    
 			// hide original input and append new replacement inputs
-			$(this).attr('type','hidden').after(output);
+			//$(this).attr('type','hidden').after(output);
+            // Fix IE crash (tuupola@appelsiini.net)
+			$(this).hide().after(output);
+			
 		});
+		
 		
 		$('select.timepicker').change(function(){
 			var i = this.id.substr(2);

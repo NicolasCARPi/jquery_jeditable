@@ -61,7 +61,8 @@ $.editable.addInputType('time',
 $.editable.addInputType('date',
     /* create input element */
     function(settings) {
-        var i = document.createElement('input');    
+        var i = document.createElement('input');
+        //$(i).css('opacity', 0.01);
         return(i);
     },
     /* set input element value */
@@ -73,20 +74,25 @@ $.editable.addInputType('date',
     },
     /* attach 3rd party plugin to input element */
     function(settings) {
+        /* Workaround for missing parentNode in IE */
+        var form = $(this).parent();
+        settings.onblur = 'cancel'
         $(this)
         .datePicker({createButton:false})
         .bind('click', function() {
+            //$(this).blur();
             $(this).dpDisplay();
-            this.blur();
             return false;
         })
-        .bind('dateSelected',
-            function(e, selectedDate, $td) {
-                $(this).parent().submit();
-            }
-        )
-        .trigger('change');
-        $(this).click();
+        .bind('dateSelected', function(e, selectedDate, $td) {
+                $(form).submit();
+        })
+        .bind('dpClosed', function(e, selected) {
+            /* TODO: unneseccary calls reset() */
+            //$(this).blur();
+    	})
+        .trigger('change')
+        .click();
     }
 );
 
