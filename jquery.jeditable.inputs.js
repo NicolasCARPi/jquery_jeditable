@@ -23,7 +23,7 @@
 /* Needs http://digitalbush.com/projects/masked-input-plugin */
 $.editable.addInputType('masked', {
     /* Create input element. */
-    element : function(settings) {
+    element : function(settings, original) {
         /* Create an input. Mask it using masked input plugin. Settings */
         /* for mask were passed with jEditable settings hash. Remember  */
         /* to return the created input!                                 */
@@ -38,21 +38,21 @@ $.editable.addInputType('timepicker', {
     /* This uses default hidden input field. No need for element() function. */    
 
     /* Call before submit hook. */
-    submit: function (settings) {
+    submit: function (settings, original) {
         /* Collect hour, minute and am/pm from pulldowns. Create a string from */
         /* them. Set value of hidden input field to this string.               */
         var value = $("#h_").val() + ":" + $("#m_").val() + "" + $("#p_").val();
         $("input", this).val(value);
     },
     /* Attach Timepicker plugin to the default hidden input element. */
-    plugin:  function(settings) {
+    plugin:  function(settings, original) {        
         $("input", this).filter(":hidden").timepicker();
     }
 });
 
 $.editable.addInputType('time', {
     /* Create input element. */
-    element : function(settings) {
+    element : function(settings, original) {
         /* Create and pulldowns for hours and minutes. Append them to */
         /* form which is accessible as variable this.                 */ 		
 		var hourselect = $('<select id="hour_">');
@@ -83,7 +83,7 @@ $.editable.addInputType('time', {
         return(hidden);
     },
     /* Set content / value of previously created input element. */
-    content : function(string, settings) {
+    content : function(string, settings, original) {
         
         /* Select correct hour and minute in pulldowns. */
         var hour = parseInt(string.substr(0,2));
@@ -102,7 +102,7 @@ $.editable.addInputType('time', {
 
     },
     /* Call before submit hook. */
-    submit: function (settings) {
+    submit: function (settings, original) {
         /* Take values from hour and minute pulldowns. Create string such as    */
         /* 13:45 from them. Set value of the hidden input field to this string. */
         var value = $("#hour_").val() + ":" + $("#min_").val();
@@ -113,14 +113,14 @@ $.editable.addInputType('time', {
 /* Needs http://kelvinluck.com/assets/jquery/datePicker/v2/demo/ */
 $.editable.addInputType('datepicker', {
     /* create input element */
-    element : function(settings) {
+    element : function(settings, original) {
         var input = $('<input>');
         $(this).append(input);
         //$(input).css('opacity', 0.01);
         return(input);
     },
     /* attach 3rd party plugin to input element */
-    plugin : function(settings) {
+    plugin : function(settings, original) {
         /* Workaround for missing parentNode in IE */
         var form = this;
         settings.onblur = 'cancel'
@@ -151,8 +151,8 @@ $.editable.addInputType('ajaxupload', {
         $(this).append(input);
         return(input);
     },
-    content : function(string, settings) {
-        
+    content : function(string, settings, original) {
+        /* do nothing */
     },
     plugin : function(settings, original) {
         var form = this;

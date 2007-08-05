@@ -150,7 +150,7 @@ jQuery.fn.editable = function(target, options, callback) {
         }
         
         /*  Add main input element to form and store it in i. */
-        var i = element.apply(f, [settings]);
+        var i = element.apply(f, [settings, self]);
 
         /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
@@ -165,7 +165,7 @@ jQuery.fn.editable = function(target, options, callback) {
         if (settings.loadurl) {
             var t = setTimeout(function() {
                 i.disabled = true;
-                content.apply(f, [settings.loadtext, settings]);
+                content.apply(f, [settings.loadtext, settings, self]);
             }, 100);
                 
             var loaddata = {};
@@ -181,14 +181,14 @@ jQuery.fn.editable = function(target, options, callback) {
                data : loaddata,
                success: function(string) {
                	  window.clearTimeout(t);                
-                  content.apply(f, [string, settings]);
+                  content.apply(f, [string, settings, self]);
                   i.disabled = false;
                }
             });
         } else if (settings.data) {
-            content.apply(f, [settings.data, settings]);
+            content.apply(f, [settings.data, settings, self]);
         } else { 
-            content.apply(f, [self.revert, settings]);
+            content.apply(f, [self.revert, settings, self]);
         }
 
         i.name  = settings.name;
@@ -295,17 +295,14 @@ jQuery.editable = {
     types: {
         defaults: {
             element : function(settings, original) {
-                console.log('default element')
                 var input = jQuery('<input type="hidden">');                
                 jQuery(this).append(input);
                 return(input);
             },
-            content : function(string, original) {
-                console.log('default content')
+            content : function(string, settings, original) {
                 jQuery(this).children().val(string);
             },
             buttons : function(settings, original) {
-                console.log('default buttons')
                 if (settings.submit) {
                     var submit = jQuery('<input type="submit">');
                     submit.val(settings.submit + '');
@@ -324,7 +321,7 @@ jQuery.editable = {
             }
         },
         text: {
-            element : function(settings) {
+            element : function(settings, original) {
                 var input = jQuery('<input>');
                 input.width(settings.width);
                 input.height(settings.height);
@@ -336,7 +333,7 @@ jQuery.editable = {
             }
         },
         textarea: {
-            element : function(settings) {
+            element : function(settings, original) {
                 var textarea = jQuery('<textarea>');
                 if (settings.rows) {
                     textarea.attr('rows', settings.rows);
@@ -353,12 +350,12 @@ jQuery.editable = {
             }
         },
         select: {
-            element : function(settings) {
+            element : function(settings, original) {
                 var select = jQuery('<select>');
                 jQuery(this).append(select);
                 return(select);
             },
-            content : function(string) {
+            content : function(string, settings, original) {
                 if (String == string.constructor) { 	 
                     eval ("var json = " + string);
                     for (var key in json) {
