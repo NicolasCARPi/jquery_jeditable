@@ -96,11 +96,11 @@ jQuery.fn.editable = function(target, options, callback) {
     var plugin   = jQuery.editable.types[settings.type].plugin || function() { };
     var submit   = jQuery.editable.types[settings.type].submit || function() { };
     var buttons  = jQuery.editable.types[settings.type].buttons 
-                || jQuery.editable.types['default'].buttons;
+                || jQuery.editable.types['defaults'].buttons;
     var content  = jQuery.editable.types[settings.type].content 
-                || jQuery.editable.types['default'].content;
+                || jQuery.editable.types['defaults'].content;
     var element  = jQuery.editable.types[settings.type].element 
-                || jQuery.editable.types['default'].element;
+                || jQuery.editable.types['defaults'].element;
           
     jQuery(this).attr('title', settings.tooltip);
 
@@ -198,8 +198,6 @@ jQuery.fn.editable = function(target, options, callback) {
 
         /* add created form to self */
         self.appendChild(f);
-
-        i.focus();
         
         /* highlight input contents when requested */
         if (settings.select) {
@@ -208,6 +206,9 @@ jQuery.fn.editable = function(target, options, callback) {
          
         /* attach 3rd party plugin if requested */
         plugin.apply(f, [settings, self]);            
+
+        /* focus to first visible form element */
+        jQuery(":input:visible:enabled:first", f).focus();
         
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
@@ -292,7 +293,7 @@ jQuery.fn.editable = function(target, options, callback) {
  
 jQuery.editable = {
     types: {
-        default: {
+        defaults: {
             element : function(settings, original) {
                 console.log('default element')
                 var input = jQuery('<input type="hidden">');                
