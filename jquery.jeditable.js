@@ -1,12 +1,12 @@
 /*
 +-----------------------------------------------------------------------+
 | Copyright (c) 2006-2007 Mika Tuupola, Dylan Verheul                   |
-| All rights reserved.                                                  |
+| All rights reserved.                                                  |  
 |                                                                       |
 | Redistribution and use in source and binary forms, with or without    |
 | modification, are permitted provided that the following conditions    |
 | are met:                                                              |
-|                                                                       |
+|                                                                       | 
 | o Redistributions of source code must retain the above copyright      |
 |   notice, this list of conditions and the following disclaimer.       |
 | o Redistributions in binary form must reproduce the above copyright   |
@@ -91,8 +91,17 @@ jQuery.fn.editable = function(target, options, callback) {
         jQuery.extend(settings, options);
     };
     
+    /* setup some functions */
     var callback = callback || function() { };
-      
+    var plugin   = jQuery.editable.types[settings.type].plugin || function() { };
+    var submit   = jQuery.editable.types[settings.type].submit || function() { };
+    var buttons  = jQuery.editable.types[settings.type].buttons 
+                || jQuery.editable.types['default'].buttons;
+    var content  = jQuery.editable.types[settings.type].content 
+                || jQuery.editable.types['default'].content;
+    var element  = jQuery.editable.types[settings.type].element 
+                || jQuery.editable.types['default'].element;
+          
     jQuery(this).attr('title', settings.tooltip);
 
     jQuery(this)[settings.event](function(e) {
@@ -140,8 +149,8 @@ jQuery.fn.editable = function(target, options, callback) {
             }
         }
         
-        /*  main input element */
-        var i = jQuery.editable.types[settings.type].element.apply(self, [settings]);
+        /*  Add main input element to form and store it in i. */
+        var i = element.apply(f, [settings]);
 
         /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
@@ -156,7 +165,7 @@ jQuery.fn.editable = function(target, options, callback) {
         if (settings.loadurl) {
             var t = setTimeout(function() {
                 i.disabled = true;
-                jQuery.editable.types[settings.type].content.apply(i, [settings.loadtext, settings]);
+                content.apply(f, [settings.loadtext, settings]);
             }, 100);
                 
             var loaddata = {};
@@ -172,35 +181,20 @@ jQuery.fn.editable = function(target, options, callback) {
                data : loaddata,
                success: function(string) {
                	  window.clearTimeout(t);                
-                  jQuery.editable.types[settings.type].content.apply(i, [string, settings]);
+                  content.apply(f, [string, settings]);
                   i.disabled = false;
                }
             });
         } else if (settings.data) {
-            jQuery.editable.types[settings.type].content.apply(i, [settings.data, settings]);
+            content.apply(f, [settings.data, settings]);
         } else { 
-            jQuery.editable.types[settings.type].content.apply(i, [self.revert, settings]);
+            content.apply(f, [self.revert, settings]);
         }
 
         i.name  = settings.name;
-        f.appendChild(i);
-
-        if (settings.submit) {
-            var b = document.createElement('input');
-            b.type = 'submit';
-            b.value = settings.submit;
-            f.appendChild(b);
-        }
-
-        if (settings.cancel) {
-            var b = document.createElement('input');
-            b.type = 'button';
-            b.value = settings.cancel;
-            jQuery(b).click(function() {
-                reset();
-            });
-            f.appendChild(b);
-        }
+        
+        /* add buttons to the form */
+        buttons.apply(f, [settings, self]);
 
         /* add created form to self */
         self.appendChild(f);
@@ -212,9 +206,8 @@ jQuery.fn.editable = function(target, options, callback) {
             i.select();
         }
          
-        if (jQuery.isFunction(jQuery.editable.types[settings.type].plugin)) {
-            jQuery.editable.types[settings.type].plugin.apply(i, [settings]);            
-        }
+        /* attach 3rd party plugin if requested */
+        plugin.apply(f, [settings, self]);            
         
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
@@ -251,9 +244,7 @@ jQuery.fn.editable = function(target, options, callback) {
             e.preventDefault(); 
             
             /* if this input type has a call before submit hook, call it */
-            if (jQuery.isFunction(jQuery.editable.types[settings.type].submit)) {
-                jQuery.editable.types[settings.type].submit.apply(i, [settings]);            
-            }
+            submit.apply(f, [settings]);            
 
             /* check if given target is function */
             if (jQuery.isFunction(settings.target)) {
@@ -301,43 +292,70 @@ jQuery.fn.editable = function(target, options, callback) {
  
 jQuery.editable = {
     types: {
+        default: {
+            element : function(settings, original) {
+                console.log('default element')
+                var input = jQuery('<input type="hidden">');                
+                jQuery(this).append(input);
+                return(input);
+            },
+            content : function(string, original) {
+                console.log('default content')
+                jQuery(this).children().val(string);
+            },
+            buttons : function(settings, original) {
+                console.log('default buttons')
+                if (settings.submit) {
+                    var submit = jQuery('<input type="submit">');
+                    submit.val(settings.submit + '');
+                    jQuery(this).append(submit);
+                }
+                if (settings.cancel) {
+                    var cancel = jQuery('<input type="button">');
+                    cancel.val(settings.cancel);
+                    jQuery(this).append(cancel);
+
+                    jQuery(cancel).click(function() {
+                        jQuery(original).html(original.revert);
+                        original.editing = false;
+                    });
+                }
+            }
+        },
         text: {
             element : function(settings) {
-                var i = document.createElement('input');
-                i.type  = settings.type;
-                jQuery(i).width(settings.width);
-                jQuery(i).height(settings.height);
+                var input = jQuery('<input>');
+                input.width(settings.width);
+                input.height(settings.height);
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
-                i.setAttribute('autocomplete','off');
-                return(i);
-            },
-            content : function(string) {
-                this.value = string;        
+                //input[0].setAttribute('autocomplete','off');
+                input.attr('autocomplete','off');
+                jQuery(this).append(input);
+                return(input);
             }
         },
         textarea: {
             element : function(settings) {
-                var i = document.createElement('textarea');
+                var textarea = jQuery('<textarea>');
                 if (settings.rows) {
-                    i.rows = settings.rows;
+                    textarea.attr('rows', settings.rows);
                 } else {
-                    jQuery(i).height(settings.height);
+                    textarea.height(settings.height);
                 }
                 if (settings.cols) {
-                    i.cols = settings.cols;
+                    textarea.attr('cols', settings.cols);
                 } else {
-                    jQuery(i).width(settings.width);
+                    textarea.width(settings.width);
                 }
-                return(i);
-            },
-            content : function(string) {
-                this.value = string;
+                jQuery(this).append(textarea);
+                return(textarea);
             }
         },
         select: {
             element : function(settings) {
-                var i = document.createElement('select');
-                return(i);
+                var select = jQuery('<select>');
+                jQuery(this).append(select);
+                return(select);
             },
             content : function(string) {
                 if (String == string.constructor) { 	 
@@ -346,14 +364,14 @@ jQuery.editable = {
                         if ('selected' == key) {
                             continue;
                         } 
-                        o = document.createElement('option'); 	 
-                        o.value = key;
-                        var text = document.createTextNode(json[key]);
-                        o.appendChild(text)
+                        var option = $('<option>').val(key).append(json[key]);
                         if (key == json['selected']) {
-                            o.selected = true;
+                            console.log(key);
+                            /* TODO: why does not this work? */
+                            //option.attr('selected', 'selected');
+                            option[0].selected = true;
                         }
-                        this.appendChild(o); 	 
+                        jQuery("select", this).append(option); 	 
                     }
                 }
             }
@@ -361,14 +379,8 @@ jQuery.editable = {
     },
     
     /* Add new input type */
-    addInputType: function(name, element, content, submit, plugin) {
-        var type = {
-            element : element,
-            content : content,
-            submit  : submit,
-            plugin  : plugin
-        }
-        jQuery.editable.types[name] = type;
+    addInputType: function(name, input) {
+        jQuery.editable.types[name] = input;
     }
 }
 

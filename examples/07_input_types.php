@@ -28,6 +28,8 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <script type="text/javascript" src="lib/jquery.dimensions.js"></script>
 <script type="text/javascript" src="lib/jquery.datePicker.js"></script>
 
+<script type="text/javascript" src="lib/jquery.ajaxfileupload.js"></script>
+
 <script src="lib/firebug/firebug.js" type="text/javascript"></script>
 <script type="text/javascript">
 // <![CDATA[
@@ -39,9 +41,15 @@ $(document).ready(function() {
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
-    $(".date").editable("<?php print $url ?>save.php", { 
+    $(".datepicker").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type      : 'date',
+        type      : 'datepicker',
+        tooltip   : "Click to edit..."
+    });
+    $(".timepicker").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'timepicker',
+        submit    : 'OK',
         tooltip   : "Click to edit..."
     });
     $(".time").editable("<?php print $url ?>save.php", { 
@@ -49,6 +57,13 @@ $(document).ready(function() {
         type      : 'time',
         submit    : 'OK',
         tooltip   : "Click to edit..."
+    });
+    $(".ajaxupload").editable("<?php print $url ?>upload.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'ajaxupload',
+        submit    : 'Upload',
+        cancel    : 'Cancel',
+        tooltip   : "Click to upload..."
     });
 });
 // ]]>
@@ -69,10 +84,13 @@ These demos use jEditable version which still only exists in <a href="http://svn
 <h2 class="masked" id="header_11"><?php print file_get_contents($url . 'load.php?id=header_11') ?></h2>
 <p>Custom input which uses 
 <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input Plugin</a> by Josh Bush.</p>
-<h2 class="time" id="header_12"><?php print file_get_contents($url . 'load.php?id=header_12') ?></h2>
+<h2 class="timepicker" id="header_12"><?php print file_get_contents($url . 'load.php?id=header_12') ?></h2>
 <p>Custom input which uses <a href="http://jquery.com/plugins/project/timepicker">Timepicker Plugin</a> by Jason Huck.
-<h2 class="date" id="header_13"><?php print file_get_contents($url . 'load.php?id=header_13') ?></h2>
+<h2 class="time" id="header_14"><?php print file_get_contents($url . 'load.php?id=header_14') ?></h2>
+<p>Custom input coded without 3rd party plugins.</p>
+<h2 class="datepicker" id="header_13"><?php print file_get_contents($url . 'load.php?id=header_13') ?></h2>
 <p>Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker Plugin</a> by Kelvin Luck. This input still has some bugs.
+<h2 class="ajaxupload" id="header_15"><?php print file_get_contents($url . 'load.php?id=header_15 ') ?></h2>
 
 <div id="footer">
 <?php include '00_footer.php' ?>
