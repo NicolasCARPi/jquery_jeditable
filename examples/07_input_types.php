@@ -74,7 +74,7 @@ $(document).ready(function() {
 <div id="center">
 <div id="header">
   <h1>jEditable demo</h1>
-  <h2>Custom input types (Masked Input, Timepicker, Datepicker).</h2>
+  <h2>Custom input types.</h2>
 </div>
 
 <p>
@@ -90,8 +90,9 @@ These demos use jEditable version which still only exists in <a href="http://svn
 <p>Custom input coded without 3rd party plugins.</p>
 <h2 class="datepicker" id="header_13"><?php print file_get_contents($url . 'load.php?id=header_13') ?></h2>
 <p>Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker Plugin</a> by Kelvin Luck. This input still has some bugs.
-<h2 class="ajaxupload" id="header_15"><?php print file_get_contents($url . 'load.php?id=header_15 ') ?></h2>
-
+<h2 class="ajaxupload" id="header_15">Click me to upload</h2>
+Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.
+For security reasons after uploading this demo only display file size and name.
 <div id="footer">
 <?php include '00_footer.php' ?>
 </div>
