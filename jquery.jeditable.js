@@ -68,9 +68,9 @@
 jQuery.fn.editable = function(target, options, callback) {
 
     /* prevent elem has no properties error */
-    if (this.length == 0) { 
+    if (this.length === 0) { 
         return(this); 
-    };
+    }
     
     var settings = {
         target     : target,
@@ -89,10 +89,9 @@ jQuery.fn.editable = function(target, options, callback) {
         
     if(options) {
         jQuery.extend(settings, options);
-    };
+    }
     
     /* setup some functions */
-    var callback = callback || function() { };
     var plugin   = jQuery.editable.types[settings.type].plugin || function() { };
     var submit   = jQuery.editable.types[settings.type].submit || function() { };
     var buttons  = jQuery.editable.types[settings.type].buttons 
@@ -101,6 +100,8 @@ jQuery.fn.editable = function(target, options, callback) {
                 || jQuery.editable.types['defaults'].content;
     var element  = jQuery.editable.types[settings.type].element 
                 || jQuery.editable.types['defaults'].element;
+
+    callback = callback || function() { };
           
     jQuery(this).attr('title', settings.tooltip);
 
@@ -223,7 +224,7 @@ jQuery.fn.editable = function(target, options, callback) {
         var t;
         if ('cancel' == settings.onblur) {
             jQuery(i).blur(function(e) {
-                t = setTimeout(reset, 500)
+                t = setTimeout(reset, 500);
             });
         } else if ('submit' == settings.onblur) {
             jQuery(i).blur(function(e) {
@@ -280,12 +281,12 @@ jQuery.fn.editable = function(target, options, callback) {
         function reset() {
             self.innerHTML = self.revert;
             self.editing   = false;
-        };
+        }
 
     });
     
     return(this);
-}
+};
 
 /**
   *
@@ -380,5 +381,4 @@ jQuery.editable = {
     addInputType: function(name, input) {
         jQuery.editable.types[name] = input;
     }
-}
-
+};
