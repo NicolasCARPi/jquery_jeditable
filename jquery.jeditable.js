@@ -301,12 +301,12 @@ jQuery.editable = {
                 return(input);
             },
             content : function(string, settings, original) {
-                jQuery(this).children().val(string);
+                jQuery(':input:first', this).val(string);
             },
             buttons : function(settings, original) {
                 if (settings.submit) {
                     var submit = jQuery('<input type="submit">');
-                    submit.val(settings.submit + '');
+                    submit.val(settings.submit);
                     jQuery(this).append(submit);
                 }
                 if (settings.cancel) {
