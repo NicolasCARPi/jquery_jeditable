@@ -246,7 +246,7 @@ jQuery.fn.editable = function(target, options, callback) {
             e.preventDefault(); 
             
             /* if this input type has a call before submit hook, call it */
-            submit.apply(f, [settings]);            
+            submit.apply(f, [settings, self]);            
 
             /* check if given target is function */
             if (jQuery.isFunction(settings.target)) {
