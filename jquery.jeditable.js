@@ -46,8 +46,8 @@
   * @param String  options[type]      text, textarea or select
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
-  * @param Mixed   options[height]    'auto' or height in pixels
-  * @param Mixed   options[width]     'auto' or width in pixels 
+  * @param Mixed   options[height]    'auto', 'none' or height in pixels
+  * @param Mixed   options[width]     'auto', 'none' or width in pixels 
   * @param String  options[loadurl]   URL to fetch external content before editing
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param String  options[loadtext]  Text to display while loading external content.
@@ -118,12 +118,16 @@ jQuery.fn.editable = function(target, options, callback) {
         /* figure out how wide and tall we are */
         /* TODO: this is a bit of PHPism */
         // var width =         
-        settings.width = 
-            ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+        if (settings.width != 'none') {
+          settings.width = 
+              ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+        }
         // var height = 
-        settings.height = 
-            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
-            
+        if (settings.height != 'none') {
+          settings.height = 
+              ('auto' == settings.height) ? jQuery(self).height() : settings.height;
+        }
+                
         self.editing    = true;
         self.revert     = jQuery(self).html();
         self.innerHTML  = '';
@@ -324,8 +328,8 @@ jQuery.editable = {
         text: {
             element : function(settings, original) {
                 var input = jQuery('<input>');
-                input.width(settings.width);
-                input.height(settings.height);
+                if (settings.width  == 'none') { input.width(settings.width);  }
+                if (settings.height == 'none') { input.height(settings.height); }
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 //input[0].setAttribute('autocomplete','off');
                 input.attr('autocomplete','off');
