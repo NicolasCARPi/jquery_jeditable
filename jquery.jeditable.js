@@ -104,7 +104,11 @@ jQuery.fn.editable = function(target, options, callback) {
     callback = callback || function() { };
           
     jQuery(this).attr('title', settings.tooltip);
-        
+
+    /* temporary fix for auto width and height */
+    settings.autowidth  = 'auto' == settings.width;
+    settings.autoheight = 'auto' == settings.height;
+                
     jQuery(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
@@ -116,16 +120,13 @@ jQuery.fn.editable = function(target, options, callback) {
         }
 
         /* figure out how wide and tall we are */
-        /* TODO: this is a bit of PHPism */
-        // var width =         
         if (settings.width != 'none') {
             settings.width = 
-                ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+               settings.autowidth ? jQuery(self).width()  : settings.width;
         }
-        // var height = 
         if (settings.height != 'none') {
-          settings.height = 
-              ('auto' == settings.height) ? jQuery(self).height() : settings.height;
+            settings.height = 
+                settings.autoheight ? jQuery(self).height() : settings.height;
         }
                 
         self.editing    = true;
