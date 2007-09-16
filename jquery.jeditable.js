@@ -104,7 +104,7 @@ jQuery.fn.editable = function(target, options, callback) {
     callback = callback || function() { };
           
     jQuery(this).attr('title', settings.tooltip);
-
+        
     jQuery(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
@@ -119,8 +119,8 @@ jQuery.fn.editable = function(target, options, callback) {
         /* TODO: this is a bit of PHPism */
         // var width =         
         if (settings.width != 'none') {
-          settings.width = 
-              ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+            settings.width = 
+                ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
         }
         // var height = 
         if (settings.height != 'none') {
