@@ -1,8 +1,8 @@
 # $Id$
 
-VERSION = 1.4.0RC4
+VERSION = 1.4.0
 SHELL = /bin/sh
-DOWNLOAD = /export/home/tuupola/old_public_html/download
+DOWNLOAD = /export/home/tuupola/rails/mephisto-svn/public/download
 JSPACKER = /export/home/tuupola/bin/jspacker
 JSMIN    = /export/home/tuupola/bin/jsmin
 
