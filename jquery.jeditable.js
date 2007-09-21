@@ -31,7 +31,7 @@
 /* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.4.0)
+  * jQuery inplace editor plugin (version 1.4.1)
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
