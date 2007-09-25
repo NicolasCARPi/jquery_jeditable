@@ -192,7 +192,11 @@ jQuery.fn.editable = function(target, options, callback) {
                }
             });
         } else if (settings.data) {
-            content.apply(f, [settings.data, settings, self]);
+            var str = settings.data;
+            if (jQuery.isFunction(settings.data)) {
+                var str = settings.data.apply(self, [self.revert, settings]);
+            }
+            content.apply(f, [str, settings, self]);
         } else { 
             content.apply(f, [self.revert, settings, self]);
         }
