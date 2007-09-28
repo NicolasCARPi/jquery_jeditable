@@ -1,6 +1,6 @@
 <?php
 
-/* $Id$ */
+/* $Id: json.php 117 2007-03-02 16:16:08Z tuupola $ */
 
 $array['D'] =  'Letter D';
 $array['E'] =  'Letter E';

@@ -1,8 +1,8 @@
 <?php
 
-/* $Id$ */
+/* $Id: load.php 171 2007-07-31 14:22:58Z tuupola $ */
 
-require_once 'dbConnection.php';
+require_once 'config.php';
 require_once 'defaults.php';
 
 $token    = $_GET['id'] ?  $_GET['id'] : $_POST['id'];

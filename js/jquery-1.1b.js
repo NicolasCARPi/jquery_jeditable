@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date$
- * $Rev: 996 $
+ * $Date: 2007-01-12 20:47:50 +0200 (Fri, 12 Jan 2007) $
+ * $Rev: 94 $
  */
 
 // Global undefined variable

@@ -17,7 +17,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <script language="javascript" type="text/javascript" src="lib/firebug/firebug.js"></script>
 
 <script type="text/javascript" src="lib/jquery.js"></script>
-<script type="text/javascript" src="lib/jquery.jeditable.js"></script>
+<script type="text/javascript" src="lib/jquery.jeditable.pack.js"></script>
 <script type="text/javascript" src="lib/jquery.jeditable.inputs.js"></script>
 
 <script type="text/javascript" src="lib/jquery.maskedinput.js"></script>
@@ -60,7 +60,8 @@ $(document).ready(function() {
     });
     $(".ajaxupload").editable("<?php print $url ?>upload.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type      : 'ajaxupload',
+        type      : 'threebutton',
+        third     : 'Alert!',
         submit    : 'Upload',
         cancel    : 'Cancel',
         tooltip   : "Click to upload..."

@@ -10,7 +10,7 @@
 
 /*
 $HeadURL: http://svn.textpattern.com/development/crockery/textpattern/lib/classTextile.php $
-$LastChangedRevision: 1090 $
+$LastChangedRevision: 13 $
 */
 
 /*

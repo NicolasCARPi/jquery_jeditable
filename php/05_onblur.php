@@ -1,6 +1,6 @@
 <?php      
 
-/* $Id$ */      
+/* $Id: 05_onblur.php 146 2007-04-25 17:05:58Z tuupola $ */      
 
 /* No hardoced URL's in examples. Just copy the folder to server. */  
 $folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
@@ -11,7 +11,7 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-<title>jEditable - using different events</title>
+<title>jEditable - onblur options</title>
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script src="lib/jquery.jeditable.js" type="text/javascript"></script>
 <script src="lib/firebug/firebug.js" type="text/javascript"></script>
@@ -20,17 +20,25 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 $(document).ready(function() {
     $(".editable1").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        tooltip   : "Click to edit..."
+        type      : 'textarea',
+        onblur    : 'cancel',
+        tooltip   : 'Click to edit...',
+        cancel    : 'Cancel',
+        submit    : 'OK'
     });
     $(".editable2").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        tooltip   : "Doubleclick to edit...",
-        event     : "dblclick"
+        type      : 'textarea',
+        onblur    : 'submit',
+        tooltip   : "Click to edit..."
     });
     $(".editable3").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        tooltip   : "Move mouseover to edit...",
-        event     : "mouseover"
+        type      : 'textarea',
+        onblur    : 'ignore',
+        tooltip   : "Click to edit...",
+        cancel    : 'Cancel',
+        submit    : 'OK'
     });
 });
 // ]]>
@@ -41,13 +49,22 @@ $(document).ready(function() {
 <div id="center">
 <div id="header">
   <h1>jEditable demo</h1>
-  <h2>using different events</h2>
+  <h2>using different onblur options</h2>
 </div>
 
 <p>
-click: <h1 class="editable1" id="header_4"><?php print file_get_contents($url . 'load.php?id=header_4') ?></span></h1>
-doubleclick: <h1 class="editable2" id="header_5"><?php print file_get_contents($url . 'load.php?id=header_5') ?></span></h1>
-mouseover: <h1 class="editable3" id="header_6"><?php print file_get_contents($url . 'load.php?id=header_6') ?></h1>
+onblur : 'cancel'<br />
+Clicking outside editable area cancels changes.<br />
+Clicking OK button submits changes.
+<h1 class="editable1" id="header_7"><?php print file_get_contents($url . 'load.php?id=header_7') ?></h1>
+onblur : submit'<br />
+Clicking outside editable area submits changes.
+<h1 class="editable2" id="header_8"><?php print file_get_contents($url . 'load.php?id=header_8') ?></h1>
+onblur : 'ignore'<br />
+Click outside editable area is ignored. <br />
+Pressing ESC cancels changes. <br />
+Clicking OK button submits changes.
+<h1 class="editable3" id="header_9"><?php print file_get_contents($url . 'load.php?id=header_9') ?></h1>
 </p>
 
 <div id="footer">
@@ -58,3 +75,6 @@ mouseover: <h1 class="editable3" id="header_6"><?php print file_get_contents($ur
 
 </body>
 </html>
+
+
+

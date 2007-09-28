@@ -1,1 +1,0 @@
-../../jquery.jeditable.inputs.js

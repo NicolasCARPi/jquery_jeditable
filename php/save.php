@@ -1,14 +1,8 @@
 <?php
 
-/* $Id$ */
+/* $Id: save.php 101 2007-01-17 15:51:52Z tuupola $ */
 
-require_once 'dbConnection.php';
-
-$status = $dbh->query('
-CREATE TABLE config (id INTEGER PRIMARY KEY, 
-                     token VARCHAR(64),
-                     value TEXT)
-');
+require_once 'config.php';
 
 $id = $dbh->nextId('config');
 

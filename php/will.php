@@ -1,6 +1,6 @@
 <?php      
 
-/* $Id$ */      
+/* $Id: 01_basic_usage.php 146 2007-04-25 17:05:58Z tuupola $ */      
 
 /* No hardoced URL's in examples. Just copy the folder to server. */  
 $folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
@@ -18,12 +18,27 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 <script type="text/javascript">
 // <![CDATA[
 $(document).ready(function() {
+  $.editable.addInputType('text_changed_checker', {
+      element : function(settings, original) { 
+          var input = $('<input>');
+          $(this).append(input);
+          return(input);        
+      },
+      submit  : function(settings, original) { 
+          if (original.revert == $("input", this).val()) {
+              console.log('Unhanged.');           
+          } else {
+              console.log('Changed.');
+          }
+      }
+  });
+  
     $(".editable").editable("<?php print $url ?>echo.php", { 
       indicator : "<img src='img/indicator.gif'>"
     });
     $(".editable_textarea").editable("<?php print $url ?>echo.php", { 
         indicator : "<img src='img/indicator.gif'>",
-        type   : 'textarea',
+        type   : 'text_changed_checker',
         submit : 'OK'
     });
     $(".editable_select").editable("<?php print $url ?>echo.php", { 

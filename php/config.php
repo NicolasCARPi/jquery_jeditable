@@ -1,6 +1,6 @@
 <?php
 
-/* $Id$ */
+/* $Id: dbConnection.php 23 2006-09-28 13:31:24Z tuupola $ */
 
 error_reporting(E_ALL ^ E_NOTICE);
 

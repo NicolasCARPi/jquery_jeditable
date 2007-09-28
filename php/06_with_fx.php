@@ -1,6 +1,6 @@
 <?php      
 
-/* $Id$ */      
+/* $Id: 06_with_fx.php 146 2007-04-25 17:05:58Z tuupola $ */      
 
 /* No hardoced URL's in examples. Just copy the folder to server. */  
 $folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
