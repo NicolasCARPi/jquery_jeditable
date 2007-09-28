@@ -35,7 +35,15 @@ $(document).ready(function() {
         type      : "textarea",
         submit    : "OK",
         cancel    : "Cancel",
-        tooltip   : "Click to edit..."
+        tooltip   : "Click to edit...",
+//	submitdata  : {foo: "bar"},
+        submitdata : function(value, settings) {
+            return {maybe : "forsure"};
+        },
+//	loaddata  : {com: "net"}
+//        loaddata : function(value, settings) {
+//           return {yes : "no"};
+//        }
     });
 });
 // ]]>
@@ -53,6 +61,7 @@ $(document).ready(function() {
 <h2 class="editable" id="header_2"><?php print file_get_contents($url . 'load.php?id=header_2') ?></h2>
 <h3 class="editable_select" id="header_10"><?php print file_get_contents($url . 'load.php?id=header_10') ?></h3>
 <div class="editable_textile" id="paragraph_2"><?php print file_get_contents($url . 'load.php?id=paragraph_2&renderer=textile') ?></div>
+<div class="editable_textile" id="paragraph_5"><?php print file_get_contents($url . 'load.php?id=paragraph_5&renderer=textile') ?></div>
 
 <div id="footer">
 <?php include '00_footer.php' ?>
