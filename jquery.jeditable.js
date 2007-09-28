@@ -113,35 +113,35 @@
                 self.innerHTML  = '';
 
                 /* create the form object */
-                var f = document.createElement('form');
-        
+                var form = $('<form>');
+                
                 /* apply css or style or both */
                 if (settings.cssclass) {
                     if ('inherit' == settings.cssclass) {
-                        $(f).attr('class', $(self).attr('class'));
+                        form.attr('class', $(self).attr('class'));
                     } else {
-                        $(f).attr('class', settings.cssclass);
+                        form.attr('class', settings.cssclass);
                     }
                 }
         
                 if (settings.style) {
                     if ('inherit' == settings.style) {
-                        $(f).attr('style', $(self).attr('style'));
+                        form.attr('style', $(self).attr('style'));
                         /* IE needs the second line or display wont be inherited */
-                        $(f).css('display', $(self).css('display'));                
+                        form.css('display', $(self).css('display'));                
                     } else {
-                        $(f).attr('style', settings.style);
+                        form.attr('style', settings.style);
                     }
                 }
         
                 /*  Add main input element to form and store it in i. */
-                var i = element.apply(f, [settings, self]);
+                var input = element.apply(form, [settings, self]);
 
                 /* set input content via POST, GET, given data or existing value */
                 if (settings.loadurl) {
                     var t = setTimeout(function() {
-                        i.disabled = true;
-                        content.apply(f, [settings.loadtext, settings, self]);
+                        input.disabled = true;
+                        content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
                 
                     var loaddata = {};
@@ -157,8 +157,8 @@
                        data : loaddata,
                        success: function(string) {
                        	  window.clearTimeout(t);                
-                          content.apply(f, [string, settings, self]);
-                          i.disabled = false;
+                          content.apply(form, [string, settings, self]);
+                          input.disabled = false;
                        }
                     });
                 } else if (settings.data) {
@@ -166,32 +166,32 @@
                     if ($.isFunction(settings.data)) {
                         var str = settings.data.apply(self, [self.revert, settings]);
                     }
-                    content.apply(f, [str, settings, self]);
+                    content.apply(form, [str, settings, self]);
                 } else { 
-                    content.apply(f, [self.revert, settings, self]);
+                    content.apply(form, [self.revert, settings, self]);
                 }
 
-                i.name  = settings.name;
+                input.attr('name', settings.name);
         
                 /* add buttons to the form */
-                buttons.apply(f, [settings, self]);
+                buttons.apply(form, [settings, self]);
 
                 /* add created form to self */
-                self.appendChild(f);
+                $(self).append(form);
         
                 /* highlight input contents when requested */
                 if (settings.select) {
-                    i.select();
+                    input.select();
                 }
          
                 /* attach 3rd party plugin if requested */
-                plugin.apply(f, [settings, self]);            
+                plugin.apply(form, [settings, self]);
 
                 /* focus to first visible form element */
-                $(":input:visible:enabled:first", f).focus();
+                $(":input:visible:enabled:first", form).focus();
         
                 /* discard changes if pressing esc */
-                $(i).keydown(function(e) {
+                input.keydown(function(e) {
                     if (e.keyCode == 27) {
                         e.preventDefault();
                         reset();
@@ -202,20 +202,20 @@
                 /* do nothing is usable when navigating with tab */
                 var t;
                 if ('cancel' == settings.onblur) {
-                    $(i).blur(function(e) {
+                    input.blur(function(e) {
                         t = setTimeout(reset, 500);
                     });
                 } else if ('submit' == settings.onblur) {
-                    $(i).blur(function(e) {
-                        $(f).submit();
+                    input.blur(function(e) {
+                        form.submit();
                     });
                 } else {
-                    $(i).blur(function(e) {
+                    input.blur(function(e) {
                       /* TODO: maybe something here */
                     });
                 }
 
-                $(f).submit(function(e) {
+                form.submit(function(e) {
 
                     if (t) { 
                         clearTimeout(t);
@@ -225,18 +225,18 @@
                     e.preventDefault(); 
             
                     /* if this input type has a call before submit hook, call it */
-                    submit.apply(f, [settings, self]);            
+                    submit.apply(form, [settings, self]);
 
                     /* check if given target is function */
                     if ($.isFunction(settings.target)) {
-                        var str = settings.target.apply(self, [$(i).val(), settings]);
+                        var str = settings.target.apply(self, [input.val(), settings]);
                         self.innerHTML = str;
                         self.editing = false;
                         callback.apply(self, [self.innerHTML, settings]);
                     } else {
                         /* add edited content and id of edited element to POST */
                         var submitdata = {};
-                        submitdata[i.name] = $(i).val();
+                        submitdata[settings.name] = input.val();
                         submitdata[settings.id] = self.id;
                         /* add extra data to be POST:ed */
                         if ($.isFunction(settings.submitdata)) {
@@ -341,7 +341,6 @@
                             } 
                             var option = $('<option>').val(key).append(json[key]);
                             if (key == json['selected']) {
-                                console.log(key);
                                 /* TODO: why does not this work? */
                                 //option.attr('selected', 'selected');
                                 option[0].selected = true;
