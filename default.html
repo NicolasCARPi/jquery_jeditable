@@ -4,7 +4,7 @@
 
 /* No hardoced URL's in examples. Just copy the folder to server. */  
 $folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-$url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
+$url    = sprintf('http://%s%sphp/', $_SERVER['SERVER_NAME'], $folder);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,20 +12,18 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Lazy Load Enabled</title>
+<title>Jeditable edit in place demo</title>
 <meta name="generator" content="Mephisto" />
 <link href="http://www.appelsiini.net/stylesheets/main.css" rel="stylesheet" type="text/css" />
 <link rel="alternate" type="application/atom+xml" href="http://feeds.feedburner.com/tuupola" title="Atom feed" />
 <script src="/mint/?js" type="text/javascript"></script>
 <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
-<script type="text/javascript">
-  _uacct = "UA-190966-1";
-  urchinTracker();
-</script>
 <script src="http://static.taevas.ee/js/jquery-1.2.1.mini.js" type="text/javascript" charset="utf-8"></script>
-<script src="lib/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
+<script src="jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-$(function() {          
+
+$(function() {
+        
   $(".editable_select").editable("<?php print $url ?>save.php", { 
     indicator : '<img src="img/indicator.gif">',
     data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit', 'selected':'Ipsum dolor'}",
@@ -128,6 +126,11 @@ $(function() {
   
   <div id="footer">
   </div>
+
+  <script type="text/javascript">
+    _uacct = "UA-190966-1";
+    urchinTracker();
+  </script>
 
 </body>
 </html>

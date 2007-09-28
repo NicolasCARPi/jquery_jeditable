@@ -21,7 +21,7 @@ $retval = trim($retval) ?  $retval : $default[$token];
 $retval = trim($retval) ?  $retval : 'Edit me!';
 
 if ('textile' == $renderer) {
-    require_once './lib/Textile.php';
+    require_once './Textile.php';
     $t = new Textile();
     $retval = $t->TextileThis($retval);
 } 
