@@ -48,14 +48,7 @@
 
 (function($) {
 
-    $.fn.editable = function(target, options, callback) {
-
-        /* prevent elem has no properties error */
-        /*
-        if (this.length === 0) { 
-            return(this); 
-        }
-        */
+    $.fn.editable = function(target, options) {
     
         var settings = {
             target     : target,
@@ -85,8 +78,7 @@
                     || $.editable.types['defaults'].content;
         var element  = $.editable.types[settings.type].element 
                     || $.editable.types['defaults'].element;
-
-        callback = callback || function() { };
+        var callback = settings.callback || function() { };
           
         $(this).attr('title', settings.tooltip);
 
@@ -144,15 +136,6 @@
         
                 /*  Add main input element to form and store it in i. */
                 var i = element.apply(f, [settings, self]);
-
-                /* maintain bc with 1.1.1 and earlier versions */        
-                if (settings.getload) {
-                    settings.loadurl    = settings.getload;
-                    settings.loadtype = 'GET';
-                } else if (settings.postload) {
-                    settings.loadurl    = settings.postload;
-                    settings.loadtype = 'POST';
-                }
 
                 /* set input content via POST, GET, given data or existing value */
                 if (settings.loadurl) {
