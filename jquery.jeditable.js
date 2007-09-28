@@ -113,8 +113,7 @@
                 self.innerHTML  = '';
 
                 /* create the form object */
-                var form = $('<form>');
-                
+                var form = $('<form/>');
                 /* apply css or style or both */
                 if (settings.cssclass) {
                     if ('inherit' == settings.cssclass) {
