@@ -81,10 +81,6 @@
         var callback = settings.callback || function() { };
           
         $(this).attr('title', settings.tooltip);
-
-        /* temporary fix for auto width and height */
-        settings.autowidth  = 'auto' == settings.width;
-        settings.autoheight = 'auto' == settings.height;
           
         return this.each(function() {
               
@@ -101,11 +97,11 @@
                 /* figure out how wide and tall we are */
                 if (settings.width != 'none') {
                     settings.width = 
-                       settings.autowidth ? $(self).width()  : settings.width;
+                        ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
                 }
                 if (settings.height != 'none') {
                     settings.height = 
-                        settings.autoheight ? $(self).height() : settings.height;
+                        ('auto' == settings.height) ? jQuery(self).height() : settings.height;
                 }
                 
                 self.editing    = true;
