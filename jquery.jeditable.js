@@ -183,7 +183,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* focus to first visible form element */
-                $(":input:visible:enabled:first", form).focus();
+                $(':input:visible:enabled:first', form).focus();
         
                 /* discard changes if pressing esc */
                 input.keydown(function(e) {
@@ -329,17 +329,17 @@
                 },
                 content : function(string, settings, original) {
                     if (String == string.constructor) { 	 
-                        eval ("var json = " + string);
+                        eval ('var json = ' + string);
                         for (var key in json) {
                             if ('selected' == key) {
                                 continue;
                             } 
                             var option = $('<option>').val(key).append(json[key]);
-                            $("select", this).append(option); 	 
+                            $('select', this).append(option); 	 
                         }
                     }
                     /* Loop option again to set selected. IE needed this... */ 
-                    $("select", this).children().each(function() {
+                    $('select', this).children().each(function() {
                         if ($(this).val() == json['selected']) {
                             $(this).attr('selected', 'selected');
                         };
@@ -355,10 +355,3 @@
     };
 
 })(jQuery);
-
-
-/**
-  *
-  */
- 
-
