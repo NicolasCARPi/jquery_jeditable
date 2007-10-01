@@ -335,14 +335,15 @@
                                 continue;
                             } 
                             var option = $('<option>').val(key).append(json[key]);
-                            if (key == json['selected']) {
-                                /* TODO: why does not this work? */
-                                //option.attr('selected', 'selected');
-                                option[0].selected = true;
-                            }
                             $("select", this).append(option); 	 
                         }
                     }
+                    /* Loop option again to set selected. IE needed this... */ 
+                    $("select", this).children().each(function() {
+                        if ($(this).val() == json['selected']) {
+                            $(this).attr('selected', 'selected');
+                        };
+                    });
                 }
             }
         },
