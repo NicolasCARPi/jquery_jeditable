@@ -61,6 +61,7 @@
             onblur     : 'cancel',
             loadtype   : 'GET',
             loadtext   : 'Loading...',
+            placeholder: 'Click to edit',
             loaddata   : {},
             submitdata : {}
         };
@@ -81,10 +82,23 @@
         var callback = settings.callback || function() { };
           
         $(this).attr('title', settings.tooltip);
-          
+        
+        settings.autowidth  = 'auto' == settings.width;
+        settings.autoheight = 'auto' == settings.height;
+
         return this.each(function() {
-              
+            
+            /* if element is empty add something clickable (if requested) */
+            if (!$.trim($(this).html())) {
+                $(this).html(settings.placeholder);
+            }
+            
             $(this)[settings.event](function(e) {
+
+                /* remove placeholder text */
+                if ($(this).html() == settings.placeholder) {
+                    $(this).html('');
+                }
 
                 /* save this to self because this changes when scope changes */
                 var self = this;
@@ -97,11 +111,11 @@
                 /* figure out how wide and tall we are */
                 if (settings.width != 'none') {
                     settings.width = 
-                        ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
+                        settings.autowidth ? $(self).width()  : settings.width;
                 }
                 if (settings.height != 'none') {
                     settings.height = 
-                        ('auto' == settings.height) ? jQuery(self).height() : settings.height;
+                        settings.autoheight ? $(self).height() : settings.height;
                 }
                 
                 self.editing    = true;
@@ -110,6 +124,10 @@
 
                 /* create the form object */
                 var form = $('<form/>');
+
+                /* add created form to self */
+                $(self).append(form);
+                
                 /* apply css or style or both */
                 if (settings.cssclass) {
                     if ('inherit' == settings.cssclass) {
@@ -129,16 +147,18 @@
                     }
                 }
         
-                /*  Add main input element to form and store it in i. */
+                /* add main input element to form and store it in input */
                 var input = element.apply(form, [settings, self]);
 
                 /* set input content via POST, GET, given data or existing value */
+                var input_content;
+                
                 if (settings.loadurl) {
                     var t = setTimeout(function() {
                         input.disabled = true;
                         content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
-                
+
                     var loaddata = {};
                     loaddata[settings.id] = self.id;
                     if ($.isFunction(settings.loaddata)) {
@@ -150,30 +170,28 @@
                        type : settings.loadtype,
                        url  : settings.loadurl,
                        data : loaddata,
-                       success: function(string) {
-                       	  window.clearTimeout(t);                
-                          content.apply(form, [string, settings, self]);
+                       async : false,
+                       success: function(result) {
+                       	  window.clearTimeout(t);
+                       	  input_content = result;
                           input.disabled = false;
                        }
                     });
                 } else if (settings.data) {
-                    var str = settings.data;
+                    input_content = settings.data;
                     if ($.isFunction(settings.data)) {
-                        var str = settings.data.apply(self, [self.revert, settings]);
+                        input_content = settings.data.apply(self, [self.revert, settings]);
                     }
-                    content.apply(form, [str, settings, self]);
-                } else { 
-                    content.apply(form, [self.revert, settings, self]);
+                } else {
+                    input_content = self.revert; 
                 }
+                content.apply(form, [input_content, settings, self]);
 
                 input.attr('name', settings.name);
         
                 /* add buttons to the form */
                 buttons.apply(form, [settings, self]);
 
-                /* add created form to self */
-                $(self).append(form);
-        
                 /* highlight input contents when requested */
                 if (settings.select) {
                     input.select();
@@ -246,15 +264,22 @@
                             self.innerHTML = str;
                             self.editing = false;
                             callback.apply(self, [self.innerHTML, settings]);
+                            /* TODO: this is not dry */                              
+                            if (!$.trim($(self).html())) {
+                                $(self).html(settings.placeholder);
+                            }
                         });
                     }
-                        
+                     
                     return false;
                 });
 
                 function reset() {
                     self.innerHTML = self.revert;
                     self.editing   = false;
+                    if (!$.trim($(self).html())) {
+                        $(self).html(settings.placeholder);
+                    }
                 }
 
             });
