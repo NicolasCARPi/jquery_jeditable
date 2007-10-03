@@ -114,13 +114,13 @@
                 }
                 
                 /* remove placeholder text */
-                if ($(this).html() == settings.placeholder) {
+                if ($(this).text() == $(settings.placeholder).text()) {
                     $(this).html('');
                 }
                                 
                 self.editing    = true;
                 self.revert     = $(self).html();
-                self.innerHTML  = '';
+                $(self).html('');
 
                 /* create the form object */
                 var form = $('<form/>');
@@ -243,7 +243,7 @@
                     /* check if given target is function */
                     if ($.isFunction(settings.target)) {
                         var str = settings.target.apply(self, [input.val(), settings]);
-                        self.innerHTML = str;
+                        $(self).html(str);
                         self.editing = false;
                         callback.apply(self, [self.innerHTML, settings]);
                     } else {
@@ -261,7 +261,7 @@
                         /* show the saving indicator */
                         $(self).html(settings.indicator);
                         $.post(settings.target, submitdata, function(str) {
-                            self.innerHTML = str;
+                            $(self).html(str);
                             self.editing = false;
                             callback.apply(self, [self.innerHTML, settings]);
                             /* TODO: this is not dry */                              
@@ -275,7 +275,7 @@
                 });
 
                 function reset() {
-                    self.innerHTML = self.revert;
+                    $(self).html(self.revert);
                     self.editing   = false;
                     if (!$.trim($(self).html())) {
                         $(self).html(settings.placeholder);
