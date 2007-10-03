@@ -95,11 +95,6 @@
             
             $(this)[settings.event](function(e) {
 
-                /* remove placeholder text */
-                if ($(this).html() == settings.placeholder) {
-                    $(this).html('');
-                }
-
                 /* save this to self because this changes when scope changes */
                 var self = this;
 
@@ -118,6 +113,11 @@
                         settings.autoheight ? $(self).height() : settings.height;
                 }
                 
+                /* remove placeholder text */
+                if ($(this).html() == settings.placeholder) {
+                    $(this).html('');
+                }
+                                
                 self.editing    = true;
                 self.revert     = $(self).html();
                 self.innerHTML  = '';
