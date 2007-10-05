@@ -114,9 +114,10 @@
                         settings.autoheight ? $(self).height() : settings.height;
                 }
                 
-                /* remove placeholder text */
-                if ($(this).text() == $(settings.placeholder).text()) {
-                    $(this).html('');
+                /* remove placeholder text, replace is here because of IE */
+                if ($(this).html().toLowerCase().replace(/;/, '') == 
+                    settings.placeholder.toLowerCase().replace(/;/, '')) {
+                        $(this).html('');
                 }
                                 
                 self.editing    = true;
