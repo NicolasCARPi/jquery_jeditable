@@ -42,6 +42,7 @@
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
   * @param String  options[select]    true or false, when true text is highlighted
+  * @param String  options[placeholder] Placeholder text or html to insert when element is empty.
   *             
   */
 
