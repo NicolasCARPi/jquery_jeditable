@@ -46,7 +46,6 @@
   *             
   */
 
-
 (function($) {
 
     $.fn.editable = function(target, options) {
