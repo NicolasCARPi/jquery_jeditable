@@ -4,7 +4,7 @@
 
 /* No hardoced URL's in examples. Just copy the folder to server. */  
 $folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-$url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
+$url    = sprintf('http://%s%s%s/', $_SERVER['SERVER_NAME'], $folder, 'php');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,9 +12,10 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Lazy Load Enabled</title>
+<title>Jeditable Custom Input Types Demo</title>
 <meta name="generator" content="Mephisto" />
 <link href="http://www.appelsiini.net/stylesheets/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/datePicker.css" media="screen" />
 <link rel="alternate" type="application/atom+xml" href="http://feeds.feedburner.com/tuupola" title="Atom feed" />
 <script src="/mint/?js" type="text/javascript"></script>
 <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
@@ -23,55 +24,57 @@ $url    = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], $folder);
   urchinTracker();
 </script>
 <script src="http://static.taevas.ee/js/jquery-1.2.1.mini.js" type="text/javascript" charset="utf-8"></script>
-<script src="lib/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/jquery.jeditable.js" type="text/javascript"></script>
+<script src="js/jquery.jeditable.inputs.js" type="text/javascript" ></script>
+
+<script type="text/javascript" src="js/jquery.maskedinput.js"></script>
+<script type="text/javascript" src="js/jquery.timepicker.js"></script>
+
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/jquery.bgigframe.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="js/jquery.datePicker.js"></script>
+
+<script type="text/javascript" src="js/jquery.ajaxfileupload.js"></script>
+
+
 <script type="text/javascript" charset="utf-8">
-$(function() {          
-  $(".editable_select").editable("<?php print $url ?>save.php", { 
-    indicator : '<img src="img/indicator.gif">',
-    data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit', 'selected':'Ipsum dolor'}",
-    type   : "select",
-    submit : "OK",
-    style  : "inherit"
-  });
-  $(".editable_textarea").editable("<?php print $url ?>save.php", { 
-      indicator : "<img src='img/indicator.gif'>",
-      type   : 'textarea',
-      submit : 'OK'
-  });
-  $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
-      indicator : "<img src='img/indicator.gif'>",
-      loadurl   : "<?php print $url ?>load.php",
-      type      : "textarea",
-      submit    : "OK",
-      cancel    : "Cancel",
-      tooltip   : "Click to edit..."
-  });
-  
-  $(".click").editable("<?php print $url ?>echo.php", { 
-      indicator : "<img src='img/indicator.gif'>",
-      tooltip   : "Click to edit...",
-      style  : "inherit"
-  });
-  $(".dblclick").editable("<?php print $url ?>echo.php", { 
-      indicator : "<img src='img/indicator.gif'>",
-      tooltip   : "Doubleclick to edit...",
-      event     : "dblclick",
-      style  : "inherit"
-  });
-  $(".mouseover").editable("<?php print $url ?>echo.php", { 
-      indicator : "<img src='img/indicator.gif'>",
-      tooltip   : "Move mouseover to edit...",
-      event     : "mouseover",
-      style  : "inherit"
-  });
-  
-  /* Should not cause error. */
-  $("#nosuch").editable("<?php print $url ?>echo.php", { 
-      indicator : "<img src='img/indicator.gif'>",
-      type   : 'textarea',
-      submit : 'OK'
-  });
+// <![CDATA[
+$(document).ready(function() {
+    $(".masked").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : "masked",
+        mask      : "99/99/9999",
+        submit    : 'OK',
+        tooltip   : "Click to edit..."
+    });
+    $(".datepicker").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'datepicker',
+        tooltip   : "Click to edit..."
+    });
+    $(".timepicker").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'timepicker',
+        submit    : 'OK',
+        tooltip   : "Click to edit..."
+    });
+    $(".time").editable("<?php print $url ?>save.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'time',
+        submit    : 'OK',
+        tooltip   : "Click to edit..."
+    });
+    $(".ajaxupload").editable("<?php print $url ?>upload.php", { 
+        indicator : "<img src='img/indicator.gif'>",
+        type      : 'ajaxupload',
+        submit    : 'Upload',
+        cancel    : 'Cancel',
+        tooltip   : "Click to upload..."
+    });
 });
+// ]]>
 </script>  
 <style type="text/css">
 #sidebar {
@@ -104,22 +107,41 @@ $(function() {
     <div id="content">
       
     <div class="entry">
+      
+      <p>You might also want to check <a href="default.html">default inputs demo</a>.
 
-    <h2>Normal textarea</h2>
-    <p class="editable_textarea" id="paragraph_1"><?php print file_get_contents($url . 'load.php?id=paragraph_1') ?></p>
-
-    <h2>Inlined select</h2>
-    <p><b class="editable_select" id="select_1" style="display: inline"> <?php print file_get_contents($url . 'load.php?id=select_1') ?></b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>    
-
-    <h2>Textile renderer</h2>
-    <div class="editable_textile" id="paragraph_2"><?php print file_get_contents($url . 'load.php?id=paragraph_2&renderer=textile') ?></div>
-
-    <h2>Different events</h2>
-    <p>
-      <b class="click" style="display: inline">Click me if you date!</b></> or maybe you should 
-      <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
-      <b class="mouseover" style="display: inline">mouseover me</b>...
-    </p>
+      <h2>Masked Input</h2>
+      <p class="masked" id="custom_1"><?php print file_get_contents($url . 'load.php?id=custom_1') ?></p>
+      <p>Custom input which uses 
+        <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input Plugin</a> by Josh Bush.
+      </p>
+    
+      <h2>Time Picker</h2>
+      <p class="timepicker" id="custom_2"><?php print file_get_contents($url . 'load.php?id=custom_2') ?></p>
+      <p>
+        Custom input which uses <a href="http://jquery.com/plugins/project/timepicker">Timepicker Plugin</a> 
+        by Jason Huck.
+      </p>
+      
+      <h2>Time Picker 2</h2>
+      <p class="time" id="custom_3"><?php print file_get_contents($url . 'load.php?id=custom_3') ?></p>
+      <p>
+        Custom input written without 3rd party plugins.
+      </p>
+      
+      <h2>Date Picker</h2>
+      <p class="datepicker" id="custom_4"><?php print file_get_contents($url . 'load.php?id=custom_4') ?></p>
+      <p>
+        Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker 
+        Plugin</a> by Kelvin Luck. This input still has some bugs.
+      </p>
+      
+      <h2>Ajax File Upload</h2>
+      <p class="ajaxupload" id="custom_5"><?php print file_get_contents($url . 'load.php?id=custom_5') ?></p>
+      <p>
+        Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.
+        For security reasons after uploading this demo only display file size and name.
+      </p>
     
     </div>
     <div id="sidebar">
