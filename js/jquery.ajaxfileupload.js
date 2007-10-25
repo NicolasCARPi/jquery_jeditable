@@ -192,7 +192,8 @@ jQuery.extend({
             eval( "data = " + data );
         // evaluate scripts within html
         if ( type == "html" )
-            jQuery("<div>").html(data).evalScripts();
+            jQuery("<div>").html(data);
+            //jQuery("<div>").html(data).evalScripts();
 			//alert($('param', data).each(function(){alert($(this).attr('value'));}));
         return data;
     }
