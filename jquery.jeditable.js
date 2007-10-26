@@ -14,7 +14,7 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.0
+  * Version 1.5.x
   *
   * @name  Jeditable
   * @type  jQuery
@@ -222,6 +222,10 @@
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
                         form.submit();
+                    });
+                } else if ($.isFunction(settings.onblur)) {
+                    input.blur(function(e) {
+                        settings.onblur.apply(self, [input.val(), settings]);
                     });
                 } else {
                     input.blur(function(e) {
