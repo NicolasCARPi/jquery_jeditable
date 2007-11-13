@@ -14,7 +14,7 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.x
+  * Version 1.5.1
   *
   * @name  Jeditable
   * @type  jQuery
@@ -251,6 +251,10 @@
                         $(self).html(str);
                         self.editing = false;
                         callback.apply(self, [self.innerHTML, settings]);
+                        /* TODO: this is not dry */                              
+                        if (!$.trim($(self).html())) {
+                            $(self).html(settings.placeholder);
+                        }
                     } else {
                         /* add edited content and id of edited element to POST */
                         var submitdata = {};
