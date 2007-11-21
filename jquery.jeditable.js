@@ -14,7 +14,7 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.1
+  * Version 1.5.x
   *
   * @name  Jeditable
   * @type  jQuery
@@ -80,6 +80,13 @@
         var element  = $.editable.types[settings.type].element 
                     || $.editable.types['defaults'].element;
         var callback = settings.callback || function() { };
+        
+        /* add custom event if it does not exist */
+        if  (!$.isFunction($(this)[settings.event])) {
+            $.fn[settings.event] = function(fn){
+          		return fn ? this.bind(settings.event, fn) : this.trigger(settings.event);
+          	}
+        }
           
         $(this).attr('title', settings.tooltip);
         
