@@ -14,7 +14,7 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.x
+  * Version 1.5.2
   *
   * @name  Jeditable
   * @type  jQuery
