@@ -39,28 +39,28 @@ $.editable.addInputType('time', {
     /* Create input element. */
     element : function(settings, original) {
         /* Create and pulldowns for hours and minutes. Append them to */
-        /* form which is accessible as variable this.                 */ 		
-		var hourselect = $('<select id="hour_">');
-		var minselect  = $('<select id="min_">');
-		
-		for (var hour=1; hour <= 24; hour++) {
-		    if (hour < 10) {
-		        hour = '0' + hour;
-		    }
-		    var option = $('<option>').val(hour).append(hour);
-		    hourselect.append(option);
-		}
-		$(this).append(hourselect);
+        /* form which is accessible as variable this.                 */        
+        var hourselect = $('<select id="hour_">');
+        var minselect  = $('<select id="min_">');
+        
+        for (var hour=1; hour <= 24; hour++) {
+            if (hour < 10) {
+                hour = '0' + hour;
+            }
+            var option = $('<option>').val(hour).append(hour);
+            hourselect.append(option);
+        }
+        $(this).append(hourselect);
 
-		for (var min=0; min <= 45; min = parseInt(min)+15) {
-		    if (min < 10) {
-		        min = '0' + min;
-		    }
-		    var option = $('<option>').val(min).append(min);
-		    minselect.append(option);
-		}
-		$(this).append(minselect);
-		        
+        for (var min=0; min <= 45; min = parseInt(min)+15) {
+            if (min < 10) {
+                min = '0' + min;
+            }
+            var option = $('<option>').val(min).append(min);
+            minselect.append(option);
+        }
+        $(this).append(minselect);
+                
         /* Last create an hidden input. This is returned to plugin. It will */
         /* later hold the actual value which will be submitted to server.   */
         var hidden = $('<input type="hidden">');
@@ -74,16 +74,16 @@ $.editable.addInputType('time', {
         var hour = parseInt(string.substr(0,2));
         var min = parseInt(string.substr(3,2));
 
-		$("#hour_", this).children().each(function() {
-		    if (hour == $(this).val()) {
-		        $(this).attr('selected', 'selected');
-		    }
-		});
-		$("#min_", this).children().each(function() {
-		    if (min == $(this).val()) {
-		        $(this).attr('selected', 'selected')
-		    }
-		});
+        $("#hour_", this).children().each(function() {
+            if (hour == $(this).val()) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+        $("#min_", this).children().each(function() {
+            if (min == $(this).val()) {
+                $(this).attr('selected', 'selected')
+            }
+        });
 
     },
     /* Call before submit hook. */
@@ -122,7 +122,7 @@ $.editable.addInputType('datepicker', {
         .bind('dpClosed', function(e, selected) {
             /* TODO: unneseccary calls reset() */
             //$(this).blur();
-    	})
+        })
         .trigger('change')
         .click();
     }
@@ -150,8 +150,8 @@ $.editable.addInputType('ajaxupload', {
                 fileElementId: 'upload',
                 dataType: 'html',
                 success: function (data, status) {
-        			$(original).html(data);
-        			original.editing = false;
+                    $(original).html(data);
+                    original.editing = false;
                 },
                 error: function (data, status, e) {
                     alert(e);
