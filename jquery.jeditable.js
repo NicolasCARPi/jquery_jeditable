@@ -1,7 +1,7 @@
 /*
  * Jeditable - jQuery in place edit plugin
  *
- * Copyright (c) 2006-2007 Mika Tuupola, Dylan Verheul
+ * Copyright (c) 2006-2008 Mika Tuupola, Dylan Verheul
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -11,10 +11,13 @@
  */
 
 /**
+  * Project home:
+  * http://www.appelsiini.net/projects/jeditable
+  *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.2
+  * Version 1.5.3
   *
   * @name  Jeditable
   * @type  jQuery
