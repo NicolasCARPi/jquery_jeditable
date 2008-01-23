@@ -110,7 +110,9 @@
                     return;
                 }
 
-                /* figure out how wide and tall we are */
+                /* figure out how wide and tall we are, visibility trick */
+                /* is workaround for http://dev.jquery.com/ticket/2190 */
+                $(self).css("visibility", "hidden");                
                 if (settings.width != 'none') {
                     settings.width = 
                         settings.autowidth ? $(self).width()  : settings.width;
@@ -119,6 +121,8 @@
                     settings.height = 
                         settings.autoheight ? $(self).height() : settings.height;
                 }
+                $(this).css("visibility", "");
+                
                 
                 /* remove placeholder text, replace is here because of IE */
                 if ($(this).html().toLowerCase().replace(/;/, '') == 
@@ -144,7 +148,7 @@
                         form.attr('class', settings.cssclass);
                     }
                 }
-        
+
                 if (settings.style) {
                     if ('inherit' == settings.style) {
                         form.attr('style', $(self).attr('style'));
@@ -154,7 +158,7 @@
                         form.attr('style', settings.style);
                     }
                 }
-        
+
                 /* add main input element to form and store it in input */
                 var input = element.apply(form, [settings, self]);
 
