@@ -379,6 +379,9 @@
                     if (String == string.constructor) { 	 
                         eval ('var json = ' + string);
                         for (var key in json) {
+                            if (!json.hasOwnProperty(key)) {
+                                continue;
+                            }
                             if ('selected' == key) {
                                 continue;
                             } 
