@@ -17,7 +17,7 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.3
+  * Version 1.5.4
   *
   * @name  Jeditable
   * @type  jQuery
@@ -139,9 +139,6 @@
 
                 /* create the form object */
                 var form = $('<form/>');
-
-                /* add created form to self */
-                $(self).append(form);
                 
                 /* apply css or style or both */
                 if (settings.cssclass) {
@@ -214,6 +211,9 @@
          
                 /* attach 3rd party plugin if requested */
                 plugin.apply(form, [settings, self]);
+                
+                /* add created form to self */
+                $(self).append(form);
 
                 /* focus to first visible form element */
                 $(':input:visible:enabled:first', form).focus();
