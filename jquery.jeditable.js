@@ -203,11 +203,6 @@
         
                 /* add buttons to the form */
                 buttons.apply(form, [settings, self]);
-
-                /* highlight input contents when requested */
-                if (settings.select) {
-                    input.select();
-                }
          
                 /* attach 3rd party plugin if requested */
                 plugin.apply(form, [settings, self]);
@@ -217,6 +212,11 @@
 
                 /* focus to first visible form element */
                 $(':input:visible:enabled:first', form).focus();
+
+                /* highlight input contents when requested */
+                if (settings.select) {
+                    input.select();
+                }
         
                 /* discard changes if pressing esc */
                 input.keydown(function(e) {
