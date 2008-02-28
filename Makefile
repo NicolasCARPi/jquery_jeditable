@@ -9,7 +9,7 @@ JSMIN    = /export/home/tuupola/bin/jsmin
 #all: jeditable packed tarball latest
 all: jeditable packed minified latest
 
-jeditable: jquery.jeditable.js jquery.jeditable.inputs.js
+jeditable: jquery.jeditable.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).js
 #	cp jquery.jeditable.inputs.js $(DOWNLOAD)/jquery.jeditable.inputs-$(VERSION).js
 
@@ -24,6 +24,7 @@ minified: jquery.jeditable.js
 latest: jquery.jeditable.js jquery.jeditable.pack.js jquery.jeditable.inputs.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable.js
 	cp jquery.jeditable.inputs.js $(DOWNLOAD)/jquery.jeditable.inputs.js
+	cp jquery.jeditable.time.js $(DOWNLOAD)/jquery.jeditable.time.js
 	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable.pack.js
 	cp jquery.jeditable.mini.js $(DOWNLOAD)/jquery.jeditable.mini.js
 
