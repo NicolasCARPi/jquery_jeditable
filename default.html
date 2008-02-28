@@ -24,10 +24,13 @@ $(function() {
         
   $(".editable_select").editable("<?php print $url ?>save.php", { 
     indicator : '<img src="img/indicator.gif">',
-    data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit', 'selected':'Ipsum dolor'}",
+    data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit'}",
     type   : "select",
-    submit : "OK",
-    style  : "inherit"
+    submit : "XX",
+    style  : "inherit",
+    submitdata : function() {
+      return {id : 2};
+    }
   });
   $(".editable_select_json").editable("<?php print $url ?>save.php", { 
     indicator : '<img src="img/indicator.gif">',
@@ -39,7 +42,11 @@ $(function() {
   $(".editable_textarea").editable("<?php print $url ?>save.php", { 
       indicator : "<img src='img/indicator.gif'>",
       type   : 'textarea',
-      submit : 'OK'
+      submitdata: { _method: "put" },
+      select : true,
+      submit : 'OK',
+      cancel : 'cancel',
+      cssclass : "editable"
   });
   $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
       indicator : "<img src='img/indicator.gif'>",
@@ -74,8 +81,18 @@ $(function() {
       type   : 'textarea',
       submit : 'OK'
   });
+
+
+  $(".sel").editable("http://www.smallthankyou.com/pizza/edit.php", { 
+      //data   : "{'pizza':'pizza','strom':'strom', 'selected':'pizza'}",
+      loadurl : "./php/json.php",
+      type   : "select",
+      submit : "OK" 
+  });
+
 });
-</script>  
+</script>
+
 <style type="text/css">
 #sidebar {
   width: 0px;
@@ -83,6 +100,15 @@ $(function() {
 
 #content {
   width: 770px;
+}
+
+.editable input[type=submit] {
+  color: #F00;
+  font-weight: bold;
+}
+.editable input[type=button] {
+  color: #0F0;
+  font-weight: bold;
 }
 
 </style>
@@ -107,6 +133,7 @@ $(function() {
     <div id="content">
       
     <div class="entry">
+      <b class="sel" id="31">pizza</b>
       
     <p>You might also want to check <a href="custom.html">custom inputs demo</a>.
 

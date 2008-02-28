@@ -14,13 +14,10 @@
  */
 
 /**
-  * Project home:
-  * http://www.appelsiini.net/projects/jeditable
-  *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.5
+  * Version 1.5.6
   *
   * @name  Jeditable
   * @type  jQuery
@@ -394,8 +391,9 @@
                     }
                     /* Loop option again to set selected. IE needed this... */ 
                     $('select', this).children().each(function() {
-                        if ($(this).val() == json['selected']) {
-                            $(this).attr('selected', 'selected');
+                        if ($(this).val() == json['selected'] || 
+                            $(this).text() == original.revert) {
+                                $(this).attr('selected', 'selected');
                         };
                     });
                 }
