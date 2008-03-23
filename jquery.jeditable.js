@@ -17,12 +17,13 @@
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
-  * Version 1.5.6
+  * Version 1.5.x
   *
   * @name  Jeditable
   * @type  jQuery
   * @param String  target             POST URL or function name to send edited content
   * @param Hash    options            additional options 
+  * @param Function options[callback] Function to run after submitting edited content
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
   * @param Hash    options[submitdata] Extra parameters to send when submitting edited content.
@@ -115,7 +116,7 @@
 
                 /* figure out how wide and tall we are, visibility trick */
                 /* is workaround for http://dev.jquery.com/ticket/2190 */
-                $(self).css("visibility", "hidden");                
+                $(self).css('visibility', 'hidden');                
                 if (settings.width != 'none') {
                     settings.width = 
                         settings.autowidth ? $(self).width()  : settings.width;
@@ -124,7 +125,7 @@
                     settings.height = 
                         settings.autoheight ? $(self).height() : settings.height;
                 }
-                $(this).css("visibility", "");
+                $(this).css('visibility', '');
                 
                 
                 /* remove placeholder text, replace is here because of IE */
@@ -336,6 +337,9 @@
                         $(cancel).click(function() {
                             $(original).html(original.revert);
                             original.editing = false;
+                            if (!$.trim($(original).html())) {
+                                $(original).html(settings.placeholder);
+                            }
                         });
                     }
                 }
