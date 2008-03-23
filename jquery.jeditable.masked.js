@@ -1,7 +1,7 @@
 /*
  * Masked input for Jeditable
  *
- * Copyright (c) 2007 Mika Tuupola
+ * Copyright (c) 2007-2008 Mika Tuupola
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php

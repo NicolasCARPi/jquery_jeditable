@@ -7,7 +7,7 @@
  *   http://www.opensource.org/licenses/mit-license.php
  * 
  * Depends on Autogrow jQuery plugin by Chrys Bader:
- *   http://www.chrysbader.com/
+ *   http://www.aclevercookie.com/facebook-like-auto-growing-textarea/
  *
  * Project home:
  *   http://www.appelsiini.net/projects/jeditable
