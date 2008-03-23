@@ -9,14 +9,14 @@
  * Project home:
  *   http://www.appelsiini.net/projects/jeditable
  *
+ * Based on editable by Dylan Verheul <dylan_at_dyve.net>:
+ *    http://www.dyve.net/jquery/?editable
+ *
  * Revision: $Id$
  *
  */
 
 /**
-  * Based on editable by Dylan Verheul <dylan@dyve.net>
-  * http://www.dyve.net/jquery/?editable
-  *
   * Version 1.5.x
   *
   * @name  Jeditable
@@ -32,7 +32,7 @@
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto', 'none' or height in pixels
   * @param Mixed   options[width]     'auto', 'none' or width in pixels 
-  * @param String  options[loadurl]   URL to fetch external content before editing
+  * @param String  options[loadurl]   URL to fetch input content before editing
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param String  options[loadtext]  Text to display while loading external content.
   * @param Hash    options[loaddata]  Extra parameters to pass when fetching content before editing.
@@ -324,22 +324,38 @@
                     $(':input:first', this).val(string);
                 },
                 buttons : function(settings, original) {
+                    var form = this;
                     if (settings.submit) {
-                        var submit = $('<input type="submit">');
-                        submit.val(settings.submit);
+                        /* if given html string use that */
+                        if (settings.submit.match(/>$/)) {
+                            var submit = $(settings.submit).click(function() {
+                                form.submit();
+                            });
+                        /* otherwise use button with given string as text */
+                        } else {
+                            var submit = $('<button type="submit">');
+                            submit.html(settings.submit);                            
+                        }
                         $(this).append(submit);
                     }
                     if (settings.cancel) {
-                        var cancel = $('<input type="button">');
-                        cancel.val(settings.cancel);
+                        /* if given html string use that */
+                        if (settings.cancel.match(/>$/)) {
+                            var cancel = $(settings.cancel);
+                        /* otherwise use button with given string as text */
+                        } else {
+                            var cancel = $('<button type="cancel">');
+                            cancel.html(settings.cancel);
+                        }
                         $(this).append(cancel);
 
-                        $(cancel).click(function() {
+                        $(cancel).click(function(event) {
                             $(original).html(original.revert);
                             original.editing = false;
                             if (!$.trim($(original).html())) {
                                 $(original).html(settings.placeholder);
                             }
+                            return false;
                         });
                     }
                 }
