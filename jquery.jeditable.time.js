@@ -1,5 +1,5 @@
 /*
- * Timepicker for Jeditable - jQuery in place edit plugin
+ * Timepicker for Jeditable
  *
  * Copyright (c) 2008 Mika Tuupola
  *
@@ -50,14 +50,14 @@ $.editable.addInputType('time', {
         
         /* Select correct hour and minute in pulldowns. */
         var hour = parseInt(string.substr(0,2));
-        var min = parseInt(string.substr(3,2));
+        var min  = parseInt(string.substr(3,2));
 
-        $("#hour_", this).children().each(function() {
+        $('#hour_', this).children().each(function() {
             if (hour == $(this).val()) {
                 $(this).attr('selected', 'selected');
             }
         });
-        $("#min_", this).children().each(function() {
+        $('#min_', this).children().each(function() {
             if (min == $(this).val()) {
                 $(this).attr('selected', 'selected')
             }
@@ -68,7 +68,7 @@ $.editable.addInputType('time', {
     submit: function (settings, original) {
         /* Take values from hour and minute pulldowns. Create string such as    */
         /* 13:45 from them. Set value of the hidden input field to this string. */
-        var value = $("#hour_").val() + ":" + $("#min_").val();
-        $("input", this).val(value);
+        var value = $('#hour_').val() + ':' + $('#min_').val();
+        $('input', this).val(value);
     }
 });
