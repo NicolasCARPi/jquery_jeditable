@@ -29,7 +29,8 @@ $.editable.addInputType('ajaxupload', {
     },
     plugin : function(settings, original) {
         var form = this;
-        $("input:submit", this).bind('click', function() {
+        form.attr("enctype", "multipart/form-data");
+        $("button:submit", form).bind('click', function() {
             //$(".message").show();
             $.ajaxFileUpload({
                 url: settings.target,
