@@ -6,7 +6,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  * 
- * Depends on Timepicker jQuery plugin by xxx xxx:
+ * Depends on Timepicker jQuery plugin by Jason Huck:
  *   http://jquery.com/plugins/project/timepicker
  *
  * Project home:
