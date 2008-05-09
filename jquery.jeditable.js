@@ -257,42 +257,44 @@
                     /* do no submit */
                     e.preventDefault(); 
             
-                    /* if this input type has a call before submit hook, call it */
-                    submit.apply(form, [settings, self]);
+                    /* call before submit hook. if it returns false abort submitting */
+                    if (false !== submit.apply(form, [settings, self])) { 
+                      
+                      /* check if given target is function */
+                      if ($.isFunction(settings.target)) {
+                          var str = settings.target.apply(self, [input.val(), settings]);
+                          $(self).html(str);
+                          self.editing = false;
+                          callback.apply(self, [self.innerHTML, settings]);
+                          /* TODO: this is not dry */                              
+                          if (!$.trim($(self).html())) {
+                              $(self).html(settings.placeholder);
+                          }
+                      } else {
+                          /* add edited content and id of edited element to POST */
+                          var submitdata = {};
+                          submitdata[settings.name] = input.val();
+                          submitdata[settings.id] = self.id;
+                          /* add extra data to be POST:ed */
+                          if ($.isFunction(settings.submitdata)) {
+                              $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
+                          } else {
+                              $.extend(submitdata, settings.submitdata);
+                          }          
 
-                    /* check if given target is function */
-                    if ($.isFunction(settings.target)) {
-                        var str = settings.target.apply(self, [input.val(), settings]);
-                        $(self).html(str);
-                        self.editing = false;
-                        callback.apply(self, [self.innerHTML, settings]);
-                        /* TODO: this is not dry */                              
-                        if (!$.trim($(self).html())) {
-                            $(self).html(settings.placeholder);
-                        }
-                    } else {
-                        /* add edited content and id of edited element to POST */
-                        var submitdata = {};
-                        submitdata[settings.name] = input.val();
-                        submitdata[settings.id] = self.id;
-                        /* add extra data to be POST:ed */
-                        if ($.isFunction(settings.submitdata)) {
-                            $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
-                        } else {
-                            $.extend(submitdata, settings.submitdata);
-                        }          
-
-                        /* show the saving indicator */
-                        $(self).html(settings.indicator);
-                        $.post(settings.target, submitdata, function(str) {
-                            $(self).html(str);
-                            self.editing = false;
-                            callback.apply(self, [self.innerHTML, settings]);
-                            /* TODO: this is not dry */                              
-                            if (!$.trim($(self).html())) {
-                                $(self).html(settings.placeholder);
-                            }
-                        });
+                          /* show the saving indicator */
+                          $(self).html(settings.indicator);
+                          $.post(settings.target, submitdata, function(str) {
+                              $(self).html(str);
+                              self.editing = false;
+                              callback.apply(self, [self.innerHTML, settings]);
+                              /* TODO: this is not dry */                              
+                              if (!$.trim($(self).html())) {
+                                  $(self).html(settings.placeholder);
+                              }
+                          });
+                      }
+                      
                     }
                      
                     return false;
