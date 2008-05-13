@@ -17,7 +17,7 @@
  */
 
 /**
-  * Version 1.5.7
+  * Version 1.5.x
   *
   * @name  Jeditable
   * @type  jQuery
@@ -92,6 +92,7 @@
           	}
         }
           
+        /* TODO: remove this when form is displayed */
         $(this).attr('title', settings.tooltip);
         
         settings.autowidth  = 'auto' == settings.width;
@@ -104,10 +105,11 @@
                 $(this).html(settings.placeholder);
             }
             
+            /* save this to self because this changes when scope changes */
+            var self = this;
+
             $(this)[settings.event](function(e) {
 
-                /* save this to self because this changes when scope changes */
-                var self = this;
 
                 /* prevent throwing an exeption if edit field is clicked again */
                 if (self.editing) {
@@ -116,7 +118,9 @@
 
                 /* figure out how wide and tall we are, visibility trick */
                 /* is workaround for http://dev.jquery.com/ticket/2190 */
-                $(self).css('visibility', 'hidden');                
+                $(self).css('visibility', 'hidden');
+
+                
                 if (settings.width != 'none') {
                     settings.width = 
                         settings.autowidth ? $(self).width()  : settings.width;
@@ -223,7 +227,7 @@
                 input.keydown(function(e) {
                     if (e.keyCode == 27) {
                         e.preventDefault();
-                        reset();
+                        self.reset();
                     }
                 });
 
@@ -232,7 +236,7 @@
                 var t;
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
-                        t = setTimeout(reset, 500);
+                        t = setTimeout(self.reset, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
@@ -307,8 +311,17 @@
                         $(self).html(settings.placeholder);
                     }
                 }
-
             });
+            
+            /* privileged methods */
+            this.reset = function() {
+                //alert("privileged reset");
+                $(self).html(self.revert);
+                self.editing   = false;
+                if (!$.trim($(self).html())) {
+                    $(self).html(settings.placeholder);
+                }
+            }            
         });
 
     };
