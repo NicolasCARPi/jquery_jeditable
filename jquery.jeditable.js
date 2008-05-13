@@ -99,38 +99,44 @@
         settings.autoheight = 'auto' == settings.height;
 
         return this.each(function() {
+
+            /* save this to self because this changes when scope changes */
+            var self = this;  
+                   
+            /* inlined block elements lose their width and height after first edit */
+            /* save them for later use as workaround */
+            var savedwidth  = $(self).width();
+            var savedheight = $(self).height();
             
             /* if element is empty add something clickable (if requested) */
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
             }
             
-            /* save this to self because this changes when scope changes */
-            var self = this;
-
             $(this)[settings.event](function(e) {
-
 
                 /* prevent throwing an exeption if edit field is clicked again */
                 if (self.editing) {
                     return;
                 }
 
-                /* figure out how wide and tall we are, visibility trick */
-                /* is workaround for http://dev.jquery.com/ticket/2190 */
-                $(self).css('visibility', 'hidden');
-
-                
-                if (settings.width != 'none') {
-                    settings.width = 
-                        settings.autowidth ? $(self).width()  : settings.width;
+                /* figure out how wide and tall we are, saved width and height */
+                /* are workaround for http://dev.jquery.com/ticket/2190 */
+                if (0 == $(self).width()) {
+                    //$(self).css('visibility', 'hidden');
+                    settings.width  = savedwidth;
+                    settings.height = savedheight;
+                } else {
+                    if (settings.width != 'none') {
+                        settings.width = 
+                            settings.autowidth ? $(self).width()  : settings.width;
+                    }
+                    if (settings.height != 'none') {
+                        settings.height = 
+                            settings.autoheight ? $(self).height() : settings.height;
+                    }
                 }
-                if (settings.height != 'none') {
-                    settings.height = 
-                        settings.autoheight ? $(self).height() : settings.height;
-                }
-                $(this).css('visibility', '');
-                
+                //$(this).css('visibility', '');
                 
                 /* remove placeholder text, replace is here because of IE */
                 if ($(this).html().toLowerCase().replace(/;/, '') == 
