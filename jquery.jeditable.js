@@ -215,11 +215,11 @@
                 /* add buttons to the form */
                 buttons.apply(form, [settings, self]);
          
-                /* attach 3rd party plugin if requested */
-                plugin.apply(form, [settings, self]);
-                
                 /* add created form to self */
                 $(self).append(form);
+         
+                /* attach 3rd party plugin if requested */
+                plugin.apply(form, [settings, self]);
 
                 /* focus to first visible form element */
                 $(':input:visible:enabled:first', form).focus();
