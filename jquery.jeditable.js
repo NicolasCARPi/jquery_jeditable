@@ -309,19 +309,10 @@
                      
                     return false;
                 });
-
-                function reset() {
-                    $(self).html(self.revert);
-                    self.editing   = false;
-                    if (!$.trim($(self).html())) {
-                        $(self).html(settings.placeholder);
-                    }
-                }
             });
             
             /* privileged methods */
             this.reset = function() {
-                //alert("privileged reset");
                 $(self).html(self.revert);
                 self.editing   = false;
                 if (!$.trim($(self).html())) {
@@ -371,11 +362,7 @@
                         $(this).append(cancel);
 
                         $(cancel).click(function(event) {
-                            $(original).html(original.revert);
-                            original.editing = false;
-                            if (!$.trim($(original).html())) {
-                                $(original).html(settings.placeholder);
-                            }
+                            original.reset();
                             return false;
                         });
                     }
