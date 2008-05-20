@@ -40,7 +40,7 @@
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
-  * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
+  * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
@@ -83,6 +83,8 @@
                     || $.editable.types['defaults'].content;
         var element  = $.editable.types[settings.type].element 
                     || $.editable.types['defaults'].element;
+        var reset    = $.editable.types[settings.type].reset 
+                    || $.editable.types['defaults'].reset;
         var callback = settings.callback || function() { };
         
         /* add custom event if it does not exist */
@@ -233,7 +235,8 @@
                 input.keydown(function(e) {
                     if (e.keyCode == 27) {
                         e.preventDefault();
-                        self.reset();
+                        //self.reset();
+                        reset.apply(form, [settings, self]);
                     }
                 });
 
@@ -242,7 +245,10 @@
                 var t;
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
-                        t = setTimeout(self.reset, 500);
+                        //t = setTimeout(self.reset, 500);
+                        t = setTimeout(function() {
+                            reset.apply(form, [settings, self]);
+                        }, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
@@ -335,6 +341,9 @@
                 content : function(string, settings, original) {
                     $(':input:first', this).val(string);
                 },
+                reset : function(settings, original) {
+                  original.reset();
+                },
                 buttons : function(settings, original) {
                     var form = this;
                     if (settings.submit) {
@@ -362,7 +371,9 @@
                         $(this).append(cancel);
 
                         $(cancel).click(function(event) {
-                            original.reset();
+                            //original.reset();
+                            var reset = $.editable.types['defaults'].reset;
+                            reset.apply(form, [settings, original]);
                             return false;
                         });
                     }
