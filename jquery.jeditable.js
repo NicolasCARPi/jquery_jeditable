@@ -372,7 +372,11 @@
 
                         $(cancel).click(function(event) {
                             //original.reset();
-                            var reset = $.editable.types['defaults'].reset;
+                            if ($.isFunction($.editable.types[settings.type].reset)) {
+                                var reset = $.editable.types[settings.type].reset;                                                                
+                            } else {
+                                var reset = $.editable.types['defaults'].reset;                                
+                            }
                             reset.apply(form, [settings, original]);
                             return false;
                         });
