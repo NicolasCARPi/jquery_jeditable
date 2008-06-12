@@ -1,6 +1,6 @@
 # $Id$
 
-VERSION = 1.5.7
+VERSION = 1.6.0
 SHELL = /bin/sh
 DOWNLOAD = /export/home/tuupola/rails/mephisto-svn/public/download
 JSPACKER = /export/home/tuupola/bin/jspacker
@@ -42,4 +42,3 @@ tarball: examples/index.html
 	cp jquery.jeditable.js examples/lib/
 	/usr/local/bin/tar -X ignore.txt -czvf jEditable_examples-$(VERSION).tar.gz examples/*
 	cp jEditable_examples-$(VERSION).tar.gz $(DOWNLOAD)
-
