@@ -17,7 +17,7 @@
  */
 
 /**
-  * Version 1.5.x
+  * Version 1.6.0
   *
   * @name  Jeditable
   * @type  jQuery
