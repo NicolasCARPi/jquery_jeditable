@@ -27,10 +27,12 @@ $url    = sprintf('http://%s%s%s/', $_SERVER['SERVER_NAME'], $folder, 'php');
 <script src="jquery.jeditable.time.js" type="text/javascript" ></script>
 <script src="jquery.jeditable.timepicker.js" type="text/javascript" ></script>
 <script src="jquery.jeditable.datepicker.js" type="text/javascript" ></script>
+<script src="jquery.jeditable.charcounter.js" type="text/javascript" ></script>
 
 <script type="text/javascript" src="js/jquery.maskedinput.js"></script>
 <script type="text/javascript" src="js/jquery.timepicker.js"></script>
 <script type="text/javascript" src="js/jquery.autogrow.js"></script>
+<script type="text/javascript" src="js/jquery.charcounter.js"></script>
 
 <script type="text/javascript" src="js/date.js"></script>
 <!--
@@ -45,6 +47,16 @@ $url    = sprintf('http://%s%s%s/', $_SERVER['SERVER_NAME'], $folder, 'php');
 <script type="text/javascript" charset="utf-8">
 // <![CDATA[
 $(document).ready(function() {
+  $(".charcounter").editable("<?php print $url ?>save.php", { 
+      indicator : "<img src='img/indicator.gif'>",
+      type      : "charcounter",
+      submit    : 'OK',
+      tooltip   : "Click to edit...",
+      onblur    : "ignore",
+      charcounter : {
+         characters : 60
+      }
+  });
     $(".autogrow").editable("<?php print $url ?>save.php", { 
         indicator : "<img src='img/indicator.gif'>",
         type      : "autogrow",
@@ -184,6 +196,17 @@ div.entry {
       </p>
       
     </div>
+    
+    <div class="entry">
+
+      <h2>Character counter</h2>
+      <p class="charcounter" id="custom_5"><?php print file_get_contents($url . 'load.php?id=custom_6') ?></p>
+      <p>
+        Using character counter.
+      </p>
+      
+    </div>
+    
     <!--
     <div class="entry">
 
