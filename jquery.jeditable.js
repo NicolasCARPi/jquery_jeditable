@@ -350,7 +350,12 @@
                         /* if given html string use that */
                         if (settings.submit.match(/>$/)) {
                             var submit = $(settings.submit).click(function() {
-                                form.submit();
+                              var submit = $(settings.submit);
+                              if (submit.attr("type") != "submit") {
+                                  submit.click(function() {
+                                      form.submit();
+                                  });
+                              }
                             });
                         /* otherwise use button with given string as text */
                         } else {
