@@ -2,12 +2,13 @@
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>'
-'<link rel="stylesheet" href="testsuite.css" type="text/css" media="screen" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="testsuite.css" type="text/css" media="screen" />
 <script type="text/javascript" src="testrunner.js"></script>
 <script type="text/javascript" src="../jquery.jeditable.js"></script>
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
+    
     //window.loadFirebugConsole();
     /* We need synchronous AJAX for testing. */
     $.ajaxSetup({
@@ -31,7 +32,7 @@ $(document).ready(function(){
         data      : "Parameter content",
         tooltip   : "Tooltip",
         submit    : "OK",
-        style     : "color: #0f0",
+        style     : "margin-top: 27px",
         cssclass  : "bar",
         event     : "dblclick",
         submit    : "<i>Click to submit</i>",
@@ -133,7 +134,7 @@ $(document).ready(function(){
       $("#post").trigger("click");
       equals($("#post form").css("display"), "inline", "Should inherit inline");
       $("#put").trigger("click");
-      equals($("#put form").css("color"), "rgb(0, 255, 0)", "Should inherit rgb(0, 255, 0)");      
+      equals($("#put form").css("margin-top"), "27px", "Should be 27px");      
     });
     
     test("CSS class", function() {
@@ -143,10 +144,10 @@ $(document).ready(function(){
       ok($("#put form").hasClass("bar"), "Should have class bar.");
     });
     
-    test("Buttons", function() {
+    test("Buttons", function() {      
       $("#post").trigger("click");
       ok($("#post button[type=submit]").size() == 1, "Should have submit button.");
-      ok($("#post button[type=cancel]").size() == 1, "Should have cancel button.");
+      ok($("#post button").size() == 2, "Should have cancel button too.");
       $("#put").trigger("click");
       $("#put form i").html();
       $("#put form i").trigger("click");
@@ -196,7 +197,8 @@ $(document).ready(function(){
  <ol id="tests"></ol>
 
  <div id="main"></div>
- 
+ <button id="xxx" type="cancel">foobar</button>
+ <button id="yyy" type="submit">foobar</button>
  <div id="post" style="display: inline;" class="foo">Here be dragons.</div>
  <div id="put">Here be dragons.</div>
  <div id="placeholder"></div>
