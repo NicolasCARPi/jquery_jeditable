@@ -17,36 +17,39 @@
  */
 
 /**
-  * Version 1.6.0
+  * Version 1.6.X
+  *
+  * ** means there is basic unit tests for this parameter. 
   *
   * @name  Jeditable
   * @type  jQuery
-  * @param String  target             POST URL or function name to send edited content
+  * @param String  target             (POST) URL or function to send edited content to **
   * @param Hash    options            additional options 
-  * @param Function options[callback] Function to run after submitting edited content
+  * @param String  options[method]    method to use to send edited content (POST or PUT) **
+  * @param Function options[callback] Function to run after submitting edited content **
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
   * @param Hash    options[submitdata] Extra parameters to send when submitting edited content.
-  * @param String  options[type]      text, textarea or select
-  * @param Integer options[rows]      number of rows if using textarea
-  * @param Integer options[cols]      number of columns if using textarea
-  * @param Mixed   options[height]    'auto', 'none' or height in pixels
-  * @param Mixed   options[width]     'auto', 'none' or width in pixels 
-  * @param String  options[loadurl]   URL to fetch input content before editing
+  * @param String  options[type]      text, textarea or select (or any 3rd party input type) **
+  * @param Integer options[rows]      number of rows if using textarea ** 
+  * @param Integer options[cols]      number of columns if using textarea **
+  * @param Mixed   options[height]    'auto', 'none' or height in pixels **
+  * @param Mixed   options[width]     'auto', 'none' or width in pixels **
+  * @param String  options[loadurl]   URL to fetch input content before editing **
   * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param String  options[loadtext]  Text to display while loading external content.
   * @param Hash    options[loaddata]  Extra parameters to pass when fetching content before editing.
-  * @param String  options[data]      Or content given as paramameter.
+  * @param String  options[data]      Or content given as paramameter. **
   * @param String  options[indicator] indicator html to show when saving
-  * @param String  options[tooltip]   optional tooltip text via title attribute
-  * @param String  options[event]     jQuery event such as 'click' of 'dblclick'
-  * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function
-  * @param String  options[submit]    submit button value, empty means no button
-  * @param String  options[cancel]    cancel button value, empty means no button
-  * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
-  * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
-  * @param String  options[select]    true or false, when true text is highlighted
-  * @param String  options[placeholder] Placeholder text or html to insert when element is empty.
+  * @param String  options[tooltip]   optional tooltip text via title attribute **
+  * @param String  options[event]     jQuery event such as 'click' of 'dblclick' **
+  * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  * @param String  options[submit]    submit button value, empty means no button **
+  * @param String  options[cancel]    cancel button value, empty means no button **
+  * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent. **
+  * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent. **
+  * @param String  options[select]    true or false, when true text is highlighted ??
+  * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   *             
   */
 
@@ -296,7 +299,12 @@
                               $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
                           } else {
                               $.extend(submitdata, settings.submitdata);
-                          }          
+                          }
+                          
+                          /* quick and dirty PUT support */
+                          if ('PUT' == settings.method) {
+                              submitdata['_method'] = 'put';
+                          }
 
                           /* show the saving indicator */
                           $(self).html(settings.indicator);
@@ -350,12 +358,9 @@
                         /* if given html string use that */
                         if (settings.submit.match(/>$/)) {
                             var submit = $(settings.submit).click(function() {
-                              var submit = $(settings.submit);
-                              if (submit.attr("type") != "submit") {
-                                  submit.click(function() {
-                                      form.submit();
-                                  });
-                              }
+                                if (submit.attr("type") != "submit") {
+                                    form.submit();
+                                }
                             });
                         /* otherwise use button with given string as text */
                         } else {
@@ -418,7 +423,7 @@
                 }
             },
             select: {
-                element : function(settings, original) {
+               element : function(settings, original) {
                     var select = $('<select>');
                     $(this).append(select);
                     return(select);
