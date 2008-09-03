@@ -30,6 +30,7 @@ latest: jquery.jeditable.js jquery.jeditable.pack.js jquery.jeditable.inputs.js
 #	cp jquery.jeditable.tageditor.js $(DOWNLOAD)/jquery.jeditable.tageditor.js
 	cp jquery.jeditable.time.js $(DOWNLOAD)/jquery.jeditable.time.js
 	cp jquery.jeditable.timepicker.js $(DOWNLOAD)/jquery.jeditable.timepicker.js
+	cp jquery.jeditable.charcounter.js $(DOWNLOAD)/jquery.jeditable.charcounter.js
 	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable.pack.js
 	cp jquery.jeditable.mini.js $(DOWNLOAD)/jquery.jeditable.mini.js
 
