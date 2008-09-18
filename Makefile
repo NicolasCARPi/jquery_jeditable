@@ -1,13 +1,13 @@
 # $Id$
 
-VERSION = 1.6.1
+VERSION = 1.6.2-rc1
 SHELL = /bin/sh
 DOWNLOAD = /export/home/tuupola/rails/mephisto-svn/public/download
 JSPACKER = /export/home/tuupola/bin/jspacker
 JSMIN    = /export/home/tuupola/bin/jsmin
 
 #all: jeditable packed tarball latest
-all: jeditable packed minified latest
+all: jeditable packed minified latest wysiwyg
 
 jeditable: jquery.jeditable.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).js
@@ -33,6 +33,11 @@ latest: jquery.jeditable.js jquery.jeditable.pack.js jquery.jeditable.inputs.js
 	cp jquery.jeditable.charcounter.js $(DOWNLOAD)/jquery.jeditable.charcounter.js
 	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable.pack.js
 	cp jquery.jeditable.mini.js $(DOWNLOAD)/jquery.jeditable.mini.js
+
+
+.PHONY: wysiwyg
+wysiwyg:
+	 cp wysiwyg/jquery.jeditable.wysiwyg.js  $(DOWNLOAD)/jquery.jeditable.wysiwyg.js
 
 tests: jquery.jeditable.js
 	rm examples/lib/jquery.jeditable.js
