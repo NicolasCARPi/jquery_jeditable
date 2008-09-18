@@ -10,6 +10,6 @@ $default['paragraph_2'] = 'Lorem ipsum dolor sit amet, consectetuer adipiscing _
 * Foo
 * Bar
 
-Duis autem vel eum "edit in place":http://www.appelsiini.net/projects/jeditable  in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto.
+Duis autem vel eum in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto.
 '
 ?>
