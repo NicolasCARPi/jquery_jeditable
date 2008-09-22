@@ -342,7 +342,7 @@
         types: {
             defaults: {
                 element : function(settings, original) {
-                    var input = $('<input type="hidden">');                
+                    var input = $('<input type="hidden"></input>');                
                     $(this).append(input);
                     return(input);
                 },
@@ -395,7 +395,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input>');
+                    var input = $('<input></input>');
                     if (settings.width  != 'none') { input.width(settings.width);  }
                     if (settings.height != 'none') { input.height(settings.height); }
                     /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
