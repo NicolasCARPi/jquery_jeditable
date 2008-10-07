@@ -248,14 +248,17 @@
                 var t;
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
-                        //t = setTimeout(self.reset, 500);
+                        /* prevent canceling if submit was clicked */
                         t = setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
-                        form.submit();
+                        /* prevent double submit if submit was clicked */
+                        t = setTimeout(function() {
+                            form.submit();
+                        }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
                     input.blur(function(e) {
