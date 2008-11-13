@@ -43,13 +43,17 @@
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute **
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick' **
-  * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
   * @param String  options[submit]    submit button value, empty means no button **
   * @param String  options[cancel]    cancel button value, empty means no button **
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent. **
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent. **
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
+  * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  *             
+  * TODO @param Function options[onsubmit]
+  * TODO @param Function options[onreset]
+  * TODO @param Function options[onerror]
   *             
   */
 
@@ -89,6 +93,8 @@
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
         var callback = settings.callback || function() { };
+        var onsubmit = settings.onsubmit || function() { };
+        var onreset  = settings.onreset  || function() { };
         
         /* add custom event if it does not exist */
         if  (!$.isFunction($(this)[settings.event])) {
@@ -97,6 +103,7 @@
           	}
         }
           
+        /* show tooltip */
         $(this).attr('title', settings.tooltip);
         
         settings.autowidth  = 'auto' == settings.width;
@@ -281,39 +288,16 @@
                     /* do no submit */
                     e.preventDefault(); 
             
-                    /* call before submit hook. if it returns false abort submitting */
-                    if (false !== submit.apply(form, [settings, self])) { 
-                      
-                      /* check if given target is function */
-                      if ($.isFunction(settings.target)) {
-                          var str = settings.target.apply(self, [input.val(), settings]);
-                          $(self).html(str);
-                          self.editing = false;
-                          callback.apply(self, [self.innerHTML, settings]);
-                          /* TODO: this is not dry */                              
-                          if (!$.trim($(self).html())) {
-                              $(self).html(settings.placeholder);
-                          }
-                      } else {
-                          /* add edited content and id of edited element to POST */
-                          var submitdata = {};
-                          submitdata[settings.name] = input.val();
-                          submitdata[settings.id] = self.id;
-                          /* add extra data to be POST:ed */
-                          if ($.isFunction(settings.submitdata)) {
-                              $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
-                          } else {
-                              $.extend(submitdata, settings.submitdata);
-                          }
-                          
-                          /* quick and dirty PUT support */
-                          if ('PUT' == settings.method) {
-                              submitdata['_method'] = 'put';
-                          }
+                    /* call before submit hook. */
+                    /* if it returns false abort submitting */                    
+                    if (false !== onsubmit.apply(form, [settings, self])) { 
+                        /* custom inputs call before submit hook. */
+                        /* if it returns false abort submitting */
+                        if (false !== submit.apply(form, [settings, self])) { 
 
-                          /* show the saving indicator */
-                          $(self).html(settings.indicator);
-                          $.post(settings.target, submitdata, function(str) {
+                          /* check if given target is function */
+                          if ($.isFunction(settings.target)) {
+                              var str = settings.target.apply(self, [input.val(), settings]);
                               $(self).html(str);
                               self.editing = false;
                               callback.apply(self, [self.innerHTML, settings]);
@@ -321,9 +305,37 @@
                               if (!$.trim($(self).html())) {
                                   $(self).html(settings.placeholder);
                               }
-                          });
-                      }
-                      
+                          } else {
+                              /* add edited content and id of edited element to POST */
+                              var submitdata = {};
+                              submitdata[settings.name] = input.val();
+                              submitdata[settings.id] = self.id;
+                              /* add extra data to be POST:ed */
+                              if ($.isFunction(settings.submitdata)) {
+                                  $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
+                              } else {
+                                  $.extend(submitdata, settings.submitdata);
+                              }
+
+                              /* quick and dirty PUT support */
+                              if ('PUT' == settings.method) {
+                                  submitdata['_method'] = 'put';
+                              }
+
+                              /* show the saving indicator */
+                              $(self).html(settings.indicator);
+                              $.post(settings.target, submitdata, function(str) {
+                                  $(self).html(str);
+                                  self.editing = false;
+                                  callback.apply(self, [self.innerHTML, settings]);
+                                  /* TODO: this is not dry */                              
+                                  if (!$.trim($(self).html())) {
+                                      $(self).html(settings.placeholder);
+                                  }
+                              });
+                          }
+
+                        }
                     }
                     
                     /* show tooltip again */
@@ -334,14 +346,20 @@
             });
             
             /* privileged methods */
-            this.reset = function() {
-                $(self).html(self.revert);
-                self.editing   = false;
-                if (!$.trim($(self).html())) {
-                    $(self).html(settings.placeholder);
+            this.reset = function(form) {
+                /* prevent calling reset twice when blurring */
+                if (this.editing) {
+                    /* before reset hook, if it returns false abort reseting */
+                    if (false !== onreset.apply(form, [settings, self])) { 
+                        $(self).html(self.revert);
+                        self.editing   = false;
+                        if (!$.trim($(self).html())) {
+                            $(self).html(settings.placeholder);
+                        }
+                        /* show tooltip again */
+                        $(self).attr('title', settings.tooltip);                
+                    }                    
                 }
-                /* show tooltip again */
-                $(self).attr('title', settings.tooltip);                
             }            
         });
 
@@ -360,7 +378,7 @@
                     $(':input:first', this).val(string);
                 },
                 reset : function(settings, original) {
-                  original.reset();
+                  original.reset(this);
                 },
                 buttons : function(settings, original) {
                     var form = this;
