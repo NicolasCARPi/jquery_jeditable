@@ -97,7 +97,6 @@
           	}
         }
           
-        /* TODO: remove this when form is displayed */
         $(this).attr('title', settings.tooltip);
         
         settings.autowidth  = 'auto' == settings.width;
@@ -125,6 +124,9 @@
                     return;
                 }
 
+                /* remove tooltip */
+                $(self).removeAttr('title');
+                
                 /* figure out how wide and tall we are, saved width and height */
                 /* are workaround for http://dev.jquery.com/ticket/2190 */
                 if (0 == $(self).width()) {
@@ -323,7 +325,10 @@
                       }
                       
                     }
-                     
+                    
+                    /* show tooltip again */
+                    $(self).attr('title', settings.tooltip);
+                    
                     return false;
                 });
             });
@@ -335,6 +340,8 @@
                 if (!$.trim($(self).html())) {
                     $(self).html(settings.placeholder);
                 }
+                /* show tooltip again */
+                $(self).attr('title', settings.tooltip);                
             }            
         });
 
