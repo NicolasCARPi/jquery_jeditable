@@ -17,7 +17,7 @@
  */
 
 /**
-  * Version 1.6.1
+  * Version 1.6.2-rc2
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -392,7 +392,7 @@
                             });
                         /* otherwise use button with given string as text */
                         } else {
-                            var submit = $('<button type="submit">');
+                            var submit = $('<button type="submit" />');
                             submit.html(settings.submit);                            
                         }
                         $(this).append(submit);
@@ -403,7 +403,7 @@
                             var cancel = $(settings.cancel);
                         /* otherwise use button with given string as text */
                         } else {
-                            var cancel = $('<button type="cancel">');
+                            var cancel = $('<button type="cancel" />');
                             cancel.html(settings.cancel);
                         }
                         $(this).append(cancel);
@@ -423,7 +423,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input></input>');
+                    var input = $('<input />');
                     if (settings.width  != 'none') { input.width(settings.width);  }
                     if (settings.height != 'none') { input.height(settings.height); }
                     /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
@@ -435,7 +435,7 @@
             },
             textarea: {
                 element : function(settings, original) {
-                    var textarea = $('<textarea>');
+                    var textarea = $('<textarea />');
                     if (settings.rows) {
                         textarea.attr('rows', settings.rows);
                     } else {
@@ -452,7 +452,7 @@
             },
             select: {
                element : function(settings, original) {
-                    var select = $('<select>');
+                    var select = $('<select />');
                     $(this).append(select);
                     return(select);
                 },
@@ -466,7 +466,7 @@
                             if ('selected' == key) {
                                 continue;
                             } 
-                            var option = $('<option>').val(key).append(json[key]);
+                            var option = $('<option />').val(key).append(json[key]);
                             $('select', this).append(option); 	 
                         }
                     }

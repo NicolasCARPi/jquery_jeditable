@@ -1,6 +1,6 @@
 # $Id$
 
-VERSION = 1.6.2-rc1
+VERSION = 1.6.2-rc2
 SHELL = /bin/sh
 DOWNLOAD = /export/home/tuupola/rails/mephisto-svn/public/download
 JSPACKER = /export/home/tuupola/bin/jspacker
