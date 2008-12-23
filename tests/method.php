@@ -1,7 +1,7 @@
 <?php
 
 if (count($_POST)) {
-    if ("put" == $_POST["_method"]) {
+    if (isset($_POST["_method"]) && "put" == $_POST["_method"]) {
         print "PUT";
     } else {
         print "POST";
