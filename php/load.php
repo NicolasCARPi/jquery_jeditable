@@ -1,7 +1,5 @@
 <?php
 
-/* $Id: load.php 171 2007-07-31 14:22:58Z tuupola $ */
-
 require_once 'config.php';
 require_once 'defaults.php';
 
@@ -15,7 +13,7 @@ $query = sprintf("SELECT value
                   LIMIT 1", 
                   $token);
 
-$retval =  $dbh->getOne($query);
+$retval =  $dbh->query($query)->fetchColumn(0);
 
 $retval = trim($retval) ?  $retval : $default[$token];
 $retval = trim($retval) ?  $retval : 'Edit me!';
@@ -27,5 +25,3 @@ if ('textile' == $renderer) {
 } 
 
 print $retval;
-
-?>
