@@ -18,14 +18,14 @@ $.editable.addInputType('time', {
     element : function(settings, original) {
         /* Create and pulldowns for hours and minutes. Append them to */
         /* form which is accessible as variable this.                 */        
-        var hourselect = $('<select id="hour_">');
-        var minselect  = $('<select id="min_">');
+        var hourselect = $('<select id="hour_" />');
+        var minselect  = $('<select id="min_" />');
         
         for (var hour=1; hour <= 24; hour++) {
             if (hour < 10) {
                 hour = '0' + hour;
             }
-            var option = $('<option>').val(hour).append(hour);
+            var option = $('<option />').val(hour).append(hour);
             hourselect.append(option);
         }
         $(this).append(hourselect);
@@ -34,14 +34,14 @@ $.editable.addInputType('time', {
             if (min < 10) {
                 min = '0' + min;
             }
-            var option = $('<option>').val(min).append(min);
+            var option = $('<option />').val(min).append(min);
             minselect.append(option);
         }
         $(this).append(minselect);
                 
         /* Last create an hidden input. This is returned to plugin. It will */
         /* later hold the actual value which will be submitted to server.   */
-        var hidden = $('<input type="hidden">');
+        var hidden = $('<input type="hidden" />');
         $(this).append(hidden);
         return(hidden);
     },

@@ -18,7 +18,7 @@
  
 $.editable.addInputType('charcounter', {
     element : function(settings, original) {
-        var textarea = $('<textarea>');
+        var textarea = $('<textarea />');
         if (settings.rows) {
             textarea.attr('rows', settings.rows);
         } else {

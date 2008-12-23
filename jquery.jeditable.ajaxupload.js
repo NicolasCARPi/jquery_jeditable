@@ -20,7 +20,7 @@ $.editable.addInputType('ajaxupload', {
     /* create input element */
     element : function(settings) {
         settings.onblur = 'ignore';
-        var input = $('<input type="file" id="upload" name="upload">');
+        var input = $('<input type="file" id="upload" name="upload" />');
         $(this).append(input);
         return(input);
     },
