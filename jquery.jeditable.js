@@ -51,9 +51,11 @@
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
   *             
-  * TODO @param Function options[onsubmit]
-  * TODO @param Function options[onreset]
-  * TODO @param Function options[onerror]
+  * @param Function options[onsubmit] function(settings, original) { ... } called before submit
+  * @param Function options[onreset]  function(settings, original) { ... } called before reset
+  * @param Function options[onerror]  function(reason, settings, original) { ... } called on error
+  *             
+  * @param Hash    options[ajaxoption]  jQuery Ajax options. See docs.jquery.com.
   *             
   */
 
@@ -74,7 +76,8 @@
             loadtext   : 'Loading...',
             placeholder: 'Click to edit',
             loaddata   : {},
-            submitdata : {}
+            submitdata : {},
+            ajaxoptions: {}
         };
         
         if(options) {
@@ -95,6 +98,7 @@
         var callback = settings.callback || function() { };
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
+        var onerror  = settings.onerror  || function() { };
         
         /* add custom event if it does not exist */
         if  (!$.isFunction($(this)[settings.event])) {
@@ -163,7 +167,7 @@
                 $(self).html('');
 
                 /* create the form object */
-                var form = $('<form/>');
+                var form = $('<form />');
                 
                 /* apply css or style or both */
                 if (settings.cssclass) {
@@ -324,17 +328,30 @@
 
                               /* show the saving indicator */
                               $(self).html(settings.indicator);
-                              $.post(settings.target, submitdata, function(str) {
-                                  $(self).html(str);
-                                  self.editing = false;
-                                  callback.apply(self, [self.innerHTML, settings]);
-                                  /* TODO: this is not dry */                              
-                                  if (!$.trim($(self).html())) {
-                                      $(self).html(settings.placeholder);
+                              
+                              /* defaults for ajaxoptions */
+                              var ajaxoptions = {
+                                  type    : 'POST',
+                                  data    : submitdata,
+                                  url     : settings.target,
+                                  success : function(result, status) {
+                                      $(self).html(result);
+                                      self.editing = false;
+                                      callback.apply(self, [self.innerHTML, settings]);
+                                      if (!$.trim($(self).html())) {
+                                          $(self).html(settings.placeholder);
+                                      }
+                                  },
+                                  error   : function(xhr, status, error) {
+                                      onerror.apply(form, [xhr, settings, self]);
                                   }
-                              });
-                          }
-
+                              }
+                              
+                              /* override with what is given in settings.ajaxoptions */
+                              $.extend(ajaxoptions, settings.ajaxoptions);   
+                              $.ajax(ajaxoptions);          
+                              
+                            }
                         }
                     }
                     
