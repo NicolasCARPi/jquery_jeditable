@@ -55,7 +55,7 @@
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
   * @param Function options[onerror]  function(settings, original, xhr) { ... } called on error
   *             
-  * @param Hash    options[ajaxoption]  jQuery Ajax options. See docs.jquery.com.
+  * @param Hash    options[ajaxoptions]  jQuery Ajax options. See docs.jquery.com.
   *             
   */
 
