@@ -53,7 +53,7 @@
   *             
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
-  * @param Function options[onerror]  function(reason, settings, original) { ... } called on error
+  * @param Function options[onerror]  function(settings, original, xhr) { ... } called on error
   *             
   * @param Hash    options[ajaxoption]  jQuery Ajax options. See docs.jquery.com.
   *             
@@ -98,7 +98,7 @@
         var callback = settings.callback || function() { };
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
-        var onerror  = settings.onerror  || function() { };
+        var onerror  = settings.onerror  || reset;
         
         /* add custom event if it does not exist */
         if  (!$.isFunction($(this)[settings.event])) {
@@ -114,7 +114,7 @@
         settings.autoheight = 'auto' == settings.height;
 
         return this.each(function() {
-
+                        
             /* save this to self because this changes when scope changes */
             var self = this;  
                    
@@ -343,7 +343,7 @@
                                       }
                                   },
                                   error   : function(xhr, status, error) {
-                                      onerror.apply(form, [xhr, settings, self]);
+                                      onerror.apply(form, [settings, self, xhr]);
                                   }
                               }
                               
