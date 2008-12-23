@@ -21,7 +21,7 @@ $.editable.addInputType('time', {
         var hourselect = $('<select id="hour_" />');
         var minselect  = $('<select id="min_" />');
         
-        for (var hour=1; hour <= 24; hour++) {
+        for (var hour=0; hour <= 23; hour++) {
             if (hour < 10) {
                 hour = '0' + hour;
             }
