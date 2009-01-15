@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.6.2
+  * Version 1.6.3-dev
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -97,13 +97,6 @@
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
-        
-        /* add custom event if it does not exist */
-        if  (!$.isFunction($(this)[settings.event])) {
-            $.fn[settings.event] = function(fn){
-                return fn ? this.bind(settings.event, fn) : this.trigger(settings.event);
-            }
-        }
           
         /* show tooltip */
         $(this).attr('title', settings.tooltip);
@@ -126,7 +119,7 @@
                 $(this).html(settings.placeholder);
             }
             
-            $(this)[settings.event](function(e) {
+            $(this).bind(settings.event, function(e) {
 
                 /* prevent throwing an exeption if edit field is clicked again */
                 if (self.editing) {
