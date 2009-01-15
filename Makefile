@@ -1,8 +1,8 @@
-VERSION = 1.6.2-rc3
+VERSION = 1.6.2
 SHELL = /bin/sh
-DOWNLOAD = /export/home/tuupola/rails/mephisto-svn/public/download
-JSPACKER = /export/home/tuupola/bin/jspacker
-JSMIN    = /export/home/tuupola/bin/jsmin
+DOWNLOAD = /var/www/www.appelsiini.net/htdocs/download
+JSPACKER = /home/tuupola/bin/jspacker
+JSMIN    = /home/tuupola/bin/jsmin
 
 #all: jeditable packed tarball latest
 all: jeditable packed minified latest wysiwyg
@@ -11,16 +11,15 @@ jeditable: jquery.jeditable.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).js
 
 packed: jquery.jeditable.js
-	$(JSPACKER) -i jquery.jeditable.js -o jquery.jeditable.pack.js -f -e62
+	$(JSPACKER) < jquery.jeditable.js > jquery.jeditable.pack.js 
 	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).pack.js
 
 minified: jquery.jeditable.js
 	$(JSMIN) < jquery.jeditable.js > jquery.jeditable.mini.js 
 	cp jquery.jeditable.mini.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).mini.js
 
-latest: jquery.jeditable.js jquery.jeditable.pack.js jquery.jeditable.inputs.js
+latest: jquery.jeditable.js jquery.jeditable.pack.js 
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable.js
-	cp jquery.jeditable.inputs.js $(DOWNLOAD)/jquery.jeditable.inputs.js
 	cp jquery.jeditable.ajaxupload.js $(DOWNLOAD)/jquery.jeditable.ajaxupload.js
 	cp jquery.jeditable.autogrow.js $(DOWNLOAD)/jquery.jeditable.autogrow.js
 #	cp jquery.jeditable.datepicker.js $(DOWNLOAD)/jquery.jeditable.datepicker.js
