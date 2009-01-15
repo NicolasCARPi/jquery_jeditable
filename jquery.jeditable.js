@@ -12,12 +12,10 @@
  * Based on editable by Dylan Verheul <dylan_at_dyve.net>:
  *    http://www.dyve.net/jquery/?editable
  *
- * Revision: $Id$
- *
  */
 
 /**
-  * Version 1.6.2-rc2
+  * Version 1.6.2
   *
   * ** means there is basic unit tests for this parameter. 
   *
