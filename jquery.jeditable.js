@@ -1,7 +1,7 @@
 /*
  * Jeditable - jQuery in place edit plugin
  *
- * Copyright (c) 2006-2008 Mika Tuupola, Dylan Verheul
+ * Copyright (c) 2006-2009 Mika Tuupola, Dylan Verheul
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -99,7 +99,9 @@
         var onerror  = settings.onerror  || reset;
           
         /* show tooltip */
-        $(this).attr('title', settings.tooltip);
+        if (settings.tooltip) {
+            $(this).attr('title', settings.tooltip);
+        }
         
         settings.autowidth  = 'auto' == settings.width;
         settings.autoheight = 'auto' == settings.height;
@@ -127,7 +129,9 @@
                 }
 
                 /* remove tooltip */
-                $(self).removeAttr('title');
+                if (settings.tooltip) {
+                    $(self).removeAttr('title');
+                }
                 
                 /* figure out how wide and tall we are, saved width and height */
                 /* are workaround for http://dev.jquery.com/ticket/2190 */
@@ -365,7 +369,9 @@
                             $(self).html(settings.placeholder);
                         }
                         /* show tooltip again */
-                        $(self).attr('title', settings.tooltip);                
+                        if (settings.tooltip) {
+                            $(self).attr('title', settings.tooltip);                
+                        }
                     }                    
                 }
             }            
