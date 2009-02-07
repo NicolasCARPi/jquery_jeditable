@@ -452,12 +452,12 @@
                     var textarea = $('<textarea />');
                     if (settings.rows) {
                         textarea.attr('rows', settings.rows);
-                    } else {
+                    } else if (settings.height != "none") {
                         textarea.height(settings.height);
                     }
                     if (settings.cols) {
                         textarea.attr('cols', settings.cols);
-                    } else {
+                    } else if (settings.width != "none") {
                         textarea.width(settings.width);
                     }
                     $(this).append(textarea);
