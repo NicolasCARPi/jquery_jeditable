@@ -94,6 +94,7 @@
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
         var callback = settings.callback || function() { };
+        var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
@@ -127,7 +128,12 @@
                 if (self.editing) {
                     return;
                 }
-
+                
+                /* abort if onedit hook returns false */
+                if (false === onedit.apply(this, [settings, self])) {
+                   return;
+                }
+                
                 /* remove tooltip */
                 if (settings.tooltip) {
                     $(self).removeAttr('title');
