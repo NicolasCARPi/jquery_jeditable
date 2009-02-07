@@ -470,20 +470,24 @@
                     $(this).append(select);
                     return(select);
                 },
-                content : function(string, settings, original) {
-                    if (String == string.constructor) {      
-                        eval ('var json = ' + string);
-                        for (var key in json) {
-                            if (!json.hasOwnProperty(key)) {
-                                continue;
-                            }
-                            if ('selected' == key) {
-                                continue;
-                            } 
-                            var option = $('<option />').val(key).append(json[key]);
-                            $('select', this).append(option);    
-                        }
+                content : function(data, settings, original) {
+                    /* If it is string assume it is json. */
+                    if (String == data.constructor) {      
+                        eval ('var json = ' + data);
+                    } else {
+                    /* Otherwise assume it is a hash already. */
+                        var json = data;
                     }
+                    for (var key in json) {
+                        if (!json.hasOwnProperty(key)) {
+                            continue;
+                        }
+                        if ('selected' == key) {
+                            continue;
+                        } 
+                        var option = $('<option />').val(key).append(json[key]);
+                        $('select', this).append(option);    
+                    }                    
                     /* Loop option again to set selected. IE needed this... */ 
                     $('select', this).children().each(function() {
                         if ($(this).val() == json['selected'] || 
