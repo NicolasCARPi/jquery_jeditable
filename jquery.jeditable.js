@@ -62,11 +62,11 @@
     $.fn.editable = function(target, options) {
             
         if ('disable' == target) {
-            $(this).data('editable', {disabled : true});
+            $(this).data('disabled.editable', true);
             return;
         }
         if ('enable' == target) {
-            $(this).data('editable', {disabled : false});
+            $(this).data('disabled.editable', false);
             return;
         }
         
@@ -133,9 +133,9 @@
             
             $(this).bind(settings.event, function(e) {
                 
-                /* abort if disabled for this element */                
-                if ('undefined' != typeof($(this).data('editable'))  
-                    && true === $(this).data('editable').disabled) {
+                /* abort if disabled for this element */
+                if (true === $(this).data('disabled.editable')) {
+                    alert('disabled');
                     return;
                 }
                 
