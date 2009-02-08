@@ -69,6 +69,13 @@
             $(this).data('disabled.editable', false);
             return;
         }
+        if ('destroy' == target) {
+            $(this)
+                .unbind($(this).data('event.editable'))
+                .removeData('disabled.editable')
+                .removeData('event.editable');
+            return;
+        }
         
         var settings = {
             target     : target,
@@ -126,6 +133,9 @@
             var savedwidth  = $(self).width();
             var savedheight = $(self).height();
             
+            /* save so it can be later used by $.editable('destroy') */
+            $(this).data('event.editable', settings.event);
+            
             /* if element is empty add something clickable (if requested) */
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
@@ -135,7 +145,6 @@
                 
                 /* abort if disabled for this element */
                 if (true === $(this).data('disabled.editable')) {
-                    alert('disabled');
                     return;
                 }
                 
