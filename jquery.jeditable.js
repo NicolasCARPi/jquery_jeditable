@@ -158,8 +158,8 @@
                 //$(this).css('visibility', '');
                 
                 /* remove placeholder text, replace is here because of IE */
-                if ($(this).html().toLowerCase().replace(/;/, '') == 
-                    settings.placeholder.toLowerCase().replace(/;/, '')) {
+                if ($(this).html().toLowerCase().replace(/(;|")/g, '') == 
+                    settings.placeholder.toLowerCase().replace(/(;|")/g, '')) {
                         $(this).html('');
                 }
                                 
