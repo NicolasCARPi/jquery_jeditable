@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.6.3-dev
+  * Version 1.7.0
   *
   * ** means there is basic unit tests for this parameter. 
   *
