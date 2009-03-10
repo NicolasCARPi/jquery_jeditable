@@ -60,7 +60,23 @@
 (function($) {
 
     $.fn.editable = function(target, options) {
-    
+            
+        if ('disable' == target) {
+            $(this).data('disabled.editable', true);
+            return;
+        }
+        if ('enable' == target) {
+            $(this).data('disabled.editable', false);
+            return;
+        }
+        if ('destroy' == target) {
+            $(this)
+                .unbind($(this).data('event.editable'))
+                .removeData('disabled.editable')
+                .removeData('event.editable');
+            return;
+        }
+        
         var settings = {
             target     : target,
             name       : 'value',
@@ -106,7 +122,7 @@
         
         settings.autowidth  = 'auto' == settings.width;
         settings.autoheight = 'auto' == settings.height;
-
+        
         return this.each(function() {
                         
             /* save this to self because this changes when scope changes */
@@ -117,13 +133,21 @@
             var savedwidth  = $(self).width();
             var savedheight = $(self).height();
             
+            /* save so it can be later used by $.editable('destroy') */
+            $(this).data('event.editable', settings.event);
+            
             /* if element is empty add something clickable (if requested) */
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
             }
             
             $(this).bind(settings.event, function(e) {
-
+                
+                /* abort if disabled for this element */
+                if (true === $(this).data('disabled.editable')) {
+                    return;
+                }
+                
                 /* prevent throwing an exeption if edit field is clicked again */
                 if (self.editing) {
                     return;
