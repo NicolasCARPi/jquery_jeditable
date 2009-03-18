@@ -139,6 +139,10 @@
                    return;
                 }
                 
+                // prevent default action and bubbling
+                e.preventDefault();
+                e.stopPropagation();
+                
                 /* remove tooltip */
                 if (settings.tooltip) {
                     $(self).removeAttr('title');
