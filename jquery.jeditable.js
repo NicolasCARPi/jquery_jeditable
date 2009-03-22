@@ -358,11 +358,14 @@
                               var ajaxoptions = {
                                   type    : 'POST',
                                   data    : submitdata,
+                                  dataType: 'html',
                                   url     : settings.target,
                                   success : function(result, status) {
-                                      $(self).html(result);
+                                      if (ajaxoptions.dataType == 'html') {
+                                        $(self).html(result);
+                                      }
                                       self.editing = false;
-                                      callback.apply(self, [self.innerHTML, settings]);
+                                      callback.apply(self, [result, settings]);
                                       if (!$.trim($(self).html())) {
                                           $(self).html(settings.placeholder);
                                       }
