@@ -77,27 +77,8 @@
             return;
         }
         
-        var settings = {
-            target     : target,
-            name       : 'value',
-            id         : 'id',
-            type       : 'text',
-            width      : 'auto',
-            height     : 'auto',
-            event      : 'click',
-            onblur     : 'cancel',
-            loadtype   : 'GET',
-            loadtext   : 'Loading...',
-            placeholder: 'Click to edit',
-            loaddata   : {},
-            submitdata : {},
-            ajaxoptions: {}
-        };
+        var settings = $.extend($.fn.editable.defaults, {target:target}, options);
         
-        if(options) {
-            $.extend(settings, options);
-        }
-    
         /* setup some functions */
         var plugin   = $.editable.types[settings.type].plugin || function() { };
         var submit   = $.editable.types[settings.type].submit || function() { };
@@ -536,6 +517,23 @@
         addInputType: function(name, input) {
             $.editable.types[name] = input;
         }
+    };
+
+    // publicly accessible defaults
+    $.fn.editable.defaults = {
+        name       : 'value',
+        id         : 'id',
+        type       : 'text',
+        width      : 'auto',
+        height     : 'auto',
+        event      : 'click',
+        onblur     : 'cancel',
+        loadtype   : 'GET',
+        loadtext   : 'Loading...',
+        placeholder: 'Click to edit',
+        loaddata   : {},
+        submitdata : {},
+        ajaxoptions: {}
     };
 
 })(jQuery);
