@@ -1,7 +1,7 @@
 /*
  * Timepicker for Jeditable
  *
- * Copyright (c) 2008 Mika Tuupola
+ * Copyright (c) 2008-2009 Mika Tuupola
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -30,7 +30,7 @@ $.editable.addInputType('time', {
         }
         $(this).append(hourselect);
 
-        for (var min=0; min <= 45; min = parseInt(min)+15) {
+        for (var min=0; min <= 45; min = parseInt(min, 10) + 15) {
             if (min < 10) {
                 min = '0' + min;
             }
@@ -49,8 +49,8 @@ $.editable.addInputType('time', {
     content : function(string, settings, original) {
         
         /* Select correct hour and minute in pulldowns. */
-        var hour = parseInt(string.substr(0,2));
-        var min  = parseInt(string.substr(3,2));
+        var hour = parseInt(string.substr(0,2), 10);
+        var min  = parseInt(string.substr(3,2), 10);
 
         $('#hour_', this).children().each(function() {
             if (hour == $(this).val()) {
@@ -59,7 +59,7 @@ $.editable.addInputType('time', {
         });
         $('#min_', this).children().each(function() {
             if (min == $(this).val()) {
-                $(this).attr('selected', 'selected')
+                $(this).attr('selected', 'selected');
             }
         });
 

@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.7.0
+  * Version 1.7.1
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -139,7 +139,7 @@
                    return;
                 }
                 
-                // prevent default action and bubbling
+                /* prevent default action and bubbling */
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -358,7 +358,7 @@
                                   error   : function(xhr, status, error) {
                                       onerror.apply(form, [settings, self, xhr]);
                                   }
-                              }
+                              };
                               
                               /* override with what is given in settings.ajaxoptions */
                               $.extend(ajaxoptions, settings.ajaxoptions);   
@@ -392,7 +392,7 @@
                         }
                     }                    
                 }
-            }            
+            };            
         });
 
     };
@@ -511,7 +511,7 @@
                         if ($(this).val() == json['selected'] || 
                             $(this).text() == original.revert) {
                                 $(this).attr('selected', 'selected');
-                        };
+                        }
                     });
                 }
             }
