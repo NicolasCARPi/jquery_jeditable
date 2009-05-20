@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.7.1
+  * Version 1.7.2-dev
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -530,7 +530,7 @@
         type       : 'text',
         width      : 'auto',
         height     : 'auto',
-        event      : 'click',
+        event      : 'click.editable',
         onblur     : 'cancel',
         loadtype   : 'GET',
         loadtext   : 'Loading...',

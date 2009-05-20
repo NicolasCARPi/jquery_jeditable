@@ -1,5 +1,9 @@
 h3. Changelog
 
+h4. 1.7.2
+
+* Namespace default event as click.editable ("Zangetsu":http://github.com/Zangetsu)
+
 h4. 1.7.1
 
 * Make default setting publicly available ("lawrencepit":http://github.com/lawrencepit)
