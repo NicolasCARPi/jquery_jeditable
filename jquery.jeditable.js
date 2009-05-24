@@ -509,7 +509,7 @@
                     /* Loop option again to set selected. IE needed this... */ 
                     $('select', this).children().each(function() {
                         if ($(this).val() == json['selected'] || 
-                            $(this).text() == original.revert) {
+                            $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
                         }
                     });
