@@ -28,7 +28,7 @@ $.editable.addInputType('datepicker', {
     plugin : function(settings, original) {
         /* Workaround for missing parentNode in IE */
         var form = this;
-        settings.onblur = 'cancel'
+        settings.onblur = 'cancel';
         $("input", this)
         .datePicker({createButton:false})
         .bind('click', function() {

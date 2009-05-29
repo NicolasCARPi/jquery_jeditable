@@ -1,5 +1,14 @@
 h3. Changelog
 
+h4. 1.7.1
+
+* Namespace default event as click.editable ("Zangetsu":http://github.com/Zangetsu)
+* Trim whitespace when determining the selected value of pulldown ("binarylogic":http://github.com/binarylogic)
+* Make default settings publicly available ("lawrencepit":http://github.com/lawrencepit)
+* Allow ajax calls other than 'html', e.g. json and script calls. ("lawrencepit":http://github.com/lawrencepit)
+* Do not follow links if they are editable ("Darwin":http://github.com/darwin)
+* make JSLInt happy ("olleolleolle":http://github.com/olleolleolle)
+
 h4. 1.7.0
 
 * Full control over jQuery AJAX options for those who want to tinker.

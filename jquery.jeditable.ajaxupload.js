@@ -1,7 +1,7 @@
 /*
  * Ajaxupload for Jeditable
  *
- * Copyright (c) 2008 Mika Tuupola
+ * Copyright (c) 2008-2009 Mika Tuupola
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -44,7 +44,7 @@ $.editable.addInputType('ajaxupload', {
                 error: function (data, status, e) {
                     alert(e);
                 }
-            })
+            });
             return(false);
         });
     }

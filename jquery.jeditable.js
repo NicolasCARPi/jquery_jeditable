@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.7.0
+  * Version 1.7.1
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -77,27 +77,8 @@
             return;
         }
         
-        var settings = {
-            target     : target,
-            name       : 'value',
-            id         : 'id',
-            type       : 'text',
-            width      : 'auto',
-            height     : 'auto',
-            event      : 'click',
-            onblur     : 'cancel',
-            loadtype   : 'GET',
-            loadtext   : 'Loading...',
-            placeholder: 'Click to edit',
-            loaddata   : {},
-            submitdata : {},
-            ajaxoptions: {}
-        };
+        var settings = $.extend({}, $.fn.editable.defaults, {target:target}, options);
         
-        if(options) {
-            $.extend(settings, options);
-        }
-    
         /* setup some functions */
         var plugin   = $.editable.types[settings.type].plugin || function() { };
         var submit   = $.editable.types[settings.type].submit || function() { };
@@ -157,6 +138,10 @@
                 if (false === onedit.apply(this, [settings, self])) {
                    return;
                 }
+                
+                /* prevent default action and bubbling */
+                e.preventDefault();
+                e.stopPropagation();
                 
                 /* remove tooltip */
                 if (settings.tooltip) {
@@ -358,11 +343,14 @@
                               var ajaxoptions = {
                                   type    : 'POST',
                                   data    : submitdata,
+                                  dataType: 'html',
                                   url     : settings.target,
                                   success : function(result, status) {
-                                      $(self).html(result);
+                                      if (ajaxoptions.dataType == 'html') {
+                                        $(self).html(result);
+                                      }
                                       self.editing = false;
-                                      callback.apply(self, [self.innerHTML, settings]);
+                                      callback.apply(self, [result, settings]);
                                       if (!$.trim($(self).html())) {
                                           $(self).html(settings.placeholder);
                                       }
@@ -370,7 +358,7 @@
                                   error   : function(xhr, status, error) {
                                       onerror.apply(form, [settings, self, xhr]);
                                   }
-                              }
+                              };
                               
                               /* override with what is given in settings.ajaxoptions */
                               $.extend(ajaxoptions, settings.ajaxoptions);   
@@ -404,7 +392,7 @@
                         }
                     }                    
                 }
-            }            
+            };            
         });
 
     };
@@ -521,9 +509,9 @@
                     /* Loop option again to set selected. IE needed this... */ 
                     $('select', this).children().each(function() {
                         if ($(this).val() == json['selected'] || 
-                            $(this).text() == original.revert) {
+                            $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
-                        };
+                        }
                     });
                 }
             }
@@ -533,6 +521,23 @@
         addInputType: function(name, input) {
             $.editable.types[name] = input;
         }
+    };
+
+    // publicly accessible defaults
+    $.fn.editable.defaults = {
+        name       : 'value',
+        id         : 'id',
+        type       : 'text',
+        width      : 'auto',
+        height     : 'auto',
+        event      : 'click.editable',
+        onblur     : 'cancel',
+        loadtype   : 'GET',
+        loadtext   : 'Loading...',
+        placeholder: 'Click to edit',
+        loaddata   : {},
+        submitdata : {},
+        ajaxoptions: {}
     };
 
 })(jQuery);
