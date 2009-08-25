@@ -5,7 +5,7 @@
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Depends on Timepicker jQuery plugin by Jason Huck:
  *   http://jquery.com/plugins/project/timepicker
  *
@@ -15,9 +15,9 @@
  * Revision: $Id$
  *
  */
- 
+
 $.editable.addInputType('timepicker', {
-    /* This uses default hidden input field. No need for element() function. */    
+    /* This uses default hidden input field. No need for element() function. */
 
     /* Call before submit hook. */
     submit: function (settings, original) {
@@ -27,7 +27,7 @@ $.editable.addInputType('timepicker', {
         $('input', this).val(value);
     },
     /* Attach Timepicker plugin to the default hidden input element. */
-    plugin:  function(settings, original) {        
+    plugin:  function(settings, original) {
         $('input', this).filter(':hidden').timepicker();
     }
 });
