@@ -513,6 +513,13 @@
                                 $(this).attr('selected', 'selected');
                         }
                     });
+                    /* Submit on change if no submit button defined. */
+                    if (!settings.submit) {
+                        var form = this;
+                        $('select', this).change(function() {
+                            form.submit();
+                        });
+                    }
                 }
             }
         },
