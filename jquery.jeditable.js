@@ -165,8 +165,8 @@
                 }
                 
                 /* Remove placeholder text, replace is here because of IE. */
-                if ($(this).html().toLowerCase().replace(/(;|")/g, '') == 
-                    settings.placeholder.toLowerCase().replace(/(;|")/g, '')) {
+                if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') == 
+                    settings.placeholder.toLowerCase().replace(/(;|"|\/)/g, '')) {
                         $(this).html('');
                 }
                                 
