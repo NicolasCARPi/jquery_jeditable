@@ -171,6 +171,7 @@
                 }
                                 
                 self.editing    = true;
+                self.noblur     = false;
                 self.revert     = $(self).html();
                 $(self).html('');
 
@@ -276,9 +277,11 @@
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
-                        t = setTimeout(function() {
-                            form.submit();
-                        }, 200);
+                        if (!self.noblur) {
+                            t = setTimeout(function() {
+                                form.submit();
+                            }, 200);
+                        }
                     });
                 } else if ($.isFunction(settings.onblur)) {
                     input.blur(function(e) {
@@ -445,6 +448,12 @@
                             }
                             reset.apply(form, [settings, original]);
                             return false;
+                        });
+                        $(cancel).mouseenter(function(event) {
+                            original.noblur = true;
+                        });
+                        $(cancel).mouseleave(function(event) {
+                            original.noblur = false;
                         });
                     }
                 }
