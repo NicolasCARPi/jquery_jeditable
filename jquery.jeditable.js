@@ -171,7 +171,7 @@
                 }
                                 
                 self.editing    = true;
-                self.revert     = $(self).html();
+                self.revert     = $(self).text();
                 $(self).html('');
 
                 /* Create the form object. */
@@ -309,7 +309,7 @@
                           /* Check if given target is function */
                           if ($.isFunction(settings.target)) {
                               var str = settings.target.apply(self, [input.val(), settings]);
-                              $(self).html(str);
+                              $(self).text(str);
                               self.editing = false;
                               callback.apply(self, [self.innerHTML, settings]);
                               /* TODO: this is not dry */                              
@@ -378,7 +378,7 @@
                 if (this.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
                     if (false !== onreset.apply(form, [settings, self])) { 
-                        $(self).html(self.revert);
+                        $(self).text(self.revert);
                         self.editing   = false;
                         if (!$.trim($(self).html())) {
                             $(self).html(settings.placeholder);
