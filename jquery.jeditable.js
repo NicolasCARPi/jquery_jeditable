@@ -196,6 +196,12 @@
                     }
                 }
 
+                /* Add (optional) form input label for user instructions, etc */
+                if(settings.label)
+                {
+                     form.append("<label>"+settings.label+"</label>");
+                }
+
                 /* Add main input element to form and store it in input. */
                 var input = element.apply(form, [settings, self]);
 
