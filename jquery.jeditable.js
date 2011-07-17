@@ -48,6 +48,7 @@
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  * @param String  options[ontab]     'submit', or 'escape', block default browser tab action and take our own action
   *             
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
@@ -260,6 +261,15 @@
                     if (e.keyCode == 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
+                    }
+                    if (e.keyCode === 9) {
+                      if (settings.ontab === "escape") {
+                        e.preventDefault();
+                        reset.apply(form, [settings, self]);
+                      } else if (settings.ontab === "submit"){
+                        e.preventDefault();
+                        form.submit();
+                      }
                     }
                 });
 
@@ -514,6 +524,13 @@
                         var form = this;
                         $('select', this).change(function() {
                             form.submit();
+                        });
+                        /* also allow enter to submit, even if no change */
+                        $('select', this).keydown(function(e) {
+                            if (e.keyCode == 13) {
+                                e.preventDefault();
+                                form.submit();
+                            }
                         });
                     }
                 }
