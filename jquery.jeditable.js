@@ -95,6 +95,8 @@
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
+        var afterInPlace = settings.afterInPlace || function() { };
+
           
         /* Show tooltip. */
         if (settings.tooltip) {
@@ -243,6 +245,8 @@
          
                 /* Add created form to self. */
                 $(self).append(form);
+
+                afterInPlace();
          
                 /* Attach 3rd party plugin if requested. */
                 plugin.apply(form, [settings, self]);
