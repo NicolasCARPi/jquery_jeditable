@@ -502,16 +502,26 @@
                     /* Otherwise assume it is a hash already. */
                         var json = data;
                     }
-                    for (var key in json) {
-                        if (!json.hasOwnProperty(key)) {
+                    for (var item in json) {
+                        var option_key;
+                        var option_value;
+                        if ($.isArray(json)) {
+                          option_key = json[item][0];
+                          option_value = json[item][1];
+                        } else {
+                          if (!json.hasOwnProperty(item)) {
+                              continue;
+                          }
+                          option_key = item;
+                          option_value = json[item];
+                        }
+
+                        if ('selected' == option_key) {
                             continue;
                         }
-                        if ('selected' == key) {
-                            continue;
-                        } 
-                        var option = $('<option />').val(key).append(json[key]);
-                        if (key == json['selected'] ||
-                            json[key] == $.trim(original.revert)) {
+                        var option = $('<option />').val(option_key).append(option_value);
+                        if (option_key == json['selected'] ||
+                            option_value == $.trim(original.revert)) {
                                 $(option).attr('selected', 'selected');
                         }
                         $('select', this).append(option);
