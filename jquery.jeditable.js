@@ -510,15 +510,13 @@
                             continue;
                         } 
                         var option = $('<option />').val(key).append(json[key]);
-                        $('select', this).append(option);    
-                    }                    
-                    /* Loop option again to set selected. IE needed this... */ 
-                    $('select', this).children().each(function() {
-                        if ($(this).val() == json['selected'] || 
-                            $(this).text() == $.trim(original.revert)) {
-                                $(this).attr('selected', 'selected');
+                        if (key == json['selected'] ||
+                            json[key] == $.trim(original.revert)) {
+                                $(option).attr('selected', 'selected');
                         }
-                    });
+                        $('select', this).append(option);
+                    }
+
                     /* Submit on change if no submit button defined. */
                     if (!settings.submit) {
                         var form = this;
