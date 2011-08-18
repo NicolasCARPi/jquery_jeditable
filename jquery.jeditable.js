@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.7.2-dev
+  * Version 1.7.3-dev
   *
   * ** means there is basic unit tests for this parameter. 
   *
@@ -48,6 +48,7 @@
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  * @param Function options[showfn]   function that can animate ethe element when switching to edit mode **
   *             
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
@@ -240,9 +241,15 @@
         
                 /* Add buttons to the form. */
                 buttons.apply(form, [settings, self]);
-         
+
                 /* Add created form to self. */
+                if (settings.showfn) {
+                    form.hide();
+                }
                 $(self).append(form);
+                if (settings.showfn) {
+                    settings.showfn(form);
+                }
          
                 /* Attach 3rd party plugin if requested. */
                 plugin.apply(form, [settings, self]);
