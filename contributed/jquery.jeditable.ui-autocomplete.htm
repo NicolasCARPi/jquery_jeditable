@@ -1,0 +1,35 @@
+/* Autocomplete using jQueryUI1.8.16 [from rezeusor with love]*/
+/* This additional code needs to be inserted in your page for the multicomplete to work smoothly */
+
+
+function split( val ) {
+	return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+	return split( term ).pop();
+}
+var listofstuff = ["0118","999","88199","9119","725","3"] ;
+$('.importantNumbers').editable(function(value,settings){return save(this.id,value,this.revert);},
+	{type:"autocomplete",autocomplete:{
+		minLength: 0,
+		source: function( request, response ) {
+			response( $.ui.autocomplete.filter( analysts, extractLast( request.term ) ) );
+		},
+		focus: function() {
+			return false;
+		},
+		select: function( event, ui ) {
+			var terms = split( this.value );
+			terms.pop();
+			terms.push( ui.item.value );
+			terms.push( "" );
+			// Set this to whatever you want to be
+			this.value = terms.join( ", " );
+			return false;
+		}
+	},
+	submit:'save',
+	cancel:'cancel',
+	onblur:'ignore'
+	}
+); 
