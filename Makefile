@@ -1,4 +1,4 @@
-VERSION = 1.7.1
+VERSION = 1.7.3
 SHELL = /bin/sh
 DOWNLOAD = /var/www/www.appelsiini.net/htdocs/download
 JSPACKER = ~/bin/jspacker

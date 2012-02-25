@@ -15,7 +15,7 @@
  */
 
 /**
-  * Version 1.7.2-dev
+  * Version 1.7.3
   *
   * ** means there is basic unit tests for this parameter.
   *
@@ -211,7 +211,6 @@
 
                     var loaddata = {};
                     if (settings.idattr) {
-                        alert(settings.idattr);
                         loaddata[settings.id] = $(self).attr(settings.idattr);
                     } else {
                         alert('all normal');
@@ -328,8 +327,7 @@
                               var submitdata = {};
                               submitdata[settings.name] = input.val();
                               if (settings.idattr) {
-                                  alert(loaddata);
-                                  loaddata[settings.id] = $(self).attr(settings.idattr);
+                                  submitdata[settings.id] = $(self).attr(settings.idattr);
                               } else {
                                   submitdata[settings.id] = self.id;
                               }
