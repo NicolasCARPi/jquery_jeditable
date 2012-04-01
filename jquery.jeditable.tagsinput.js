@@ -34,7 +34,7 @@ $.editable.addInputType( 'tagsinput', {
 		//Place the string contained in the original div as the value of our input field
 		$('input', this).attr('value', string);
 	},
-	plugin : function(string, settings, original) {
+	plugin : function(settings, original) {
 		var form = this,
           input = form.find( "input" );
 		// Don't cancel inline editing onblur to allow clicking tags
