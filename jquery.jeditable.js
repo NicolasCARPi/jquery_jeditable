@@ -308,13 +308,21 @@
 
                           /* Check if given target is function */
                           if ($.isFunction(settings.target)) {
-                              var str = settings.target.apply(self, [input.val(), settings]);
-                              $(self).html(str);
-                              self.editing = false;
-                              callback.apply(self, [self.innerHTML, settings]);
-                              /* TODO: this is not dry */                              
-                              if (!$.trim($(self).html())) {
-                                  $(self).html(settings.placeholder);
+                              /* Callback function to handle the target reponse */
+                              var handleresponse = function(value) {
+                                  $(self).html(value);
+                                  self.editing = false;
+                                  callback.apply(self, [self.innerHTML, settings]);
+                                  /* TODO: this is not dry */
+                                  if (!$.trim($(self).html())) {
+                                      $(self).html(settings.placeholder);
+                                  }
+                              }
+                              /* Call the user target function */
+                              var user_target = settings.target.apply(self, [input.val(), settings, handleresponse]);
+                              /* Handle the target function return for compatibility */
+                              if (false !== user_target && undefined !== user_target) {
+                                handleresponse(user_target);
                               }
                           } else {
                               /* Add edited content and id of edited element to POST. */
