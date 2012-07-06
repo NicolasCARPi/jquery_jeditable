@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +9,12 @@
 <script type="text/javascript" src="../jquery.jeditable.js"></script>
 <script>
 $(document).ready(function() {
-    
+
     //window.loadFirebugConsole();
     /* We need synchronous AJAX for testing. */
     $.ajaxSetup({
         async : false
-    }); 
+    });
     $("#post").editable("method.php", {
         loadurl   : "load.php",
         type      : "textarea",
@@ -38,7 +38,7 @@ $(document).ready(function() {
         event     : "dblclick",
         submit    : "<i>Click to submit</i>",
         onblur    : "ignore"
-    });  
+    });
     $("#placeholder").editable("echo.php", {
         placeholder : "PLACEHOLDER",
         width     : 200,
@@ -65,8 +65,13 @@ $(document).ready(function() {
     }, {
         submit  : "OK"
     });
-    
-    module("CORE");    
+	$("#differentId").editable("id.php", {
+        submit  : "OK",
+		idattr: 'data-model-id',
+    });
+
+
+    module("CORE");
 
     test("Event triggers", function() {
         $("#post").trigger("click");
@@ -98,8 +103,8 @@ $(document).ready(function() {
         $("#placeholder form").submit();
 
         $("#select").trigger("click");
-        equals($("#select :input:first").attr("type"), "select-one", "Should be select-one");      
-        equals($("#select :selected").html(), "Select B", "Should be Select B");        
+        equals($("#select :input:first").attr("type"), "select-one", "Should be select-one");
+        equals($("#select :selected").html(), "Select B", "Should be Select B");
         $("#select form").submit();
     });
 
@@ -109,7 +114,7 @@ $(document).ready(function() {
         $("#function form").submit();
         equals($("#function").html(), "Pacman", 'Target function returns Pacman');
     });
-    
+
     test("Onblur events", function() {
         /* How to work around timeout problem? */
     });
@@ -122,11 +127,12 @@ $(document).ready(function() {
     });
 
     test("Tooltip", function() {
+	  console.log($('#post').attr('title'));
       equals($("#post").attr("title"), "Tooltip", "Should be tooltip.");
       equals($("#put").attr("title"), "Tooltip", "Should be tooltip.");
       equals($("#select").attr("title"), "Tooltip", "Should be tooltip.");
     });
-    
+
     test("Select", function() {
         /* How to access selection? */
     });
@@ -135,62 +141,68 @@ $(document).ready(function() {
       $("#post").trigger("click");
       equals($("#post form").css("display"), "inline", "Should inherit inline");
       $("#put").trigger("click");
-      equals($("#put form").css("margin-top"), "27px", "Should be 27px");      
+      equals($("#put form").css("margin-top"), "27px", "Should be 27px");
     });
-    
+
     test("CSS class", function() {
       $("#post").trigger("click");
       ok($("#post form").hasClass("foo"), "Should inherit class foo.");
       $("#put").trigger("click");
       ok($("#put form").hasClass("bar"), "Should have class bar.");
     });
-    
-    test("Buttons", function() {      
+
+    test("Buttons", function() {
       $("#post").trigger("click");
-      ok($("#post button[type=submit]").size() == 1, "Should have submit button.");
+      ok($("#post button:first").attr('type') == 'submit', "Should have submit button.");
       ok($("#post button").size() == 2, "Should have cancel button too.");
       $("#put").trigger("click");
       $("#put form i").html();
       $("#put form i").trigger("click");
     });
-    
+
     test("Placeholder", function() {
         equals($("#placeholder").html(), "PLACEHOLDER", "Should be PLACEHOLDER");
         $("#placeholder").trigger("edit");
         equals($("#placeholder input").html(), "", "Should be empty");
         $("#placeholder form").submit();
         equals($("#placeholder").html(), "PLACEHOLDER", "Should be PLACEHOLDER");
-        
+
         $("#placeholder").trigger("edit");
         $("#placeholder input").val("NEW VALUE");
         $("#placeholder form").submit();
         equals($("#placeholder").html(), "NEW VALUE", "Should be PLACEHOLDER");
     });
-    
+
     test("Callback", function() {
         $("#callback").trigger("click");
         $("#callback form").trigger("submit");
         equals($("#callback").html(), "Dragons begone.", "Dragons should be gone");
     });
-    
+
+    test("Different Id Attribute", function() {
+        $("#differentId").click();
+        $("#differentId form").submit();
+        equals($("#differentId").html(), "3", "Should be 3");
+    });
+
     module("AJAH");
     test("Submit methods", function() {
         $("#post").click();
         $("#post form").submit();
         equals($("#post").html(), "POST", "Should be POST");
-        
+
         $("#put").dblclick();
         $("#put form").submit();
         equals($("#put").html(), "PUT", "Should be PUT");
-    });
 
+    });
 });
 
 </script>
-  
+
 </head>
 <body>
-  
+
  <h1>Jeditable unit tests</h1>
  <h2 id="banner"></h2>
  <h2 id="userAgent"></h2>
@@ -204,5 +216,6 @@ $(document).ready(function() {
  <div id="select">Select B</div>
  <div id="callback">Here be dragons.</div>
  <div id="function">Here be dragons.</div>
+ <div id="differentId" data-model-id="3">Here be dragons.</div>
 </body>
 </html>
