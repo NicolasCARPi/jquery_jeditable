@@ -1,5 +1,9 @@
 h3. Changelog
 
+h4. 1.7.3
+
+* Add afterInPlace callback ("seeweer":http://github.com/seeweer)
+
 h4. 1.7.2
 
 * Submit on change if input type select and no submit button defined ("gregpyp":http://github.com/gregpyp)
