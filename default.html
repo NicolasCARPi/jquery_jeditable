@@ -29,14 +29,16 @@ $(function() {
     style  : "inherit",
     submitdata : function() {
       return {id : 2};
-    }
+    },
+    showfn : function (elem) { elem.fadeIn('fast'); }
   });
   $(".editable_select_json").editable("<?php print $url ?>save.php", { 
     indicator : '<img src="img/indicator.gif">',
     loadurl : "<?php print $url ?>json.php",
     type   : "select",
     submit : "OK",
-    style  : "inherit"
+    style  : "inherit",
+    showfn : function (elem) { elem.fadeIn('fast'); }
   });
   $(".editable_textarea").editable("<?php print $url ?>save.php", { 
       indicator : "<img src='img/indicator.gif'>",
@@ -45,7 +47,8 @@ $(function() {
       select : true,
       submit : 'OK',
       cancel : 'cancel',
-      cssclass : "editable"
+      cssclass : "editable",
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
   $(".editable_textile").editable("<?php print $url ?>save.php?renderer=textile", { 
       indicator : "<img src='img/indicator.gif'>",
@@ -53,32 +56,37 @@ $(function() {
       type      : "textarea",
       submit    : "OK",
       cancel    : "Cancel",
-      tooltip   : "Click to edit..."
+      tooltip   : "Click to edit...",
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
   
   $(".click").editable("<?php print $url ?>echo.php", { 
       indicator : "<img src='img/indicator.gif'>",
       tooltip   : "Click to edit...",
-      style  : "inherit"
+      style  : "inherit",
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
   $(".dblclick").editable("<?php print $url ?>echo.php", { 
       indicator : "<img src='img/indicator.gif'>",
       tooltip   : "Doubleclick to edit...",
       event     : "dblclick",
-      style  : "inherit"
+      style  : "inherit",
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
   $(".mouseover").editable("<?php print $url ?>echo.php", { 
       indicator : "<img src='img/indicator.gif'>",
       tooltip   : "Move mouseover to edit...",
       event     : "mouseover",
-      style  : "inherit"
+      style  : "inherit",
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
   
   /* Should not cause error. */
   $("#nosuch").editable("<?php print $url ?>echo.php", { 
       indicator : "<img src='img/indicator.gif'>",
       type   : 'textarea',
-      submit : 'OK'
+      submit : 'OK',
+      showfn : function (elem) { elem.fadeIn('fast'); }
   });
 
 });
