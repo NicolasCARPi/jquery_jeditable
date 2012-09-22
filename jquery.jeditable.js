@@ -45,6 +45,9 @@
   * @param String  options[cancel]    cancel button value, empty means no button **
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent. **
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent. **
+  * @param String  options[formid]    Give an id to the form to allow to style it **
+  * @param String  options[submitCssClass]  CSS class to apply to submit button **
+  * @param String  options[cancelCssClass]  CSS class to apply to cancel button **
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
@@ -177,6 +180,11 @@
                 /* Create the form object. */
                 var form = $('<form />');
                 
+                /* Assign a DOM Id to the form */
+                if (settings.formid) {
+                    form.attr('id', settings.formid);
+                }
+
                 /* Apply css or style or both. */
                 if (settings.cssclass) {
                     if ('inherit' == settings.cssclass) {
@@ -423,6 +431,7 @@
                         } else {
                             var submit = $('<button type="submit" />');
                             submit.html(settings.submit);                            
+                            submit.addClass(settings.submitcssclass);
                         }
                         $(this).append(submit);
                     }
@@ -434,6 +443,7 @@
                         } else {
                             var cancel = $('<button type="cancel" />');
                             cancel.html(settings.cancel);
+                            cancel.addClass(settings.cancelcssclass);
                         }
                         $(this).append(cancel);
 
