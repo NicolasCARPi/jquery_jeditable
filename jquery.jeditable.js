@@ -451,7 +451,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input />');
+                    var input = $('<input type="text" />');
                     if (settings.width  != 'none') { input.attr('width', settings.width);  }
                     if (settings.height != 'none') { input.attr('height', settings.height); }
                     /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
