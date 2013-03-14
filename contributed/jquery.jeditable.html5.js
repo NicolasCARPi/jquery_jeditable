@@ -17,7 +17,7 @@
     $.fn.editableAriaShim = function () {
         //$.log('WAI-ARIA shim..');
 
-        $(this).attr({
+        this.attr({
             role: 'button',
             tabindex: 0
             //, title: 'Editable' -- See 'tooltip' below.
@@ -32,7 +32,15 @@
     // Accessibility - there should be a default value for the title/ tooltip.
     $.fn.editable.defaults.tooltip = 'Click to edit'; //$.fn.editable.defaults.placeholder
 
+    // Shim - $(sel).checkValidity()
+    if (! $.fn.checkValidity) {
+        $.fn.checkValidity = function () {
+            var inp = this[0];
+            return inp ? inp.checkValidity() : null;
+        };
+    }
 
+    // Type = text : With HTML5 attributes.
     $.editable.addInputType('html5_text', {
         element: function (settings, original) {
             var input = $('<input />').attr({
@@ -56,14 +64,7 @@
         }
     });
 
-$.editable.addInputType('unsigned_integer', {
-  element: function (settings, original) {
-    var input = $('<input type="number" min="0" max="10" step="1">');
-    $(this).append(input);
-    return input;
-  }
-});
-
+// Type = number.
 $.editable.addInputType('number', {
   element: function (settings, original) {
     var input = $('<input />').attr({
@@ -81,6 +82,16 @@ $.editable.addInputType('number', {
   }
 });
 
+// Deprecated.
+$.editable.addInputType('unsigned_integer', {
+  element: function (settings, original) {
+    var input = $('<input type="number" min="0" max="10" step="1">');
+    $(this).append(input);
+    return input;
+  }
+});
+
+// Type = range : Not usable.
 /*$.editable.addInputType('range', {
   element: function (settings, original) {
     var input = $('<input />').attr({
@@ -97,6 +108,7 @@ $.editable.addInputType('number', {
   }
 });*/
 
+// Type = email
 $.editable.addInputType('email', {
   element: function (settings, original) {
     var input = $('<input />').attr({
@@ -110,6 +122,7 @@ $.editable.addInputType('email', {
   }
 });
 
+// Type = url
 $.editable.addInputType('url', {
   element: function (settings, original) {
     var input = $('<input />').attr({
