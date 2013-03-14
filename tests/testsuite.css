@@ -6,7 +6,10 @@ h2 { padding: 10px; background-color: #eee; color: black; margin: 0; font-size: 
 
 .pass { color: green; } 
 .fail { color: red; } 
-p.result { margin-left: 1em; }
+.editable :valid { border-color: green; }
+:focus:invalid { border-color: red; }
+
+p.result, div[id] { margin-left: 1em; }
 
 #banner { height: 2em; border-bottom: 1px solid white; }
 h2.pass { background-color: green; }
