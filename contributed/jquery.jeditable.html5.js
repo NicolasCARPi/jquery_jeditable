@@ -26,7 +26,6 @@
         return this; //<--jquery object - chaining.
     };
 
-
     // Keyboard accessibility - use mouse click OR press any key to enable editing.
     $.fn.editable.defaults.event = 'click.editable keydown.editable';
 
@@ -42,7 +41,7 @@
                 // disabled -- Not relevant.
                 // readonly -- Not relevant.
                 //autocomplete: settings.autocomplete, -- Todo.
-                inputmode: settings.input.mode,
+                inputmode: settings.inputmode,
                 list: settings.list,
                 maxlength: settings.maxlength,
                 pattern: settings.pattern,
