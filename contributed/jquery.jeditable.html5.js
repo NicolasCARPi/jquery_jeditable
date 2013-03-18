@@ -36,7 +36,7 @@
     if (! $.fn.checkValidity) {
         $.fn.checkValidity = function () {
             var inp = this[0];
-            return inp ? inp.checkValidity() : null;
+            return inp && typeof inp.checkValidity==="function" ? inp.checkValidity() : null;
         };
     }
 

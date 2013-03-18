@@ -95,6 +95,7 @@ $(document).ready(function() {
         required: true
     });
 
+
     module("CORE");    
 
     test("Event triggers", function() {
@@ -217,8 +218,10 @@ $(document).ready(function() {
     module("HTML5");
 
     test("Keyboard accessibility", function () {
-        equals($(".editable").attr("role"), "button", "WAI-ARIA role should be button");
-        equals($(".editable").attr("tabindex"), "0", "Tabindex should be 0");
+        /*( isObj($.fn.editableAriaShim, function(){}, "Is a function, v1"); )*/
+        equals(typeof $.fn.editableAriaShim, "function", "`$.fn.editableAriaShim` is a function()");
+        equals($(".editable").attr("role"), "button", "WAI-ARIA `role` should be `button`");
+        equals($(".editable").attr("tabindex"), "0", "Attribute `tabindex` should be 0");
         $("#h5-number").trigger("click");
         ok($("#h5-number form").size() == 1, "Click event should trigger Jeditable.");
         $("#h5-number form").submit();
@@ -231,25 +234,31 @@ $(document).ready(function() {
 
     test("HTML5 input types", function () {
         $("#h5-number").trigger("click");
-        equals($("#h5-number input").attr("type"), "number", "Type should be number");
-        equals($("#h5-number input").attr("min"), "0", "Min should be 0");
+        equals($("#h5-number input").attr("type"), "number", "Type should be `number`");
+        equals($("#h5-number input").attr("min"), "0", "Attribute `min` should be 0");
         equals($("#h5-number input").val(), "-2.06", "Value should be -2.06");
-        equals(document.querySelector("#h5-number input").checkValidity(), false, "checkValidity() should be false");
+        equals(typeof document.querySelector("#h5-number input").checkValidity, "function", "`\x3Cinput>.checkValidity` is a function");
+        equals(document.querySelector("#h5-number input").checkValidity(), false, "`\x3Cinput>.checkValidity()` should return false");
         $("#h5-number form").submit();
 
         $("#h5-email").trigger("click");
-        equals($("#h5-email input").attr("type"), "email", "Type should be email");
-        equals($("#h5-email input")[0].checkValidity(), true, "checkValidity() should be true");
+        equals($("#h5-email input").attr("type"), "email", "Type should be `email`");
+        equals($("#h5-email input")[0].checkValidity(), true, "`checkValidity()` should return true");
         $("#h5-email form").submit();
 
         $("#h5-text").trigger("click");
-        equals($("#h5-text input").attr("type"), "text", "Type should be text");
-        equals($("#h5-text input").attr("required"), '', "Required should be '' (empty string)");
-        equals($("#h5-text input").checkValidity(), true, "checkValidity() should be true");
+        equals($("#h5-text input").attr("type"), "text", "Type should be `text`");
+        equals($("#h5-text input").attr("required"), '', "Attribute `required` should be '' (empty)");
+        equals(typeof $.fn.checkValidity, "function", "`$.fn.checkValidity` is a function");
+        equals($("#h5-text input").checkValidity(), true, "`$(selector).checkValidity()` should return true");
         $("#h5-text form").submit();
     });
-});
 
+    // Hack: add IDs for easy reference.
+    $("#tests > li").each(function (i, el) {
+        el.id = "qt-" + i;
+    });
+});
 </script>
   
 </head>
