@@ -15,8 +15,6 @@
 
     // Keyboard accessibility/WAI-ARIA - allow users to navigate to an editable element using TAB/Shift+TAB.
     $.fn.editableAriaShim = function () {
-        //$.log('WAI-ARIA shim..');
-
         this.attr({
             role: 'button',
             tabindex: 0
@@ -44,11 +42,7 @@
         var i = document.createElement('input');
         i.setAttribute('type', type);
         return i.type !== 'text' ? type : 'text';
-
-        //return i.type !== 'text';
-        //return ! navigator.userAgent.match(/MSIE/);
     };
-    //$.fn.supportInType = _supportInType;
 
     // Type = text : With HTML5 attributes.
     $.editable.addInputType('html5_text', {
@@ -85,17 +79,8 @@ $.editable.addInputType('number', {
         max : settings.max,
         step: settings.step,
         title: settings.html5_error_text,
-        type: _supportInType('number') //? 'number' : 'text'
+        type: _supportInType('number')
     });
-    $(this).append(input);
-    return input;
-  }
-});
-
-// Deprecated.
-$.editable.addInputType('unsigned_integer', {
-  element: function (settings, original) {
-    var input = $('<input type="number" min="0" max="10" step="1">');
     $(this).append(input);
     return input;
   }
@@ -125,7 +110,7 @@ $.editable.addInputType('email', {
         // pattern -- Not useful.
         maxlength: settings.maxlength,
         placeholder: settings.html5_placeholder,
-        type: _supportInType('email') //? 'email' : 'text'
+        type: _supportInType('email')
     });
     $(this).append(input);
     return input;
@@ -140,7 +125,7 @@ $.editable.addInputType('url', {
         pattern: settings.pattern,
         placeholder: settings.html5_placeholder,
         title: settings.html5_error_text,
-        type: _supportInType('url') //? 'url' : 'text'
+        type: _supportInType('url')
     });
     $(this).append(input);
     return input;
