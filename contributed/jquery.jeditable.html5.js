@@ -40,6 +40,16 @@
         };
     }
 
+    var _supportInType = function (type) {
+        var i = document.createElement('input');
+        i.setAttribute('type', type);
+        return i.type !== 'text' ? type : 'text';
+
+        //return i.type !== 'text';
+        //return ! navigator.userAgent.match(/MSIE/);
+    };
+    //$.fn.supportInType = _supportInType;
+
     // Type = text : With HTML5 attributes.
     $.editable.addInputType('html5_text', {
         element: function (settings, original) {
@@ -75,7 +85,7 @@ $.editable.addInputType('number', {
         max : settings.max,
         step: settings.step,
         title: settings.html5_error_text,
-        type: 'number'
+        type: _supportInType('number') //? 'number' : 'text'
     });
     $(this).append(input);
     return input;
@@ -101,7 +111,7 @@ $.editable.addInputType('unsigned_integer', {
         min : settings.min,
         max : settings.max,
         step: settings.step,
-        type: 'range'
+        type: _supportInType('range')
     });
     $(this).append(input);
     return input;
@@ -115,7 +125,7 @@ $.editable.addInputType('email', {
         // pattern -- Not useful.
         maxlength: settings.maxlength,
         placeholder: settings.html5_placeholder,
-        type: 'email'
+        type: _supportInType('email') //? 'email' : 'text'
     });
     $(this).append(input);
     return input;
@@ -130,7 +140,7 @@ $.editable.addInputType('url', {
         pattern: settings.pattern,
         placeholder: settings.html5_placeholder,
         title: settings.html5_error_text,
-        type: 'url'
+        type: _supportInType('url') //? 'url' : 'text'
     });
     $(this).append(input);
     return input;

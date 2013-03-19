@@ -237,20 +237,21 @@ $(document).ready(function() {
         equals($("#h5-number input").attr("type"), "number", "Type should be `number`");
         equals($("#h5-number input").attr("min"), "0", "Attribute `min` should be 0");
         equals($("#h5-number input").val(), "-2.06", "Value should be -2.06");
-        equals(typeof document.querySelector("#h5-number input").checkValidity, "function", "`\x3Cinput>.checkValidity` is a function");
-        equals(document.querySelector("#h5-number input").checkValidity(), false, "`\x3Cinput>.checkValidity()` should return false");
+
+        equals(typeof $.fn.checkValidity, "function", "`$.fn.checkValidity` is a function");
+        equals($("#h5-number input").checkValidity(), false, "`$(selector).checkValidity()` should return false");
         $("#h5-number form").submit();
 
         $("#h5-email").trigger("click");
         equals($("#h5-email input").attr("type"), "email", "Type should be `email`");
-        equals($("#h5-email input")[0].checkValidity(), true, "`checkValidity()` should return true");
+        equals($("#h5-email input").checkValidity(), true, "`$(selector).checkValidity()` should return true");
         $("#h5-email form").submit();
 
         $("#h5-text").trigger("click");
         equals($("#h5-text input").attr("type"), "text", "Type should be `text`");
         equals($("#h5-text input").attr("required"), '', "Attribute `required` should be '' (empty)");
-        equals(typeof $.fn.checkValidity, "function", "`$.fn.checkValidity` is a function");
-        equals($("#h5-text input").checkValidity(), true, "`$(selector).checkValidity()` should return true");
+        equals(typeof document.querySelector("#h5-text input").checkValidity, "function", "`\x3Cinput>.checkValidity` is a function");
+        equals(document.querySelector("#h5-text input").checkValidity(), true, "`\x3Cinput>.checkValidity()` should return true");
         $("#h5-text form").submit();
     });
 
@@ -263,10 +264,12 @@ $(document).ready(function() {
   
 </head>
 <body>
-  
+
  <h1>Jeditable unit tests</h1>
  <h2 id="banner"></h2>
  <h2 id="userAgent"></h2>
+
+<!--[if IE]><p style="color:red">Most HTML5 unit tests will NOT pass with Internet Explorer (especially MSIE &lt; 10)<![endif]-->
 
  <ol id="tests"></ol>
 
