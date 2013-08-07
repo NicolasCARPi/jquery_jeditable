@@ -506,7 +506,7 @@
                     $('select', this).children().each(function() {
                         if ($(this).val() == json['selected'] || 
                             $(this).text() == $.trim(original.revert)) {
-                                $(this).attr('selected', 'selected');
+                                $(this).prop('selected', true);
                         }
                     });
                     /* Submit on change if no submit button defined. */
