@@ -1,11 +1,11 @@
-VERSION = 1.7.0
+VERSION = 1.7.1
 SHELL = /bin/sh
 DOWNLOAD = /var/www/www.appelsiini.net/htdocs/download
 JSPACKER = /home/tuupola/bin/jspacker
 JSMIN    = /home/tuupola/bin/jsmin
 
-#all: jeditable packed tarball latest
-all: jeditable packed minified latest wysiwyg
+#all: jeditable packed minified latest wysiwyg
+all: jeditable minified latest wysiwyg
 
 jeditable: jquery.jeditable.js
 	cp jquery.jeditable.js $(DOWNLOAD)/jquery.jeditable-$(VERSION).js
@@ -28,7 +28,7 @@ latest: jquery.jeditable.js jquery.jeditable.pack.js
 	cp jquery.jeditable.time.js $(DOWNLOAD)/jquery.jeditable.time.js
 	cp jquery.jeditable.timepicker.js $(DOWNLOAD)/jquery.jeditable.timepicker.js
 	cp jquery.jeditable.charcounter.js $(DOWNLOAD)/jquery.jeditable.charcounter.js
-	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable.pack.js
+#	cp jquery.jeditable.pack.js $(DOWNLOAD)/jquery.jeditable.pack.js
 	cp jquery.jeditable.mini.js $(DOWNLOAD)/jquery.jeditable.mini.js
 
 
