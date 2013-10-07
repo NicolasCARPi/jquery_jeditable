@@ -44,6 +44,7 @@
   * @param String  options[id]        POST parameter name of edited div id
   * @param Hash    options[submitdata] Extra parameters to send when submitting edited content.
   * @param String  options[type]      text, textarea or select
+  * @param Integer options[maxlength] maxlength value for text input or textarea
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto', 'none' or height in pixels
@@ -338,6 +339,9 @@ jQuery.editable = {
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 //input[0].setAttribute('autocomplete','off');
                 input.attr('autocomplete','off');
+                if (settings.maxlength) {
+                    input.attr('maxlength', settings.maxlength);
+                }
                 jQuery(this).append(input);
                 return(input);
             }
@@ -354,6 +358,9 @@ jQuery.editable = {
                     textarea.attr('cols', settings.cols);
                 } else {
                     textarea.width(settings.width);
+                }
+                if (settings.maxlength) {
+                    textarea.attr('maxlength', settings.maxlength);
                 }
                 jQuery(this).append(textarea);
                 return(textarea);
