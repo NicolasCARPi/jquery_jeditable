@@ -41,6 +41,7 @@
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute **
   * @param String  options[event]     jQuery event such as 'click' of 'dblclick' **
+  * @param String  options[before]    function to be executed before going into edit mode
   * @param String  options[submit]    submit button value, empty means no button **
   * @param String  options[cancel]    cancel button value, empty means no button **
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent. **
@@ -95,6 +96,7 @@
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
+        var before   = settings.before   || false;
           
         /* Show tooltip. */
         if (settings.tooltip) {
@@ -138,7 +140,14 @@
                 if (false === onedit.apply(this, [settings, self])) {
                    return;
                 }
-                
+
+                /* execute the before function if any was specified */
+                if (settings.before && jQuery.isFunction(settings.before)) {
+                  settings.before();
+                } else if (settings.before && !jQuery.isFunction(settings.before)) {
+                  throw 'The \'before\' option needs to be provided as a function';
+                }
+
                 /* Prevent default action and bubbling. */
                 e.preventDefault();
                 e.stopPropagation();
