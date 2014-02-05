@@ -100,6 +100,9 @@
         if (settings.tooltip) {
             $(this).attr('title', settings.tooltip);
         }
+        if (settings.activecssclass) {
+         $(self).removeClass(settings.activecssclass);
+        }
         
         settings.autowidth  = 'auto' == settings.width;
         settings.autoheight = 'auto' == settings.height;
@@ -146,6 +149,11 @@
                 /* Remove tooltip. */
                 if (settings.tooltip) {
                     $(self).removeAttr('title');
+                }
+                
+                /* add css class. */
+                if (settings.activecssclass) {
+                    $(self).addClass(settings.activecssclass);
                 }
                 
                 /* Figure out how wide and tall we are, saved width and height. */
@@ -367,6 +375,10 @@
                     
                     /* Show tooltip again. */
                     $(self).attr('title', settings.tooltip);
+                    /* remove css class */
+                    if (settings.activecssclass) {
+                    	$(self).removeClass(settings.activecssclass);
+                    }
                     
                     return false;
                 });
@@ -386,6 +398,10 @@
                         /* Show tooltip again. */
                         if (settings.tooltip) {
                             $(self).attr('title', settings.tooltip);                
+                        }
+                        /* remove css class */
+                        if (settings.activecssclass) {
+                        	$(self).removeClass(settings.activecssclass);
                         }
                     }                    
                 }
