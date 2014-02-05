@@ -48,6 +48,7 @@
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  * @param String  options[ontab]     'submit', or 'escape', block default browser tab action and take our own action
   *             
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
@@ -260,6 +261,15 @@
                     if (e.keyCode == 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
+                    }
+                    if (e.keyCode === 9) {
+                      if (settings.ontab === "escape") {
+                        e.preventDefault();
+                        reset.apply(form, [settings, self]);
+                      } else if (settings.ontab === "submit"){
+                        e.preventDefault();
+                        form.submit();
+                      }
                     }
                 });
 
@@ -492,28 +502,43 @@
                     /* Otherwise assume it is a hash already. */
                         var json = data;
                     }
-                    for (var key in json) {
-                        if (!json.hasOwnProperty(key)) {
+                    for (var item in json) {
+                        var option_key;
+                        var option_value;
+                        if ($.isArray(json)) {
+                          option_key = json[item][0];
+                          option_value = json[item][1];
+                        } else {
+                          if (!json.hasOwnProperty(item)) {
+                              continue;
+                          }
+                          option_key = item;
+                          option_value = json[item];
+                        }
+
+                        if ('selected' == option_key) {
                             continue;
                         }
-                        if ('selected' == key) {
-                            continue;
-                        } 
-                        var option = $('<option />').val(key).append(json[key]);
-                        $('select', this).append(option);    
-                    }                    
-                    /* Loop option again to set selected. IE needed this... */ 
-                    $('select', this).children().each(function() {
-                        if ($(this).val() == json['selected'] || 
-                            $(this).text() == $.trim(original.revert)) {
-                                $(this).attr('selected', 'selected');
+                        var option = $('<option />').val(option_key).append(option_value);
+                        if (option_key == json['selected'] ||
+                            option_value == $.trim(original.revert)) {
+                                $(option).attr('selected', 'selected');
                         }
-                    });
+                        $('select', this).append(option);
+                    }
+
                     /* Submit on change if no submit button defined. */
                     if (!settings.submit) {
                         var form = this;
                         $('select', this).change(function() {
                             form.submit();
+                        });
+                        /* also allow enter to submit, even if no change */
+                        $('select', this).keydown(function(e) {
+                            if (e.keyCode == 13) {
+                                e.preventDefault();
+                                form.submit();
+                            }
                         });
                     }
                 }
