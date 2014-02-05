@@ -3,10 +3,13 @@
 <html>
 <head>
 <title>Jeditable Unit Tests</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="testsuite.css" type="text/css" media="screen" />
 <script type="text/javascript" src="testrunner.js"></script>
 <script type="text/javascript" src="../jquery.jeditable.js"></script>
+
+<script type="text/javascript" src="../contributed/jquery.jeditable.html5.js"></script>
 <script>
 $(document).ready(function() {
     
@@ -65,7 +68,34 @@ $(document).ready(function() {
     }, {
         submit  : "OK"
     });
-    
+
+
+    $(".editable").editableAriaShim();
+
+    $("#h5-number").editable("echo.php", {
+        type: "number",
+        tooltip: "Click to edit: number",
+        html5_placeholder: "0",
+        html5_error_text: "Enter a number between 0 and 10",
+        min: 0,
+        max: 10,
+        step: 1
+    });
+
+    $("#h5-email").editable("echo.php", {
+        type: "email",
+        tooltip: "Click to edit: email"
+    });
+
+    $("#h5-text").editable("echo.php", {
+        type: "html5_text",
+        tooltip: "Click to edit: username",
+        html5_error_text: "Enter a lower-case name, optionally ending a number. No spaces.",
+        pattern: "[a-z]+\\d?",
+        required: true
+    });
+
+
     module("CORE");    
 
     test("Event triggers", function() {
@@ -184,16 +214,62 @@ $(document).ready(function() {
         equals($("#put").html(), "PUT", "Should be PUT");
     });
 
-});
 
+    module("HTML5");
+
+    test("Keyboard accessibility", function () {
+        /*( isObj($.fn.editableAriaShim, function(){}, "Is a function, v1"); )*/
+        equals(typeof $.fn.editableAriaShim, "function", "`$.fn.editableAriaShim` is a function()");
+        equals($(".editable").attr("role"), "button", "WAI-ARIA `role` should be `button`");
+        equals($(".editable").attr("tabindex"), "0", "Attribute `tabindex` should be 0");
+        $("#h5-number").trigger("click");
+        ok($("#h5-number form").size() == 1, "Click event should trigger Jeditable.");
+        $("#h5-number form").submit();
+        ok($("#h5-number form").size() == 0, "After submit should go back to normal.");
+        $("#h5-number").trigger("keydown");
+        ok($("#h5-number form").size() == 1, "Keydown event should trigger Jeditable.");
+        $("#h5-number form").submit();
+        ok($("#h5-number form").size() == 0, "After submit should go back to normal.");
+    });
+
+    test("HTML5 input types", function () {
+        $("#h5-number").trigger("click");
+        equals($("#h5-number input").attr("type"), "number", "Type should be `number`");
+        equals($("#h5-number input").attr("min"), "0", "Attribute `min` should be 0");
+        equals($("#h5-number input").val(), "-2.06", "Value should be -2.06");
+
+        equals(typeof $.fn.checkValidity, "function", "`$.fn.checkValidity` is a function");
+        equals($("#h5-number input").checkValidity(), false, "`$(selector).checkValidity()` should return false");
+        $("#h5-number form").submit();
+
+        $("#h5-email").trigger("click");
+        equals($("#h5-email input").attr("type"), "email", "Type should be `email`");
+        equals($("#h5-email input").checkValidity(), true, "`$(selector).checkValidity()` should return true");
+        $("#h5-email form").submit();
+
+        $("#h5-text").trigger("click");
+        equals($("#h5-text input").attr("type"), "text", "Type should be `text`");
+        equals($("#h5-text input").attr("required"), '', "Attribute `required` should be '' (empty)");
+        equals(typeof document.querySelector("#h5-text input").checkValidity, "function", "`\x3Cinput>.checkValidity` is a function");
+        equals(document.querySelector("#h5-text input").checkValidity(), true, "`\x3Cinput>.checkValidity()` should return true");
+        $("#h5-text form").submit();
+    });
+
+    // Hack: add IDs for easy reference.
+    $("#tests > li").each(function (i, el) {
+        el.id = "qt-" + i;
+    });
+});
 </script>
   
 </head>
 <body>
-  
+
  <h1>Jeditable unit tests</h1>
  <h2 id="banner"></h2>
  <h2 id="userAgent"></h2>
+
+<!--[if IE]><p style="color:red">Most HTML5 unit tests will NOT pass with Internet Explorer (especially MSIE &lt; 10)<![endif]-->
 
  <ol id="tests"></ol>
 
@@ -204,5 +280,10 @@ $(document).ready(function() {
  <div id="select">Select B</div>
  <div id="callback">Here be dragons.</div>
  <div id="function">Here be dragons.</div>
+
+ <div id="h5-number" class="editable">-2.06</div>
+ <div id="h5-email" class="editable">Joe+TAG1@example</div>
+ <div id="h5-text" class="editable">user5</div>
+
 </body>
 </html>

@@ -6,6 +6,7 @@ try {
     $dbh = new PDO('sqlite:/tmp/editable.sqlite');
 } catch(PDOException $e) {
     print $e->getMessage();
+    exit(-1);
 }
 
 /* Create table for storing example data. */

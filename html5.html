@@ -1,0 +1,97 @@
+<!doctype html><html lang="en">
+<meta charset="utf-8" />
+<title>Jeditable HTML5 Input Types Demo</title>
+<meta name="generator" content="Mephisto" />
+<link href="http://www.appelsiini.net/stylesheets/main2.css" rel="stylesheet" />
+<link rel="alternate" type="application/atom+xml" href="http://feeds.feedburner.com/tuupola" title="Atom feed" />
+<script src="/mint/?js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" charset="utf-8"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" charset="utf-8"></script>
+
+<script src="jquery.jeditable.js"></script>
+<script src="contributed/jquery.jeditable.html5.js" ></script>
+
+<script>
+$(document).ready(function () {
+
+  // Keyboard accessibility.
+  $(".editable").editableAriaShim();
+
+  $(".number").editable("php/echo.php", {
+    type: "number",
+    tooltip: "Click to edit: number",
+    html5_placeholder: "0",
+    html5_error_text: "Enter a number between 0 and 10",
+    min: 0,
+    max: 10,
+    step: 1
+  });
+
+  $(".email").editable("php/echo.php", {
+    type: "email",
+    tooltip: "Click to edit: email"
+  });
+
+  $(".editable.text").editable("php/echo.php", {
+    type: "html5_text",
+    tooltip: "Click to edit: username",
+    html5_error_text: "Enter a lower-case name, optionally ending a number. No spaces.",
+    pattern: "[a-z]+\\d?",
+    required: true
+  });
+});
+</script>
+
+
+<body>
+  <div id="wrap"> 
+    <div id="header">
+      <p>
+        <h1>Jeditable</h1><br />
+        <small>Edit in place plugin for jQuery.</small>
+        <ul id="nav">
+          <li id="first"><a href="/" class="active">weblog</a></li>
+          <li><a href="/projects" class="last">projects</a></li>
+          <!--
+          <li><a href="/cv" class="last">cv</a></li>
+        -->
+        </ul>
+      </p>
+    </div>
+    <div id="content">
+
+    <p>You might also want to check <a href="default.html">default inputs demo</a>.</p>
+
+    <div class="entry">
+
+      <h2>HTML5</h2>
+
+      <p>Some useful introductions to HTML5 forms:
+        <a href="http://diveintohtml5.info/forms.html">Dive into HTML5: Forms</a> and
+        <a href="http://whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html">HTML5: The <code>input</code> element</a>
+
+      <h3>Number type</h3>
+      <p class="editable number" id="number" >-2.06</p>
+
+      <h3>Email type</h3>
+      <p class="editable email" id="email" >Joe+TAG1@example</p>
+
+      <h3>HTML5 text</h3>
+      <p class="editable text" id="username" >user5</p>
+
+
+    </div>
+
+    <div id="sidebar">
+    </div>
+  
+  <div id="footer">
+  </div>
+
+  <script src="http://www.google-analytics.com/urchin.js"></script>
+  <script>
+    _uacct = "UA-190966-1";
+    urchinTracker();
+  </script>
+</body>
+</html>
