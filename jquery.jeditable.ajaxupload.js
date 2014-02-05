@@ -32,6 +32,20 @@ $.editable.addInputType('ajaxupload', {
         form.attr("enctype", "multipart/form-data");
         $("button:submit", form).bind('click', function() {
             //$(".message").show();
+            // Modification to include original id and submitdata in target's querystring
+		var queryString;
+		if ($.isFunction(settings.submitdata)) {
+			queryString = jQuery.param(settings.submitdata.apply(self, [self.revert, settings]));
+		} else {
+			queryString = jQuery.param(settings.submitdata);
+		}
+		if (settings.target.indexOf('?') < 0)	{
+			queryString = '?' + settings.id + '=' + $(original).attr('id') + '&' + queryString;
+		} else {
+			queryString = '&' + settings.id + '=' + $(original).attr('id') + '&' + queryString;
+		}
+		settings.target += queryString;
+            // End modification
             $.ajaxFileUpload({
                 url: settings.target,
                 secureuri:false,
