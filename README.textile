@@ -1,3 +1,5 @@
+I am adding CSS classes to the submit and cancel button allowing to style them individually
+
 h3. Changelog
 
 h4. 1.7.3
