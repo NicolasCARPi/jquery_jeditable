@@ -347,7 +347,7 @@
                                         $(self).html(result);
                                       }
                                       self.editing = false;
-                                      callback.apply(self, [result, settings]);
+                                      callback.apply(self, [result, settings, submitdata]);
                                       if (!$.trim($(self).html())) {
                                           $(self).html(settings.placeholder);
                                       }
