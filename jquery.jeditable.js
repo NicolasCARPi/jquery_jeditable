@@ -244,6 +244,12 @@
                 /* Add created form to self. */
                 $(self).append(form);
          
+                /* adjust width */
+                if (settings.width != 'none') {
+                    var adj_width = settings.width - (input.outerWidth(true) - settings.width);
+                    input.width(adj_width);
+                }
+
                 /* Attach 3rd party plugin if requested. */
                 plugin.apply(form, [settings, self]);
 
