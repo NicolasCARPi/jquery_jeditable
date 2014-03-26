@@ -48,7 +48,8 @@
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
-  *             
+  *
+  * @param Function options[onedit]   function(settings, original) { ... } called before edit, aborts the edit if false is returned
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
   * @param Function options[onerror]  function(settings, original, xhr) { ... } called on error
