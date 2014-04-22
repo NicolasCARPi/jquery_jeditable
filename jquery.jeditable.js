@@ -91,7 +91,7 @@
                     || $.editable.types['defaults'].element;
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
-		var loaded   = settings.loaded   || function() { };
+        var loaded   = settings.loaded   || function() { };
         var callback = settings.callback || function() { };
         var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
@@ -372,7 +372,7 @@
                     
                     return false;
                 });
-				loaded.apply(self, [self.innerHTML, settings]);
+                loaded.apply(self, [self.innerHTML, settings]);
             });
             
             /* Privileged methods */
