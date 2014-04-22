@@ -23,6 +23,7 @@
   * @type  jQuery
   * @param String  target             (POST) URL or function to send edited content to **
   * @param Hash    options            additional options 
+  * @param Function options[loaded]   Function which runs once the editable content is loaded **
   * @param String  options[method]    method to use to send edited content (POST or PUT) **
   * @param Function options[callback] Function to run after submitting edited content **
   * @param String  options[name]      POST parameter name of edited content
@@ -90,6 +91,7 @@
                     || $.editable.types['defaults'].element;
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
+        var loaded   = settings.loaded   || function() { };
         var callback = settings.callback || function() { };
         var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
@@ -370,6 +372,7 @@
                     
                     return false;
                 });
+                loaded.apply(self, [self.innerHTML, settings]);
             });
             
             /* Privileged methods */
