@@ -60,7 +60,6 @@
 (function($) {
 
     $.fn.editable = function(target, options) {
-            
         if ('disable' == target) {
             $(this).data('disabled.editable', true);
             return;
@@ -69,14 +68,7 @@
             $(this).data('disabled.editable', false);
             return;
         }
-        if ('destroy' == target) {
-            $(this)
-                .unbind($(this).data('event.editable'))
-                .removeData('disabled.editable')
-                .removeData('event.editable');
-            return;
-        }
-        
+
         var settings = $.extend({}, $.fn.editable.defaults, {target:target}, options);
         
         /* setup some functions */
@@ -90,12 +82,14 @@
                     || $.editable.types['defaults'].element;
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
+        var destroy  = $.editable.types[settings.type].destroy 
+                    || $.editable.types['defaults'].destroy;
         var callback = settings.callback || function() { };
         var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
-          
+
         /* Show tooltip. */
         if (settings.tooltip) {
             $(this).attr('title', settings.tooltip);
@@ -105,7 +99,6 @@
         settings.autoheight = 'auto' == settings.height;
         
         return this.each(function() {
-                        
             /* Save this to self because this changes when scope changes. */
             var self = this;  
                    
@@ -122,8 +115,12 @@
                 $(this).html(settings.placeholder);
             }
             
+            if ('destroy' == target) {
+                destroy.apply($(this).find('form'),[settings,self]);
+                return;
+            }
+            
             $(this).bind(settings.event, function(e) {
-                
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
                     return;
@@ -203,7 +200,7 @@
                 var input_content;
                 
                 if (settings.loadurl) {
-                    var t = setTimeout(function() {
+                    var t = self.setTimeout(function() {
                         input.disabled = true;
                         content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
@@ -221,7 +218,7 @@
                        data : loaddata,
                        async : false,
                        success: function(result) {
-                          window.clearTimeout(t);
+                          self.clearTimeout(t);
                           input_content = result;
                           input.disabled = false;
                        }
@@ -248,7 +245,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* Focus to first visible form element. */
-                $(':input:visible:enabled:first', form).focus();
+                form.find(':input:visible:enabled:first').focus();
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
@@ -269,14 +266,14 @@
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent canceling if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             form.submit();
                         }, 200);
                     });
@@ -292,8 +289,8 @@
 
                 form.submit(function(e) {
 
-                    if (t) { 
-                        clearTimeout(t);
+                    if (t) {
+                        self.clearTimeout(t);
                     }
 
                     /* Do no submit. */
@@ -371,11 +368,11 @@
                     return false;
                 });
             });
-            
+
             /* Privileged methods */
-            this.reset = function(form) {
+            self.reset = function(form) {
                 /* Prevent calling reset twice when blurring. */
-                if (this.editing) {
+                if (self.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
                     if (false !== onreset.apply(form, [settings, self])) { 
                         $(self).html(self.revert);
@@ -389,9 +386,58 @@
                         }
                     }                    
                 }
-            };            
-        });
+            };
+            self.destroy = function(form) {
+                $(self)
+                .unbind($(self).data('event.editable'))
+                .removeData('disabled.editable')
+                .removeData('event.editable');
 
+                self.clearTimeouts();
+
+                if (self.editing) {
+                     reset.apply(form, [settings, self]);
+                }
+            };
+            self.clearTimeout = function(t) {
+                var timeouts = $(self).data("timeouts");
+                clearTimeout(t);
+                if(timeouts) {
+                    var i = timeouts.indexOf(t);
+                    if(i > -1) {
+                        timeouts.splice(i, 1);
+                        if(timeouts.length <= 0) {
+                            $(self).removeData("timeouts");
+                        }
+                    } else {
+                        console.warn("jeditable clearTimeout could not find timeout "+t);
+                    }
+                }
+            };
+            self.clearTimeouts = function () {
+                var timeouts = $(self).data("timeouts");
+                if(timeouts) {
+                    for(var i = 0, n = timeouts.length; i < n; ++i) {
+                        clearTimeout(timeouts[i]);
+                    }
+                    timeouts.length = 0;
+                    $(self).removeData("timeouts");
+                }
+            };
+            self.setTimeout = function(callback, time) {
+               var timeouts = $(self).data("timeouts");
+               var t = setTimeout(function() {
+                   callback();
+                   self.clearTimeout(t);
+               }, time);
+               if(!timeouts) {
+                   timeouts = [];
+                   $(self).data("timeouts", timeouts);
+               }
+               timeouts.push(t);
+               return t;
+            };
+        });
     };
 
 
@@ -404,10 +450,13 @@
                     return(input);
                 },
                 content : function(string, settings, original) {
-                    $(':input:first', this).val(string);
+                    $(this).find(':input:first').val(string);
                 },
                 reset : function(settings, original) {
                   original.reset(this);
+                },
+                destroy: function(settings, original) {
+                  original.destroy(this);
                 },
                 buttons : function(settings, original) {
                     var form = this;
@@ -500,10 +549,10 @@
                             continue;
                         } 
                         var option = $('<option />').val(key).append(json[key]);
-                        $('select', this).append(option);    
+                        $(this).find('select').append(option);    
                     }                    
                     /* Loop option again to set selected. IE needed this... */ 
-                    $('select', this).children().each(function() {
+                    $(this).find('select').children().each(function() {
                         if ($(this).val() == json['selected'] || 
                             $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
@@ -512,7 +561,7 @@
                     /* Submit on change if no submit button defined. */
                     if (!settings.submit) {
                         var form = this;
-                        $('select', this).change(function() {
+                        $(this).find('select').change(function() {
                             form.submit();
                         });
                     }
