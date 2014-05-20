@@ -60,7 +60,6 @@
 (function($) {
 
     $.fn.editable = function(target, options) {
-            
         if ('disable' == target) {
             $(this).data('disabled.editable', true);
             return;
@@ -69,14 +68,7 @@
             $(this).data('disabled.editable', false);
             return;
         }
-        if ('destroy' == target) {
-            $(this)
-                .unbind($(this).data('event.editable'))
-                .removeData('disabled.editable')
-                .removeData('event.editable');
-            return;
-        }
-        
+
         var settings = $.extend({}, $.fn.editable.defaults, {target:target}, options);
         
         /* setup some functions */
@@ -95,7 +87,7 @@
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
-          
+
         /* Show tooltip. */
         if (settings.tooltip) {
             $(this).attr('title', settings.tooltip);
@@ -105,7 +97,6 @@
         settings.autoheight = 'auto' == settings.height;
         
         return this.each(function() {
-                        
             /* Save this to self because this changes when scope changes. */
             var self = this;  
                    
@@ -122,8 +113,13 @@
                 $(this).html(settings.placeholder);
             }
             
+            /* Check for destroy */
+            if ('destroy' == target) {
+                this.destroy(this);
+                return;
+            }
+            
             $(this).bind(settings.event, function(e) {
-                
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
                     return;
@@ -203,7 +199,7 @@
                 var input_content;
                 
                 if (settings.loadurl) {
-                    var t = setTimeout(function() {
+                    var t = self.setTimeout(function() {
                         input.disabled = true;
                         content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
@@ -221,7 +217,7 @@
                        data : loaddata,
                        async : false,
                        success: function(result) {
-                          window.clearTimeout(t);
+                          self.clearTimeout(t);
                           input_content = result;
                           input.disabled = false;
                        }
@@ -269,14 +265,14 @@
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent canceling if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             form.submit();
                         }, 200);
                     });
@@ -292,8 +288,8 @@
 
                 form.submit(function(e) {
 
-                    if (t) { 
-                        clearTimeout(t);
+                    if (t) {
+                        self.clearTimeout(t);
                     }
 
                     /* Do no submit. */
@@ -389,9 +385,47 @@
                         }
                     }                    
                 }
-            };            
-        });
+            };
+            this.destroy = function(form) {
+                $(this)
+                .unbind($(this).data('event.editable'))
+                .removeData('disabled.editable')
+                .removeData('event.editable');
 
+                self.clearTimeouts();
+
+                if (this.editing) {
+                     reset.apply(form, [settings, self]);
+                }
+            };
+            this.clearTimeout = function(t) {
+                clearTimeout(t);
+                if(settings.timeouts) {
+                    var i = settings.timeouts.indexOf(t);
+                    if(i > -1) {
+                        settings.timeouts.splice(i, 1);
+                    } else {
+                        console.warn("jeditable clearTimeout could not find timeout "+t);
+                    }
+                }
+            };
+            this.clearTimeouts = function () {;
+                if(settings.timeouts) {
+                    for(var i = 0, n = settings.timeouts.length; i < n; ++i) {
+                        clearTimeout(settings.timeouts[i]);
+                    }
+                    settings.timeouts.length = 0;
+                }
+            };
+            this.setTimeout = function(callback, time) {
+               var t = setTimeout(callback, time);
+               if(!settings.timeouts) {
+                   settings.timeouts = [];
+               }
+               settings.timeouts.push(t);
+               return t;
+            };
+        });
     };
 
 
