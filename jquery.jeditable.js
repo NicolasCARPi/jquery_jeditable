@@ -409,7 +409,7 @@
                     }
                 }
             };
-            this.clearTimeouts = function () {;
+            this.clearTimeouts = function () {
                 if(settings.timeouts) {
                     for(var i = 0, n = settings.timeouts.length; i < n; ++i) {
                         clearTimeout(settings.timeouts[i]);
@@ -418,7 +418,10 @@
                 }
             };
             this.setTimeout = function(callback, time) {
-               var t = setTimeout(callback, time);
+               var t = setTimeout(function() {
+                   callback();
+                   self.clearTimeout(t);
+               }, time);
                if(!settings.timeouts) {
                    settings.timeouts = [];
                }
