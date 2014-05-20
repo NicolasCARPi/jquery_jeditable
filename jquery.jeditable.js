@@ -82,6 +82,8 @@
                     || $.editable.types['defaults'].element;
         var reset    = $.editable.types[settings.type].reset 
                     || $.editable.types['defaults'].reset;
+        var destroy  = $.editable.types[settings.type].destroy 
+                    || $.editable.types['defaults'].destroy;
         var callback = settings.callback || function() { };
         var onedit   = settings.onedit   || function() { }; 
         var onsubmit = settings.onsubmit || function() { };
@@ -113,9 +115,8 @@
                 $(this).html(settings.placeholder);
             }
             
-            /* Check for destroy */
             if ('destroy' == target) {
-                this.destroy(this);
+                destroy.apply($(this).find('form'),[settings,self]);
                 return;
             }
             
@@ -367,11 +368,11 @@
                     return false;
                 });
             });
-            
+
             /* Privileged methods */
-            this.reset = function(form) {
+            self.reset = function(form) {
                 /* Prevent calling reset twice when blurring. */
-                if (this.editing) {
+                if (self.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
                     if (false !== onreset.apply(form, [settings, self])) { 
                         $(self).html(self.revert);
@@ -386,46 +387,54 @@
                     }                    
                 }
             };
-            this.destroy = function(form) {
-                $(this)
-                .unbind($(this).data('event.editable'))
+            self.destroy = function(form) {
+                $(self)
+                .unbind($(self).data('event.editable'))
                 .removeData('disabled.editable')
                 .removeData('event.editable');
 
                 self.clearTimeouts();
 
-                if (this.editing) {
+                if (self.editing) {
                      reset.apply(form, [settings, self]);
                 }
             };
-            this.clearTimeout = function(t) {
+            self.clearTimeout = function(t) {
+                var timeouts = $(self).data("timeouts");
                 clearTimeout(t);
-                if(settings.timeouts) {
-                    var i = settings.timeouts.indexOf(t);
+                if(timeouts) {
+                    var i = timeouts.indexOf(t);
                     if(i > -1) {
-                        settings.timeouts.splice(i, 1);
+                        timeouts.splice(i, 1);
+                        if(timeouts.length <= 0) {
+                            $(self).removeData("timeouts");
+                        }
                     } else {
                         console.warn("jeditable clearTimeout could not find timeout "+t);
                     }
                 }
             };
-            this.clearTimeouts = function () {
-                if(settings.timeouts) {
-                    for(var i = 0, n = settings.timeouts.length; i < n; ++i) {
-                        clearTimeout(settings.timeouts[i]);
+            self.clearTimeouts = function () {
+                var timeouts = $(self).data("timeouts");
+                if(timeouts) {
+                    for(var i = 0, n = timeouts.length; i < n; ++i) {
+                        clearTimeout(timeouts[i]);
                     }
-                    settings.timeouts.length = 0;
+                    timeouts.length = 0;
+                    $(self).removeData("timeouts");
                 }
             };
-            this.setTimeout = function(callback, time) {
+            self.setTimeout = function(callback, time) {
+               var timeouts = $(self).data("timeouts");
                var t = setTimeout(function() {
                    callback();
                    self.clearTimeout(t);
                }, time);
-               if(!settings.timeouts) {
-                   settings.timeouts = [];
+               if(!timeouts) {
+                   timeouts = [];
+                   $(self).data("timeouts", timeouts);
                }
-               settings.timeouts.push(t);
+               timeouts.push(t);
                return t;
             };
         });
@@ -445,6 +454,9 @@
                 },
                 reset : function(settings, original) {
                   original.reset(this);
+                },
+                destroy: function(settings, original) {
+                  original.destroy(this);
                 },
                 buttons : function(settings, original) {
                     var form = this;
