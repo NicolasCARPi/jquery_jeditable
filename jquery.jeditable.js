@@ -244,7 +244,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* Focus to first visible form element. */
-                $(':input:visible:enabled:first', form).focus();
+                form.find(':input:visible:enabled:first').focus();
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
@@ -441,7 +441,7 @@
                     return(input);
                 },
                 content : function(string, settings, original) {
-                    $(':input:first', this).val(string);
+                    $(this).find(':input:first').val(string);
                 },
                 reset : function(settings, original) {
                   original.reset(this);
@@ -537,10 +537,10 @@
                             continue;
                         } 
                         var option = $('<option />').val(key).append(json[key]);
-                        $('select', this).append(option);    
+                        $(this).find('select').append(option);    
                     }                    
                     /* Loop option again to set selected. IE needed this... */ 
-                    $('select', this).children().each(function() {
+                    $(this).find('select').children().each(function() {
                         if ($(this).val() == json['selected'] || 
                             $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
@@ -549,7 +549,7 @@
                     /* Submit on change if no submit button defined. */
                     if (!settings.submit) {
                         var form = this;
-                        $('select', this).change(function() {
+                        $(this).find('select').change(function() {
                             form.submit();
                         });
                     }
