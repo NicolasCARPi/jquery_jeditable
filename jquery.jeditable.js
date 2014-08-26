@@ -44,6 +44,7 @@
   * @param String  options[submit]    submit button value, empty means no button **
   * @param String  options[cancel]    cancel button value, empty means no button **
   * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent. **
+  * @param String  options[inputcssclass]  CSS class to apply to input. 'inherit' to copy from parent. **
   * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent. **
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
@@ -198,6 +199,15 @@
 
                 /* Add main input element to form and store it in input. */
                 var input = element.apply(form, [settings, self]);
+
+                /* Apply css class to input */
+                if (settings.inputcssclass) {
+                    if ('inherit' == settings.inputcssclass) {
+                        input.attr('class', $(self).attr('class'));            
+                    } else {
+                        input.attr('class', settings.inputcssclass);
+                    }
+                }
 
                 /* Set input content via POST, GET, given data or existing value. */
                 var input_content;
