@@ -497,8 +497,14 @@
                         if (!json.hasOwnProperty(key)) {
                             continue;
                         }
-                        if (/selected.*/.test(key)) {
-                            selectedVals.push(json[key]);
+                        if ('selected' == key) {
+                            if (typeof json[key] == 'string') {
+                                selectedVals.push(json[key]);
+                            } else if (typeof json[key] == 'object') {
+                                for (var i = 0; i < json[key].length; i++) {
+                                    selectedVals.push(json[key][i]);
+                                }
+                            }
                             continue;
                         }
                         var option = $('<option />').val(key).append(json[key]);
@@ -506,10 +512,8 @@
                     }                    
                     /* Loop option again to set selected. IE needed this... */
                     for (var i = 0; i < selectedVals.length; i++) {
-                        var val = selectedVals[i];
-
                         $('select', this).children().each(function () {
-                            if ($(this).val() == val ||
+                            if ($(this).val() == selectedVals[i] ||
                                 $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
                             }
