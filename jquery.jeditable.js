@@ -480,11 +480,12 @@
             },
             select: {
                element : function(settings, original) {
-                    var select = $('<select />');
-                    $(this).append(select);
+                   var select = settings.multiselect ? $('<select multiple />') : $('<select />');
+                   $(this).append(select);
                     return(select);
                 },
                 content : function(data, settings, original) {
+                    var selectedVals = [];
                     /* If it is string assume it is json. */
                     if (String == data.constructor) {      
                         eval ('var json = ' + data);
@@ -497,20 +498,29 @@
                             continue;
                         }
                         if ('selected' == key) {
+                            if (typeof json[key] == 'string') {
+                                selectedVals.push(json[key]);
+                            } else if (typeof json[key] == 'object') {
+                                for (var i = 0; i < json[key].length; i++) {
+                                    selectedVals.push(json[key][i]);
+                                }
+                            }
                             continue;
-                        } 
+                        }
                         var option = $('<option />').val(key).append(json[key]);
                         $('select', this).append(option);    
                     }                    
-                    /* Loop option again to set selected. IE needed this... */ 
-                    $('select', this).children().each(function() {
-                        if ($(this).val() == json['selected'] || 
-                            $(this).text() == $.trim(original.revert)) {
+                    /* Loop option again to set selected. IE needed this... */
+                    for (var i = 0; i < selectedVals.length; i++) {
+                        $('select', this).children().each(function () {
+                            if ($(this).val() == selectedVals[i] ||
+                                $(this).text() == $.trim(original.revert)) {
                                 $(this).attr('selected', 'selected');
-                        }
-                    });
+                            }
+                        });
+                    }
                     /* Submit on change if no submit button defined. */
-                    if (!settings.submit) {
+                    if (!(settings.submit || settings.multiselect)) {
                         var form = this;
                         $('select', this).change(function() {
                             form.submit();
@@ -538,6 +548,7 @@
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
+        multiselect: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}
