@@ -369,7 +369,7 @@ jQuery.editable = {
                 /* IE borks if we do not store select in separate variable. */
                 var select = jQuery('select', this);
                 if (String == string.constructor) { 	 
-                    eval ("var json = " + string);
+                    var json = JSON.parse(string);
                     for (var key in json) {
                         if ('selected' == key) {
                             continue;
@@ -394,7 +394,7 @@ jQuery.editable = {
                 console.log(select);
                 select.children().each(function() {
                     if (jQuery(this).val() == which) {
-                        jQuery(this).attr('selected', 'selected');
+                        jQuery(this).prop('selected', true);
                     };                    
                 });
             }
