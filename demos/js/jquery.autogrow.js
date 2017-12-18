@@ -98,17 +98,7 @@
 			
 			// Strip HTML tags
 			var html = this.textarea.val().replace(/(<|>)/g, '');
-			
-			// IE is different, as per usual
-			if ($.browser.msie)
-			{
-				html = html.replace(/\n/g, '<BR>new');
-			}
-			else
-			{
-				html = html.replace(/\n/g, '<br>new');
-			}
-			
+
 			if (this.dummy.html() != html)
 			{
 				this.dummy.html(html);	

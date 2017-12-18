@@ -44,51 +44,55 @@
     </div>
 
     <div id="content">
-        <div class="entry">
 
-            <!-- EXAMPLE 1 - NORMAL TEXTAREA -->
+        <!-- EXAMPLE 1 - NORMAL TEXTAREA -->
+        <div class="entry">
             <h2>Normal textarea</h2>
             <p class="editable_textarea">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+        </div>
 
-            <h2>Inlined select</h2>
-            <p><b class="editable_select" style="display: inline">BLAH</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh <b class="editable_select_json" style="display: inline">BLAH</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
+        <!-- EXAMPLE 2 - INLINE SELECT -->
+        <div class="entry">
+            <h2>Inline select</h2>
+            <p><b class="editable_select inline">THIS IS A SELECT</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
+            <p><b class="editable_select_json inline">THIS IS A SELECT WITH JSON FEED</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
+        </div>
 
+        <!-- EXAMPLE 3 - DIFFERENT EVENTS -->
+        <div class="entry">
             <h2>Different events</h2>
             <p>
-            <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
-            <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
-            <b class="mouseover" style="display: inline">mouseover me</b>...
+                <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
+                <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
+                <b class="mouseover" style="display: inline">mouseover me</b>...
             </p>
-            </div>
+        </div>
+
+        <!-- EXAMPLE 4 - AUTOGROW -->
+        <div class="entry">
             <h2>Autogrow textarea</h2>
-            <p class="autogrow" style="width: 300px">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-            <p>Depends on
-            <a href="http://plugins.jquery.com/project/autogrow">Autogrow</a>
-            by Chrys Bader.</p>
+            <p class="autogrow">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <p>Depends on Autogrow by Chrys Bader.</p>
+        </div>
 
-            </div>
-
-          <div class="entry">
+        <!-- EXAMPLE 5 - AJAX FILE UPLOAD -->
+        <div class="entry">
             <h2>Ajax File Upload</h2>
-            <p class="ajaxupload" id="custom_6">Blah</p>
+            <p class="ajaxupload">Click here to upload a file</p>
             <p>
               Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.
               For security reasons after uploading this demo only display file size and name.
-              <br/>
-              <br/>
-              <br/>
             </p>
-          </div>
-
-          <div class="entry">
-
-          <h2>Masked Input</h2>
-          <p class="masked">Blah</p>
-          <p>Depends on
-            <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input</a> by Josh Bush.
-          </p>
-
         </div>
+
+        <div class="entry">
+            <h2>Masked Input</h2>
+            <p class="masked">Blah</p>
+            <p>Depends on
+            <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input</a> by Josh Bush.
+            </p>
+        </div>
+
         <div class="entry">
           <h2>Time Picker</h2>
           <p class="timepicker">Blah</p>
@@ -97,14 +101,15 @@
             by Jason Huck.
           </p>
         </div>
-        <div class="entry">
 
+        <div class="entry">
           <h2>Time Picker 2</h2>
           <p class="time">Blah</p>
           <p>
             Similar as previous but without dependenices. See <a href="http://www.appelsiini.net/2008/2/creating-inline-timepicker-with-javascript">how to create inputs tutorial</a>.
           </p>
         </div>
+
         <div class="entry">
 
           <h2>Character counter</h2>
@@ -113,6 +118,7 @@
             Using character counter.
           </p>
         </div>
+    </div>
 </div>
 
 <script>
@@ -139,38 +145,39 @@ $(document).ready(function() {
         }
     });
 
+    // EXAMPLE 2b - INLINE SELECT WITH JSON
+    $(".editable_select_json").editable("save.php", {
+        type   : "select",
+        indicator : "<img src='../img/indicator.gif' />",
+        loadurl : "json.php",
+        submit : "OK",
+        style  : "inherit"
+    });
 
-  $(".editable_select_json").editable("save.php", {
-    indicator : '<img src="../img/indicator.gif" />',
-    loadurl : "json.php",
-    type   : "select",
-    submit : "OK",
-    style  : "inherit"
-  });
-  $(".click").editable("echo.php", {
-      indicator : "<img src='../img/indicator.gif' />",
-      tooltip   : "Click to edit...",
-      style  : "inherit"
-  });
-  $(".dblclick").editable("echo.php", {
-      indicator : "<img src='../img/indicator.gif' />",
-      tooltip   : "Doubleclick to edit...",
-      event     : "dblclick",
-      style  : "inherit"
-  });
-  $(".mouseover").editable("echo.php", {
-      indicator : "<img src='../img/indicator.gif' />",
-      tooltip   : "Move mouseover to edit...",
-      event     : "mouseover",
-      style  : "inherit"
-  });
+    // EXAMPLE 3 - DIFFERENT EVENTS
+    // click
+    $(".click").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        tooltip   : "Click to edit...",
+        style  : "inherit"
+    });
 
-  /* Should not cause error. */
-  $("#nosuch").editable("echo.php", {
-      indicator : "<img src='../img/indicator.gif' />",
-      type   : 'textarea',
-      submit : 'OK'
-  });
+    // double click
+    $(".dblclick").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        tooltip   : "Doubleclick to edit...",
+        event     : "dblclick",
+        style  : "inherit"
+    });
+
+    // mouseover
+    $(".mouseover").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        tooltip   : "Move mouseover to edit...",
+        event     : "mouseover",
+        style  : "inherit"
+    });
+
   $(".charcounter").editable("save.php", {
       indicator : "<img src='../img/indicator.gif' />",
       type      : "charcounter",
@@ -223,6 +230,13 @@ $(document).ready(function() {
         submit    : 'Upload',
         cancel    : 'Cancel',
         tooltip   : "Click to upload..."
+    });
+
+    // Non existing element should not cause error
+    $("#nosuch").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        type   : 'textarea',
+        submit : 'OK'
     });
 
 });

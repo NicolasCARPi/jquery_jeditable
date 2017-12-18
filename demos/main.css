@@ -24,4 +24,6 @@ div.entry {
   float: left;
 }
 
-
+.inline {
+    display: inline;
+}
