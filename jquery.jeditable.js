@@ -448,7 +448,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input />');
+                    var input = $("<input type='text' />");
                     if (settings.width  != 'none') { input.css('width', settings.width);  }
                     if (settings.height != 'none') { input.css('height', settings.height); }
                     input.attr('autocomplete','off');
