@@ -85,6 +85,7 @@
             </p>
         </div>
 
+        <!-- EXAMPLE 6 - MASKED INPUT -->
         <div class="entry">
             <h2>Masked Input</h2>
             <p class="masked">Blah</p>
@@ -178,16 +179,27 @@ $(document).ready(function() {
         style  : "inherit"
     });
 
-  $(".charcounter").editable("save.php", {
-      indicator : "<img src='../img/indicator.gif' />",
-      type      : "charcounter",
-      submit    : 'OK',
-      tooltip   : "Click to edit...",
-      onblur    : "ignore",
-      charcounter : {
-         characters : 60
-      }
-  });
+    // EXAMPLE 4 - CHAR COUNTER
+    $(".charcounter").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        type      : "charcounter",
+        submit    : 'OK',
+        tooltip   : "Click to edit...",
+        onblur    : "ignore",
+        charcounter : {
+            characters : 60
+        }
+    });
+
+    // EXAMPLE 5 - MASKED INPUT
+    $(".masked").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        type      : "masked",
+        mask      : "99/99/9999",
+        submit    : 'OK',
+        tooltip   : "Click to edit..."
+    });
+
     $(".autogrow").editable("save.php", {
         indicator : "<img src='../img/indicator.gif' />",
         type      : "autogrow",
@@ -199,13 +211,6 @@ $(document).ready(function() {
            lineHeight : 16,
            minHeight  : 32
         }
-    });
-    $(".masked").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : "masked",
-        mask      : "99/99/9999",
-        submit    : 'OK',
-        tooltip   : "Click to edit..."
     });
     $(".datepicker").editable("save.php", {
         indicator : "<img src='../img/indicator.gif' />",
