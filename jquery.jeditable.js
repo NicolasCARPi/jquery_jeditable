@@ -218,6 +218,7 @@
                        type : settings.loadtype,
                        url  : settings.loadurl,
                        data : loaddata,
+                       async: false,
                        cache : false,
                        success: function(result) {
                           window.clearTimeout(t);

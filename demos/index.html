@@ -51,20 +51,20 @@
             <p class="editable-text">Lorem ipsum dolor sit amet, aliquip ex ea commodo consequat.</p>
         </div>
 
-        <!-- EXAMPLE 1 - NORMAL TEXTAREA -->
+        <!-- NORMAL TEXTAREA -->
         <div class="entry">
             <h2>Normal textarea</h2>
             <p class="editable_textarea">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
         </div>
 
-        <!-- EXAMPLE 2 - INLINE SELECT -->
+        <!-- INLINE SELECT -->
         <div class="entry">
             <h2>Inline select</h2>
-            <p><b class="editable_select inline">THIS IS A SELECT</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
-            <p><b class="editable_select_json inline">THIS IS A SELECT WITH JSON FEED</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
+            <p><b class="editable-select inline">THIS IS A SELECT</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
+            <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
         </div>
 
-        <!-- EXAMPLE 3 - DIFFERENT EVENTS -->
+        <!-- DIFFERENT EVENTS -->
         <div class="entry">
             <h2>Different events</h2>
             <p>
@@ -74,7 +74,7 @@
             </p>
         </div>
 
-        <!-- EXAMPLE 4 - AUTOGROW -->
+        <!-- AUTOGROW -->
         <div class="entry">
             <h2>Autogrow textarea</h2>
             <p class="autogrow">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
@@ -149,7 +149,7 @@ $(document).ready(function() {
     });
 
     // EXAMPLE 2 - INLINE SELECT
-    $(".editable_select").editable("save.php", {
+    $(".editable-select").editable("save.php", {
         type   : "select",
         indicator : '<img src="../img/indicator.gif" />',
         data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit'}",
@@ -161,7 +161,7 @@ $(document).ready(function() {
     });
 
     // EXAMPLE 2b - INLINE SELECT WITH JSON
-    $(".editable_select_json").editable("save.php", {
+    $(".editable-select-json").editable("save.php", {
         type   : "select",
         indicator : "<img src='../img/indicator.gif' />",
         loadurl : "json.php",
