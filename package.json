@@ -1,0 +1,30 @@
+{
+  "name": "jquery-jeditable",
+  "version": "1.8.0",
+  "description": "Edit in place plugin for jQuery",
+  "main": "jquery.jeditable.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasCARPi/jquery_jeditable.git"
+  },
+  "keywords": [
+    "jquery",
+    "edit",
+    "in",
+    "place",
+    "jeditable",
+    "plugin"
+  ],
+  "author": "Mika Tuupola <tuupola@appelsiini.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicolasCARPi/jquery_jeditable/issues"
+  },
+  "homepage": "https://github.com/NicolasCARPi/jquery_jeditable#readme"
+}
