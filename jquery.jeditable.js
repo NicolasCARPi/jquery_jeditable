@@ -94,8 +94,10 @@
             $(this).attr('title', settings.tooltip);
         }
 
+        /*
         settings.autowidth  = 'auto' == settings.width;
         settings.autoheight = 'auto' == settings.height;
+        */
 
         return this.each(function() {
 
@@ -143,6 +145,7 @@
 
                 /* Figure out how wide and tall we are, saved width and height. */
                 /* Workaround for http://dev.jquery.com/ticket/2190 */
+                /*
                 if (0 == $(self).width()) {
                     settings.width  = savedwidth;
                     settings.height = savedheight;
@@ -156,6 +159,7 @@
                             settings.autoheight ? $(self).height() : settings.height;
                     }
                 }
+                */
 
                 /* Remove placeholder text, replace is here because of IE. */
                 if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') ==
@@ -443,8 +447,8 @@
             text: {
                 element : function(settings, original) {
                     var input = $('<input />');
-                    if (settings.width  != 'none') { input.attr('width', settings.width);  }
-                    if (settings.height != 'none') { input.attr('height', settings.height); }
+                    if (settings.width  != 'none') { input.css('width', settings.width);  }
+                    if (settings.height != 'none') { input.css('height', settings.height); }
                     input.attr('autocomplete','off');
                     if (settings.size) {
                         input.attr('size', settings.size);

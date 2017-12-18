@@ -45,6 +45,12 @@
 
     <div id="content">
 
+        <!-- NORMAL TEXT -->
+        <div class="entry">
+            <h2>Normal text</h2>
+            <p class="editable-text">Lorem ipsum dolor sit amet, aliquip ex ea commodo consequat.</p>
+        </div>
+
         <!-- EXAMPLE 1 - NORMAL TEXTAREA -->
         <div class="entry">
             <h2>Normal textarea</h2>
@@ -124,6 +130,14 @@
 
 <script>
 $(document).ready(function() {
+    // NORMAL TEXT
+    $(".editable-text").editable("save.php", {
+        indicator : "<img src='../img/indicator.gif' />",
+        type : "text",
+        submit : 'OK',
+        tooltip : "Click to edit..."
+    });
+
     // EXAMPLE 1 - NORMAL TEXTAREA
     $(".editable_textarea").editable("save.php", {
         type   : 'textarea',
@@ -191,7 +205,7 @@ $(document).ready(function() {
         }
     });
 
-    // EXAMPLE 5 - MASKED INPUT
+    // EXAMPLE 6 - MASKED INPUT
     $(".masked").editable("save.php", {
         indicator : "<img src='../img/indicator.gif' />",
         type      : "masked",
