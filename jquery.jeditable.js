@@ -222,6 +222,7 @@
                        url  : settings.loadurl,
                        data : loaddata,
                        async : false,
+                       cache : false,
                        success: function(result) {
                           window.clearTimeout(t);
                           input_content = result;
