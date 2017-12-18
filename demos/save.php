@@ -1,10 +1,14 @@
 <?php
+echo $_POST['value'];
+die();
 
 require_once 'config.php';
 
-$query = sprintf("INSERT INTO config (token, value)
-                  VALUES ('%s', '%s')",
-                  $_POST['id'], stripslashes($_POST['value']));
+$query = sprintf(
+    "INSERT INTO config (token, value) VALUES ('%s', '%s')",
+    $_POST['id'],
+    stripslashes($_POST['value'])
+);
 
 $dbh->exec($query);
 
