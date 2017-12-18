@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.8.0
+
+* A lot of cleanup in the repo after years of abandon
+* The demos folder now contains a page (index.html) with all the demo code
+* Removed Textile stuff
+* Removed SQLite from the demo
+* Add suport for configuring size and maxlength. by @bonkowski (#32)
+* Set "cache" to false on loadurl. Fix issue with IE8. by @spikex (#33)
+* Add package.json for npm hosting
+* Remove eval to allow compilation with Closure & Fix for newer jQuery. by @flavour (#158)
+
 ## 1.7.3
 
 * Add support for "jQuery plugin repository": http://plugins.jquery.com/
