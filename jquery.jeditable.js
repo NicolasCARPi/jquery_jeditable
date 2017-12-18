@@ -106,8 +106,10 @@
 
             /* Inlined block elements lose their width and height after first edit. */
             /* Save them for later use as workaround. */
+            /*
             var savedwidth  = $(self).width();
             var savedheight = $(self).height();
+            */
 
             /* Save so it can be later used by $.editable('destroy') */
             $(this).data('event.editable', settings.event);
@@ -216,7 +218,6 @@
                        type : settings.loadtype,
                        url  : settings.loadurl,
                        data : loaddata,
-                       async : false,
                        cache : false,
                        success: function(result) {
                           window.clearTimeout(t);
