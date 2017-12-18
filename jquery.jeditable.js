@@ -490,7 +490,7 @@
                 content : function(data, settings, original) {
                     /* If it is string assume it is json. */
                     if (String == data.constructor) {
-                        eval ('var json = ' + data);
+                        var json = JSON.parse(string);
                     } else {
                     /* Otherwise assume it is a hash already. */
                         var json = data;
@@ -509,7 +509,7 @@
                     $('select', this).children().each(function() {
                         if ($(this).val() == json['selected'] || 
                             $(this).text() == $.trim(original.revert)) {
-                                $(this).attr('selected', 'selected');
+                                $(this).prop('selected', true);
                         }
                     });
                     /* Submit on change if no submit button defined. */
