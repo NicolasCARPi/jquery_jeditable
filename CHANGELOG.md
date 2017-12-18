@@ -12,6 +12,7 @@
 * Remove eval to allow compilation with Closure & Fix for newer jQuery. by @flavour (#158)
 * Remove async: false (#135)
 * Fix issue with width/height (#137)
+* Fix issue with selected in select element (#106)
 
 ## 1.7.3
 
