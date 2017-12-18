@@ -52,7 +52,7 @@
             <p class="editable_textarea">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
 
             <h2>Inlined select</h2>
-            <p><b class="editable_select" id="select_1" style="display: inline"> <?php print file_get_contents($url . 'load.php?id=select_1') ?></b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh <b class="editable_select_json" id="select_2" style="display: inline"> <?php print file_get_contents($url . 'load.php?id=select_2') ?></b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
+            <p><b class="editable_select" style="display: inline">BLAH</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh <b class="editable_select_json" style="display: inline">BLAH</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
 
             <h2>Different events</h2>
             <p>
@@ -120,46 +120,47 @@
 $(document).ready(function() {
     // EXAMPLE 1 - NORMAL TEXTAREA
     $(".editable_textarea").editable("save.php", {
-      indicator : "../img/indicator.gif",
-      type   : 'textarea',
-      select : true,
-      submit : 'OK',
-      cancel : 'cancel',
-      cssclass : "editable"
+        type   : 'textarea',
+        indicator : "<img src='../img/indicator.gif' />",
+        select : true,
+        submit : 'OK',
+        cancel : 'cancel',
+        cssclass : "editable"
+    });
+
+    // EXAMPLE 2 - INLINE SELECT
+    $(".editable_select").editable("save.php", {
+        type   : "select",
+        indicator : '<img src="../img/indicator.gif" />',
+        data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit'}",
+        submit : "OK",
+        style  : "inherit",
+        submitdata : function() {
+            return {id : 2};
+        }
     });
 
 
-
-  $(".editable_select").editable("save.php", {
-    indicator : '<img src="img/indicator.gif" />',
-    data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit'}",
-    type   : "select",
-    submit : "OK",
-    style  : "inherit",
-    submitdata : function() {
-      return {id : 2};
-    }
-  });
   $(".editable_select_json").editable("save.php", {
-    indicator : '<img src="img/indicator.gif" />',
+    indicator : '<img src="../img/indicator.gif" />',
     loadurl : "json.php",
     type   : "select",
     submit : "OK",
     style  : "inherit"
   });
   $(".click").editable("echo.php", {
-      indicator : "<img src='img/indicator.gif' />",
+      indicator : "<img src='../img/indicator.gif' />",
       tooltip   : "Click to edit...",
       style  : "inherit"
   });
   $(".dblclick").editable("echo.php", {
-      indicator : "<img src='img/indicator.gif' />",
+      indicator : "<img src='../img/indicator.gif' />",
       tooltip   : "Doubleclick to edit...",
       event     : "dblclick",
       style  : "inherit"
   });
   $(".mouseover").editable("echo.php", {
-      indicator : "<img src='img/indicator.gif' />",
+      indicator : "<img src='../img/indicator.gif' />",
       tooltip   : "Move mouseover to edit...",
       event     : "mouseover",
       style  : "inherit"
@@ -167,12 +168,12 @@ $(document).ready(function() {
 
   /* Should not cause error. */
   $("#nosuch").editable("echo.php", {
-      indicator : "<img src='img/indicator.gif' />",
+      indicator : "<img src='../img/indicator.gif' />",
       type   : 'textarea',
       submit : 'OK'
   });
   $(".charcounter").editable("save.php", {
-      indicator : "<img src='img/indicator.gif' />",
+      indicator : "<img src='../img/indicator.gif' />",
       type      : "charcounter",
       submit    : 'OK',
       tooltip   : "Click to edit...",
@@ -182,7 +183,7 @@ $(document).ready(function() {
       }
   });
     $(".autogrow").editable("save.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : "autogrow",
         submit    : 'OK',
         cancel    : 'cancel',
@@ -194,31 +195,31 @@ $(document).ready(function() {
         }
     });
     $(".masked").editable("save.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : "masked",
         mask      : "99/99/9999",
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
     $(".datepicker").editable("save.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : 'datepicker',
         tooltip   : "Click to edit..."
     });
     $(".timepicker").editable("save.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : 'timepicker',
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
     $(".time").editable("save.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : 'time',
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
     $(".ajaxupload").editable("upload.php", {
-        indicator : "<img src='img/indicator.gif' />",
+        indicator : "<img src='../img/indicator.gif' />",
         type      : 'ajaxupload',
         submit    : 'Upload',
         cancel    : 'Cancel',
