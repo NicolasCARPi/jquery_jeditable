@@ -4,11 +4,11 @@
 
 * Add support for "jQuery plugin repository": http://plugins.jquery.com/
 
-# 1.7.2
+## 1.7.2
 
 * Submit on change if input type select and no submit button defined ("gregpyp":http://github.com/gregpyp)
 
-# 1.7.1
+## 1.7.1
 
 * Namespace default event as click.editable ("Zangetsu":http://github.com/Zangetsu)
 * Trim whitespace when determining the selected value of pulldown ("binarylogic":http://github.com/binarylogic)
@@ -17,7 +17,7 @@
 * Do not follow links if they are editable ("Darwin":http://github.com/darwin)
 * make JSLInt happy ("olleolleolle":http://github.com/olleolleolle)
 
-# 1.7.0
+## 1.7.0
 
 * Full control over jQuery AJAX options for those who want to tinker.
 * Fix problem with IE and placeholder with HTML tags.
@@ -26,16 +26,16 @@
 * Allow passing select options as JavaScript object.
 * Fix IE throwing error with textareas when width or height was set to 'none'.
 
-# 1.6.2
+## 1.6.2
 
 * Fix problems when xhtml is served application/xhtml+xml.
 
-# 1.6.1
+## 1.6.1
 
 * Submit method can now be POST (default) or PUT.
 * Fix form being submitted twice in some cases.
 
-# 1.6.0
+## 1.6.0
 
 * Onblur parameter can now be a function.
 * Support for any arbitary event for triggering Jeditable
