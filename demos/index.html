@@ -89,7 +89,7 @@
             <div class='card col-md-4'>
                 <div class='card-body'>
                     <h4 class='card-title'>Checkbox</h4>
-                    <p><input type='checkbox' class='checkbox' /></p>
+                    <p class='checkbox'>Click here to test checkbox input</p>
                 </div>
             </div>
 
@@ -215,7 +215,8 @@
 
             // CHECKBOX
             $(".checkbox").editable("save.php", {
-                type      : "checkbox"
+                type      : "checkbox",
+                submit : 'ok'
             });
 
             // EXAMPLE 4 - CHAR COUNTER
