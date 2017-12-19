@@ -18,6 +18,7 @@
         <script src="../src/jquery.jeditable.ajaxupload.js"></script>
         <script src="../src/jquery.jeditable.autogrow.js"></script>
         <script src="../src/jquery.jeditable.charcounter.js"></script>
+        <script src="../src/jquery.jeditable.checkbox.js"></script>
         <script src="../src/jquery.jeditable.datepicker.js"></script>
         <script src="../src/jquery.jeditable.masked.js"></script>
         <script src="../src/jquery.jeditable.time.js"></script>
@@ -81,6 +82,14 @@
                         <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
                         <b class="mouseover" style="display: inline">mouseover me</b>...
                     </p>
+                </div>
+            </div>
+
+            <!-- CHECKBOX -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Checkbox</h4>
+                    <p><input type='checkbox' class='checkbox' /></p>
                 </div>
             </div>
 
@@ -202,6 +211,11 @@
                 tooltip   : "Move mouseover to edit...",
                 event     : "mouseover",
                 style  : "inherit"
+            });
+
+            // CHECKBOX
+            $(".checkbox").editable("save.php", {
+                type      : "checkbox"
             });
 
             // EXAMPLE 4 - CHAR COUNTER
