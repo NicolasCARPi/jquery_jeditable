@@ -10,7 +10,6 @@
 * Set "cache" to false on loadurl. Fix issue with IE8. by @spikex (#33)
 * Add package.json for npm hosting
 * Remove eval to allow compilation with Closure & Fix for newer jQuery. by @flavour (#158)
-* Remove async: false (#135)
 * Fix issue with width/height (#137)
 * Fix issue with selected in select element (#106)
 * Add label settings. by @tomasm- (#40)
