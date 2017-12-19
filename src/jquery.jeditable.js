@@ -48,6 +48,7 @@
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
   * @param String  options[size]      the size of the text field
   * @param String  options[maxlength] the maximum number of character in the text field
+  * @param String options[label] optional label
   *
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
@@ -193,6 +194,11 @@
                     } else {
                         form.attr('style', settings.style);
                     }
+                }
+
+                // add a label if it exists
+                if (settings.label) {
+                    form.append("<label>" + settings.label + "</label>");
                 }
 
                 /* Add main input element to form and store it in input. */

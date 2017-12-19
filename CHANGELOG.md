@@ -13,6 +13,7 @@
 * Remove async: false (#135)
 * Fix issue with width/height (#137)
 * Fix issue with selected in select element (#106)
+* Add label settings. by @tomasm- (#40)
 
 ## 1.7.3
 
