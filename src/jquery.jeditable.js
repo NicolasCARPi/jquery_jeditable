@@ -490,7 +490,7 @@
                 content : function(data, settings, original) {
                     /* If it is string assume it is json. */
                     if (String == data.constructor) {
-                        var json = JSON.parse(string);
+                        var json = JSON.parse(data);
                     } else {
                     /* Otherwise assume it is a hash already. */
                         var json = data;

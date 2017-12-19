@@ -1,265 +1,272 @@
 <!DOCTYPE HTML>
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>jQuery-jeditable Demos</title>
+        <!-- LOAD BOOTSTRAP FOR THE DEMO PAGE -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- OUR CSS -->
+        <link href="main.css" rel="stylesheet" type="text/css" />
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>jQuery-jeditable Demos</title>
-    <link href="http://www.appelsiini.net/stylesheets/main2.css" rel="stylesheet" type="text/css" />
-    <link href="main.css" rel="stylesheet" type="text/css" />
+        <!-- LOAD JQUERY -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!-- LOAD JQUERY -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- LOAD JQUERY-JEDITABLE -->
+        <script src="../src/jquery.jeditable.js"></script>
 
-    <!-- LOAD JQUERY-JEDITABLE -->
-    <script src="../jquery.jeditable.js"></script>
+        <!-- JEDITABLE PLUGINS -->
+        <script src="../src/jquery.jeditable.ajaxupload.js"></script>
+        <script src="../src/jquery.jeditable.autogrow.js"></script>
+        <script src="../src/jquery.jeditable.charcounter.js"></script>
+        <script src="../src/jquery.jeditable.datepicker.js"></script>
+        <script src="../src/jquery.jeditable.masked.js"></script>
+        <script src="../src/jquery.jeditable.time.js"></script>
+        <script src="../src/jquery.jeditable.timepicker.js"></script>
 
-    <script src="../jquery.jeditable.autogrow.js"></script>
-    <script src="../jquery.jeditable.ajaxupload.js"></script>
-    <script src="../jquery.jeditable.masked.js"></script>
-    <script src="../jquery.jeditable.time.js"></script>
-    <script src="../jquery.jeditable.timepicker.js"></script>
-    <script src="../jquery.jeditable.datepicker.js"></script>
-    <script src="../jquery.jeditable.charcounter.js"></script>
+        <!-- EXTERNAL LIBS -->
+        <script src="js/jquery.ajaxfileupload.js"></script>
+        <script src="js/jquery.autogrow.js"></script>
+        <script src="js/jquery.charcounter.js"></script>
+        <script src="js/jquery.datePicker.js"></script>
+        <script src="js/jquery.maskedinput.js"></script>
+        <script src="js/jquery.timepicker.js"></script>
+    </head>
 
-    <script src="js/jquery.maskedinput.js"></script>
-    <script src="js/jquery.timepicker.js"></script>
-    <script src="js/jquery.autogrow.js"></script>
-    <script src="js/jquery.charcounter.js"></script>
+    <body>
 
-    <script src="js/jquery.dimensions.js"></script>
-    <script src="js/jquery.datePicker.js"></script>
+    <div class='container'>
+        <!-- HEADER -->
+        <div class='jumbotron jumbotron-fluid'>
+                <h1>jQuery-jeditable</h1>
+                <p class='lead'>Edit in place plugin for jQuery</p>
+        </div>
 
-    <script src="js/jquery.ajaxfileupload.js"></script>
+        <!-- FIRST ROW -->
+        <div class='row'>
 
-</head>
+            <!-- NORMAL TEXT -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Normal text</h4>
+                    <h6 class='card-subtitle text-muted'>The most basic example</h6>
+                <p class="editable-text card-text">Click this text to edit it.</p>
+                </div>
+            </div>
 
-<body>
+            <!-- NORMAL TEXTAREA -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Normal textarea</h4>
+                        <p class="editable_textarea card-text">If you click anywhere on this text, it will become a textarea that you can edit. And then you can click OK to save it.</p>
+                </div>
+            </div>
 
-<div id="wrap">
-    <div id="header">
-        <h1>jQuery-jeditable</h1>
-        <p>
-        <small>Edit in place plugin for jQuery.</small>
-        </p>
+            <!-- INLINE SELECT -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Inline select</h4>
+                    <p><b class="editable-select inline">THIS IS A SELECT</b>, click it to get a select menu. Options are from the "data" setting.</p>
+                    <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b>, click it to get a select menu. Options are loaded from an ajax request getting JSON.</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- SECOND ROW -->
+        <div class='row'>
+
+            <!-- DIFFERENT EVENTS -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Different events</h4>
+                    <p>
+                        <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
+                        <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
+                        <b class="mouseover" style="display: inline">mouseover me</b>...
+                    </p>
+                </div>
+            </div>
+
+            <!-- AUTOGROW -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Autogrow textarea</h4>
+                    <p class="autogrow">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                    <p>Depends on Autogrow by Chrys Bader.</p>
+                </div>
+            </div>
+
+            <!-- AJAX FILE UPLOAD -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Ajax File Upload</h4>
+                    <p class="ajaxupload">Click here to upload a file</p>
+                    <p>
+                      Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.
+                      For security reasons after uploading this demo only display file size and name.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- THIRD ROW -->
+        <div class='row'>
+
+            <!-- MASKED INPUT -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Masked Input</h4>
+                    <p class="masked">19/12/2017</p>
+                    <p>Depends on
+                    <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input</a> by Josh Bush.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TIME PICKER -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Time Picker</h4>
+                  <p class="timepicker">16:30</p>
+                </div>
+            </div>
+
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Character counter</h4>
+                      <p class="charcounter">The number of characters will be counted.</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+        <script>
+        $(document).ready(function() {
+            // NORMAL TEXT
+            $(".editable-text").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type : "text",
+                submit : 'OK',
+                tooltip : "Click to edit..."
+            });
 
-    <div id="content">
+            // EXAMPLE 1 - NORMAL TEXTAREA
+            $(".editable_textarea").editable("save.php", {
+                type   : 'textarea',
+                indicator : "<img src='img/indicator.gif' />",
+                select : true,
+                submit : 'OK',
+                cancel : 'cancel',
+                cssclass : "editable"
+            });
 
-        <!-- NORMAL TEXT -->
-        <div class="entry">
-            <h2>Normal text</h2>
-            <p class="editable-text">Lorem ipsum dolor sit amet, aliquip ex ea commodo consequat.</p>
-        </div>
+            // EXAMPLE 2 - INLINE SELECT
+            $(".editable-select").editable("save.php", {
+                type   : "select",
+                indicator : '<img src="img/indicator.gif" />',
+                data   : '{"Lorem ipsum":"Lorem ipsum","Ipsum dolor":"Ipsum dolor","Dolor sit":"Dolor sit"}',
+                submit : "OK",
+                style  : "inherit",
+                submitdata : function() {
+                    return {id : 2};
+                }
+            });
 
-        <!-- NORMAL TEXTAREA -->
-        <div class="entry">
-            <h2>Normal textarea</h2>
-            <p class="editable_textarea">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-        </div>
+            // EXAMPLE 2b - INLINE SELECT WITH JSON
+            $(".editable-select-json").editable("save.php", {
+                type   : "select",
+                indicator : "<img src='img/indicator.gif' />",
+                loadurl : "json.php",
+                submit : "OK",
+                style  : "inherit"
+            });
 
-        <!-- INLINE SELECT -->
-        <div class="entry">
-            <h2>Inline select</h2>
-            <p><b class="editable-select inline">THIS IS A SELECT</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
-            <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b> euismod tincidunt ut laoreet dolore magna aliquam erat volutp</p>
-        </div>
+            // EXAMPLE 3 - DIFFERENT EVENTS
+            // click
+            $(".click").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                tooltip   : "Click to edit...",
+                style  : "inherit"
+            });
 
-        <!-- DIFFERENT EVENTS -->
-        <div class="entry">
-            <h2>Different events</h2>
-            <p>
-                <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
-                <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
-                <b class="mouseover" style="display: inline">mouseover me</b>...
-            </p>
-        </div>
+            // double click
+            $(".dblclick").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                tooltip   : "Doubleclick to edit...",
+                event     : "dblclick",
+                style  : "inherit"
+            });
 
-        <!-- AUTOGROW -->
-        <div class="entry">
-            <h2>Autogrow textarea</h2>
-            <p class="autogrow">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-            <p>Depends on Autogrow by Chrys Bader.</p>
-        </div>
+            // mouseover
+            $(".mouseover").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                tooltip   : "Move mouseover to edit...",
+                event     : "mouseover",
+                style  : "inherit"
+            });
 
-        <!-- EXAMPLE 5 - AJAX FILE UPLOAD -->
-        <div class="entry">
-            <h2>Ajax File Upload</h2>
-            <p class="ajaxupload">Click here to upload a file</p>
-            <p>
-              Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.
-              For security reasons after uploading this demo only display file size and name.
-            </p>
-        </div>
+            // EXAMPLE 4 - CHAR COUNTER
+            $(".charcounter").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : "charcounter",
+                submit    : 'OK',
+                tooltip   : "Click to edit...",
+                onblur    : "ignore",
+                charcounter : {
+                    characters : 60
+                }
+            });
 
-        <!-- EXAMPLE 6 - MASKED INPUT -->
-        <div class="entry">
-            <h2>Masked Input</h2>
-            <p class="masked">Blah</p>
-            <p>Depends on
-            <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input</a> by Josh Bush.
-            </p>
-        </div>
+            // EXAMPLE 6 - MASKED INPUT
+            $(".masked").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : "masked",
+                mask      : "99/99/9999",
+                submit    : 'OK',
+                tooltip   : "Click to edit..."
+            });
 
-        <div class="entry">
-          <h2>Time Picker</h2>
-          <p class="timepicker">Blah</p>
-          <p>
-            Depends on <a href="http://jquery.com/plugins/project/timepicker">Timepicker</a>
-            by Jason Huck.
-          </p>
-        </div>
+            $(".autogrow").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : "autogrow",
+                submit    : 'OK',
+                cancel    : 'cancel',
+                tooltip   : "Click to edit...",
+                onblur    : "ignore",
+                autogrow : {
+                   lineHeight : 16,
+                   minHeight  : 32
+                }
+            });
+            $(".datepicker").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : 'datepicker',
+                tooltip   : "Click to edit..."
+            });
+            // TIME
+            $(".timepicker").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : 'time',
+                submit    : 'OK',
+                tooltip   : "Click to edit..."
+            });
+            $(".ajaxupload").editable("upload.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type      : 'ajaxupload',
+                submit    : 'Upload',
+                cancel    : 'Cancel',
+                tooltip   : "Click to upload..."
+            });
 
-        <div class="entry">
-          <h2>Time Picker 2</h2>
-          <p class="time">Blah</p>
-          <p>
-            Similar as previous but without dependenices. See <a href="http://www.appelsiini.net/2008/2/creating-inline-timepicker-with-javascript">how to create inputs tutorial</a>.
-          </p>
-        </div>
+            // Non existing element should not cause error
+            $("#nosuch").editable("save.php", {
+                indicator : "<img src='img/indicator.gif' />",
+                type   : 'textarea',
+                submit : 'OK'
+            });
 
-        <div class="entry">
+        });
+        </script>
 
-          <h2>Character counter</h2>
-          <p class="charcounter">Blah</p>
-          <p>
-            Using character counter.
-          </p>
-        </div>
-    </div>
-</div>
-
-<script>
-$(document).ready(function() {
-    // NORMAL TEXT
-    $(".editable-text").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type : "text",
-        submit : 'OK',
-        tooltip : "Click to edit..."
-    });
-
-    // EXAMPLE 1 - NORMAL TEXTAREA
-    $(".editable_textarea").editable("save.php", {
-        type   : 'textarea',
-        indicator : "<img src='../img/indicator.gif' />",
-        select : true,
-        submit : 'OK',
-        cancel : 'cancel',
-        cssclass : "editable"
-    });
-
-    // EXAMPLE 2 - INLINE SELECT
-    $(".editable-select").editable("save.php", {
-        type   : "select",
-        indicator : '<img src="../img/indicator.gif" />',
-        data   : "{'Lorem ipsum':'Lorem ipsum','Ipsum dolor':'Ipsum dolor','Dolor sit':'Dolor sit'}",
-        submit : "OK",
-        style  : "inherit",
-        submitdata : function() {
-            return {id : 2};
-        }
-    });
-
-    // EXAMPLE 2b - INLINE SELECT WITH JSON
-    $(".editable-select-json").editable("save.php", {
-        type   : "select",
-        indicator : "<img src='../img/indicator.gif' />",
-        loadurl : "json.php",
-        submit : "OK",
-        style  : "inherit"
-    });
-
-    // EXAMPLE 3 - DIFFERENT EVENTS
-    // click
-    $(".click").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        tooltip   : "Click to edit...",
-        style  : "inherit"
-    });
-
-    // double click
-    $(".dblclick").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        tooltip   : "Doubleclick to edit...",
-        event     : "dblclick",
-        style  : "inherit"
-    });
-
-    // mouseover
-    $(".mouseover").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        tooltip   : "Move mouseover to edit...",
-        event     : "mouseover",
-        style  : "inherit"
-    });
-
-    // EXAMPLE 4 - CHAR COUNTER
-    $(".charcounter").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : "charcounter",
-        submit    : 'OK',
-        tooltip   : "Click to edit...",
-        onblur    : "ignore",
-        charcounter : {
-            characters : 60
-        }
-    });
-
-    // EXAMPLE 6 - MASKED INPUT
-    $(".masked").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : "masked",
-        mask      : "99/99/9999",
-        submit    : 'OK',
-        tooltip   : "Click to edit..."
-    });
-
-    $(".autogrow").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : "autogrow",
-        submit    : 'OK',
-        cancel    : 'cancel',
-        tooltip   : "Click to edit...",
-        onblur    : "ignore",
-        autogrow : {
-           lineHeight : 16,
-           minHeight  : 32
-        }
-    });
-    $(".datepicker").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : 'datepicker',
-        tooltip   : "Click to edit..."
-    });
-    $(".timepicker").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : 'timepicker',
-        submit    : 'OK',
-        tooltip   : "Click to edit..."
-    });
-    $(".time").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : 'time',
-        submit    : 'OK',
-        tooltip   : "Click to edit..."
-    });
-    $(".ajaxupload").editable("upload.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type      : 'ajaxupload',
-        submit    : 'Upload',
-        cancel    : 'Cancel',
-        tooltip   : "Click to upload..."
-    });
-
-    // Non existing element should not cause error
-    $("#nosuch").editable("save.php", {
-        indicator : "<img src='../img/indicator.gif' />",
-        type   : 'textarea',
-        submit : 'OK'
-    });
-
-});
-</script>
-
-</body>
+    </body>
 </html>

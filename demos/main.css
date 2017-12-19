@@ -1,3 +1,15 @@
+body {
+	text-align: center;
+	font-size: 120%;
+    background-color: #ccc;
+}
+
+header {
+    width: 100%;
+    margin: auto;
+    background-color: #ccc;
+}
+
 .editable input[type=submit] {
   color: #F00;
   font-weight: bold;
@@ -5,23 +17,6 @@
 .editable input[type=button] {
   color: #0F0;
   font-weight: bold;
-}
-
-textarea {
-	line-height: 16px;
-}
-
-#sidebar {
-  width: 0px;
-}
-
-#content {
-  width: 770px;
-}
-
-div.entry {
-  width: 385px;
-  float: left;
 }
 
 .inline {
