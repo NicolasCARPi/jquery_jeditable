@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.1
+
+* Add 'before' option. by @bp323 (#113)
+* Fix issue with html encodable characters (#110)
+* Add checkbox type. by @oneslash and @pushpinderbagga (#52)
+* Remove extra loop. by @dgm (#45)
+
 ## 1.8.0
 
 * A lot of cleanup in the repo after years of abandon
