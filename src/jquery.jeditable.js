@@ -2,6 +2,7 @@
  * Jeditable - jQuery in place edit plugin
  *
  * Copyright (c) 2006-2013 Mika Tuupola, Dylan Verheul
+ * © 2017 Nicolas CARPi
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -171,7 +172,7 @@
                 }
 
                 self.editing    = true;
-                self.revert     = $(self).html();
+                self.revert     = $(self).text();
                 $(self).html('');
 
                 /* Create the form object. */
