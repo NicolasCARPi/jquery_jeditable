@@ -1,13 +1,11 @@
 body {
 	text-align: center;
 	font-size: 120%;
-    background-color: #ccc;
+    background-color: #a0b0e0;
 }
 
-header {
-    width: 100%;
-    margin: auto;
-    background-color: #ccc;
+.jumbotron {
+    background-color: #fff;
 }
 
 .editable input[type=submit] {
