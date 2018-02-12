@@ -6,6 +6,10 @@ Edit in place plugin for jQuery.
 
 **This project was dead for a few years but is now maintained!**
 
+## Live demo
+
+See it in action: [LIVE DEMO](https://jeditable.elabftw.net/)
+
 ## Installation
 
 ~~~bash
