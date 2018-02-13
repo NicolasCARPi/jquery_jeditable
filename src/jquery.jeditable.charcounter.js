@@ -7,8 +7,15 @@
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
  * @copyright © 2006 Mika Tuupola, Nicolas CARPi
- * @name  jquery.jeditable.charcounter.js
- *
+ * @name PluginCharcounter
+ * @example <caption>Charcounter example:</caption>
+ * $(".charcounter").editable("save.php", {
+ *     type      : "charcounter",
+ *     submit    : 'OK',
+ *     charcounter : {
+ *         characters : 60
+ *     }
+ * });
  */
 $.editable.addInputType('charcounter', {
     element : function(settings, original) {

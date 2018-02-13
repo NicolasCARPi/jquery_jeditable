@@ -3,7 +3,7 @@
  * @author Mika Tuupola, Nicolas CARPi
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
- * @name  jquery.jeditable.checkbox.js
+ * @name PluginCheckbox
  */
 $.editable.addInputType("checkbox", {
 	element : function(settings, original) {

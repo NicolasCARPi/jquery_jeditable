@@ -7,7 +7,7 @@
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
  * @copyright © 2007 Mika Tuupola, Nicolas CARPi
- * @name  jquery.jeditable.masked.js
+ * @name PluginMaskedInput
  */
 $.editable.addInputType('masked', {
     element : function(settings, original) {

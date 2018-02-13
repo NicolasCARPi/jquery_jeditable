@@ -4,7 +4,17 @@
  * @copyright © 2008 Mika Tuupola, Nicolas CARPi
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
- * @name  jquery.jeditable.autogrow.js
+ * @name PluginAutogrow
+ * @example <caption>Autogrow example:</caption>
+ * $(".autogrow").editable("save.php", {
+ *     type      : "autogrow",
+ *     submit    : 'OK',
+ *     cancel    : 'cancel',
+ *     autogrow : {
+ *         lineHeight : 16,
+ *         minHeight  : 32
+ *     }
+ * });
  */
 $.editable.addInputType('autogrow', {
     element : function(settings, original) {

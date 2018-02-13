@@ -4,7 +4,7 @@
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
  * @copyright © 2007 Mika Tuupola, Nicolas CARPi
- * @name  jquery.jeditable.time.js
+ * @name PluginTimepicker
  */
 $.editable.addInputType('time', {
     /* Create input element. */

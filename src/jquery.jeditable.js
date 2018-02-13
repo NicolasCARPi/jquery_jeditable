@@ -4,7 +4,7 @@
  * @author Mika Tuupola, Dylan Verheul, Nicolas CARPi
  * @copyright © 2006 Mika Tuupola, Dylan Verheul, Nicolas CARPi
  * @licence MIT (see LICENCE file)
- * @name  jquery.jeditable.js
+ * @name Jquery-jeditable
  * @type  jQuery
  * @version 1.8.1
  *

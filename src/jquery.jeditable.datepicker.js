@@ -7,7 +7,7 @@
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
  * @copyright © 2007 Mika Tuupola, Nicolas CARPi
- * @name  jquery.jeditable.datepicker.js
+ * @name PluginDatepicker
  */
 $.editable.addInputType('datepicker', {
     /* create input element */
