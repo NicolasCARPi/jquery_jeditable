@@ -252,6 +252,12 @@
 
                 input.attr('name', settings.name);
 
+                /* adjust the width of the element to account for the margin/padding/border */
+                if (settings.width != 'none') {
+                    var adj_width = settings.width - (input.outerWidth(true) - settings.width);
+                    input.width(adj_width);
+                }
+
                 /* Add buttons to the form. */
                 buttons.apply(form, [settings, self]);
 
