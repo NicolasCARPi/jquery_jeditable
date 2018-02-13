@@ -91,27 +91,15 @@
         var onerror  = settings.onerror  || reset;
         var before   = settings.before || false;
 
-        /* Show tooltip. */
+        // TOOLTIP
         if (settings.tooltip) {
             $(this).attr('title', settings.tooltip);
         }
-
-        /*
-        settings.autowidth  = 'auto' == settings.width;
-        settings.autoheight = 'auto' == settings.height;
-        */
 
         return this.each(function() {
 
             /* Save this to self because this changes when scope changes. */
             var self = this;
-
-            /* Inlined block elements lose their width and height after first edit. */
-            /* Save them for later use as workaround. */
-            /*
-            var savedwidth  = $(self).width();
-            var savedheight = $(self).height();
-            */
 
             /* Save so it can be later used by $.editable('destroy') */
             $(this).data('event.editable', settings.event);
@@ -121,6 +109,7 @@
                 $(this).html(settings.placeholder);
             }
 
+            // EVENT IS FIRED
             $(this).bind(settings.event, function(e) {
 
                 /* Abort if element is disabled. */
@@ -153,24 +142,6 @@
                 if (settings.tooltip) {
                     $(self).removeAttr('title');
                 }
-
-                /* Figure out how wide and tall we are, saved width and height. */
-                /* Workaround for http://dev.jquery.com/ticket/2190 */
-                /*
-                if (0 == $(self).width()) {
-                    settings.width  = savedwidth;
-                    settings.height = savedheight;
-                } else {
-                    if (settings.width != 'none') {
-                        settings.width =
-                            settings.autowidth ? $(self).width()  : settings.width;
-                    }
-                    if (settings.height != 'none') {
-                        settings.height =
-                            settings.autoheight ? $(self).height() : settings.height;
-                    }
-                }
-                */
 
                 /* Remove placeholder text, replace is here because of IE. */
                 if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') ==
