@@ -20,3 +20,12 @@ body {
 .inline {
     display: inline;
 }
+
+/* for the full example */
+label {
+    margin-right: 5px;
+}
+
+.custom-class {
+    font-size: 110%;
+}

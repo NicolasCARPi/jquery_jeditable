@@ -45,15 +45,23 @@
         <!-- FIRST ROW -->
         <div class='row'>
 
-            <!-- NORMAL TEXT -->
+            <!-- BASIC MINIMAL EXAMPLE -->
             <div class='card col-md-4'>
                 <div class='card-body'>
-                    <h4 class='card-title'>Normal text</h4>
-                    <h6 class='card-subtitle text-muted'>The most basic example</h6>
+                    <h4 class='card-title'>Basic example</h4>
+                    <h6 class='card-subtitle text-muted'>The most basic example (press enter to validate)</h6>
                 <p class="editable-text card-text">Click this text to edit it.</p>
                 </div>
             </div>
 
+            <!-- FULL EXAMPLE -->
+            <div class='card col-md-4'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Complete example</h4>
+                    <h6 class='card-subtitle text-muted'>A more complete example with a bunch of options</h6>
+                <p class="editable-text-full card-text">Click this text to edit it.</p>
+                </div>
+            </div>
             <!-- NORMAL TEXTAREA -->
             <div class='card col-md-4'>
                 <div class='card-body'>
@@ -139,15 +147,27 @@
     </div>
         <script>
         $(document).ready(function() {
-            // NORMAL TEXT
-            $(".editable-text").editable("save.php", {
+            // BASIC MINIMAL EXAMPLE
+            $(".editable-text").editable("save.php");
+
+            // FULL EXAMPLE WITH PLENTY OF OPTIONS
+            $(".editable-text-full").editable("save.php", {
                 indicator : "<img src='img/indicator.gif' />",
                 type : "text",
-                label : "This is a label",
-                before : function(){console.log('Before function triggered')},
-                submit : 'OK',
-                tooltip : "Click to edit..."
+                before : function() { console.log('Before function triggered')},
+                callback : function() { console.log('Triggered after edit') },
+                cancel : 'Cancel',
+                cssclass : 'custom-class',
+                maxlength : 200,
+                label : 'This is a label',
+                onreset : function() { console.log('Triggered before reset') },
+                onsubmit : function() { console.log('Triggered before submit') },
+                showfn : function(elem) { elem.fadeIn('slow') },
+                submit : 'Save',
+                tooltip : "Click to edit...",
+                width : 160
             });
+
 
             // EXAMPLE 1 - NORMAL TEXTAREA
             $(".editable_textarea").editable("save.php", {
@@ -155,6 +175,7 @@
                 indicator : "<img src='img/indicator.gif' />",
                 select : true,
                 submit : 'OK',
+                label : "This is a label",
                 cancel : 'cancel',
                 cssclass : "editable"
             });

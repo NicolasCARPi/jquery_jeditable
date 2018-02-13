@@ -20,13 +20,13 @@
   * @type  jQuery
   * @param String   target              (POST) URL or function to send edited content to
   * @param Hash     options             additional options
-  * @param Hash    options[ajaxoptions]  jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
+  * @param Hash    options[ajaxoptions] jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
   * @param String   options[before]     function to be executed before going into edit mode
   * @param Function options[callback]   function to run after submitting edited content
   * @param String   options[cancel]     cancel button value, empty means no button
   * @param Integer  options[cols]       number of columns if using textarea
   * @param String   options[cssclass]   CSS class to apply to input form. 'inherit' to copy from parent
-  * @param Mixed    options[data]       content given as parameter. String or function
+  * @param Mixed    options[data]       content loaded in the form. String or function
   * @param String   options[event]      jQuery event such as 'click' of 'dblclick'
   * @param Mixed    options[height]     'auto', 'none' or height in pixels
   * @param String   options[id]         POST parameter name of edited div id
@@ -46,6 +46,7 @@
   * @param String   options[placeholder] Placeholder text or html to insert when element is empty
   * @param Integer  options[rows]       number of rows if using textarea
   * @param String   options[select]     true or false, when true text is highlighted
+  * @param Function options[showfn]     function that can animate the element when switching to edit mode
   * @param String   options[size]       the size of the text field
   * @param String   options[style]      Style to apply to input form 'inherit' to copy from parent
   * @param String   options[submit]     submit button value, empty means no button
@@ -255,7 +256,16 @@
                 buttons.apply(form, [settings, self]);
 
                 /* Add created form to self. */
+                if (settings.showfn && $.isFunction(settings.showfn)) {
+                    form.hide();
+                }
+
                 $(self).append(form);
+
+                // execute the showfn
+                if (settings.showfn && $.isFunction(settings.showfn)) {
+                    settings.showfn(form);
+                }
 
                 /* Attach 3rd party plugin if requested. */
                 plugin.apply(form, [settings, self]);
