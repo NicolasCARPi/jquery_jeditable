@@ -21,16 +21,19 @@
 $.editable.addInputType('datepicker', {
 
     element : function(settings, original) {
-        var input = $('<input>');
-        var picker = $('<span id="datepicker_">');
+        var input = $('<input />');
+        if (settings.datepicker) {
+            input.datepicker(settings.datepicker);
+        } else {
+            input.datepicker();
+        }
 
         $(this).append(input);
-        $(this).append(picker);
         return(input);
     },
 
     submit: function (settings, original) {
-        var dateRaw = $("#datepicker_", this).datepicker('getDate');
+        var dateRaw = $("input", this).datepicker('getDate');
         if (settings.datepicker.format) {
             dateFormatted = $.datepicker.formatDate(settings.datepicker.format, new Date(dateRaw));
         } else {
@@ -42,12 +45,5 @@ $.editable.addInputType('datepicker', {
     plugin : function(settings, original) {
         // prevent disappearing of calendar
         settings.onblur = null;
-
-        // load the settings if any
-        if (settings.datepicker) {
-            $("#datepicker_", this).datepicker(settings.datepicker);
-        } else {
-            $("#datepicker_", this).datepicker();
-        }
     }
 });
