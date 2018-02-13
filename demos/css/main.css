@@ -8,6 +8,16 @@ body {
     background-color: #fff;
 }
 
+.card-title {
+    font-weight: bold;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+}
+
 .editable input[type=submit] {
   color: #F00;
   font-weight: bold;
