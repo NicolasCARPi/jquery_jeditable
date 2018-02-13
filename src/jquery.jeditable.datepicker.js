@@ -1,42 +1,53 @@
 /**
- * Depends on Datepicker jQuery plugin by Kelvin Luck:
- *   http://kelvinluck.com/assets/jquery/datePicker/v2/demo/
+ * Depends on datepicker widget from jQuery-ui
+ * https://jqueryui.com/datepicker/
  *
  * @file datepicker plugin for jquery-jeditable
- * @author Mika Tuupola, Nicolas CARPi
+ * @author Nicolas CARPi
+ * @copyright © 2008 Mika Tuupola, Nicolas CARPi
  * @home https://github.com/NicolasCARPi/jquery_jeditable
  * @licence MIT (see LICENCE file)
- * @copyright © 2007 Mika Tuupola, Nicolas CARPi
  * @name PluginDatepicker
+ * @example <caption>Datepicker example:</caption>
+ * $(".date").editable("save.php", {
+ *     type      : "datepicker",
+ *     submit    : 'OK',
+ *     datepicker : {
+ *         format: "dd-mm-yy"
+ *     },
+ *     cancel    : 'cancel',
+ * });
  */
 $.editable.addInputType('datepicker', {
-    /* create input element */
+
     element : function(settings, original) {
         var input = $('<input>');
+        var picker = $('<span id="datepicker_">');
+
         $(this).append(input);
-        //$(input).css('opacity', 0.01);
+        $(this).append(picker);
         return(input);
     },
-    /* attach 3rd party plugin to input element */
+
+    submit: function (settings, original) {
+        var dateRaw = $("#datepicker_", this).datepicker('getDate');
+        if (settings.datepicker.format) {
+            dateFormatted = $.datepicker.formatDate(settings.datepicker.format, new Date(dateRaw));
+        } else {
+            dateFormatted = dateRaw;
+        }
+        $("input", this).val(dateFormatted);
+    },
+
     plugin : function(settings, original) {
-        /* Workaround for missing parentNode in IE */
-        var form = this;
-        settings.onblur = 'cancel';
-        $("input", this)
-        .datePicker({createButton:false})
-        .bind('click', function() {
-            //$(this).blur();
-            $(this).dpDisplay();
-            return false;
-        })
-        .bind('dateSelected', function(e, selectedDate, $td) {
-            $(form).submit();
-        })
-        .bind('dpClosed', function(e, selected) {
-            /* TODO: unneseccary calls reset() */
-            //$(this).blur();
-        })
-        .trigger('change')
-        .click();
+        // prevent disappearing of calendar
+        settings.onblur = null;
+
+        // load the settings if any
+        if (settings.datepicker) {
+            $("#datepicker_", this).datepicker(settings.datepicker);
+        } else {
+            $("#datepicker_", this).datepicker();
+        }
     }
 });
