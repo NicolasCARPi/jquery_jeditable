@@ -18,6 +18,10 @@ body {
     margin: 5px;
 }
 
+.trigger:hover {
+    cursor: pointer;
+}
+
 .editable input[type=submit] {
   color: #F00;
   font-weight: bold;
