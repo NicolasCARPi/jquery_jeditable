@@ -35,14 +35,14 @@ $.editable.addInputType("checkbox", {
 		    $(input).removeAttr("checked");
 		}
 
-		var value = $(input).attr("checked") ? 'on' : 'off';
+		var value = $(input).is(":checked") ? 'on' : 'off';
 		$(input).val(value);
 	},
 
     submit: function (settings, original) {
         var value;
         var input = $(':input:first', this);
-        if (input.attr('checked')) {
+        if (input.is(':checked')) {
             value = '1';
         } else {
             value = '0';
