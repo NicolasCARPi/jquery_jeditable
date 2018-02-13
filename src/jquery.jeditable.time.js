@@ -1,16 +1,10 @@
-/*
- * Timepicker for Jeditable
- *
- * Copyright (c) 2008-2009 Mika Tuupola
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- *
- * Project home:
- *   http://www.appelsiini.net/projects/jeditable
- *
- * Revision: $Id$
- *
+/**
+ * @file timepicker plugin for jquery-jeditable
+ * @author Mika Tuupola, Nicolas CARPi
+ * @home https://github.com/NicolasCARPi/jquery_jeditable
+ * @licence MIT (see LICENCE file)
+ * @copyright © 2007 Mika Tuupola, Nicolas CARPi
+ * @name  jquery.jeditable.time.js
  */
 $.editable.addInputType('time', {
     /* Create input element. */
@@ -20,11 +14,13 @@ $.editable.addInputType('time', {
         var hourselect = $('<select id="hour_" />');
         var minselect  = $('<select id="min_" />');
 
+        var option;
+
         for (var hour=0; hour <= 23; hour++) {
             if (hour < 10) {
                 hour = '0' + hour;
             }
-            var option = $('<option />').val(hour).append(hour);
+            option = $('<option />').val(hour).append(hour);
             hourselect.append(option);
         }
         $(this).append(hourselect);
@@ -33,7 +29,7 @@ $.editable.addInputType('time', {
             if (min < 10) {
                 min = '0' + min;
             }
-            var option = $('<option />').val(min).append(min);
+            option = $('<option />').val(min).append(min);
             minselect.append(option);
         }
         $(this).append(minselect);

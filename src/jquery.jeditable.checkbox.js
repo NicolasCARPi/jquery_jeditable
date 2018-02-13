@@ -1,11 +1,10 @@
-/**********************************************************************
- *	Custom input types for the jquery.jeditable plugin
- *  First version by Richard Davies <Richard__at__richarddavies.us>
- *
- * FIXES by Sardorbek Pulatov : BFM (http://bluefountainmedia.com)
- *********************************************************************/
-
-// Create a custom input type for checkboxes
+/**
+ * @file checkbox plugin for jquery-jeditable
+ * @author Mika Tuupola, Nicolas CARPi
+ * @home https://github.com/NicolasCARPi/jquery_jeditable
+ * @licence MIT (see LICENCE file)
+ * @name  jquery.jeditable.checkbox.js
+ */
 $.editable.addInputType("checkbox", {
 	element : function(settings, original) {
 		var input = $('<input type="checkbox">');

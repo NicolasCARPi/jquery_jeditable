@@ -1,61 +1,57 @@
-/*
- * Jeditable - jQuery in place edit plugin
- *
- * Copyright (©) 2006 Mika Tuupola, Dylan Verheul, Nicolas CARPi
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/mit-license.php
- *
- * Project home:
- * https://github.com/NicolasCARPi/jquery_jeditable
- *
- * Based on editable by Dylan Verheul:
- * https://dyve.net
- *
- */
-
 /**
-  *
-  * @name  Jeditable
-  * @type  jQuery
-  * @param String   target              (POST) URL or function to send edited content to
-  * @param Hash     options             additional options
-  * @param Hash    options[ajaxoptions] jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
-  * @param String   options[before]     function to be executed before going into edit mode
-  * @param Function options[callback]   function to run after submitting edited content
-  * @param String   options[cancel]     cancel button value, empty means no button
-  * @param Integer  options[cols]       number of columns if using textarea
-  * @param String   options[cssclass]   CSS class to apply to input form. 'inherit' to copy from parent
-  * @param Mixed    options[data]       content loaded in the form. String or function
-  * @param String   options[event]      jQuery event such as 'click' of 'dblclick'
-  * @param Mixed    options[height]     'auto', 'none' or height in pixels
-  * @param String   options[id]         POST parameter name of edited div id
-  * @param String   options[indicator]  indicator html to show when saving
-  * @param String   options[label]      optional label
-  * @param Mixed    options[loaddata]   Extra parameters to pass when fetching content before editing
-  * @param String   options[loadtext]   Text to display while loading external content
-  * @param String   options[loadtype]   Request type for load url (GET or POST)
-  * @param String   options[loadurl]    URL to fetch input content before editing
-  * @param String   options[maxlength]  the maximum number of character in the text field
-  * @param String   options[method]     method to use to send edited content (POST or PUT)
-  * @param String   options[name]       POST parameter name of edited content
-  * @param String   options[onblur]     'cancel', 'submit', 'ignore' or function
-  * @param Function options[onerror]    function(settings, original, xhr) { ... } called on error
-  * @param Function options[onreset]    function(settings, original) { ... } called before reset
-  * @param Function options[onsubmit]   function(settings, original) { ... } called before submit
-  * @param String   options[placeholder] Placeholder text or html to insert when element is empty
-  * @param Integer  options[rows]       number of rows if using textarea
-  * @param String   options[select]     true or false, when true text is highlighted
-  * @param Function options[showfn]     function that can animate the element when switching to edit mode
-  * @param String   options[size]       the size of the text field
-  * @param String   options[style]      Style to apply to input form 'inherit' to copy from parent
-  * @param String   options[submit]     submit button value, empty means no button
-  * @param Hash     options[submitdata] Extra parameters to send when submitting edited content
-  * @param String   options[tooltip]    optional tooltip text via title attribute
-  * @param String   options[type]       text, textarea or select (or any 3rd party input type)
-  * @param Mixed    options[width]      'auto', 'none' or width in pixels
-  */
-
+ * @file Jeditable - jQuery in place edit plugin
+ * @home https://github.com/NicolasCARPi/jquery_jeditable
+ * @author Mika Tuupola, Dylan Verheul, Nicolas CARPi
+ * @copyright © 2006 Mika Tuupola, Dylan Verheul, Nicolas CARPi
+ * @licence MIT (see LICENCE file)
+ * @name  jquery.jeditable.js
+ * @type  jQuery
+ * @version 1.8.1
+ *
+ * @param {String|Function} target - URL or Function to send edited content to
+ * @param {Object} [options] - Additional options
+ * @param {Object} [options.ajaxoptions] - jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
+ * @param {Function} [options.before] - Function to be executed before going into edit mode
+ * @param {Function} [options.callback] - Function to run after submitting edited content
+ * @param {String} [options.cancel] - Cancel button value, empty means no button
+ * @param {Number} [options.cols] - Number of columns if using textarea
+ * @param {String} [options.cssclass] - CSS class to apply to input form; use 'inherit' to copy from parent
+ * @param {String|Function} [options.data] - Content loaded in the form
+ * @param {String} [options.event='click'] - jQuery event such as 'click' of 'dblclick'. See https://api.jquery.com/category/events/
+ * @param {String|Number} [options.height='auto'] - Height of the element in pixels or 'auto' or 'none'
+ * @param {String} [options.id='id'] - POST parameter name of edited div id
+ * @param {String} [options.indicator] - Indicator html to show when saving
+ * @param {String} [options.label] - Label for the form
+ * @param {String|Function} [options.loaddata] - Extra parameters to pass when fetching content before editing
+ * @param {String} [options.loadtext='Loading…'] - Text to display while loading external content
+ * @param {String} [options.loadtype='GET'] - Request type for load url (GET or POST)
+ * @param {String} [options.loadurl] - URL to fetch input content before editing
+ * @param {String} [options.maxlength] - The maximum number of character in the text field
+ * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
+ * @param {String} [options.name='value'] - POST parameter name of edited content
+ * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit' or function
+ * @param {Function} [options.onerror] - function(settings, original, xhr) { ... } called on error
+ * @param {Function} [options.onreset] - function(settings, original) { ... } called before reset
+ * @param {Function} [options.onsubmit] - function(settings, original) { ... } called before submit
+ * @param {String} [options.placeholder='Click to edit'] - Placeholder text or html to insert when element is empty
+ * @param {Number} [options.rows] - number of rows if using textarea
+ * @param {Boolean} [options.select] - When true text is selected
+ * @param {Function} [options.showfn]- Function that can animate the element when switching to edit mode
+ * @param {String} [options.size] - The size of the text field
+ * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
+ * @param {String} [options.submit] - submit button value, empty means no button
+ * @param {Object} [options.submitdata] - Extra parameters to send when submitting edited content
+ * @param {String} [options.tooltip] - Tooltip text that appears on hover (via title attribute)
+ * @param {String} [options.type='text'] - text, textarea or select (or any 3rd party input type)
+ * @param {String|Number} [options.width='auto'] - The width of the element in pixels or 'auto' or 'none'
+ *
+ * @example <caption>Simple usage example:</caption>
+ * $(".editable").editable("save.php", {
+ *     cancel : 'Cancel',
+ *     submit : 'Save',
+ *     tooltip : "Click to edit...",
+ * });
+ */
 (function($) {
 
     $.fn.editable = function(target, options) {
@@ -533,7 +529,7 @@
         type       : 'text',
         width      : 'auto',
         height     : 'auto',
-        event      : 'click.editable',
+        event      : 'click',
         onblur     : 'cancel',
         loadtype   : 'GET',
         loadtext   : 'Loading...',

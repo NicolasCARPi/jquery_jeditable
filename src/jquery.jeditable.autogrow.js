@@ -1,21 +1,11 @@
-/*
- * Autogrow textarea for Jeditable
- *
- * Copyright (c) 2008 Mika Tuupola
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- * 
- * Depends on Autogrow jQuery plugin by Chrys Bader:
- *   http://www.aclevercookie.com/facebook-like-auto-growing-textarea/
- *
- * Project home:
- *   http://www.appelsiini.net/projects/jeditable
- *
- * Revision: $Id$
- *
+/**
+ * @file autogrow plugin for jquery-jeditable
+ * @author Mika Tuupola, Nicolas CARPi
+ * @copyright © 2008 Mika Tuupola, Nicolas CARPi
+ * @home https://github.com/NicolasCARPi/jquery_jeditable
+ * @licence MIT (see LICENCE file)
+ * @name  jquery.jeditable.autogrow.js
  */
- 
 $.editable.addInputType('autogrow', {
     element : function(settings, original) {
         var textarea = $('<textarea />');
