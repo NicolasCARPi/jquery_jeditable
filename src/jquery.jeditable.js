@@ -497,6 +497,11 @@
                     } else if (settings.width != "none") {
                         textarea.width(settings.width);
                     }
+
+                    if (settings.maxlength) {
+                        textarea.attr('maxlength', settings.maxlength);
+                    }
+
                     $(this).append(textarea);
                     return(textarea);
                 }
