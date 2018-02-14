@@ -52,7 +52,7 @@
         <h2>Core features</h2>
         <pre><code class="language-html">&lt;!-- include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.min.js&gt;&lt;/script&gt;
-</pre></code>
+</code></pre>
         <!-- FIRST ROW -->
         <div class='row'>
 
@@ -203,6 +203,28 @@ $(".mouseover").editable("save.php", {
                 </div>
             </div>
 
+            <!-- INTERCEPT -->
+            <div class='card col-md-12'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Intercept the data sent back</h4>
+                    <p class='card-text'>Useful if you want to process the returned data before it hits the page.</p>
+                    <p class='intercept example'>Click here to test the intercept option.</p>
+                <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
+                <div class='source'>
+                    <pre><code class="language-javascript">$(".intercept").editable("json2.php", {
+    submit : 'OK',
+    intercept : function(jsondata) {
+        json = JSON.parse(jsondata);
+        console.log(json.status);
+        console.log(json.other);
+        return json.result;
+    },
+});
+</code></pre>
+            </div>
+                </div>
+            </div>
+
             <!-- CHECKBOX -->
             <div class='card col-md-12'>
                 <div class='card-body'>
@@ -228,7 +250,7 @@ $(".mouseover").editable("save.php", {
         <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.datepicker.min.js&gt;&lt;/script&gt;
 &lt;!-- also include jQuery-UI JS and CSS files --&gt;
-</pre></code>
+</code></pre>
                   <p class="datepicker example">16-09-2018</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
@@ -253,7 +275,7 @@ $(".mouseover").editable("save.php", {
         <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.autogrow.min.js&gt;&lt;/script&gt;
 &lt;script src=/path/to/jquery.autogrow.js&gt;&lt;/script&gt;
-</pre></code>
+</code></pre>
                     <p class="autogrow example">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
                     <p>Depends on Autogrow by Chrys Bader.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
@@ -287,7 +309,7 @@ $(".mouseover").editable("save.php", {
 <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.masked.min.js&gt;&lt;/script&gt;
 &lt;script src=/path/to/jquery.maskedinput.js&gt;&lt;/script&gt;
-</pre></code>
+</code></pre>
                     <p class="masked example">19/12/2017</p>
                     <p>Depends on
                     <a href="https://github.com/digitalBush/jquery.maskedinput">Masked Input</a> by Josh Bush.
@@ -312,7 +334,7 @@ $(".mouseover").editable("save.php", {
                     <h4 class='card-title'>Time Picker</h4>
         <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.time.min.js&gt;&lt;/script&gt;
-</pre></code>
+</code></pre>
                   <p class="timepicker example">16:30</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
@@ -333,7 +355,7 @@ $(".mouseover").editable("save.php", {
         <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.charcounter.min.js&gt;&lt;/script&gt;
 &lt;script src=/path/to/jquery.charcounter.js&gt;&lt;/script&gt;
-</pre></code>
+</code></pre>
                       <p class="charcounter example">The number of characters will be counted.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
@@ -374,7 +396,6 @@ $(".mouseover").editable("save.php", {
             });
             // BASIC MINIMAL EXAMPLE
             $(".editable-text").editable("save.php");
-
 
             // FULL EXAMPLE WITH PLENTY OF OPTIONS
             // custom submitted data fields
@@ -458,6 +479,18 @@ $(".mouseover").editable("save.php", {
                 tooltip   : "Move mouseover to edit...",
                 event     : "mouseover",
                 style  : "inherit"
+            });
+
+            // INTERCEPT
+            // GET BACK JSON AND PROCESS IT BEFORE DISPLAY
+            $(".intercept").editable("json2.php", {
+                submit : 'OK',
+                intercept : function(jsondata) {
+					json = JSON.parse(jsondata);
+                    console.log(json.status);
+                    console.log(json.other);
+                    return json.result;
+                },
             });
 
             // CHECKBOX
