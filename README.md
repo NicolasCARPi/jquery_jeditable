@@ -4,7 +4,7 @@
 
 Edit in place plugin for jQuery.
 
-**This project was dead for a few years but is now maintained!**
+Bind it to an element on the page, and when clicked the element will become a form that will be sent by POST request to an URL.
 
 ## Live demo
 
@@ -32,30 +32,31 @@ Code above does several things:
 
 Elements with class `edit` become editable. Editing starts with single mouse click. Form input element is text. Width and height of input element matches the original element. If user clicks outside form, changes are discarded. Same thing happens if user hits ESC. When user hits ENTER, browser submits text to save.php.
 
-Not bad for oneliner, huh? Lets add some options.
+Not bad for oneliner, huh? Let's add some options.
 
 ### Adding options
 
 ~~~javascript
 $(document).ready(function() {
-     $('.edit').editable('save.php', {
-         indicator : 'Saving…',
-         event     : 'dbclick',
-         cssclass  : 'custom-css',
-         submit    : 'Save',
-         tooltip   : 'Double click to edit…'
-     });
-     $('.edit_area').editable('save.php', {
-         type      : 'textarea',
-         cancel    : 'Cancel',
-         submit    : 'OK',
-         indicator : '<img src="img/indicator.gif">',
-         tooltip   : 'Click to edit…'
-     });
- });
+    $('.edit').editable('save.php', {
+        indicator : 'Saving…',
+        event     : 'dbclick',
+        cssclass  : 'custom-css',
+        submit    : 'Save',
+        tooltip   : 'Double click to edit…'
+    });
+
+    $('.edit_area').editable('save.php', {
+        type      : 'textarea',
+        cancel    : 'Cancel',
+        submit    : 'OK',
+        indicator : '<img src="img/indicator.gif">',
+        tooltip   : 'Click to edit…'
+    });
+});
 ~~~
 
-In the code above, the elements of class `edit` will become editable with a double click. It will show 'Saving…' and sending the data. The CSS class `custom-css` will be applied to the element. The button to submit will show the 'Save' text.
+In the code above, the elements of class `edit` will become editable with a double click. It will show 'Saving…' when sending the data. The CSS class `custom-css` will be applied to the element. The button to submit will show the 'Save' text.
 
 The elements of class `edit_area` will become editable with a textarea. An image will be displayed during the save.
 
@@ -84,7 +85,7 @@ $('.edit').editable('save.php', {
 });
 ~~~
 
-And the code above will result in this being sent to the server
+And the code above will result in this being sent to the server:
 
 ~~~javascript
 bookId=element_id&bookTitle=user_edited_content
@@ -97,16 +98,22 @@ If you need to load a different content than the one displayed (element is from 
 ~~~javascript
 $('.edit_area').editable('save.php', {
     loadurl  : 'load.php',
+    loadtype : 'POST',
+    loadtext : 'Loading…',
     type    : 'textarea',
     submit  : 'OK'
 });
 ~~~
 
-Here `load.php` should return the source of the text (so markdown or wiki text but not html).
+By default it will do a GET request to `loadurl`, so if you want POST, add the `loadtype` option. And `loadtext` is to display something while the request is being made.
+
+The PHP script `load.php` should return the source of the text (so markdown or wiki text but not html).
 
 And save.php should return the html (because this is what is displayed to the user after submit).
 
 Or you can pass the source in the `data` option (which accepts a string or a function).
+
+I like writing sentences (and finishing them with text in parenthesis).
 
 ### Using selects
 
@@ -115,14 +122,14 @@ You can use selects by giving type parameter value of select. Select is built fr
 JSON encoded array looks like this:
 
 ~~~json
-{'E':'Letter E','F':'Letter F','G':'Letter G', 'selected':'F'}
+{"E":"Letter E","F":"Letter F","G":"Letter G", "selected":"F"}
 ~~~
 
 Note the last entry. It is special. With value of `selected` in array you can tell Jeditable which option should be selected by default. Lets make two simple examples. First we pass values for pulldown in data parameter:
 
 ~~~javascript
 $('.editable-select').editable('save.php', {
-    data   : "{'E':'Letter E','F':'Letter F','G':'Letter G', 'selected':'F'}",
+    data   : '{"E":"Letter E","F":"Letter F","G":"Letter G", "selected":"F"}',
     type   : 'select',
     submit : 'OK'
 });
@@ -151,7 +158,7 @@ $('.editable-select').editable('save.php', {
 
 ### Styling elements
 
-You can style input element with `cssclass` and `style` parameters. First one assumes to be name of a class defined in your CSS. Second one can be any valid style declaration as string. Check the following examples:
+You can style input element with `cssclass` and `style` parameters. First one assumes to be the name of a class defined in your CSS. Second one can be any valid style declaration as string. Check the following examples:
 
 ~~~javascript
 $('.editable').editable('save.php', {
@@ -169,7 +176,7 @@ $('.editable').editable('save.php', {
 
 Both parameters can have special value of `inherit`. Setting class to `inherit` will make the form inherit the parent's class. Setting `style` to `inherit` will make form to have same style attribute as its parent.
 
-Following example will make the word `oranges` editable with a pulldown menu. This pulldown inherits style from `<span>`. Thus it will be displayed inline.
+Following example will make the word **oranges** editable with a pulldown menu. This pulldown inherits style from `<span>`. Thus it will be displayed inline.
 
 ~~~html
 I love eating <span class="editable" style="display: inline">oranges</span>.
@@ -207,3 +214,7 @@ Note that the function must return a string. Usually the edited content. This wi
 The demo contains other examples, [have a look!](https://jeditable.elabftw.net)
 
 The complete list of options is available here: [FULL LIST OF OPTIONS](https://github.com/NicolasCARPi/jquery_jeditable/wiki)
+
+## Support
+
+Please open a [GitHub issue](https://github.com/NicolasCARPi/jquery_jeditable/issues/new) if you have a bug to report, a question to ask or if you just want to discuss something related to the project.
