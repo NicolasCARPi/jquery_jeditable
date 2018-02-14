@@ -28,6 +28,11 @@ $.editable.addInputType('datepicker', {
             input.datepicker();
         }
 
+        // get the date in the correct format
+        if (settings.datepicker.format) {
+            input.datepicker("option", "dateFormat", settings.datepicker.format);
+        }
+
         $(this).append(input);
         return(input);
     },

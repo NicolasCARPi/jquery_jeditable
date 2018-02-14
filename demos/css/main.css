@@ -18,6 +18,13 @@ body {
     margin: 5px;
 }
 
+.example {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fffeee;
+}
+
 .trigger:hover {
     cursor: pointer;
 }

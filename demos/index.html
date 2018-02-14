@@ -49,6 +49,10 @@
                 <p><i class="fab fa-github"></i> <a href="https://github.com/NicolasCARPi/jquery_jeditable/">GitHub repository</a></p>
         </div>
 
+        <h2>Core features</h2>
+        <pre><code class="language-html">&lt;!-- include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.min.js&gt;&lt;/script&gt;
+</pre></code>
         <!-- FIRST ROW -->
         <div class='row'>
 
@@ -57,7 +61,7 @@
                 <div class='card-body'>
                     <h4 class='card-title'>Basic minimal example</h4>
                     <h6 class='card-subtitle text-muted'>The most basic example (press enter to validate)</h6>
-                <p class="editable-text card-text">Click this text to edit it.</p>
+                <p class="editable-text card-text example">Click this text to edit it.</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
                     <pre><code class="language-javascript">$(".editable-text").editable("save.php");</code></pre>
@@ -70,11 +74,10 @@
                 <div class='card-body'>
                     <h4 class='card-title'>Complete example</h4>
                     <h6 class='card-subtitle text-muted'>A more complete example with a bunch of options</h6>
-                <p class="editable-text-full card-text">Click this text to edit it.</p>
+                <p class="editable-text-full card-text example">Click this text to edit it.</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                <pre><code class="language-javascript">
-var submitdata = {}
+                <pre><code class="language-javascript">var submitdata = {}
 submitdata['param1'] = 42;
 submitdata['pwet'] = 'youpla';
 
@@ -109,12 +112,11 @@ $(".editable-text-full").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Normal textarea</h4>
-                        <p class="editable_textarea card-text">If you click anywhere on this text, it will become a textarea that you can edit. And then you can click OK to save it.</p>
+                        <p class="editable_textarea card-text example">If you click anywhere on this text, it will become a textarea that you can edit. And then you can click OK to save it.</p>
                 </div>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                <pre><code class="language-javascript">
-$(".editable_textarea").editable("save.php", {
+                <pre><code class="language-javascript">$(".editable_textarea").editable("save.php", {
     type   : 'textarea',
     indicator : "<img src='img/indicator.gif' />",
     select : true,
@@ -129,13 +131,14 @@ $(".editable_textarea").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Inline select</h4>
-                    <p><b class="editable-select inline">THIS IS A SELECT</b>, click it to get a select menu. Options are from the "data" setting.</p>
-                    <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b>, click it to get a select menu. Options are loaded from an ajax request getting JSON.</p>
+                    <div class='example'>
+                        <p><b class="editable-select inline">THIS IS A SELECT</b>, click it to get a select menu. Options are from the "data" setting.</p>
+                        <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b>, click it to get a select menu. Options are loaded from an ajax request getting JSON.</p>
+                    </div>
                 </div>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-// inline select
+                    <pre><code class="language-javascript">// inline select
 $(".editable-select").editable("save.php", {
     type   : "select",
     indicator : '<img src="img/indicator.gif" />',
@@ -166,15 +169,14 @@ $(".editable-select-json").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Different events</h4>
-                    <p>
+                    <p class='example'>
                         <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
                         <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
                         <b class="mouseover" style="display: inline">mouseover me</b>...
                     </p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-// click
+                    <pre><code class="language-javascript">// click
 $(".click").editable("save.php", {
     indicator : "<img src='img/indicator.gif' />",
     tooltip   : "Click to edit...",
@@ -205,11 +207,10 @@ $(".mouseover").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Checkbox</h4>
-                    <p class='checkbox'>Click here to test checkbox input</p>
+                    <p class='checkbox example'>Click here to test checkbox input</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-$(".checkbox").editable("save.php", {
+                    <pre><code class="language-javascript">$(".checkbox").editable("save.php", {
     type      : "checkbox",
     submit : 'ok'
 });
@@ -218,16 +219,46 @@ $(".checkbox").editable("save.php", {
                 </div>
             </div>
 
-            <!-- AUTOGROW -->
+        <h2>Features requiring plugins</h2>
+
+            <!-- DATE PICKER -->
+            <div class='card col-md-12'>
+                <div class='card-body'>
+                    <h4 class='card-title'>Date Picker (requires jQuery-ui datepicker)</h4>
+        <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.datepicker.min.js&gt;&lt;/script&gt;
+&lt;!-- also include jQuery-UI JS and CSS files --&gt;
+</pre></code>
+                  <p class="datepicker example">16-09-2018</p>
+                <h4 class='trigger'>Show source code</h4>
+                <div class='source'>
+                    <pre><code class="language-javascript">$(".datepicker").editable("save.php", {
+    type      : 'datepicker',
+    submit : 'OK',
+    datepicker : {
+        format: "dd-mm-yy"
+    },
+    tooltip   : "Click to edit..."
+});
+</code></pre>
+            </div>
+                </div>
+            </div>
+
+        <!-- AUTOGROW -->
+
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Autogrow textarea</h4>
-                    <p class="autogrow">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+        <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.autogrow.min.js&gt;&lt;/script&gt;
+&lt;script src=/path/to/jquery.autogrow.js&gt;&lt;/script&gt;
+</pre></code>
+                    <p class="autogrow example">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
                     <p>Depends on Autogrow by Chrys Bader.</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-$(".autogrow").editable("save.php", {
+                    <pre><code class="language-javascript">$(".autogrow").editable("save.php", {
     indicator : "<img src='img/indicator.gif' />",
     type      : "autogrow",
     submit    : 'OK',
@@ -248,18 +279,22 @@ $(".autogrow").editable("save.php", {
         <!-- THIRD ROW -->
         <div class='row'>
 
-            <!-- MASKED INPUT -->
+        <!-- MASKED INPUT -->
+
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Masked Input</h4>
-                    <p class="masked">19/12/2017</p>
+<pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.masked.min.js&gt;&lt;/script&gt;
+&lt;script src=/path/to/jquery.maskedinput.js&gt;&lt;/script&gt;
+</pre></code>
+                    <p class="masked example">19/12/2017</p>
                     <p>Depends on
-                    <a href="https://github.com/digitalBush/jquery.maskedinpuh">Masked Input</a> by Josh Bush.
+                    <a href="https://github.com/digitalBush/jquery.maskedinput">Masked Input</a> by Josh Bush.
                     </p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-$(".masked").editable("save.php", {
+                    <pre><code class="language-javascript">$(".masked").editable("save.php", {
     type      : "masked",
     mask      : "99/99/9999",
     submit    : 'OK',
@@ -270,36 +305,18 @@ $(".masked").editable("save.php", {
                 </div>
             </div>
 
-            <!-- DATE PICKER -->
-            <div class='card col-md-12'>
-                <div class='card-body'>
-                    <h4 class='card-title'>Date Picker</h4>
-                  <p class="datepicker">16-09-2018</p>
-                <h4 class='trigger'>Show source code</h4>
-                <div class='source'>
-                    <pre><code class="language-javascript">
-$(".datepicker").editable("save.php", {
-    type      : 'datepicker',
-    submit : 'OK',
-    datepicker : {
-        format: "dd-mm-yy"
-    },
-    tooltip   : "Click to edit..."
-});
-</code></pre>
-            </div>
-                </div>
-            </div>
 
             <!-- TIME PICKER -->
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Time Picker</h4>
-                  <p class="timepicker">16:30</p>
+        <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.time.min.js&gt;&lt;/script&gt;
+</pre></code>
+                  <p class="timepicker example">16:30</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-$(".timepicker").editable("save.php", {
+                    <pre><code class="language-javascript">$(".timepicker").editable("save.php", {
     type      : 'time',
     submit    : 'OK',
     tooltip   : "Click to edit..."
@@ -313,11 +330,14 @@ $(".timepicker").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Character counter</h4>
-                      <p class="charcounter">The number of characters will be counted.</p>
+        <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
+&lt;script src=/path/to/jquery.jeditable.charcounter.min.js&gt;&lt;/script&gt;
+&lt;script src=/path/to/jquery.charcounter.js&gt;&lt;/script&gt;
+</pre></code>
+                      <p class="charcounter example">The number of characters will be counted.</p>
                 <h4 class='trigger'>Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
-$(".charcounter").editable("save.php", {
+                    <pre><code class="language-javascript">$(".charcounter").editable("save.php", {
     indicator : "<img src='img/indicator.gif' />",
     type      : "charcounter",
     submit    : 'OK',
