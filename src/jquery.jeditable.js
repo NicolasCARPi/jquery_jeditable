@@ -14,10 +14,12 @@
  * @param {Function} [options.before] - Function to be executed before going into edit mode
  * @param {Function} [options.callback] - Function to run after submitting edited content
  * @param {String} [options.cancel] - Cancel button value, empty means no button
+ * @param {String} [options.cancelcssclass - CSS class to apply to cancel button
  * @param {Number} [options.cols] - Number of columns if using textarea
  * @param {String} [options.cssclass] - CSS class to apply to input form; use 'inherit' to copy from parent
  * @param {String|Function} [options.data] - Content loaded in the form
  * @param {String} [options.event='click'] - jQuery event such as 'click' of 'dblclick'. See https://api.jquery.com/category/events/
+ * @param {String} [options.formid] - Give an id to the form that is produced
  * @param {String|Number} [options.height='auto'] - Height of the element in pixels or 'auto' or 'none'
  * @param {String} [options.id='id'] - POST parameter name of edited div id
  * @param {String} [options.indicator] - Indicator html to show when saving
@@ -40,6 +42,7 @@
  * @param {String} [options.size] - The size of the text field
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
+ * @param {String} [options.submitcssclass - CSS class to apply to submit button
  * @param {Object} [options.submitdata] - Extra parameters to send when submitting edited content
  * @param {String} [options.tooltip] - Tooltip text that appears on hover (via title attribute)
  * @param {String} [options.type='text'] - text, textarea or select (or any 3rd party input type)
@@ -177,14 +180,22 @@
                     form.append("<label>" + settings.label + "</label>");
                 }
 
+                // add an ID to the form
+                if (settings.formid) {
+                    form.attr('id', settings.formid);
+                }
+
                 /* Add main input element to form and store it in input. */
                 var input = element.apply(form, [settings, self]);
 
                 /* Set input content via POST, GET, given data or existing value. */
                 var input_content;
 
+                // timeout function
+                var t;
+
                 if (settings.loadurl) {
-                    var t = setTimeout(function() {
+                    t = setTimeout(function() {
                         input.disabled = true;
                         content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
@@ -262,7 +273,6 @@
 
                 /* Discard, submit or nothing with changes when clicking outside. */
                 /* Do nothing is usable when navigating with tab. */
-                var t;
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent canceling if submit was clicked. */
@@ -409,37 +419,46 @@
                 },
                 buttons : function(settings, original) {
                     var form = this;
+                    var submit;
                     if (settings.submit) {
                         /* If given html string use that. */
                         if (settings.submit.match(/>$/)) {
-                            var submit = $(settings.submit).click(function() {
+                            submit = $(settings.submit).click(function() {
                                 if (submit.attr("type") != "submit") {
                                     form.submit();
                                 }
                             });
                         /* Otherwise use button with given string as text. */
                         } else {
-                            var submit = $('<button type="submit" />');
+                            submit = $('<button type="submit" />');
                             submit.html(settings.submit);
+                            if (settings.submitcssclass) {
+                                submit.addClass(settings.submitcssclass);
+                            }
                         }
                         $(this).append(submit);
                     }
                     if (settings.cancel) {
+                        var cancel;
                         /* If given html string use that. */
                         if (settings.cancel.match(/>$/)) {
-                            var cancel = $(settings.cancel);
+                            cancel = $(settings.cancel);
                         /* otherwise use button with given string as text */
                         } else {
-                            var cancel = $('<button type="cancel" />');
+                            cancel = $('<button type="cancel" />');
                             cancel.html(settings.cancel);
+                            if (settings.cancelcssclass) {
+                                cancel.addClass(settings.cancelcssclass);
+                            }
                         }
                         $(this).append(cancel);
 
                         $(cancel).click(function(event) {
+                            var reset;
                             if ($.isFunction($.editable.types[settings.type].reset)) {
-                                var reset = $.editable.types[settings.type].reset;
+                                reset = $.editable.types[settings.type].reset;
                             } else {
-                                var reset = $.editable.types['defaults'].reset;
+                                reset = $.editable.types.defaults.reset;
                             }
                             reset.apply(form, [settings, original]);
                             return false;
@@ -489,12 +508,13 @@
                     return(select);
                 },
                 content : function(data, settings, original) {
+                    var json;
                     /* If it is string assume it is json. */
                     if (String == data.constructor) {
-                        var json = JSON.parse(data);
+                        json = JSON.parse(data);
                     } else {
                     /* Otherwise assume it is a hash already. */
-                        var json = data;
+                        json = data;
                     }
                     for (var key in json) {
                         if (!json.hasOwnProperty(key)) {
@@ -504,7 +524,7 @@
                             continue;
                         }
                         var option = $('<option />').val(key).append(json[key]);
-                        if (key == json['selected'] || json[key] == $.trim(original.revert)) {
+                        if (key == json.selected || json[key] == $.trim(original.revert)) {
                             $(option).prop('selected', true);
                         }
                         $('select', this).append(option);
