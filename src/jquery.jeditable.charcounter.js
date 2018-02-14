@@ -30,6 +30,17 @@ $.editable.addInputType('charcounter', {
         } else {
             textarea.width(settings.width);
         }
+
+        // stop bubbling and propagation to parent element
+        textarea.click(function(event) {
+            if (event.cancelBubble) {
+                event.cancelBubble();
+            }
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            }
+        });
+
         $(this).append(textarea);
         return(textarea);
     },
