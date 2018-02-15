@@ -32,7 +32,7 @@
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
  * @param {String} [options.name='value'] - POST parameter name of edited content
  * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function. If function returns false, the form is cancelled.
- * @param {Function} [opitons.onedit] - function triggered upon edition; will cancel edition if it returns false
+ * @param {Function} [options.onedit] - function triggered upon edition; will cancel edition if it returns false
  * @param {Function} [options.onerror] - function(settings, original, xhr) { ... } called on error
  * @param {Function} [options.onreset] - function(settings, original) { ... } called before reset
  * @param {Function} [options.onsubmit] - function(settings, original) { ... } called before submit
