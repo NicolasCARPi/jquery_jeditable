@@ -1,11 +1,32 @@
 # Changelog
 
-## 1.8.1
+## 1.9.0
 
+* BREAKING: remove ajaxupload and old datepicker plugins (new datepicker added)
+* Add datepicker plugin for jQuery-UI's datepicker
+* Add form param to onblur apply (#37)
+* Allow onblur function to cancel form if it returns false (#14)
+* Properly cleanup after destroy. by  @Scottmitch (#125)
+* Return submitdata if it's a function. by @mkdgs (#109)
+* Add onedit example + doc. by @chriskeeble (#122)
+* Stop event propagation for charcounter. by @twashing (#86)
+* Add maxlength to textarea too. by @estebistec (#68)
+* Add option to style buttons and add id to form. by @quocvu (#71)
+* Add intercept option useful for preprocessing data. by @randell (#66)
+* Pass the source event to the onedit hook. by @gfouquet (#104)
 * Add 'before' option. by @bp323 (#113)
 * Fix issue with html encodable characters (#110)
 * Add checkbox type. by @oneslash and @pushpinderbagga (#52)
+* Correctly check if checkbox is checked
+* Add submitdata to callback. by @mikemeier (#64)
+* Adjust the width of the element to account for border/margin/padding
+* Add showfn for jquery animations before displaying form (#46)
 * Remove extra loop. by @dgm (#45)
+* Better demo page showing more example
+* Add proper API documentation
+* Add usage documentation in README.md
+* Add Dockerfile to serve the demos
+* Add LICENSE file
 
 ## 1.8.0
 
