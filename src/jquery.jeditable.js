@@ -6,7 +6,6 @@
  * @licence MIT (see LICENCE file)
  * @name Jquery-jeditable
  * @type  jQuery
- * @version 1.8.1
  *
  * @param {String|Function} target - URL or Function to send edited content to. Can also be 'disable', 'enable', or 'destroy'
  * @param {Object} [options] - Additional options
@@ -26,7 +25,7 @@
  * @param {String} [options.label] - Label for the form
  * @param {String|Function} [options.loaddata] - Extra parameters to pass when fetching content before editing
  * @param {String} [options.loadtext='Loading…'] - Text to display while loading external content
- * @param {String} [options.loadtype='GET'] - Request type for load url (GET or POST)
+ * @param {String} [options.loadtype='GET'] - Request type for loadurl (GET or POST)
  * @param {String} [options.loadurl] - URL to fetch input content before editing
  * @param {String} [options.maxlength] - The maximum number of character in the text field
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
