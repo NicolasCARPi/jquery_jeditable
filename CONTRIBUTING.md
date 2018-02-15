@@ -4,9 +4,9 @@
 * Use 4 spaces for indent
 * Use UNIX-style line ending
 * Use UTF-8 without BOM
-* Use a linter
+* Use a javascript linter
 
-# Generate the API
+# Generate the API doc
 
 ~~~bash
 npm -g install documentation
