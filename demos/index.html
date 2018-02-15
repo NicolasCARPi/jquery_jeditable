@@ -94,6 +94,8 @@ $(".editable-text-full").editable("save.php", {
     },
     cancel : 'Cancel',
     cssclass : 'custom-class',
+    cancelcssclass : 'btn btn-danger',
+    submitcssclass : 'btn btn-success',
     maxlength : 200,
     label : 'This is a label',
     onreset : function() { console.log('Triggered before reset') },
@@ -244,6 +246,7 @@ $(".mouseover").editable("save.php", {
                     <pre><code class="language-javascript">$(".css-buttons").editable("save.php", {
     submit : 'OK',
     cancel : 'Cancel',
+    cssclass : 'custom-class',
     cancelcssclass : 'btn btn-danger',
     submitcssclass : 'btn btn-success',
     formid : 'abc-123'
@@ -442,6 +445,8 @@ $(".mouseover").editable("save.php", {
                 },
                 cancel : 'Cancel',
                 cssclass : 'custom-class',
+                cancelcssclass : 'btn btn-danger',
+                submitcssclass : 'btn btn-success',
                 maxlength : 200,
                 label : 'This is a label',
                 onreset : function() { console.log('Triggered before reset') },
@@ -532,6 +537,7 @@ $(".mouseover").editable("save.php", {
             $(".css-buttons").editable("save.php", {
                 submit : 'OK',
                 cancel : 'Cancel',
+                cssclass : 'custom-class',
                 cancelcssclass : 'btn btn-danger',
                 submitcssclass : 'btn btn-success',
                 formid : 'abc-123'

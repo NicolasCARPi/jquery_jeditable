@@ -25,6 +25,16 @@ body {
     background-color: #fffeee;
 }
 
+.custom-class input, button {
+    margin-right: 10px;
+}
+
+.custom-class input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .trigger:hover {
     cursor: pointer;
 }
@@ -49,8 +59,4 @@ h4 {
 /* for the full example */
 label {
     margin-right: 5px;
-}
-
-.custom-class {
-    font-size: 110%;
 }

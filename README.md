@@ -6,6 +6,8 @@ Edit in place plugin for [jQuery](https://jquery.com/) (compatible with jQuery v
 
 Bind it to an element on the page, and when clicked the element will become a form that will be sent by POST request to an URL.
 
+![demo](https://i.imgur.com/GGAVtZ0.gif)
+
 ## Live demo
 
 See it in action: [LIVE DEMO](https://jeditable.elabftw.net/)
