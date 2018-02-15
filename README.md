@@ -8,6 +8,8 @@ Bind it to an element on the page, and when clicked the element will become a fo
 
 ![demo](https://i.imgur.com/GGAVtZ0.gif)
 
+Works with text inputs, textarea, select, datepicker, and more… Comes with a ton of different options you can use to do exactly what you want!
+
 ## Live demo
 
 See it in action: [LIVE DEMO](https://jeditable.elabftw.net/)
