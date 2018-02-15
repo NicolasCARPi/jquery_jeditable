@@ -445,6 +445,7 @@ $(".mouseover").editable("save.php", {
                 maxlength : 200,
                 label : 'This is a label',
                 onreset : function() { console.log('Triggered before reset') },
+                onblur : function() { console.log('Triggered on blur event') },
                 onsubmit : function() { console.log('Triggered before submit') },
                 showfn : function(elem) { elem.fadeIn('slow') },
                 submit : 'Save',
