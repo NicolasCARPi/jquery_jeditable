@@ -66,7 +66,7 @@ Both elements will have a tooltip showing when mouse is hovering.
 
 The [live demo](https://jeditable.elabftw.net) shows more example but with that you can already do plenty!
 
-The complete list of options is available here: [FULL LIST OF OPTIONS](https://github.com/NicolasCARPi/jquery_jeditable/wiki)
+The complete list of options is available here: [FULL LIST OF OPTIONS](https://jeditable.elabftw.net/api/#jquery-jeditable)
 
 ### What is sent to the server?
 
@@ -215,7 +215,7 @@ Note that the function must return a string. Usually the edited content. This wi
 
 The demo contains other examples, [have a look!](https://jeditable.elabftw.net)
 
-The complete list of options is available here: [FULL LIST OF OPTIONS](https://github.com/NicolasCARPi/jquery_jeditable/wiki)
+The complete list of options is available here: [FULL LIST OF OPTIONS](https://jeditable.elabftw.net/api/#jquery-jeditable)
 
 ## Support
 
