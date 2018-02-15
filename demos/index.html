@@ -76,7 +76,7 @@
                 <div class='card-body'>
                     <h4 class='card-title'>Complete example</h4>
                     <h6 class='card-subtitle text-muted'>A more complete example with a bunch of options</h6>
-                <p class="editable-text-full card-text example">Click this text to edit it.</p>
+                <p class="editable-text-full card-text example" data-test="yep">Click this text to edit it.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
                 <pre><code class="language-javascript">/* data that will be sent along */
@@ -117,6 +117,14 @@ $(".editable-text-full").editable("save.php", {
     tooltip : "Click to edit...",
     width : 160
 });
+
+/* target as a function example
+$(".editable-text-full").editable(function(input, settings, elem) {
+    console.log(input);
+    console.log(settings);
+    console.log($(elem).data('test'));
+}, {});
+*/
 </code></pre>
                 </div>
                 </div>

@@ -320,7 +320,7 @@
 
                           /* Check if given target is function */
                           if ($.isFunction(settings.target)) {
-                              var str = settings.target.apply(self, [input.val(), settings]);
+                              var str = settings.target.apply(self, [input.val(), settings, self]);
                               $(self).html(str);
                               self.editing = false;
                               callback.apply(self, [self.innerHTML, settings]);
