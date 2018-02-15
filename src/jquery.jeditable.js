@@ -14,7 +14,7 @@
  * @param {Function} [options.before] - Function to be executed before going into edit mode
  * @param {Function} [options.callback] - Function to run after submitting edited content
  * @param {String} [options.cancel] - Cancel button value, empty means no button
- * @param {String} [options.cancelcssclass - CSS class to apply to cancel button
+ * @param {String} [options.cancelcssclass] - CSS class to apply to cancel button
  * @param {Number} [options.cols] - Number of columns if using textarea
  * @param {String} [options.cssclass] - CSS class to apply to input form; use 'inherit' to copy from parent
  * @param {String|Function} [options.data] - Content loaded in the form
@@ -43,7 +43,7 @@
  * @param {String} [options.size] - The size of the text field
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
- * @param {String} [options.submitcssclass - CSS class to apply to submit button
+ * @param {String} [options.submitcssclass] - CSS class to apply to submit button
  * @param {Object|Function} [options.submitdata] - Extra parameters to send when submitting edited content. function(revert, settings, submitdata)
  * @param {String} [options.tooltip] - Tooltip text that appears on hover (via title attribute)
  * @param {String} [options.type='text'] - text, textarea or select (or any 3rd party input type)

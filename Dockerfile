@@ -15,6 +15,18 @@ LABEL org.label-schema.name="jquery-jeditable demo" \
     org.label-schema.maintainer="nicolas.carpi@curie.fr" \
     org.label-schema.schema-version="1.0"
 
+# install npm
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get -y install gnupg \
+    && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g documentation
+
+
 COPY . /var/www/html
 RUN ln -s /var/www/html/src /var/www/html/demos/src
 RUN sed -i -e "s:/var/www/html:/var/www/html/demos:" /etc/apache2/sites-enabled/000-default.conf
+
+# generate api doc
+WORKDIR /var/www/html
+RUN documentation build src -f html -o demos/api
