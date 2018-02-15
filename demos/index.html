@@ -84,7 +84,7 @@ submitdata['param1'] = 42;
 submitdata['pwet'] = 'youpla';
 
 $(".editable-text-full").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     type : "text",
     onedit : function() { console.log('If I return false edition will be canceled'); return true;},
     before : function() { console.log('Triggered before form appears')},
@@ -130,7 +130,7 @@ $(".editable-text-full").editable("save.php", {
                 <div class='source'>
                 <pre><code class="language-javascript">$(".editable_textarea").editable("save.php", {
     type   : 'textarea',
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     select : true,
     submit : 'OK',
     cancel : 'Nope'
@@ -153,7 +153,7 @@ $(".editable-text-full").editable("save.php", {
                     <pre><code class="language-javascript">// inline select
 $(".editable-select").editable("save.php", {
     type   : "select",
-    indicator : '<img src="img/indicator.gif" />',
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     data   : '{"Lorem ipsum":"Lorem ipsum","Ipsum dolor":"Ipsum dolor","Dolor sit":"Dolor sit"}',
     submit : "OK",
     style  : "inherit",
@@ -164,7 +164,7 @@ $(".editable-select").editable("save.php", {
 // with JSON feed
 $(".editable-select-json").editable("save.php", {
     type   : "select",
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     loadurl : "json.php",
     submit : "OK",
     style  : "inherit"
@@ -190,14 +190,14 @@ $(".editable-select-json").editable("save.php", {
                 <div class='source'>
                     <pre><code class="language-javascript">// click
 $(".click").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     tooltip   : "Click to edit...",
     style  : "inherit"
 });
 
 // double click
 $(".dblclick").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     tooltip   : "Doubleclick to edit...",
     event     : "dblclick",
     style  : "inherit"
@@ -205,7 +205,7 @@ $(".dblclick").editable("save.php", {
 
 // mouseover
 $(".mouseover").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     tooltip   : "Move mouseover to edit...",
     event     : "mouseover",
     style  : "inherit"
@@ -313,7 +313,7 @@ $(".mouseover").editable("save.php", {
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
                     <pre><code class="language-javascript">$(".autogrow").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     type      : "autogrow",
     submit    : 'OK',
     cancel    : 'cancel',
@@ -391,7 +391,7 @@ $(".mouseover").editable("save.php", {
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
                     <pre><code class="language-javascript">$(".charcounter").editable("save.php", {
-    indicator : "<img src='img/indicator.gif' />",
+    indicator : "&lt;img src='img/indicator.gif' /&gt;",
     type      : "charcounter",
     submit    : 'OK',
     tooltip   : "Click to edit...",

@@ -344,7 +344,7 @@
                                   submitdata._method = 'put';
                               }
 
-                              /* Show the saving indicator. */
+                              // SHOW INDICATOR
                               $(self).html(settings.indicator);
 
                               /* Defaults for ajaxoptions. */
