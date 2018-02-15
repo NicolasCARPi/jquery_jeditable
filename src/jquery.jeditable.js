@@ -297,7 +297,7 @@
                 } else if ($.isFunction(settings.onblur)) {
                     input.blur(function(e) {
                         // reset the form if the onblur function returns false
-                        if (false === settings.onblur.apply(self, [input.val(), settings])) {
+                        if (false === settings.onblur.apply(self, [input.val(), settings, form])) {
                             reset.apply(form, [settings, self]);
                         }
                     });
