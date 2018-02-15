@@ -16,16 +16,16 @@
  *     }
  * });
  */
-$.editable.addInputType('autogrow', {
+$.editable.addInputType("autogrow", {
     element : function(settings, original) {
-        var textarea = $('<textarea />');
+        var textarea = $("<textarea />");
         if (settings.rows) {
-            textarea.attr('rows', settings.rows);
+            textarea.attr("rows", settings.rows);
         } else {
             textarea.height(settings.height);
         }
         if (settings.cols) {
-            textarea.attr('cols', settings.cols);
+            textarea.attr("cols", settings.cols);
         } else {
             textarea.width(settings.width);
         }
@@ -33,6 +33,6 @@ $.editable.addInputType('autogrow', {
         return(textarea);
     },
     plugin : function(settings, original) {
-        $('textarea', this).autogrow(settings.autogrow);
+        $("textarea", this).autogrow(settings.autogrow);
     }
 });
