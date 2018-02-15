@@ -8,7 +8,7 @@
  * @type  jQuery
  * @version 1.8.1
  *
- * @param {String|Function} target - URL or Function to send edited content to
+ * @param {String|Function} target - URL or Function to send edited content to. Can also be 'disable', 'enable', or 'destroy'
  * @param {Object} [options] - Additional options
  * @param {Object} [options.ajaxoptions] - jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
  * @param {Function} [options.before] - Function to be executed before going into edit mode
@@ -84,6 +84,7 @@
         var content  = $.editable.types[settings.type].content || $.editable.types.defaults.content;
         var element  = $.editable.types[settings.type].element || $.editable.types.defaults.element;
         var reset    = $.editable.types[settings.type].reset || $.editable.types.defaults.reset;
+        var destroy  = $.editable.types[settings.type].destroy || $.editable.types.defaults.destroy;
         var callback = settings.callback || function() { };
         var intercept = settings.intercept || function(s) { return s; };
         var onedit   = settings.onedit   || function() { };
@@ -108,6 +109,11 @@
             /* If element is empty add something clickable (if requested) */
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
+            }
+
+            if ('destroy' == target) {
+                destroy.apply($(this).find('form'), [settings, self]);
+                return;
             }
 
             // EVENT IS FIRED
@@ -196,7 +202,7 @@
                 var t;
 
                 if (settings.loadurl) {
-                    t = setTimeout(function() {
+                    t = self.setTimeout(function() {
                         input.disabled = true;
                         content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
@@ -215,7 +221,7 @@
                        async: false,
                        cache : false,
                        success: function(result) {
-                          window.clearTimeout(t);
+                          self.clearTimeout(t);
                           input_content = result;
                           input.disabled = false;
                        }
@@ -257,7 +263,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* Focus to first visible form element. */
-                $(':input:visible:enabled:first', form).focus();
+                form.find(':input:visible:enabled:first').focus();
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
@@ -277,14 +283,14 @@
                 if ('cancel' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent canceling if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' == settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
-                        t = setTimeout(function() {
+                        t = self.setTimeout(function() {
                             form.submit();
                         }, 200);
                     });
@@ -297,7 +303,7 @@
                 form.submit(function(e) {
 
                     if (t) {
-                        clearTimeout(t);
+                        self.clearTimeout(t);
                     }
 
                     /* Do no submit. */
@@ -376,10 +382,13 @@
                     return false;
                 });
             });
-            /* Privileged methods */
-            this.reset = function(form) {
+
+            // PRIVILEGED METHODS
+
+            // RESET
+            self.reset = function(form) {
                 /* Prevent calling reset twice when blurring. */
-                if (this.editing) {
+                if (self.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
                     if (false !== onreset.apply(form, [settings, self])) {
                         $(self).html(self.revert);
@@ -394,8 +403,65 @@
                     }
                 }
             };
-        });
 
+            // DESTROY
+            self.destroy = function(form) {
+                $(self)
+                .unbind($(self).data('event.editable'))
+                .removeData('disabled.editable')
+                .removeData('event.editable');
+
+                self.clearTimeouts();
+
+                if (self.editing) {
+                     reset.apply(form, [settings, self]);
+                }
+            };
+
+            // CLEARTIMEOUT
+            self.clearTimeout = function(t) {
+                var timeouts = $(self).data("timeouts");
+                clearTimeout(t);
+                if(timeouts) {
+                    var i = timeouts.indexOf(t);
+                    if(i > -1) {
+                        timeouts.splice(i, 1);
+                        if(timeouts.length <= 0) {
+                            $(self).removeData("timeouts");
+                        }
+                    } else {
+                        console.warn("jeditable clearTimeout could not find timeout "+t);
+                    }
+                }
+            };
+
+            // CLEAR ALL TIMEOUTS
+            self.clearTimeouts = function () {
+                var timeouts = $(self).data("timeouts");
+                if(timeouts) {
+                    for(var i = 0, n = timeouts.length; i < n; ++i) {
+                        clearTimeout(timeouts[i]);
+                    }
+                    timeouts.length = 0;
+                    $(self).removeData("timeouts");
+                }
+            };
+
+            // SETTIMEOUT
+            self.setTimeout = function(callback, time) {
+               var timeouts = $(self).data("timeouts");
+               var t = setTimeout(function() {
+                   callback();
+                   self.clearTimeout(t);
+               }, time);
+               if(!timeouts) {
+                   timeouts = [];
+                   $(self).data("timeouts", timeouts);
+               }
+               timeouts.push(t);
+               return t;
+            };
+        });
     };
 
 
@@ -408,10 +474,13 @@
                     return(input);
                 },
                 content : function(string, settings, original) {
-                    $(':input:first', this).val(string);
+                    $(this).find(':input:first').val(string);
                 },
                 reset : function(settings, original) {
-                  original.reset(this);
+                    original.reset(this);
+                },
+                destroy: function(settings, original) {
+                    original.destroy(this);
                 },
                 buttons : function(settings, original) {
                     var form = this;
@@ -528,13 +597,13 @@
                         if (key == json.selected || json[key] == $.trim(original.revert)) {
                             $(option).prop('selected', true);
                         }
-                        $('select', this).append(option);
+                        $(this).find('select').append(option);
                     }
 
                     /* Submit on change if no submit button defined. */
                     if (!settings.submit) {
                         var form = this;
-                        $('select', this).change(function() {
+                        $(this).find('select').change(function() {
                             form.submit();
                         });
                     }
