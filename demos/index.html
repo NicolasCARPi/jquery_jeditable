@@ -90,7 +90,7 @@ $(".editable-text-full").editable("save.php", {
         console.log('Triggered after submit');
         console.log('Result: ' + result);
         console.log('Settings.width: ' + settings.width);
-        console.log('Submitdata: ' + submitdata['pwet']);
+        console.log('Submitdata: ' + submitdata.pwet);
     },
     cancel : 'Cancel',
     cssclass : 'custom-class',
@@ -101,6 +101,13 @@ $(".editable-text-full").editable("save.php", {
     showfn : function(elem) { elem.fadeIn('slow') },
     submit : 'Save',
     submitdata : submitdata,
+    /* submitdata as a function example
+    submitdata : function(revert, settings, submitdata) {
+        console.log("Revert text: " + revert);
+        console.log(settings);
+        console.log("User submitted text: " + submitdata.value);
+    },
+    */
     tooltip : "Click to edit...",
     width : 160
 });
@@ -442,6 +449,13 @@ $(".mouseover").editable("save.php", {
                 showfn : function(elem) { elem.fadeIn('slow') },
                 submit : 'Save',
                 submitdata : submitdata,
+                /* submitdata as a function example
+                submitdata : function(revert, settings, submitdata) {
+                    console.log("Revert text: " + revert);
+                    console.log(settings);
+                    console.log("User submitted text: " + submitdata.value);
+                },
+                */
                 tooltip : "Click to edit...",
                 width : 160
             });

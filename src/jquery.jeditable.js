@@ -44,7 +44,7 @@
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
  * @param {String} [options.submitcssclass - CSS class to apply to submit button
- * @param {Object} [options.submitdata] - Extra parameters to send when submitting edited content
+ * @param {Object|Function} [options.submitdata] - Extra parameters to send when submitting edited content. function(revert, settings, submitdata)
  * @param {String} [options.tooltip] - Tooltip text that appears on hover (via title attribute)
  * @param {String} [options.type='text'] - text, textarea or select (or any 3rd party input type)
  * @param {String|Number} [options.width='auto'] - The width of the element in pixels or 'auto' or 'none'
@@ -331,7 +331,7 @@
                               submitdata[settings.id] = self.id;
                               /* Add extra data to be POST:ed. */
                               if ($.isFunction(settings.submitdata)) {
-                                  $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings]));
+                                  $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings, submitdata]));
                               } else {
                                   $.extend(submitdata, settings.submitdata);
                               }
