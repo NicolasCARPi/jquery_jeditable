@@ -162,12 +162,10 @@ $(".editable-text-full").editable(function(input, settings, elem) {
                     <pre><code class="language-javascript">// inline select
 $(".editable-select").editable("save.php", {
     type   : "select",
-    data   : '{"Lorem ipsum":"Lorem ipsum","Ipsum dolor":"Ipsum dolor","Dolor sit":"Dolor sit"}',
-    submit : "OK",
+    // this data will be sorted by key
+    data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+    submitdata : function() { return {id : 42, something: 'else'};},
     style  : "inherit",
-    submitdata : function() {
-        return {id : 2};
-    }
 });
 // with JSON feed
 $(".editable-select-json").editable("save.php", {
@@ -482,12 +480,9 @@ $(".mouseover").editable("save.php", {
             // INLINE SELECT
             $(".editable-select").editable("save.php", {
                 type   : "select",
-                data   : '{"Lorem ipsum":"Lorem ipsum","Ipsum dolor":"Ipsum dolor","Dolor sit":"Dolor sit"}',
-                submit : "OK",
+                data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+                submitdata : function() { return {id : 42, something: 'else'};},
                 style  : "inherit",
-                submitdata : function() {
-                    return {id : 2};
-                }
             });
 
             // INLINE SELECT WITH JSON

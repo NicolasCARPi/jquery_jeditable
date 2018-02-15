@@ -581,28 +581,50 @@
                 },
                 content : function(data, settings, original) {
                     var json;
-                    /* If it is string assume it is json. */
+                    // If it is string assume it is json
                     if (String == data.constructor) {
                         json = JSON.parse(data);
                     } else {
-                    /* Otherwise assume it is a hash already. */
+                    // Otherwise assume it is a hash already
                         json = data;
                     }
+
+                    // Create tuples for sorting
+                    var tuples = [];
                     for (var key in json) {
+                        tuples.push([key, json[key]]); // Store: [key, value]
+                    }
+                    // sort it
+                    tuples.sort(function(a, b) {
+                        a = a[1];
+                        b = b[1];
+                        return a < b ? -1 : (a > b ? 1 : 0);
+                    });
+
+                    // now add the options to our select
+                    for (var i = 0; i < tuples.length; i++) {
+                        key = tuples[i][0];
+                        var value = tuples[i][1];
+                        console.log(key + value);
+
                         if (!json.hasOwnProperty(key)) {
                             continue;
                         }
-                        if ('selected' == key) {
-                            continue;
+
+                        var option = $('<option />').val(key).append(value);
+
+                        // FIXME this will add 'selected' to both the value with key selected and the value that is the same as original
+                        // only one should get this otherwise it leads to inconsistant behavior
+                        // I'd go with removing the selected key one, but it will break stuff
+                        // add the selected prop if it's the same as original or if the key is 'selected'
+                        if (key == 'selected' || key == $.trim(original.revert)) {
+                            $(option).prop('selected', 'selected');
                         }
-                        var option = $('<option />').val(key).append(json[key]);
-                        if (key == json.selected || json[key] == $.trim(original.revert)) {
-                            $(option).prop('selected', true);
-                        }
+
                         $(this).find('select').append(option);
                     }
 
-                    /* Submit on change if no submit button defined. */
+                    // submit on change if no submit button defined
                     if (!settings.submit) {
                         var form = this;
                         $(this).find('select').change(function() {
@@ -613,7 +635,7 @@
             }
         },
 
-        /* Add new input type */
+        // add new input type
         addInputType: function(name, input) {
             $.editable.types[name] = input;
         }
