@@ -2,7 +2,7 @@
 
 ## Description
 
-Edit in place plugin for jQuery.
+Edit in place plugin for [jQuery](https://jquery.com/) (compatible with jQuery v3.3.1+).
 
 Bind it to an element on the page, and when clicked the element will become a form that will be sent by POST request to an URL.
 

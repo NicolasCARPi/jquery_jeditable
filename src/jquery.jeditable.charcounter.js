@@ -17,16 +17,16 @@
  *     }
  * });
  */
-$.editable.addInputType('charcounter', {
+$.editable.addInputType("charcounter", {
     element : function(settings, original) {
-        var textarea = $('<textarea />');
+        var textarea = $("<textarea />");
         if (settings.rows) {
-            textarea.attr('rows', settings.rows);
+            textarea.attr("rows", settings.rows);
         } else {
             textarea.height(settings.height);
         }
         if (settings.cols) {
-            textarea.attr('cols', settings.cols);
+            textarea.attr("cols", settings.cols);
         } else {
             textarea.width(settings.width);
         }
@@ -45,6 +45,6 @@ $.editable.addInputType('charcounter', {
         return(textarea);
     },
     plugin : function(settings, original) {
-        $('textarea', this).charCounter(settings.charcounter.characters, settings.charcounter);
+        $("textarea", this).charCounter(settings.charcounter.characters, settings.charcounter);
     }
 });

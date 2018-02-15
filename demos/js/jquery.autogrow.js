@@ -41,9 +41,9 @@
 		this.options		  	= o || {};
 		this.dummy			  	= null;
 		this.interval	 	  	= null;
-		this.line_height	  	= this.options.lineHeight || parseInt(jQuery(e).css('line-height'));
-		this.min_height		  	= this.options.minHeight || parseInt(jQuery(e).css('min-height'));
-		this.max_height		  	= this.options.maxHeight || parseInt(jQuery(e).css('max-height'));
+		this.line_height	  	= this.options.lineHeight || parseInt(jQuery(e).css("line-height"));
+		this.min_height		  	= this.options.minHeight || parseInt(jQuery(e).css("min-height"));
+		this.max_height		  	= this.options.maxHeight || parseInt(jQuery(e).css("max-height"));
 		this.textarea		  	= jQuery(e);
 
 		if (isNaN(this.line_height)) {
@@ -55,7 +55,7 @@
 	};
 
 	jQuery.autogrow.fn = jQuery.autogrow.prototype = {
-    autogrow: '1.2.3'
+    autogrow: "1.2.3"
   };
 
  	jQuery.autogrow.fn.extend = jQuery.autogrow.extend = jQuery.extend;
@@ -64,10 +64,10 @@
 
 		init: function() {
 			var self = this;
-			this.textarea.css({overflow: 'hidden', display: 'block'});
-			this.textarea.bind('focus', function() {
+			this.textarea.css({overflow: "hidden", display: "block"});
+			this.textarea.bind("focus", function() {
                 self.startExpand();
-            }).bind('blur', function() {
+            }).bind("blur", function() {
                 self.stopExpand();
             });
 			this.checkExpand();
@@ -86,22 +86,22 @@
 
 			if (this.dummy == null)
 			{
-				this.dummy = jQuery('<div></div>');
+				this.dummy = jQuery("<div></div>");
 				this.dummy.css({
-                    'font-size'  : this.textarea.css('font-size'),
-                    'font-family': this.textarea.css('font-family'),
-                    'width'      : this.textarea.css('width'),
-                    'padding'    : this.textarea.css('padding'),
-                    'line-height': this.line_height + 'px',
-                    'overflow-x' : 'hidden',
-                    'position'   : 'absolute',
-                    'top'        : 0,
-                    'left'		 : -9999
-                    }).appendTo('body');
+                    "font-size"  : this.textarea.css("font-size"),
+                    "font-family": this.textarea.css("font-family"),
+                    "width"      : this.textarea.css("width"),
+                    "padding"    : this.textarea.css("padding"),
+                    "line-height": this.line_height + "px",
+                    "overflow-x" : "hidden",
+                    "position"   : "absolute",
+                    "top"        : 0,
+                    "left"		 : -9999
+                    }).appendTo("body");
 			}
 
 			// Strip HTML tags
-			var html = this.textarea.val().replace(/(<|>)/g, '');
+			var html = this.textarea.val().replace(/(<|>)/g, "");
 
 			if (this.dummy.html() != html)
 			{
@@ -109,12 +109,12 @@
 
 				if (this.max_height > 0 && (this.dummy.height() + this.line_height > this.max_height))
 				{
-					this.textarea.css('overflow-y', 'auto');
+					this.textarea.css("overflow-y", "auto");
 				} else {
-					this.textarea.css('overflow-y', 'hidden');
+					this.textarea.css("overflow-y", "hidden");
 					if (this.textarea.height() < this.dummy.height() + this.line_height || (this.dummy.height() < this.textarea.height()))
 					{
-						this.textarea.animate({height: (this.dummy.height() + this.line_height) + 'px'}, 100);
+						this.textarea.animate({height: (this.dummy.height() + this.line_height) + "px"}, 100);
 					}
 				}
 			}

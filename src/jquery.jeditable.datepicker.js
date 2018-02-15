@@ -18,10 +18,10 @@
  *     cancel    : 'cancel',
  * });
  */
-$.editable.addInputType('datepicker', {
+$.editable.addInputType("datepicker", {
 
     element : function(settings, original) {
-        var input = $('<input />');
+        var input = $("<input />");
         if (settings.datepicker) {
             input.datepicker(settings.datepicker);
         } else {
@@ -38,7 +38,7 @@ $.editable.addInputType('datepicker', {
     },
 
     submit: function (settings, original) {
-        var dateRaw = $("input", this).datepicker('getDate');
+        var dateRaw = $("input", this).datepicker("getDate");
         if (settings.datepicker.format) {
             dateFormatted = $.datepicker.formatDate(settings.datepicker.format, new Date(dateRaw));
         } else {

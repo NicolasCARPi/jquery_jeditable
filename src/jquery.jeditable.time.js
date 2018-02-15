@@ -52,7 +52,7 @@ $.editable.addInputType('time', {
             }
         });
         $('#min_', this).children().each(function() {
-            if (min == $(this).val()) {
+            if (min === $(this).val()) {
                 $(this).attr('selected', 'selected');
             }
         });

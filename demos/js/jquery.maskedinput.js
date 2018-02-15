@@ -80,9 +80,11 @@
                 }
                 function shiftR(pos) {
                     var i, c, j, t;
-                    for (i = pos, c = getPlaceholder(pos); len > i; i++) if (tests[i]) {
-                        if (j = seekNext(i), t = buffer[i], buffer[i] = c, !(len > j && tests[j].test(t))) break;
-                        c = t;
+                    for (i = pos, c = getPlaceholder(pos); len > i; i++) {
+                        if (tests[i]) {
+                            if (j = seekNext(i), t = buffer[i], buffer[i] = c, !(len > j && tests[j].test(t))) break;
+                            c = t;
+                        }
                     }
                 }
                 function androidInputEvent() {
@@ -99,6 +101,12 @@
                 }
                 function blurEvent() {
                     checkVal(), input.val() != focusText && input.change();
+                }
+                function clearBuffer(start, end) {
+                    var i;
+                    for (i = start; end > i && len > i; i++) {
+                        tests[i] && (buffer[i] = getPlaceholder(i));
+                    }
                 }
                 function keydownEvent(e) {
                     if (!input.prop("readonly")) {
@@ -127,10 +135,6 @@
                             e.preventDefault();
                         }
                     }
-                }
-                function clearBuffer(start, end) {
-                    var i;
-                    for (i = start; end > i && len > i; i++) tests[i] && (buffer[i] = getPlaceholder(i));
                 }
                 function writeBuffer() {
                     input.val(buffer.join(""));
