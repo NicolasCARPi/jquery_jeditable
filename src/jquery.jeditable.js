@@ -31,7 +31,7 @@
  * @param {String} [options.maxlength] - The maximum number of character in the text field
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
  * @param {String} [options.name='value'] - POST parameter name of edited content
- * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function
+ * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function. If function returns false, the form is cancelled.
  * @param {Function} [opitons.onedit] - function triggered upon edition; will cancel edition if it returns false
  * @param {Function} [options.onerror] - function(settings, original, xhr) { ... } called on error
  * @param {Function} [options.onreset] - function(settings, original) { ... } called before reset
@@ -296,7 +296,10 @@
                     });
                 } else if ($.isFunction(settings.onblur)) {
                     input.blur(function(e) {
-                        settings.onblur.apply(self, [input.val(), settings]);
+                        // reset the form if the onblur function returns false
+                        if (false === settings.onblur.apply(self, [input.val(), settings])) {
+                            reset.apply(form, [settings, self]);
+                        }
                     });
                 }
 
