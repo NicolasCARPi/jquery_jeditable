@@ -2,6 +2,9 @@
 
 * Target the 'experimental' branch
 * Use 4 spaces for indent
+* Use UNIX-style line ending
+* Use UTF-8 without BOM
+* Use a linter
 
 # Generate the API
 
