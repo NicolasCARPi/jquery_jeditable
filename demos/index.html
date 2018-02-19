@@ -86,7 +86,7 @@ submitdata['slow'] = true;
 submitdata['pwet'] = 'youpla';
 
 $(".editable-text-full").editable("save.php", {
-    indicator : "&lt;img src='img/indicator.gif' /&gt;",
+    indicator : "&lt;img src='img/spinner.svg' /&gt;",
     type : "text",
     onedit : function() { console.log('If I return false edition will be canceled'); return true;},
     before : function() { console.log('Triggered before form appears')},
@@ -435,7 +435,7 @@ $(".mouseover").editable("save.php", {
             submitdata['pwet'] = 'youpla';
 
             $(".editable-text-full").editable("save.php", {
-                indicator : "<img src='img/indicator.gif' />",
+                indicator : "<img src='img/spinner.svg' />",
                 type : "text",
                 onedit : function() { console.log('If I return false edition will be canceled'); return true;},
                 before : function() { console.log('Triggered before form appears');},

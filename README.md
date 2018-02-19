@@ -54,7 +54,7 @@ $(document).ready(function() {
         type      : 'textarea',
         cancel    : 'Cancel',
         submit    : 'OK',
-        indicator : '<img src="img/indicator.gif">',
+        indicator : '<img src="img/spinner.svg" />',
         tooltip   : 'Click to edit…'
     });
 });
