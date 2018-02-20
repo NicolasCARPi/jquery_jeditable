@@ -23,29 +23,34 @@
  * @param {String} [options.id='id'] - POST parameter name of edited div id
  * @param {String} [options.indicator] - Indicator html to show when saving
  * @param {String} [options.label] - Label for the form
+ * @param {String} [options.list] - HTML5 attribute for text input. Will suggest from a datalist with id of the list option
  * @param {String|Function} [options.loaddata] - Extra parameters to pass when fetching content before editing
  * @param {String} [options.loadtext='Loading…'] - Text to display while loading external content
  * @param {String} [options.loadtype='GET'] - Request type for loadurl (GET or POST)
  * @param {String} [options.loadurl] - URL to fetch input content before editing
+ * @param {String} [options.max] - Maximum value for number type
  * @param {String} [options.maxlength] - The maximum number of character in the text field
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
+ * @param {String} [options.min] - Mininum value for number type
  * @param {String} [options.name='value'] - POST parameter name of edited content
  * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function. If function returns false, the form is cancelled.
  * @param {Function} [options.onedit] - function triggered upon edition; will cancel edition if it returns false
  * @param {Function} [options.onerror] - function(settings, original, xhr) { ... } called on error
  * @param {Function} [options.onreset] - function(settings, original) { ... } called before reset
  * @param {Function} [options.onsubmit] - function(settings, original) { ... } called before submit
+ * @param {String} [options.pattern] - HTML5 attribute for text or URL input
  * @param {String} [options.placeholder='Click to edit'] - Placeholder text or html to insert when element is empty
  * @param {Number} [options.rows] - number of rows if using textarea
  * @param {Boolean} [options.select] - When true text is selected
  * @param {Function} [options.showfn]- Function that can animate the element when switching to edit mode
  * @param {String} [options.size] - The size of the text field
+ * @param {String} [options.step] - Step size for number type
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
  * @param {String} [options.submitcssclass] - CSS class to apply to submit button
  * @param {Object|Function} [options.submitdata] - Extra parameters to send when submitting edited content. function(revert, settings, submitdata)
  * @param {String} [options.tooltip] - Tooltip text that appears on hover (via title attribute)
- * @param {String} [options.type='text'] - text, textarea or select (or any 3rd party input type)
+ * @param {String} [options.type='text'] - text, textarea, select, email, number, url (or any 3rd party input type)
  * @param {String|Number} [options.width='auto'] - The width of the element in pixels or 'auto' or 'none'
  *
  * @example <caption>Simple usage example:</caption>
@@ -57,6 +62,16 @@
  */
 (function($) {
 
+    // Keyboard accessibility/WAI-ARIA - allow users to navigate to an editable element using TAB/Shift+TAB
+    $.fn.editableAriaShim = function () {
+        this.attr({
+            role: 'button',
+            tabindex: 0
+        });
+        return this; // <-- object chaining.
+    };
+
+    // EDITABLE function
     $.fn.editable = function(target, options) {
 
         if ('disable' == target) {
@@ -120,6 +135,11 @@
 
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
+                    return;
+                }
+
+                // do nothing if user press Tab again, just go to next element, not into edit mode
+                if (e.keyCode == 9) {
                     return;
                 }
 
@@ -466,6 +486,12 @@
         });
     };
 
+var _supportInType = function (type) {
+    var i = document.createElement('input');
+    i.setAttribute('type', type);
+    return i.type !== 'text' ? type : 'text';
+};
+
 
     $.editable = {
         types: {
@@ -535,10 +561,24 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $("<input type='text' />");
-                    if (settings.width  != 'none') { input.css('width', settings.width);  }
-                    if (settings.height != 'none') { input.css('height', settings.height); }
-                    input.attr('autocomplete','off');
+                    var input = $("<input />").attr({
+                        autocomplete: 'off',
+                        list: settings.list,
+                        maxlength: settings.maxlength,
+                        pattern: settings.pattern,
+                        placeholder: settings.placeholder,
+                        tooltip: settings.tooltip,
+                        type: 'text'
+                    });
+
+                    if (settings.width  != 'none') {
+                        input.css('width', settings.width);
+                    }
+
+                    if (settings.height != 'none') {
+                        input.css('height', settings.height);
+                    }
+
                     if (settings.size) {
                         input.attr('size', settings.size);
                     }
@@ -613,9 +653,6 @@
 
                         var option = $('<option />').val(key).append(value);
 
-                        // FIXME this will add 'selected' to both the value with key selected and the value that is the same as original
-                        // only one should get this otherwise it leads to inconsistant behavior
-                        // I'd go with removing the selected key one, but it will break stuff
                         // add the selected prop if it's the same as original or if the key is 'selected'
                         if (key == 'selected' || key == $.trim(original.revert)) {
                             $(option).prop('selected', 'selected');
@@ -631,6 +668,46 @@
                             form.submit();
                         });
                     }
+                }
+            },
+            number: {
+                element: function (settings, original) {
+                    var input = $('<input />').attr({
+                        maxlength: settings.maxlength,
+                        placeholder: settings.placeholder,
+                        min : settings.min,
+                        max : settings.max,
+                        step: settings.step,
+                        tooltip: settings.tooltip,
+                        type: _supportInType('number')
+                    });
+                    $(this).append(input);
+                    return input;
+                }
+            },
+            email: {
+                element: function (settings, original) {
+                    var input = $('<input />').attr({
+                        maxlength: settings.maxlength,
+                        placeholder: settings.placeholder,
+                        tooltip: settings.tooltip,
+                        type: _supportInType('email')
+                    });
+                    $(this).append(input);
+                    return input;
+                }
+            },
+            url: {
+                element: function (settings, original) {
+                    var input = $('<input />').attr({
+                        maxlength: settings.maxlength,
+                        pattern: settings.pattern,
+                        placeholder: settings.placeholder,
+                        tooltip: settings.tooltip,
+                        type: _supportInType('url')
+                    });
+                    $(this).append(input);
+                    return input;
                 }
             }
         },
@@ -648,7 +725,8 @@
         type       : 'text',
         width      : 'auto',
         height     : 'auto',
-        event      : 'click.editable',
+        // Keyboard accessibility - use mouse click OR press any key to enable editing
+        event      : 'click.editable keydown.editable',
         onblur     : 'cancel',
         tooltip    : 'Click to edit',
         loadtype   : 'GET',
