@@ -15,7 +15,7 @@
     "qunit": "^2.5.0"
   },
   "scripts": {
-    "test": "./node_modules/qunit/bin/qunit tests/tests.js"
+    "test": "firefox -new-tab tests/index.html"
   },
   "repository": {
     "type": "git",
