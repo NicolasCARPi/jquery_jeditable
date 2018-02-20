@@ -280,7 +280,27 @@ $(".mouseover").editable("save.php", {
                     <p class='url example'>https://www.example.com</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
-                    <pre><code class="language-javascript">
+                    <pre><code class="language-javascript">// EMAIL
+$(".email").editable("save.php", {
+    type: "email",
+    tooltip: "Enter a valid email address",
+    placeholder: "nico.tesla@example.com",
+});
+// NUMBER
+$(".number").editable("save.php", {
+    type: "number",
+    tooltip: "Click to edit: number",
+    placeholder: "0",
+    min: 0,
+    max: 10,
+    step: 1
+});
+// URL
+$(".url").editable("save.php", {
+    type: "url",
+    tooltip: "Enter a valid URL",
+    placeholder: "https://www.example.com"
+});
 </code></pre>
             </div>
                 </div>
