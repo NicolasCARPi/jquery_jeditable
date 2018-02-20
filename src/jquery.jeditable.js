@@ -224,8 +224,8 @@
                 if (settings.loadurl) {
                     t = self.setTimeout(function() {
                         input.disabled = true;
-                        content.apply(form, [settings.loadtext, settings, self]);
                     }, 100);
+                    $(self).html(settings.loadtext);
 
                     var loaddata = {};
                     loaddata[settings.id] = self.id;
@@ -271,6 +271,9 @@
                 if (settings.showfn && $.isFunction(settings.showfn)) {
                     form.hide();
                 }
+
+                // clear the loadtext that we put here before
+                $(self).html('');
 
                 $(self).append(form);
 

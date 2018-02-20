@@ -1,4 +1,5 @@
 <?php
+usleep(500000);
 $array['D'] =  'Letter D';
 $array['E'] =  'Letter E';
 $array['F'] =  'Letter F';

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta charset=utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -191,6 +191,7 @@ $(".multiple-select").editable("save.php", {
     data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
     submit: 'OK',
     multiple : true,
+    onblur: function() { return true; },
     // use intercept to display the results as we want it
     intercept: function(result, status) {
         return "You selected: " + result + ". ";
@@ -538,13 +539,21 @@ $(".mouseover").editable("save.php", {
                 submitdata : function() { return {id : 42, something: 'else'};},
                 style  : "inherit"
             });
-
+            // INLINE SELECT WITH JSON
+            $(".editable-select-json").editable("save.php", {
+                type   : "select",
+                loadurl : "json.php",
+                loadtext : "Fetching JSON…",
+                submit : "OK",
+                style  : "inherit"
+            });
             // MULTIPLE SELECT
             $(".multiple-select").editable("save.php", {
                 type : "select",
                 data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
                 submit: 'OK',
                 multiple : true,
+                onblur: function() { return true; },
                 // use intercept to display the results as we want it
                 intercept: function(result, status) {
                     return "You selected: " + result + ". ";
@@ -555,14 +564,6 @@ $(".mouseover").editable("save.php", {
                 submitdata : function(revert, settings, result) {
                     console.log("User selected values: " + result.value);
                 },
-            });
-
-            // INLINE SELECT WITH JSON
-            $(".editable-select-json").editable("save.php", {
-                type   : "select",
-                loadurl : "json.php",
-                submit : "OK",
-                style  : "inherit"
             });
 
             // DIFFERENT EVENTS
