@@ -11,10 +11,11 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-contrib-uglify-es": "^3.3.0"
+    "grunt-contrib-uglify-es": "^3.3.0",
+    "qunit": "^2.5.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/qunit/bin/qunit tests/tests.js"
   },
   "repository": {
     "type": "git",
