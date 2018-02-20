@@ -5,18 +5,18 @@
  * @licence MIT (see LICENCE file)
  * @name PluginCheckbox
  */
-$.editable.addInputType("checkbox", {
+$.editable.addInputType('checkbox', {
     element : function(settings, original) {
         var input = $('<input type="checkbox">');
         $(this).append(input);
 
-        $(input).bind("click", function() {
-            if ($(input).val() == "on") {
-                $(input).val("off");
-                $(input).removeAttr("checked");
+        $(input).bind('click', function() {
+            if ($(input).val() == 'on') {
+                $(input).val('off');
+                $(input).removeAttr('checked');
             } else {
-                $(input).val("on");
-                $(input).attr("checked", "checked");
+                $(input).val('on');
+                $(input).attr('checked', 'checked');
             }
         });
 
@@ -25,27 +25,27 @@ $.editable.addInputType("checkbox", {
 
     content : function(string, settings, original) {
 
-        var checked = (string == "yes") ? "on" : "off";
-        var input = $(":input:first", this);
+        var checked = (string == 'yes') ? 'on' : 'off';
+        var input = $(':input:first', this);
 
-        if (checked == "on") {
-            $(input).attr("checked", checked);
+        if (checked == 'on') {
+            $(input).attr('checked', checked);
         } else {
-            $(input).removeAttr("checked");
+            $(input).removeAttr('checked');
         }
 
-        var value = $(input).is(":checked") ? "on" : "off";
+        var value = $(input).is(':checked') ? 'on' : 'off';
         $(input).val(value);
     },
 
     submit: function (settings, original) {
         var value;
-        var input = $(":input:first", this);
-        if (input.is(":checked")) {
-            value = "1";
+        var input = $(':input:first', this);
+        if (input.is(':checked')) {
+            value = '1';
         } else {
-            value = "0";
+            value = '0';
         }
-        $("input", this).val(value);
+        $('input', this).val(value);
     }
 });

@@ -75,15 +75,15 @@
     // EDITABLE function
     $.fn.editable = function(target, options) {
 
-        if ('disable' == target) {
+        if ('disable' === target) {
             $(this).data('disabled.editable', true);
             return;
         }
-        if ('enable' == target) {
+        if ('enable' === target) {
             $(this).data('disabled.editable', false);
             return;
         }
-        if ('destroy' == target) {
+        if ('destroy' === target) {
             $(this)
                 .unbind($(this).data('event.editable'))
                 .removeData('disabled.editable')
@@ -126,7 +126,7 @@
                 $(this).html(settings.placeholder);
             }
 
-            if ('destroy' == target) {
+            if ('destroy' === target) {
                 destroy.apply($(this).find('form'), [settings, self]);
                 return;
             }
@@ -185,7 +185,7 @@
 
                 /* Apply css or style or both. */
                 if (settings.cssclass) {
-                    if ('inherit' == settings.cssclass) {
+                    if ('inherit' === settings.cssclass) {
                         form.attr('class', $(self).attr('class'));
                     } else {
                         form.attr('class', settings.cssclass);
@@ -193,7 +193,7 @@
                 }
 
                 if (settings.style) {
-                    if ('inherit' == settings.style) {
+                    if ('inherit' === settings.style) {
                         form.attr('style', $(self).attr('style'));
                         /* IE needs the second line or display wont be inherited. */
                         form.css('display', $(self).css('display'));
@@ -295,7 +295,7 @@
 
                 /* discard changes if pressing esc */
                 input.keydown(function(e) {
-                    if (e.keyCode == 27) {
+                    if (e.keyCode === 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
                     }
@@ -303,14 +303,14 @@
 
                 /* Discard, submit or nothing with changes when clicking outside. */
                 /* Do nothing is usable when navigating with tab. */
-                if ('cancel' == settings.onblur) {
+                if ('cancel' === settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent canceling if submit was clicked. */
                         t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
-                } else if ('submit' == settings.onblur) {
+                } else if ('submit' === settings.onblur) {
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
                         t = self.setTimeout(function() {
@@ -320,7 +320,7 @@
                 } else if ($.isFunction(settings.onblur)) {
                     input.blur(function(e) {
                         // reset the form if the onblur function returns false
-                        if (false === settings.onblur.apply(self, [input.val(), settings, form])) {
+                        if (false ==== settings.onblur.apply(self, [input.val(), settings, form])) {
                             reset.apply(form, [settings, self]);
                         }
                     });
@@ -373,7 +373,7 @@
                               }
 
                               /* Quick and dirty PUT support. */
-                              if ('PUT' == settings.method) {
+                              if ('PUT' === settings.method) {
                                   submitdata._method = 'put';
                               }
 
@@ -391,7 +391,7 @@
                                       // INTERCEPT
                                       result = intercept.apply(self, [result, status]);
 
-                                      if (ajaxoptions.dataType == 'html') {
+                                      if (ajaxoptions.dataType === 'html') {
                                         $(self).html(result);
                                       }
                                       self.editing = false;
@@ -644,7 +644,7 @@ var _supportInType = function (type) {
                 content : function(data, settings, original) {
                     var json;
                     // If it is string assume it is json
-                    if (String == data.constructor) {
+                    if (String === data.constructor) {
                         json = JSON.parse(data);
                     } else {
                     // Otherwise assume it is a hash already
@@ -675,7 +675,7 @@ var _supportInType = function (type) {
                         var option = $('<option />').val(key).append(value);
 
                         // add the selected prop if it's the same as original or if the key is 'selected'
-                        if (key == 'selected' || key == $.trim(original.revert)) {
+                        if (key === 'selected' || key === $.trim(original.revert)) {
                             $(option).prop('selected', 'selected');
                         }
 

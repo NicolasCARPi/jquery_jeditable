@@ -11,14 +11,27 @@
     $.fn.charCounter = function (max, settings) {
         max = max || 100;
         settings = $.extend({
-            container: "<span></span>",
-            classname: "charcounter",
-            format: "(%1 characters remaining)",
+            container: '<span></span>',
+            classname: 'charcounter',
+            format: '(%1 characters remaining)',
             pulse: true,
             delay: 0
         }, settings);
 
         var p, timeout;
+
+        function pulse(el, again) {
+            if (p) {
+                window.clearTimeout(p);
+                p = null;
+            }
+            el.animate({ opacity: 0.1 }, 100, function () {
+                $(this).animate({ opacity: 1.0 }, 100);
+            });
+            if (again) {
+                p = window.setTimeout(function () { pulse(el); }, 200);
+            }
+        }
 
         function count(el, container) {
             el = $(el);
@@ -40,32 +53,19 @@
             }
         }
 
-        function pulse(el, again) {
-            if (p) {
-                window.clearTimeout(p);
-                p = null;
-            }
-            el.animate({ opacity: 0.1 }, 100, function () {
-                $(this).animate({ opacity: 1.0 }, 100);
-            });
-            if (again) {
-                p = window.setTimeout(function () { pulse(el); }, 200);
-            }
-        }
-
         return this.each(function () {
             var container = (!settings.container.match(/^<.+>$/)) ? $(settings.container) : $(settings.container)
             .insertAfter(this)
             .addClass(settings.classname);
 
             $(this)
-            .bind("keydown", function () { count(this, container); })
-            .bind("keypress", function () { count(this, container); })
-            .bind("keyup", function () { count(this, container); })
-            .bind("focus", function () { count(this, container); })
-            .bind("mouseover", function () { count(this, container); })
-            .bind("mouseout", function () { count(this, container); })
-            .bind("paste", function () {
+            .bind('keydown', function () { count(this, container); })
+            .bind('keypress', function () { count(this, container); })
+            .bind('keyup', function () { count(this, container); })
+            .bind('focus', function () { count(this, container); })
+            .bind('mouseover', function () { count(this, container); })
+            .bind('mouseout', function () { count(this, container); })
+            .bind('paste', function () {
                 var me = this;
                 setTimeout(function () { count(me, container); }, 10);
             });

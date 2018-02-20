@@ -21,10 +21,12 @@ jQuery.fn.autoGrow = function(options) {
 			extraLine: true,
 		}, options);
 
+        var mirror;
+
 		var createMirror = function(textarea) {
 			jQuery(textarea).after('<div class="autogrow-textarea-mirror"></div>');
 			return jQuery(textarea).next('.autogrow-textarea-mirror')[0];
-		}
+		};
 
 		var sendContentToMirror = function (textarea) {
 			mirror.innerHTML = String(textarea.value)
@@ -39,14 +41,14 @@ jQuery.fn.autoGrow = function(options) {
 
 			if (jQuery(textarea).height() != jQuery(mirror).height())
 				jQuery(textarea).height(jQuery(mirror).height());
-		}
+		};
 
 		var growTextarea = function () {
 			sendContentToMirror(this);
 		}
 
 		// Create a mirror
-		var mirror = createMirror(this);
+		mirror = createMirror(this);
 
 		// Style the mirror
 		mirror.style.display = 'none';

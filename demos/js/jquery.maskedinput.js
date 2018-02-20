@@ -57,6 +57,23 @@
                         settings.completed.call(input);
                     }
                 }
+                function checkVal(allow) {
+                    var i, c, pos, test = input.val(), lastMatch = -1;
+                    for (i = 0, pos = 0; len > i; i++) if (tests[i]) {
+                        for (buffer[i] = getPlaceholder(i); pos++ < test.length; ) if (c = test.charAt(pos - 1), 
+                        tests[i].test(c)) {
+                            buffer[i] = c, lastMatch = i;
+                            break;
+                        }
+                        if (pos > test.length) {
+                            clearBuffer(i + 1, len);
+                            break;
+                        }
+                    } else buffer[i] === test.charAt(pos) && pos++, partialPosition > i && (lastMatch = i);
+                    return allow ? writeBuffer() : partialPosition > lastMatch + 1 ? settings.autoclear || buffer.join("") === defaultBuffer ? (input.val() && input.val(""), 
+                    clearBuffer(0, len)) : writeBuffer() : (writeBuffer(), input.val(input.val().substring(0, lastMatch + 1))), 
+                    partialPosition ? i : firstNonMaskPos;
+                }
                 function getPlaceholder(i) {
                     return settings.placeholder.charAt(i < settings.placeholder.length ? i : 0);
                 }
@@ -82,7 +99,9 @@
                     var i, c, j, t;
                     for (i = pos, c = getPlaceholder(pos); len > i; i++) {
                         if (tests[i]) {
-                            if (j = seekNext(i), t = buffer[i], buffer[i] = c, !(len > j && tests[j].test(t))) break;
+                            if (j = seekNext(i), t = buffer[i], buffer[i] = c, !(len > j && tests[j].test(t))) {
+                                break;
+                            }
                             c = t;
                         }
                     }
@@ -90,11 +109,19 @@
                 function androidInputEvent() {
                     var curVal = input.val(), pos = input.caret();
                     if (oldVal && oldVal.length && oldVal.length > curVal.length) {
-                        for (checkVal(!0); pos.begin > 0 && !tests[pos.begin - 1]; ) pos.begin--;
-                        if (0 === pos.begin) for (;pos.begin < firstNonMaskPos && !tests[pos.begin]; ) pos.begin++;
+                        for (checkVal(!0); pos.begin > 0 && !tests[pos.begin - 1];) {
+                            pos.begin--;
+                        }
+                        if (0 === pos.begin) {
+                            for (;pos.begin < firstNonMaskPos && !tests[pos.begin];) {
+                                pos.begin++;
+                            }
+                        }
                         input.caret(pos.begin, pos.begin);
                     } else {
-                        for (checkVal(!0); pos.begin < len && !tests[pos.begin]; ) pos.begin++;
+                        for (checkVal(!0); pos.begin < len && !tests[pos.begin];) {
+                            pos.begin++;
+                        }
                         input.caret(pos.begin, pos.begin);
                     }
                     tryFireCompleted();
@@ -139,23 +166,8 @@
                 function writeBuffer() {
                     input.val(buffer.join(""));
                 }
-                function checkVal(allow) {
-                    var i, c, pos, test = input.val(), lastMatch = -1;
-                    for (i = 0, pos = 0; len > i; i++) if (tests[i]) {
-                        for (buffer[i] = getPlaceholder(i); pos++ < test.length; ) if (c = test.charAt(pos - 1), 
-                        tests[i].test(c)) {
-                            buffer[i] = c, lastMatch = i;
-                            break;
-                        }
-                        if (pos > test.length) {
-                            clearBuffer(i + 1, len);
-                            break;
-                        }
-                    } else buffer[i] === test.charAt(pos) && pos++, partialPosition > i && (lastMatch = i);
-                    return allow ? writeBuffer() : partialPosition > lastMatch + 1 ? settings.autoclear || buffer.join("") === defaultBuffer ? (input.val() && input.val(""), 
-                    clearBuffer(0, len)) : writeBuffer() : (writeBuffer(), input.val(input.val().substring(0, lastMatch + 1))), 
-                    partialPosition ? i : firstNonMaskPos;
-                }
+
+
                 var input = $(this), buffer = $.map(mask.split(""), function(c, i) {
                     return "?" != c ? defs[c] ? getPlaceholder(i) : c : void 0;
                 }), defaultBuffer = buffer.join(""), focusText = input.val();

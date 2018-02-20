@@ -17,11 +17,11 @@ LABEL org.label-schema.name="jquery-jeditable demo" \
 
 # install npm
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get -y install gnupg \
+RUN apt-get update && apt-get -y --no-install-recommends install gnupg \
     && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g documentation
-
+    && npm install -g documentation \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html
 RUN ln -s /var/www/html/src /var/www/html/demos/src
