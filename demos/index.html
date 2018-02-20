@@ -149,13 +149,14 @@ $(".editable-text-full").editable(function(input, settings, elem) {
             </div>
             </div>
 
-            <!-- INLINE SELECT -->
+            <!-- SELECT -->
             <div class='card col-md-12'>
                 <div class='card-body'>
-                    <h4 class='card-title'>Inline select</h4>
+                    <h4 class='card-title'>Select</h4>
                     <div class='example'>
                         <p><b class="editable-select inline">THIS IS A SELECT</b>, click it to get a select menu. Options are from the "data" setting.</p>
                         <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b>, click it to get a select menu. Options are loaded from an ajax request getting JSON.</p>
+                        <p><b class="multiple-select inline">THIS IS A MULTIPLE SELECT.</b>You can select several values (try holding Shift or Ctrl).</p>
                     </div>
                 </div>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
@@ -174,6 +175,23 @@ $(".editable-select-json").editable("save.php", {
     loadurl : "json.php",
     submit : "OK",
     style  : "inherit"
+});
+// MULTIPLE SELECT
+$(".multiple-select").editable("save.php", {
+    type : "select",
+    data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+    submit: 'OK',
+    multiple : true,
+    // use intercept to display the results as we want it
+    intercept: function(result, status) {
+        return "You selected: " + result + ". ";
+    },
+    onerror: function(settings, self, xhr) {
+        console.log("Error with status code: " + xhr.status);
+    },
+    submitdata : function(revert, settings, result) {
+        console.log("User selected values: " + result.value);
+    },
 });
 </code></pre>
             </div>
@@ -428,6 +446,7 @@ $(".mouseover").editable("save.php", {
 
     </div>
 
+        <!-- BEGIN JAVASCRIPT -->
         <script>
         $(document).ready(function() {
             // make all examples reachable with Tab key for accessibility
@@ -507,7 +526,25 @@ $(".mouseover").editable("save.php", {
                 type   : "select",
                 data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
                 submitdata : function() { return {id : 42, something: 'else'};},
-                style  : "inherit",
+                style  : "inherit"
+            });
+
+            // MULTIPLE SELECT
+            $(".multiple-select").editable("save.php", {
+                type : "select",
+                data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+                submit: 'OK',
+                multiple : true,
+                // use intercept to display the results as we want it
+                intercept: function(result, status) {
+                    return "You selected: " + result + ". ";
+                },
+                onerror: function(settings, self, xhr) {
+                    console.log("Error with status code: " + xhr.status);
+                },
+                submitdata : function(revert, settings, result) {
+                    console.log("User selected values: " + result.value);
+                },
             });
 
             // INLINE SELECT WITH JSON

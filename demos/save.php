@@ -4,4 +4,8 @@ if ($_POST['slow']) {
     usleep(500000);
 }
 
-echo $_POST['value'];
+if (is_array($_POST['value'])) {
+    echo implode(', ', $_POST['value']);
+} else {
+    echo $_POST['value'];
+}

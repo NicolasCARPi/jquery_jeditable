@@ -28,10 +28,11 @@
  * @param {String} [options.loadtext='Loading…'] - Text to display while loading external content
  * @param {String} [options.loadtype='GET'] - Request type for loadurl (GET or POST)
  * @param {String} [options.loadurl] - URL to fetch input content before editing
- * @param {String} [options.max] - Maximum value for number type
+ * @param {Number} [options.max] - Maximum value for number type
  * @param {String} [options.maxlength] - The maximum number of character in the text field
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
- * @param {String} [options.min] - Mininum value for number type
+ * @param {Number} [options.min] - Mininum value for number type
+ * @param {Boolean} [options.multiple] - Allow multiple selections in a select input
  * @param {String} [options.name='value'] - POST parameter name of edited content
  * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function. If function returns false, the form is cancelled.
  * @param {Function} [options.onedit] - function triggered upon edition; will cancel edition if it returns false
@@ -44,7 +45,7 @@
  * @param {Boolean} [options.select] - When true text is selected
  * @param {Function} [options.showfn]- Function that can animate the element when switching to edit mode
  * @param {String} [options.size] - The size of the text field
- * @param {String} [options.step] - Step size for number type
+ * @param {Number} [options.step] - Step size for number type
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
  * @param {String} [options.submitcssclass] - CSS class to apply to submit button
@@ -376,7 +377,7 @@
                                   success : function(result, status) {
 
                                       // INTERCEPT
-                                      result = intercept.apply(self, [result]);
+                                      result = intercept.apply(self, [result, status]);
 
                                       if (ajaxoptions.dataType == 'html') {
                                         $(self).html(result);
@@ -618,10 +619,15 @@ var _supportInType = function (type) {
 
             // SELECT
             select: {
-               element : function(settings, original) {
-                    var select = $('<select />');
-                    $(this).append(select);
-                    return(select);
+                element : function(settings, original) {
+                var select = $('<select />');
+
+                if (settings.multiple) {
+                    select.attr('multiple', 'multiple');
+                }
+
+                $(this).append(select);
+                return(select);
                 },
                 content : function(data, settings, original) {
                     var json;
@@ -649,7 +655,6 @@ var _supportInType = function (type) {
                     for (var i = 0; i < tuples.length; i++) {
                         key = tuples[i][0];
                         var value = tuples[i][1];
-                        console.log(key + value);
 
                         if (!json.hasOwnProperty(key)) {
                             continue;
