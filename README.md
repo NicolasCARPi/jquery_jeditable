@@ -1,5 +1,7 @@
 # jquery-jeditable
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cb32ce695b743d68257021455330c66)](https://www.codacy.com/app/elabftw/jquery_jeditable)
+
 ## Description
 
 Edit in place plugin for [jQuery](https://jquery.com/) (compatible with jQuery v3.3.1+).
