@@ -139,7 +139,7 @@
                 }
 
                 // do nothing if user press Tab again, just go to next element, not into edit mode
-                if (e.keyCode == 9) {
+                if (e.keyCode === 9) {
                     return;
                 }
 
@@ -203,7 +203,7 @@
 
                 // add a label if it exists
                 if (settings.label) {
-                    form.append("<label>" + settings.label + "</label>");
+                    form.append('<label>' + settings.label + '</label>');
                 }
 
                 // add an ID to the form
@@ -442,17 +442,17 @@
 
             // CLEARTIMEOUT
             self.clearTimeout = function(t) {
-                var timeouts = $(self).data("timeouts");
+                var timeouts = $(self).data('timeouts');
                 clearTimeout(t);
                 if(timeouts) {
                     var i = timeouts.indexOf(t);
                     if(i > -1) {
                         timeouts.splice(i, 1);
                         if(timeouts.length <= 0) {
-                            $(self).removeData("timeouts");
+                            $(self).removeData('timeouts');
                         }
                     } else {
-                        console.warn("jeditable clearTimeout could not find timeout "+t);
+                        console.warn('jeditable clearTimeout could not find timeout '+t);
                     }
                 }
             };
@@ -561,7 +561,7 @@ var _supportInType = function (type) {
             },
             text: {
                 element : function(settings, original) {
-                    var input = $("<input />").attr({
+                    var input = $('<input />').attr({
                         autocomplete: 'off',
                         list: settings.list,
                         maxlength: settings.maxlength,
@@ -571,11 +571,11 @@ var _supportInType = function (type) {
                         type: 'text'
                     });
 
-                    if (settings.width  != 'none') {
+                    if (settings.width  !== 'none') {
                         input.css('width', settings.width);
                     }
 
-                    if (settings.height != 'none') {
+                    if (settings.height !== 'none') {
                         input.css('height', settings.height);
                     }
 
@@ -591,17 +591,19 @@ var _supportInType = function (type) {
                     return(input);
                 }
             },
+
+            // TEXTAREA
             textarea: {
                 element : function(settings, original) {
                     var textarea = $('<textarea></textarea>');
                     if (settings.rows) {
                         textarea.attr('rows', settings.rows);
-                    } else if (settings.height != "none") {
+                    } else if (settings.height !== 'none') {
                         textarea.height(settings.height);
                     }
                     if (settings.cols) {
                         textarea.attr('cols', settings.cols);
-                    } else if (settings.width != "none") {
+                    } else if (settings.width !== 'none') {
                         textarea.width(settings.width);
                     }
 
@@ -613,6 +615,8 @@ var _supportInType = function (type) {
                     return(textarea);
                 }
             },
+
+            // SELECT
             select: {
                element : function(settings, original) {
                     var select = $('<select />');
@@ -670,6 +674,8 @@ var _supportInType = function (type) {
                     }
                 }
             },
+
+            // NUMBER
             number: {
                 element: function (settings, original) {
                     var input = $('<input />').attr({
@@ -685,6 +691,8 @@ var _supportInType = function (type) {
                     return input;
                 }
             },
+
+            // EMAIL
             email: {
                 element: function (settings, original) {
                     var input = $('<input />').attr({
@@ -697,6 +705,8 @@ var _supportInType = function (type) {
                     return input;
                 }
             },
+
+            // URL
             url: {
                 element: function (settings, original) {
                     var input = $('<input />').attr({
