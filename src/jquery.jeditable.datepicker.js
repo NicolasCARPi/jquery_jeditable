@@ -18,6 +18,7 @@
  *     cancel    : 'cancel',
  * });
  */
+'use strict';
 $.editable.addInputType('datepicker', {
 
     element : function(settings, original) {

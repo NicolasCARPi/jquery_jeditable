@@ -5,6 +5,7 @@
  * @licence MIT (see LICENCE file)
  * @name PluginCheckbox
  */
+'use strict';
 $.editable.addInputType('checkbox', {
     element : function(settings, original) {
         var input = $('<input type="checkbox">');

@@ -17,6 +17,7 @@
  *     }
  * });
  */
+'use strict';
 $.editable.addInputType("charcounter", {
     element : function(settings, original) {
         var textarea = $("<textarea />");

@@ -12,6 +12,7 @@
  *     cancel    : 'cancel'
  * });
  */
+'use strict';
 $.editable.addInputType("autogrow", {
     element : function(settings, original) {
         var textarea = $("<textarea />");

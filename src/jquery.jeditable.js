@@ -63,6 +63,8 @@
  */
 (function($) {
 
+    'use strict';
+
     // Keyboard accessibility/WAI-ARIA - allow users to navigate to an editable element using TAB/Shift+TAB
     $.fn.editableAriaShim = function () {
         this.attr({

@@ -9,6 +9,7 @@
  * @copyright © 2007 Mika Tuupola, Nicolas CARPi
  * @name PluginMaskedInput
  */
+'use strict';
 $.editable.addInputType('masked', {
     element : function(settings, original) {
         /* Create an input. Mask it using masked input plugin. Settings  */

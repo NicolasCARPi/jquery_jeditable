@@ -6,6 +6,7 @@
  * @copyright © 2007 Mika Tuupola, Nicolas CARPi
  * @name PluginTimepicker
  */
+'use strict';
 $.editable.addInputType('time', {
     /* Create input element. */
     element : function(settings, original) {
