@@ -39,7 +39,7 @@ jQuery.fn.autoGrow = function(options) {
 				(settings.extraLine? '.<br/>.' : '')
 			;
 
-			if (jQuery(textarea).height() != jQuery(mirror).height())
+			if (jQuery(textarea).height() !== jQuery(mirror).height())
 				jQuery(textarea).height(jQuery(mirror).height());
 		};
 

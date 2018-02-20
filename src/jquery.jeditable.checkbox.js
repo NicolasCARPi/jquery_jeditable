@@ -11,7 +11,7 @@ $.editable.addInputType('checkbox', {
         $(this).append(input);
 
         $(input).bind('click', function() {
-            if ($(input).val() == 'on') {
+            if ($(input).val() === 'on') {
                 $(input).val('off');
                 $(input).removeAttr('checked');
             } else {
@@ -25,10 +25,10 @@ $.editable.addInputType('checkbox', {
 
     content : function(string, settings, original) {
 
-        var checked = (string == 'yes') ? 'on' : 'off';
+        var checked = (string === 'yes') ? 'on' : 'off';
         var input = $(':input:first', this);
 
-        if (checked == 'on') {
+        if (checked === 'on') {
             $(input).attr('checked', checked);
         } else {
             $(input).removeAttr('checked');

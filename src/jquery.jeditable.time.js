@@ -47,7 +47,7 @@ $.editable.addInputType('time', {
         var min  = parseInt(string.substr(3,2), 10);
 
         $('#hour_', this).children().each(function() {
-            if (hour == $(this).val()) {
+            if (hour === $(this).val()) {
                 $(this).attr('selected', 'selected');
             }
         });

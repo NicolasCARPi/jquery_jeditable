@@ -171,7 +171,7 @@
                 }
 
                 /* Remove placeholder text, replace is here because of IE. */
-                if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') ==
+                if ($(this).html().toLowerCase().replace(/(;|"|\/)/g, '') ===
                     settings.placeholder.toLowerCase().replace(/(;|"|\/)/g, '')) {
                         $(this).html('');
                 }
@@ -259,7 +259,7 @@
                 input.attr('name', settings.name);
 
                 /* adjust the width of the element to account for the margin/padding/border */
-                if (settings.width != 'none') {
+                if (settings.width !== 'none') {
                     var adj_width = settings.width - (input.outerWidth(true) - settings.width);
                     input.width(adj_width);
                 }
@@ -472,26 +472,26 @@
 
             // CLEAR ALL TIMEOUTS
             self.clearTimeouts = function () {
-                var timeouts = $(self).data("timeouts");
+                var timeouts = $(self).data('timeouts');
                 if(timeouts) {
                     for(var i = 0, n = timeouts.length; i < n; ++i) {
                         clearTimeout(timeouts[i]);
                     }
                     timeouts.length = 0;
-                    $(self).removeData("timeouts");
+                    $(self).removeData('timeouts');
                 }
             };
 
             // SETTIMEOUT
             self.setTimeout = function(callback, time) {
-               var timeouts = $(self).data("timeouts");
+               var timeouts = $(self).data('timeouts');
                var t = setTimeout(function() {
                    callback();
                    self.clearTimeout(t);
                }, time);
                if(!timeouts) {
                    timeouts = [];
-                   $(self).data("timeouts", timeouts);
+                   $(self).data('timeouts', timeouts);
                }
                timeouts.push(t);
                return t;
@@ -530,7 +530,7 @@ var _supportInType = function (type) {
                         /* If given html string use that. */
                         if (settings.submit.match(/>$/)) {
                             submit = $(settings.submit).click(function() {
-                                if (submit.attr("type") != "submit") {
+                                if (submit.attr('type') !== 'submit') {
                                     form.submit();
                                 }
                             });
@@ -653,7 +653,8 @@ var _supportInType = function (type) {
 
                     // Create tuples for sorting
                     var tuples = [];
-                    for (var key in json) {
+                    var key;
+                    for (key in json) {
                         tuples.push([key, json[key]]); // Store: [key, value]
                     }
                     // sort it

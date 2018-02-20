@@ -5,6 +5,7 @@
 * Use UNIX-style line ending
 * Use UTF-8 without BOM
 * Use a javascript linter
+* Use single quotes for strings
 
 # Generate the API doc
 
