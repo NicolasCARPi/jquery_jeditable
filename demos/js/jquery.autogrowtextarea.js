@@ -75,8 +75,8 @@ jQuery.fn.autoGrow = function(options) {
 		mirror.style.letterSpacing = jQuery(this).css('letter-spacing');
 
 		// Style the textarea
-		this.style.overflow = "hidden";
-		this.style.minHeight = this.rows+"em";
+		this.style.overflow = 'hidden';
+		this.style.minHeight = this.rows+'em';
 
 		// Bind the textarea's event
 		this.onkeyup = growTextarea;
