@@ -9,11 +9,7 @@
  * $(".autogrow").editable("save.php", {
  *     type      : "autogrow",
  *     submit    : 'OK',
- *     cancel    : 'cancel',
- *     autogrow : {
- *         lineHeight : 16,
- *         minHeight  : 32
- *     }
+ *     cancel    : 'cancel'
  * });
  */
 $.editable.addInputType("autogrow", {
@@ -33,6 +29,6 @@ $.editable.addInputType("autogrow", {
         return(textarea);
     },
     plugin : function(settings, original) {
-        $("textarea", this).autogrow(settings.autogrow);
+        $("textarea", this).autoGrow();
     }
 });

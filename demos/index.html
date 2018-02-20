@@ -26,7 +26,7 @@
         <script src="../src/jquery.jeditable.masked.js"></script>
         <script src="../src/jquery.jeditable.time.js"></script>
         <!-- EXTERNAL LIBS -->
-        <script src="js/jquery.autogrow.js"></script>
+        <script src="js/jquery.autogrowtextarea.js"></script>
         <script src="js/jquery.charcounter.js"></script>
         <script src="js/jquery.maskedinput.js"></script>
 
@@ -102,6 +102,8 @@ $(".editable-text-full").editable("save.php", {
     cancelcssclass : 'btn btn-danger',
     submitcssclass : 'btn btn-success',
     maxlength : 200,
+    // select all text
+    select : true,
     label : 'This is a label',
     onreset : function() { console.log('Triggered before reset') },
     onsubmit : function() { console.log('Triggered before submit') },
@@ -142,7 +144,6 @@ $(".editable-text-full").editable(function(input, settings, elem) {
                 <div class='source'>
                 <pre><code class="language-javascript">$(".editable_textarea").editable("save.php", {
     type   : 'textarea',
-    select : true,
     submit : 'OK',
     cancel : 'Nope'
 });
@@ -348,10 +349,10 @@ $(".mouseover").editable("save.php", {
                     <h4 class='card-title'>Autogrow textarea</h4>
         <pre><code class="language-html">&lt;!-- also include this in your HTML --&gt;
 &lt;script src=/path/to/jquery.jeditable.autogrow.min.js&gt;&lt;/script&gt;
-&lt;script src=/path/to/jquery.autogrow.js&gt;&lt;/script&gt;
+&lt;script src=/path/to/jquery.autogrowtextarea.js&gt;&lt;/script&gt;
 </code></pre>
                     <p class="autogrow example">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                    <p>Depends on Autogrow by Chrys Bader.</p>
+                    <p>Depends on <a href='https://github.com/jevin/Autogrow-Textarea'>Autogrow-Textarea</a> by Jevin O. Sewaruth.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
                     <pre><code class="language-javascript">$(".autogrow").editable("save.php", {
@@ -359,11 +360,7 @@ $(".mouseover").editable("save.php", {
     submit    : 'OK',
     cancel    : 'cancel',
     tooltip   : "Click to edit...",
-    onblur    : "ignore",
-    autogrow : {
-       lineHeight : 16,
-       minHeight  : 32
-    }
+    onblur    : "ignore"
 });
 </code></pre>
             </div>
@@ -495,6 +492,8 @@ $(".mouseover").editable("save.php", {
                 cancel : 'Cancel',
                 cssclass : 'custom-class',
                 cancelcssclass : 'btn btn-danger',
+                // select all text
+                select : true,
                 submitcssclass : 'btn btn-success',
                 maxlength : 200,
                 label : 'This is a label',
@@ -519,9 +518,11 @@ $(".mouseover").editable("save.php", {
             // NORMAL TEXTAREA
             $(".editable_textarea").editable("save.php", {
                 type   : 'textarea',
-                select : true,
                 submit : 'OK',
-                cancel : 'Nope'
+                cancelcssclass : 'btn btn-danger',
+                submitcssclass : 'btn btn-success',
+                cancel : 'Nope',
+                width: 300
             });
 
             // INLINE SELECT
@@ -655,11 +656,7 @@ $(".mouseover").editable("save.php", {
                 submit    : 'OK',
                 cancel    : 'cancel',
                 tooltip   : "Click to edit...",
-                onblur    : "ignore",
-                autogrow : {
-                   lineHeight : 16,
-                   minHeight  : 32
-                }
+                onblur    : "ignore"
             });
             // DATEPICKER
             $(".datepicker").editable("save.php", {
