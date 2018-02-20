@@ -61,7 +61,7 @@
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Basic minimal example</h4>
-                    <h6 class='card-subtitle text-muted'>The most basic example (press enter to validate)</h6>
+                    <h6 class='card-subtitle'>The most basic example (press enter to validate). No options.</h6>
                 <p class="editable-text card-text example">Click this text to edit it.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
@@ -74,7 +74,7 @@
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Complete example</h4>
-                    <h6 class='card-subtitle text-muted'>A more complete example with a bunch of options</h6>
+                    <h6 class='card-subtitle'>A more complete example with a bunch of options.</h6>
                 <p class="editable-text-full card-text example" data-test="yep">Click this text to edit it.</p>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
                 <div class='source'>
@@ -135,6 +135,7 @@ $(".editable-text-full").editable(function(input, settings, elem) {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Normal textarea</h4>
+                    <h6 class='card-subtitle'>Example of the 'textarea' type.</h6>
                         <p class="editable_textarea card-text example">If you click anywhere on this text, it will become a textarea that you can edit. And then you can click OK to save it.</p>
                 </div>
                 <h4 class='trigger'><i class='fas fa-eye'></i> Show source code</h4>
@@ -153,6 +154,7 @@ $(".editable-text-full").editable(function(input, settings, elem) {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Select</h4>
+                    <h6 class='card-subtitle'>Example of the 'select' type.</h6>
                     <div class='example'>
                         <p><b class="editable-select inline">THIS IS A SELECT</b>, click it to get a select menu. Options are from the "data" setting.</p>
                         <p><b class="editable-select-json inline">THIS IS A SELECT WITH JSON FEED</b>, click it to get a select menu. Options are loaded from an ajax request getting JSON.</p>
@@ -205,6 +207,7 @@ $(".multiple-select").editable("save.php", {
             <div class='card col-md-12'>
                 <div class='card-body'>
                     <h4 class='card-title'>Different events</h4>
+                    <h6 class='card-subtitle'>By default a click will trigger an edit. But you can bind other events as shown below.</h6>
                     <p class='example'>
                         <b class="click" style="display: inline">Click me if you dare!</b></> or maybe you should 
                         <b class="dblclick" style="display: inline">doubleclick</b> instead? Really lazy people can just
