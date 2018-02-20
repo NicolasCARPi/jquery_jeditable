@@ -484,7 +484,7 @@ $(".mouseover").editable("save.php", {
                 onedit : function() { console.log('If I return false edition will be canceled'); return true;},
                 before : function() { console.log('Triggered before form appears');},
                 callback : function(result, settings, submitdata) {
-                    console.log('Triggered after submit');
+                    console.log('Callback function: triggered after submit');
                     console.log('Result: ' + result);
                     console.log('Settings.width: ' + settings.width);
                     console.log('Submitdata: ' + submitdata.pwet);
