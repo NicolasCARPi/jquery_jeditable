@@ -1,6 +1,8 @@
 # jquery-jeditable
 
+[![npm](https://img.shields.io/npm/v/jquery-jeditable.svg)](https://www.npmjs.com/package/jquery-jeditable)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cb32ce695b743d68257021455330c66)](https://www.codacy.com/app/elabftw/jquery_jeditable)
+[![GitHub license](https://img.shields.io/github/license/NicolasCARPi/jquery_jeditable.svg)](https://github.com/NicolasCARPi/jquery_jeditable/blob/master/LICENSE)
 
 ## Description
 
