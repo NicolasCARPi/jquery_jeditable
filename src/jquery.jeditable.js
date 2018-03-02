@@ -707,6 +707,9 @@ var _supportInType = function (type) {
                         tooltip: settings.tooltip,
                         type: _supportInType('number')
                     });
+                    if (settings.width  !== 'none') {
+                        input.css('width', settings.width);
+                    }
                     $(this).append(input);
                     return input;
                 }
@@ -721,6 +724,9 @@ var _supportInType = function (type) {
                         tooltip: settings.tooltip,
                         type: _supportInType('email')
                     });
+                    if (settings.width  !== 'none') {
+                        input.css('width', settings.width);
+                    }
                     $(this).append(input);
                     return input;
                 }
@@ -736,6 +742,9 @@ var _supportInType = function (type) {
                         tooltip: settings.tooltip,
                         type: _supportInType('url')
                     });
+                    if (settings.width  !== 'none') {
+                        input.css('width', settings.width);
+                    }
                     $(this).append(input);
                     return input;
                 }
