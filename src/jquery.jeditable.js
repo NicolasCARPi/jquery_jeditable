@@ -675,7 +675,9 @@ var _supportInType = function (type) {
                             continue;
                         }
 
-                        var option = $('<option />').val(key).append(value);
+                        if (key !== 'selected') {
+                            var option = $('<option />').val(key).append(value);
+                        }
 
                         // add the selected prop if it's the same as original or if the key is 'selected'
                         if (key === 'selected' || key === $.trim(original.revert)) {
