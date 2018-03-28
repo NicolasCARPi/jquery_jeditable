@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.2
+
+* Fix a bug where selected value will get added to the select options. by @eman1986 (#166)
+
+## 2.0.1
+
+* Fix width setting to number, url and email (#163)
+
 ## 2.0.0
 
 * BREAKING: remove ajaxupload and old datepicker plugins (new datepicker added)
