@@ -174,7 +174,7 @@ $(".editable-text-full").editable(function(input, settings, elem) {
 $(".editable-select").editable("save.php", {
     type   : "select",
     // this data will be sorted by value
-    data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+    data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear", "selected":"Pear"}',
     submitdata : function() { return {id : 42, something: 'else'};},
     style  : "inherit",
 });
@@ -555,7 +555,7 @@ $(".url").editable("save.php", {
             // INLINE SELECT
             $(".editable-select").editable("save.php", {
                 type   : "select",
-                data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear"}',
+                data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear", "selected":"Pear"}',
                 submitdata : function() { return {id : 42, something: 'else'};},
                 style  : "inherit"
             });
