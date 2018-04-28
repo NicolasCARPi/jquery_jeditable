@@ -16,6 +16,7 @@
  * @param {String} [options.cancelcssclass] - CSS class to apply to cancel button
  * @param {Number} [options.cols] - Number of columns if using textarea
  * @param {String} [options.cssclass] - CSS class to apply to input form; use 'inherit' to copy from parent
+ * @param {String} [options.inputcssclass] - CSS class to apply to input. 'inherit' to copy from parent
  * @param {String|Function} [options.data] - Content loaded in the form
  * @param {String} [options.event='click'] - jQuery event such as 'click' of 'dblclick'. See https://api.jquery.com/category/events/
  * @param {String} [options.formid] - Give an id to the form that is produced
@@ -216,6 +217,14 @@
 
                 /* Add main input element to form and store it in input. */
                 var input = element.apply(form, [settings, self]);
+
+                if (settings.inputcssclass) {
+                    if ('inherit' === settings.inputcssclass) {
+                        input.attr('class', $(self).attr('class'));
+                    } else {
+                        input.attr('class', settings.inputcssclass);
+                    }
+                }
 
                 /* Set input content via POST, GET, given data or existing value. */
                 var input_content;
