@@ -11,7 +11,7 @@
  * @param {Object} [options] - Additional options
  * @param {Object} [options.ajaxoptions] - jQuery Ajax options. See https://api.jquery.com/jQuery.ajax/
  * @param {Function} [options.before] - Function to be executed before going into edit mode
- * @param {Function} [options.callback] - Function to run after submitting edited content
+ * @param {Function} [options.callback] - function(result, settings, submitdata) Function to run after submitting edited content
  * @param {String} [options.cancel] - Cancel button value, empty means no button
  * @param {String} [options.cancelcssclass] - CSS class to apply to cancel button
  * @param {Number} [options.cols] - Number of columns if using textarea
