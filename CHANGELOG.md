@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3
+
+* Add ability to apply css to input element (#173)
+
 ## 2.0.2
 
 * Fix a bug where selected value will get added to the select options. by @eman1986 (#166)
