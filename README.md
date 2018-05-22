@@ -26,6 +26,10 @@ npm install jquery-jeditable
 
 ## Usage
 
+### Loading the library
+
+Use a `<script>` tag loading the file `dist/jquery.jeditable.min.js` from your server, or use the [CDNJS link](https://cdnjs.com/libraries/jeditable.js).
+
 ### Most basic usage
 
 There is only one mandatory parameter. URL where browser sends edited content.
