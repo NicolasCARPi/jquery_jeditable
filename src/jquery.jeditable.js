@@ -668,13 +668,14 @@ var _supportInType = function (type) {
                     for (key in json) {
                         tuples.push([key, json[key]]); // Store: [key, value]
                     }
-                    // sort it
-                    tuples.sort(function(a, b) {
-                        a = a[1];
-                        b = b[1];
-                        return a < b ? -1 : (a > b ? 1 : 0);
-                    });
-
+                    if (settings.sort_select_options) {
+                        // sort it
+                        tuples.sort(function (a, b) {
+                            a = a[1];
+                            b = b[1];
+                            return a < b ? -1 : (a > b ? 1 : 0);
+                        });
+                    }     
                     // now add the options to our select
                     var option;
                     for (var i = 0; i < tuples.length; i++) {
@@ -783,6 +784,7 @@ var _supportInType = function (type) {
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
+        sort_select_options: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}

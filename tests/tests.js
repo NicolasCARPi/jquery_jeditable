@@ -24,3 +24,44 @@ QUnit.test('Enable/disable/destroy', function(assert) {
     elem.editable().editable('destroy');
     assert.notOk(elem.data('event.editable'));
 });
+
+QUnit.module("select-boxes");
+QUnit.test("Default: NOT Sorting select options", function(assert) {
+    elem.append( "<span id='select-tester'>Letter F</span>" );
+
+    $.fn.editable.defaults.sort_select_options = false;
+
+    $('#select-tester').editable('http://bla', {
+        type: 'select',
+        data: {"E": "Letter E", 'F': 'Letter F', 'D': 'Letter Disk'},
+        selected: 'Letter F'
+    });
+
+    assert.equal( $( "#select-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
+    $('#select-tester').click();
+    assert.equal($('#select-tester form').length, 1, "Clicking Editable adds inline form")
+
+    var options_list = []
+    $('#select-tester option').each(function(name, val) { options_list.push(val.text); });
+
+    assert.deepEqual(options_list, ["Letter E", "Letter F", "Letter Disk"], "Does not sort the given options-list");
+});
+QUnit.test("Default: Sorting select options", function(assert) {
+    elem.append( "<span id='select-sorted-tester'>Letter F</span>" );
+
+    $.fn.editable.defaults.sort_select_options = true;
+
+    $('#select-sorted-tester').editable('http://bla', {
+        type: 'select',
+        data: {"E": "Letter E", 'F': 'Letter F', 'D': 'Letter Disk'},
+        selected: 'Letter F'
+    });
+    assert.equal( $( "#select-sorted-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
+    $('#select-sorted-tester').click();
+    assert.equal($('#select-sorted-tester form').length, 1, "Clicking Editable adds inline form")
+
+    var options_list = []
+    $('#select-sorted-tester option').each(function(name, val) { options_list.push(val.text); });
+
+    assert.deepEqual(options_list, ["Letter Disk", "Letter E", "Letter F"], "It does sort the given options list");
+});
