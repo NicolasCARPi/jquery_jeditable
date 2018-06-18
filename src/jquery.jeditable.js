@@ -688,14 +688,14 @@ var _supportInType = function (type) {
 
                         if (key !== 'selected') {
                             option = $('<option />').val(key).append(value);
-                        }
 
-                        // add the selected prop if it's the same as original or if the key is 'selected'
-                        if (key === 'selected' || key === $.trim(original.revert)) {
-                            $(option).prop('selected', 'selected');
-                        }
+                            // add the selected prop if it's the same as original or if the key is 'selected'
+                            if (json['selected'] === key || key === $.trim(original.revert)) {
+                                $(option).prop('selected', 'selected');
+                            }
 
-                        $(this).find('select').append(option);
+                            $(this).find('select').append(option);
+                        }
                     }
 
                     // submit on change if no submit button defined

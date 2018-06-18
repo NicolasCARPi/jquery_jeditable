@@ -34,7 +34,7 @@ QUnit.test("Default: NOT Sorting select options", function(assert) {
     $('#select-tester').editable('http://bla', {
         type: 'select',
         data: {"E": "Letter E", 'F': 'Letter F', 'D': 'Letter Disk'},
-        selected: 'Letter F'
+        selected: 'F'
     });
 
     assert.equal( $( "#select-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
@@ -54,7 +54,7 @@ QUnit.test("Default: Sorting select options", function(assert) {
     $('#select-sorted-tester').editable('http://bla', {
         type: 'select',
         data: {"E": "Letter E", 'F': 'Letter F', 'D': 'Letter Disk'},
-        selected: 'Letter F'
+        selected: 'F'
     });
     assert.equal( $( "#select-sorted-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
     $('#select-sorted-tester').click();
@@ -65,3 +65,33 @@ QUnit.test("Default: Sorting select options", function(assert) {
 
     assert.deepEqual(options_list, ["Letter Disk", "Letter E", "Letter F"], "It does sort the given options list");
 });
+QUnit.module("select-boxes setting selected");
+QUnit.test("Explicitly setting a selected option", function(assert) {
+    elem.append( "<span id='selected-tester'>Letter F</span>" );
+
+    $.fn.editable.defaults.sort_select_options = false;
+
+    $('#selected-tester').editable('http://bla', {
+        type: 'select',
+        data: {"E": "Letter E", "F": "Letter F", "D": "Letter Disk", "selected": "F"},
+    });
+
+    assert.equal( $( "#selected-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
+    $('#selected-tester').click();
+    assert.equal($('#selected-tester form select :selected').text(), 'Letter F', "Sets the correct value as selected")
+});
+QUnit.test("Not setting a selected option", function(assert) {
+    elem.append( "<span id='selected-tester'>Letter F</span>" );
+
+    $.fn.editable.defaults.sort_select_options = false;
+
+    $('#selected-tester').editable('http://bla', {
+        type: 'select',
+        data: {"E": "Letter E", "F": "Letter F", "D": "Letter Disk"},
+    });
+
+    assert.equal( $( "#selected-tester").attr('title'), "Click to edit", "Editable enabled: it sets the title" );
+    $('#selected-tester').click();
+    assert.equal($('#selected-tester form select :selected').text(), 'Letter E', "Selects the first option as selected?")
+});
+
