@@ -684,7 +684,7 @@ var _supportInType = function (type) {
                             b = b[1];
                             return a < b ? -1 : (a > b ? 1 : 0);
                         });
-                    }     
+                    }
                     // now add the options to our select
                     var option;
                     for (var i = 0; i < tuples.length; i++) {
@@ -699,7 +699,7 @@ var _supportInType = function (type) {
                             option = $('<option />').val(key).append(value);
 
                             // add the selected prop if it's the same as original or if the key is 'selected'
-                            if (json['selected'] === key || key === $.trim(original.revert)) {
+                            if (json.selected === key || key === $.trim(original.revert)) {
                                 $(option).prop('selected', 'selected');
                             }
 
