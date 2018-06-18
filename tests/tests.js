@@ -67,7 +67,7 @@ QUnit.test('Default: Sorting select options', function(assert) {
 });
 QUnit.module('select-boxes setting selected');
 QUnit.test('Explicitly setting a selected option', function(assert) {
-    elem.append( "<span id='selected-tester'>Letter F</span>" );
+    elem.append( '<span id="selected-tester">Letter F</span>' );
 
     $.fn.editable.defaults.sortSelectOptions = false;
 
