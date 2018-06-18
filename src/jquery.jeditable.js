@@ -231,6 +231,7 @@
 
                 // timeout function
                 var t;
+                var is_submitting = false;
 
                 if (settings.loadurl) {
                     t = self.setTimeout(function() {
@@ -339,12 +340,20 @@
 
                 form.submit(function(e) {
 
+                    /* Do no submit. */
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (is_submitting) {
+                        console.log("...we are already submitting .. stop!");
+                        return false;
+                    } else {
+                        is_submitting = true;
+                    }
+
                     if (t) {
                         self.clearTimeout(t);
                     }
-
-                    /* Do no submit. */
-                    e.preventDefault();
 
                     /* Call before submit hook. */
                     /* If it returns false abort submitting. */
