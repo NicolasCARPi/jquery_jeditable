@@ -231,7 +231,7 @@
 
                 // timeout function
                 var t;
-                var is_submitting = false;
+                var isSubmitting = false;
 
                 if (settings.loadurl) {
                     t = self.setTimeout(function() {
@@ -344,11 +344,11 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    if (is_submitting) {
-                        console.log("...we are already submitting .. stop!");
+                    if (isSubmitting) {
+                        console.warn('...we are already submitting .. stop!');
                         return false;
                     } else {
-                        is_submitting = true;
+                        isSubmitting = true;
                     }
 
                     if (t) {
@@ -677,7 +677,7 @@ var _supportInType = function (type) {
                     for (key in json) {
                         tuples.push([key, json[key]]); // Store: [key, value]
                     }
-                    if (settings.sort_select_options) {
+                    if (settings.sortSelectOptions) {
                         // sort it
                         tuples.sort(function (a, b) {
                             a = a[1];
@@ -793,7 +793,7 @@ var _supportInType = function (type) {
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
-        sort_select_options: false,
+        sortSelectOptions: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}
