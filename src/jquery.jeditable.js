@@ -46,6 +46,7 @@
  * @param {Boolean} [options.select] - When true text is selected
  * @param {Function} [options.showfn]- Function that can animate the element when switching to edit mode
  * @param {String} [options.size] - The size of the text field
+ * @param {String} [options.sortselectoptions] - Sort the options of a select form
  * @param {Number} [options.step] - Step size for number type
  * @param {String} [options.style] - Style to apply to input form; 'inherit' to copy from parent
  * @param {String} [options.submit] - submit button value, empty means no button
@@ -345,7 +346,7 @@
                     e.stopPropagation();
 
                     if (isSubmitting) {
-                        console.warn('...we are already submitting .. stop!');
+                        // we are already submitting! Stop right here.
                         return false;
                     } else {
                         isSubmitting = true;
@@ -677,7 +678,7 @@ var _supportInType = function (type) {
                     for (key in json) {
                         tuples.push([key, json[key]]); // Store: [key, value]
                     }
-                    if (settings.sortSelectOptions) {
+                    if (settings.sortselectoptions) {
                         // sort it
                         tuples.sort(function (a, b) {
                             a = a[1];
@@ -793,7 +794,7 @@ var _supportInType = function (type) {
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
-        sortSelectOptions: false,
+        sortselectoptions: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}

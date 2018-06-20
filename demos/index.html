@@ -555,6 +555,7 @@ $(".url").editable("save.php", {
             // INLINE SELECT
             $(".editable-select").editable("save.php", {
                 type   : "select",
+                sortselectoptions: true,
                 data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear", "selected":"Pear"}',
                 submitdata : function() { return {id : 42, something: 'else'};},
                 style  : "inherit"
