@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.4
+## 2.0.5
 
 * Sorting of select items is now an option (default is not sorted). by @nathanvda (#178)
 
