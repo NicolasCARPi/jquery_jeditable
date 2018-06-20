@@ -29,7 +29,7 @@ QUnit.module('select-boxes');
 QUnit.test('Default: NOT Sorting select options', function(assert) {
     elem.append( '<span id="select-tester">Letter F</span>' );
 
-    $.fn.editable.defaults.sortSelectOptions = false;
+    $.fn.editable.defaults.sortselectoptions = false;
 
     $('#select-tester').editable('http://bla', {
         type: 'select',
@@ -49,7 +49,7 @@ QUnit.test('Default: NOT Sorting select options', function(assert) {
 QUnit.test('Default: Sorting select options', function(assert) {
     elem.append( '<span id="select-sorted-tester">Letter F</span>' );
 
-    $.fn.editable.defaults.sortSelectOptions = true;
+    $.fn.editable.defaults.sortselectoptions = true;
 
     $('#select-sorted-tester').editable('http://bla', {
         type: 'select',
@@ -69,7 +69,7 @@ QUnit.module('select-boxes setting selected');
 QUnit.test('Explicitly setting a selected option', function(assert) {
     elem.append( '<span id="selected-tester">Letter F</span>' );
 
-    $.fn.editable.defaults.sortSelectOptions = false;
+    $.fn.editable.defaults.sortselectoptions = false;
 
     $('#selected-tester').editable('http://bla', {
         type: 'select',
@@ -83,7 +83,7 @@ QUnit.test('Explicitly setting a selected option', function(assert) {
 QUnit.test('Not setting a selected option', function(assert) {
     elem.append( '<span id="selected-tester">Letter F</span>' );
 
-    $.fn.editable.defaults.sortSelectOptions = false;
+    $.fn.editable.defaults.sortselectoptions = false;
 
     $('#selected-tester').editable('http://bla', {
         type: 'select',
