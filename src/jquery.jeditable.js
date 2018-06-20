@@ -231,6 +231,7 @@
 
                 // timeout function
                 var t;
+                var isSubmitting = false;
 
                 if (settings.loadurl) {
                     t = self.setTimeout(function() {
@@ -339,12 +340,20 @@
 
                 form.submit(function(e) {
 
+                    /* Do no submit. */
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (isSubmitting) {
+                        console.warn('...we are already submitting .. stop!');
+                        return false;
+                    } else {
+                        isSubmitting = true;
+                    }
+
                     if (t) {
                         self.clearTimeout(t);
                     }
-
-                    /* Do no submit. */
-                    e.preventDefault();
 
                     /* Call before submit hook. */
                     /* If it returns false abort submitting. */
@@ -668,13 +677,14 @@ var _supportInType = function (type) {
                     for (key in json) {
                         tuples.push([key, json[key]]); // Store: [key, value]
                     }
-                    // sort it
-                    tuples.sort(function(a, b) {
-                        a = a[1];
-                        b = b[1];
-                        return a < b ? -1 : (a > b ? 1 : 0);
-                    });
-
+                    if (settings.sortSelectOptions) {
+                        // sort it
+                        tuples.sort(function (a, b) {
+                            a = a[1];
+                            b = b[1];
+                            return a < b ? -1 : (a > b ? 1 : 0);
+                        });
+                    }
                     // now add the options to our select
                     var option;
                     for (var i = 0; i < tuples.length; i++) {
@@ -687,14 +697,14 @@ var _supportInType = function (type) {
 
                         if (key !== 'selected') {
                             option = $('<option />').val(key).append(value);
-                        }
 
-                        // add the selected prop if it's the same as original or if the key is 'selected'
-                        if (key === 'selected' || key === $.trim(original.revert)) {
-                            $(option).prop('selected', 'selected');
-                        }
+                            // add the selected prop if it's the same as original or if the key is 'selected'
+                            if (json.selected === key || key === $.trim(original.revert)) {
+                                $(option).prop('selected', 'selected');
+                            }
 
-                        $(this).find('select').append(option);
+                            $(this).find('select').append(option);
+                        }
                     }
 
                     // submit on change if no submit button defined
@@ -783,6 +793,7 @@ var _supportInType = function (type) {
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: 'Click to edit',
+        sortSelectOptions: false,
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}
