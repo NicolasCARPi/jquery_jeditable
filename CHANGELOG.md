@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.4
+
+* Sorting of select items is now an option (default is not sorted). by @nathanvda (#178)
+
 ## 2.0.3
 
 * Add ability to apply css to input element (#173)
