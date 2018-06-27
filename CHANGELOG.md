@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.6
+* Fix cancel when ESC is pressed (#177) by @thezoggy
+
 ## 2.0.5
 
 * Sorting of select items is now an option (default is not sorted). by @nathanvda (#178)
