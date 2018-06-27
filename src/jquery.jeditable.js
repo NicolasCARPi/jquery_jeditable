@@ -144,7 +144,7 @@
                 }
 
                 // do nothing if user press Tab again, just go to next element, not into edit mode
-                if (e.keyCode === 9) {
+                if (e.which === 9) {
                     return;
                 }
 
@@ -307,8 +307,8 @@
                 }
 
                 /* discard changes if pressing esc */
-                input.keydown(function(e) {
-                    if (e.keyCode === 27) {
+                $(this).keydown(function(e) {
+                    if (e.which === 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
                     }
