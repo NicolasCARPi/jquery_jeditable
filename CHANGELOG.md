@@ -1,7 +1,9 @@
 # Changelog
 
 ## 2.0.6
+
 * Fix cancel when ESC is pressed (#177) by @thezoggy
+* Fix "main" entry of package.json (#181)
 
 ## 2.0.5
 
