@@ -1,14 +1,15 @@
 # Description
 
-## how to reproduce
+## How to reproduce
 
 (add a jsfiddle/codepen example)
 
-## expected result
+## Expected result
 
-## actual result
+## Actual result
 
 # Environment
 
+jQuery version:
 Browser:
 OS:
