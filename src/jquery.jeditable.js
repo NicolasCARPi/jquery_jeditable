@@ -160,7 +160,7 @@
 
                 /* execute the before function if any was specified */
                 if (settings.before && jQuery.isFunction(settings.before)) {
-                    settings.before();
+                    settings.before(e);
                 } else if (settings.before && !jQuery.isFunction(settings.before)) {
                     throw "The 'before' option needs to be provided as a function!";
                 }
