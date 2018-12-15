@@ -11,11 +11,36 @@
  */
 'use strict';
 $.editable.addInputType('masked', {
-    element : function(settings, original) {
-        /* Create an input. Mask it using masked input plugin. Settings  */
-        /* for mask can be passed with Jeditable settings hash.          */
-        var input = $('<input />').mask(settings.mask);
-        $(this).append(input);
-        return(input);
-    }
+
+	
+	element : function(settings, original) {
+                    var input = $('<input />').attr({
+                        autocomplete: 'off',
+                        list: settings.list,
+                        maxlength: settings.maxlength,
+                        pattern: settings.pattern,
+                        placeholder: settings.placeholder,
+                        tooltip: settings.tooltip,
+                        type: 'text'
+                    }).mask(settings.mask);
+
+                    if (settings.width  !== 'none') {
+                        input.css('width', settings.width);
+                    }
+
+                    if (settings.height !== 'none') {
+                        input.css('height', settings.height);
+                    }
+
+                    if (settings.size) {
+                        input.attr('size', settings.size);
+                    }
+
+                    if (settings.maxlength) {
+                        input.attr('maxlength', settings.maxlength);
+                    }
+
+                    $(this).append(input);
+                    return(input);
+                }
 });
