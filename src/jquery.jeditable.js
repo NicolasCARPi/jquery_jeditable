@@ -600,7 +600,7 @@ var _supportInType = function (type) {
                         list: settings.list,
                         maxlength: settings.maxlength,
                         pattern: settings.pattern,
-                        placeholder: settings.placeholder,
+                        placeholder: settings.placeholder.replace(/<(?:.|\n)*?>/gm, ''),
                         tooltip: settings.tooltip,
                         type: 'text'
                     });
@@ -723,7 +723,7 @@ var _supportInType = function (type) {
                 element: function (settings, original) {
                     var input = $('<input />').attr({
                         maxlength: settings.maxlength,
-                        placeholder: settings.placeholder,
+                        placeholder: settings.placeholder.replace(/<(?:.|\n)*?>/gm, ''),
                         min : settings.min,
                         max : settings.max,
                         step: settings.step,
@@ -743,7 +743,7 @@ var _supportInType = function (type) {
                 element: function (settings, original) {
                     var input = $('<input />').attr({
                         maxlength: settings.maxlength,
-                        placeholder: settings.placeholder,
+                        placeholder: settings.placeholder.replace(/<(?:.|\n)*?>/gm, ''),
                         tooltip: settings.tooltip,
                         type: _supportInType('email')
                     });
@@ -761,7 +761,7 @@ var _supportInType = function (type) {
                     var input = $('<input />').attr({
                         maxlength: settings.maxlength,
                         pattern: settings.pattern,
-                        placeholder: settings.placeholder,
+                        placeholder: settings.placeholder.replace(/<(?:.|\n)*?>/gm, ''),
                         tooltip: settings.tooltip,
                         type: _supportInType('url')
                     });
