@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.7
+
+* Width/height now correctly taken into account for masked inputs (#189)
+* Pass event object to the before callback (#188)
+
 ## 2.0.6
 
 * Fix cancel when ESC is pressed (#177) by @thezoggy
