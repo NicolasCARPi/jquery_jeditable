@@ -404,6 +404,9 @@
                               /* Defaults for ajaxoptions. */
                               var ajaxoptions = {
                                   type    : 'POST',
+                                  complete: function (xhr, status) {
+                                      isSubmitting = false;
+                                  },
                                   data    : submitdata,
                                   dataType: 'html',
                                   url     : settings.target,

@@ -523,6 +523,11 @@ $(".url").editable("save.php", {
                 select : true,
                 submitcssclass : 'btn btn-success',
                 maxlength : 200,
+                onerror: function(settings, self, xhr) {
+                    console.log("Error with status code: " + xhr.status);
+                    // reset the form
+                    self.reset();
+                },
                 label : 'This is a label',
                 onreset : function() { console.log('Triggered before reset') },
                 onblur : function() { console.log('Triggered on blur event');return true; },
