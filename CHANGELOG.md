@@ -2,6 +2,7 @@
 
 ## 2.0.7
 
+* Change isSubmitting back to false onComplete (#192)
 * Width/height now correctly taken into account for masked inputs (#189)
 * Pass event object to the before callback (#188)
 
