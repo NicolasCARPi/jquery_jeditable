@@ -2,7 +2,8 @@
 
 ## How to reproduce
 
-(add a jsfiddle/codepen example)
+It helps a lot if you can create a working example from this template:
+https://codepen.io/pen?template=pBxBXm
 
 ## Expected result
 
