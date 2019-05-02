@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.8
+
+* Update dependencies to fix security vulnerabilities (CVE-2019-11358, and in js-yaml)
+
 ## 2.0.7
 
 * Change isSubmitting back to false onComplete (#192)
