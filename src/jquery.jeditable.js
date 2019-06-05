@@ -358,27 +358,32 @@
 
                     /* Call before submit hook. */
                     /* If it returns false abort submitting. */
-                    if (false !== onsubmit.apply(form, [settings, self])) {
+                    isSubmitting = false !== onsubmit.apply(form, [settings, self]);
+                    if (isSubmitting) {
                         /* Custom inputs call before submit hook. */
                         /* If it returns false abort submitting. */
-                        if (false !== submit.apply(form, [settings, self])) {
+                        isSubmitting = false !== submit.apply(form, [settings, self]);
+                        if (isSubmitting) {
 
                           /* Check if given target is function */
                           if ($.isFunction(settings.target)) {
                              /* Callback function to handle the target reponse */
-                              var responseHandler = function(value) {
-                                  $(self).html(value);
-                                  self.editing = false;
-                                  callback.apply(self, [self.innerHTML, settings]);
-                                  if (!$.trim($(self).html())) {
-                                      $(self).html(settings.placeholder);
+                              var responseHandler = function(value, complete) {
+                                  isSubmitting = false;
+                                  if (false !== complete) {
+                                      $(self).html(value);
+                                      self.editing = false;
+                                      callback.apply(self, [self.innerHTML, settings]);
+                                      if (!$.trim($(self).html())) {
+                                          $(self).html(settings.placeholder);
+                                      }
                                   }
                               };
                               /* Call the user target function */
                               var userTarget = settings.target.apply(self, [input.val(), settings, responseHandler]);
                               /* Handle the target function return for compatibility */
                               if (false !== userTarget && undefined !== userTarget) {
-                                  responseHandler(userTarget);
+                                  responseHandler(userTarget, userTarget);
                               }
 
                           } else {
