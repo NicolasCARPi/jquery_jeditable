@@ -2,7 +2,7 @@
 # https://github.com/NicolasCARPi/jquery_jeditable
 
 # use apache + php
-FROM php:7.2.1-apache-stretch
+FROM php:7.2-apache-stretch
 
 # select version or branch here
 ENV JEDITABLE_VERSION master

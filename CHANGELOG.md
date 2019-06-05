@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.9
+
+* Allow resubmiting if onsubmit or submit returns false (#201 by @RobdeT)
+
 ## 2.0.8
 
 * Update dependencies to fix security vulnerabilities (CVE-2019-11358, and in js-yaml)
