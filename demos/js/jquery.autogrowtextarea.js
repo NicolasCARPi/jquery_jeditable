@@ -43,9 +43,9 @@ jQuery.fn.autoGrow = function(options) {
 				jQuery(textarea).height(jQuery(mirror).height());
 		};
 
-		var growTextarea = function () {
+		var growTextarea = function() {
 			sendContentToMirror(this);
-		}
+		};
 
 		// Create a mirror
 		mirror = createMirror(this);
