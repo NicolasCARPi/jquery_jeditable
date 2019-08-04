@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.11
+
+* Use text() instead of html() for revert (#203)
+
 ## 2.0.10
 
 * Regenerate the minified files
