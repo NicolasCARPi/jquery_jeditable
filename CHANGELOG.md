@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.12
+
+* Wrap the plugins in functions for non-conflict mode (#205)
+
 ## 2.0.11
 
 * Use text() instead of html() for revert (#203)
