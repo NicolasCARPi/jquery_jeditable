@@ -19,39 +19,41 @@
  * });
  */
 'use strict';
-$.editable.addInputType('datepicker', {
+(function ($) {
+    $.editable.addInputType('datepicker', {
 
-    element : function(settings, original) {
-        var input = $('<input />');
-        if (settings.datepicker) {
-            input.datepicker(settings.datepicker);
-        } else {
-            input.datepicker();
+        element : function(settings, original) {
+            var input = $('<input />');
+            if (settings.datepicker) {
+                input.datepicker(settings.datepicker);
+            } else {
+                input.datepicker();
+            }
+
+            // get the date in the correct format
+            if (settings.datepicker.format) {
+                input.datepicker('option', 'dateFormat', settings.datepicker.format);
+            }
+
+            $(this).append(input);
+            return(input);
+        },
+
+        submit: function (settings, original) {
+            var dateRaw = $('input', this).datepicker('getDate');
+            var dateFormatted;
+
+            if (settings.datepicker.format) {
+                dateFormatted = $.datepicker.formatDate(settings.datepicker.format, new Date(dateRaw));
+            } else {
+                dateFormatted = dateRaw;
+            }
+            $('input', this).val(dateFormatted);
+        },
+
+        plugin : function(settings, original) {
+            // prevent disappearing of calendar
+            settings.onblur = null;
         }
-
-        // get the date in the correct format
-        if (settings.datepicker.format) {
-            input.datepicker('option', 'dateFormat', settings.datepicker.format);
-        }
-
-        $(this).append(input);
-        return(input);
-    },
-
-    submit: function (settings, original) {
-        var dateRaw = $('input', this).datepicker('getDate');
-        var dateFormatted;
-
-        if (settings.datepicker.format) {
-            dateFormatted = $.datepicker.formatDate(settings.datepicker.format, new Date(dateRaw));
-        } else {
-            dateFormatted = dateRaw;
-        }
-        $('input', this).val(dateFormatted);
-    },
-
-    plugin : function(settings, original) {
-        // prevent disappearing of calendar
-        settings.onblur = null;
-    }
-});
+    });
+})(jQuery);
