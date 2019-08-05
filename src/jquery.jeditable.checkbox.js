@@ -6,47 +6,49 @@
  * @name PluginCheckbox
  */
 'use strict';
-$.editable.addInputType('checkbox', {
-    element : function(settings, original) {
-        var input = $('<input type="checkbox">');
-        $(this).append(input);
+(function ($) {
+    $.editable.addInputType('checkbox', {
+        element : function(settings, original) {
+            var input = $('<input type="checkbox">');
+            $(this).append(input);
 
-        $(input).bind('click', function() {
-            if ($(input).val() === 'on') {
-                $(input).val('off');
-                $(input).removeAttr('checked');
+            $(input).bind('click', function() {
+                if ($(input).val() === 'on') {
+                    $(input).val('off');
+                    $(input).removeAttr('checked');
+                } else {
+                    $(input).val('on');
+                    $(input).attr('checked', 'checked');
+                }
+            });
+
+        return(input);
+        },
+
+        content : function(string, settings, original) {
+
+            var checked = (string === 'yes') ? 'on' : 'off';
+            var input = $(':input:first', this);
+
+            if (checked === 'on') {
+                $(input).attr('checked', checked);
             } else {
-                $(input).val('on');
-                $(input).attr('checked', 'checked');
+                $(input).removeAttr('checked');
             }
-        });
 
-    return(input);
-    },
+            var value = $(input).is(':checked') ? 'on' : 'off';
+            $(input).val(value);
+        },
 
-    content : function(string, settings, original) {
-
-        var checked = (string === 'yes') ? 'on' : 'off';
-        var input = $(':input:first', this);
-
-        if (checked === 'on') {
-            $(input).attr('checked', checked);
-        } else {
-            $(input).removeAttr('checked');
+        submit: function (settings, original) {
+            var value;
+            var input = $(':input:first', this);
+            if (input.is(':checked')) {
+                value = '1';
+            } else {
+                value = '0';
+            }
+            $('input', this).val(value);
         }
-
-        var value = $(input).is(':checked') ? 'on' : 'off';
-        $(input).val(value);
-    },
-
-    submit: function (settings, original) {
-        var value;
-        var input = $(':input:first', this);
-        if (input.is(':checked')) {
-            value = '1';
-        } else {
-            value = '0';
-        }
-        $('input', this).val(value);
-    }
-});
+    });
+})(jQuery);

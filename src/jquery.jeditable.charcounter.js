@@ -18,34 +18,36 @@
  * });
  */
 'use strict';
-$.editable.addInputType("charcounter", {
-    element : function(settings, original) {
-        var textarea = $("<textarea />");
-        if (settings.rows) {
-            textarea.attr("rows", settings.rows);
-        } else {
-            textarea.height(settings.height);
-        }
-        if (settings.cols) {
-            textarea.attr("cols", settings.cols);
-        } else {
-            textarea.width(settings.width);
-        }
-
-        // stop bubbling and propagation to parent element
-        textarea.click(function(event) {
-            if (event.cancelBubble) {
-                event.cancelBubble();
+(function ($) {
+    $.editable.addInputType("charcounter", {
+        element : function(settings, original) {
+            var textarea = $("<textarea />");
+            if (settings.rows) {
+                textarea.attr("rows", settings.rows);
+            } else {
+                textarea.height(settings.height);
             }
-            if (event.stopPropagation) {
-                event.stopPropagation();
+            if (settings.cols) {
+                textarea.attr("cols", settings.cols);
+            } else {
+                textarea.width(settings.width);
             }
-        });
 
-        $(this).append(textarea);
-        return(textarea);
-    },
-    plugin : function(settings, original) {
-        $("textarea", this).charCounter(settings.charcounter.characters, settings.charcounter);
-    }
-});
+            // stop bubbling and propagation to parent element
+            textarea.click(function(event) {
+                if (event.cancelBubble) {
+                    event.cancelBubble();
+                }
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                }
+            });
+
+            $(this).append(textarea);
+            return(textarea);
+        },
+        plugin : function(settings, original) {
+            $("textarea", this).charCounter(settings.charcounter.characters, settings.charcounter);
+        }
+    });
+})(jQuery);
