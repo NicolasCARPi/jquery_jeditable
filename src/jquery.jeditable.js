@@ -683,9 +683,21 @@ var _supportInType = function (type) {
                     // Create tuples for sorting
                     var tuples = [];
                     var key;
-                    for (key in json) {
-                        tuples.push([key, json[key]]); // Store: [key, value]
+
+                    if (Array.isArray(json) && json.every(Array.isArray)) {
+                        // Process list of tuples
+                        tuples = json // JSON already contains list of [key, value]
+                        json = {};
+                        tuples.forEach(function(e) {
+                            json[e[0]] = e[1]; // Recreate json object to comply with following code
+                        });
+                    } else {
+                        // Process object
+                        for (key in json) {
+                            tuples.push([key, json[key]]); // Store: [key, value]
+                        }
                     }
+
                     if (settings.sortselectoptions) {
                         // sort it
                         tuples.sort(function (a, b) {
