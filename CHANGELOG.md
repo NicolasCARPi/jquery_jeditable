@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.13
+
+* Accept list of tuples as items for select element (#208 by @emjayko)
+
 ## 2.0.12
 
 * Wrap the plugins in functions for non-conflict mode (#205)
