@@ -65,6 +65,67 @@ QUnit.test('Default: Sorting select options', function(assert) {
 
     assert.deepEqual(optionsList, ['Letter Disk', 'Letter E', 'Letter F'], 'It does sort the given options list');
 });
+QUnit.module('select-boxes input data');
+QUnit.test('List of tuples', function(assert) {
+    elem.append('<span id="select-tester"></span>');
+    var e = $('#select-tester', elem);
+
+    var test_data = [['E', 'Letter E'], ['F', 'Letter F'], ['D', 'Letter Disk']];
+    e.editable('http://bla', {
+        type: 'select',
+        data: test_data
+    });
+
+    e.click();
+
+    var optionsList = [];
+    e.find('option').each(function(name, val) { optionsList.push([val.value, val.text]); });
+    assert.deepEqual(optionsList, test_data, 'Options keep sorted as defined in input');
+});
+QUnit.test('List of strings', function(assert) {
+    elem.append('<span id="select-tester"></span>');
+    var e = $('#select-tester', elem);
+
+    var test_data = ['E', 'F', 'D'];
+    var sort = Math.random() > 0.5;
+    e.editable('http://bla', {
+        type: 'select',
+        data: test_data,
+        sortselectoptions: sort
+    });
+
+    e.click();
+
+    var optionsList = [];
+    var expected_result = [['0', 'E'],['1', 'F'], ['2', 'D']];
+    if (sort) {
+        expected_result.sort(function(a, b) {return a[1] > b[1];});
+    }
+    e.find('option').each(function(name, val) { optionsList.push([val.value, val.text]); });
+    assert.deepEqual(optionsList, expected_result, 'Options get auto assigned integer values in order of input and options are sorted by label based on sortselectoptions option');
+});
+QUnit.test('Object', function(assert) {
+    elem.append('<span id="select-tester"></span>');
+    var e = $('#select-tester', elem);
+
+    var test_data = {'E': 'Letter E', 'F': 'Letter F', 'D': 'Letter Disk'};
+    var sort = Math.random() > 0.5;
+    e.editable('http://bla', {
+        type: 'select',
+        data: test_data,
+        sortselectoptions: sort
+    });
+
+    e.click();
+
+    var optionsList = [];
+    var expected_result = [['E', 'Letter E'], ['F', 'Letter F'], ['D', 'Letter Disk']];
+    if (sort) {
+        expected_result.sort(function(a, b) {return a[1] > b[1];});
+    }
+    e.find('option').each(function(name, val) { optionsList.push([val.value, val.text]); });
+    assert.deepEqual(optionsList, expected_result, 'Options are sorted either in order of object definition or by label depending on sortselectoptions option');
+});
 QUnit.module('select-boxes setting selected');
 QUnit.test('Explicitly setting a selected option', function(assert) {
     elem.append( '<span id="selected-tester">Letter F</span>' );
