@@ -89,7 +89,7 @@
         }
         if ('destroy' === target) {
             $(this)
-                .unbind($(this).data('event.editable'))
+                .off($(this).data('event.editable'))
                 .removeData('disabled.editable')
                 .removeData('event.editable');
             return;
@@ -299,7 +299,7 @@
                 plugin.apply(form, [settings, self]);
 
                 /* Focus to first visible form element. */
-                form.find(':input:visible:enabled:first').focus();
+                form.find(':input:visible:enabled:first').trigger('focus');
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
@@ -307,7 +307,7 @@
                 }
 
                 /* discard changes if pressing esc */
-                $(this).keydown(function(e) {
+                $(this).on('keydown', function(e) {
                     if (e.which === 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
@@ -327,7 +327,7 @@
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
                         t = self.setTimeout(function() {
-                            form.submit();
+                            form.trigger('submit');
                         }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
@@ -339,7 +339,7 @@
                     });
                 }
 
-                form.submit(function(e) {
+                form.on('submit', function(e) {
 
                     /* Do no submit. */
                     e.preventDefault();
@@ -471,7 +471,7 @@
             // DESTROY
             self.destroy = function(form) {
                 $(self)
-                .unbind($(self).data('event.editable'))
+                .off($(self).data('event.editable'))
                 .removeData('disabled.editable')
                 .removeData('event.editable');
 
@@ -560,7 +560,7 @@ var _supportInType = function (type) {
                         if (settings.submit.match(/>$/)) {
                             submit = $(settings.submit).on('click', function() {
                                 if (submit.attr('type') !== 'submit') {
-                                    form.submit();
+                                    form.trigger('submit');
                                 }
                             });
                         /* Otherwise use button with given string as text. */
@@ -732,7 +732,7 @@ var _supportInType = function (type) {
                     if (!settings.submit) {
                         var form = this;
                         $(this).find('select').change(function() {
-                            form.submit();
+                            form.trigger('submit');
                         });
                     }
                 }
