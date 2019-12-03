@@ -136,7 +136,7 @@
             }
 
             // EVENT IS FIRED
-            $(this).bind(settings.event, function(e) {
+            $(this).on(settings.event, function(e) {
 
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
@@ -558,7 +558,7 @@ var _supportInType = function (type) {
                     if (settings.submit) {
                         /* If given html string use that. */
                         if (settings.submit.match(/>$/)) {
-                            submit = $(settings.submit).click(function() {
+                            submit = $(settings.submit).on('click', function() {
                                 if (submit.attr('type') !== 'submit') {
                                     form.submit();
                                 }
@@ -588,7 +588,7 @@ var _supportInType = function (type) {
                         }
                         $(this).append(cancel);
 
-                        $(cancel).click(function(event) {
+                        $(cancel).on('click', function(event) {
                             var reset;
                             if ($.isFunction($.editable.types[settings.type].reset)) {
                                 reset = $.editable.types[settings.type].reset;
