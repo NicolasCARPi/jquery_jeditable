@@ -12,9 +12,9 @@
   "devDependencies": {
     "grunt": "^1.0.4",
     "grunt-contrib-uglify-es": "^3.3.0",
-    "lodash": ">=4.17.13",
+    "lodash": "^4.17.15",
     "merge": ">=1.2.1",
-    "qunit": "^2.9.2"
+    "qunit": "^2.9.3"
   },
   "scripts": {
     "test": "firefox -new-tab tests/index.html"

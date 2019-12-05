@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.14
+
+* Remove deprecated jQuery functions and replace them by modern counterparts (#211)
+
 ## 2.0.13
 
 * Accept list of tuples as items for select element (#208 by @emjayko)
