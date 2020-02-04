@@ -2,7 +2,7 @@
 # https://github.com/NicolasCARPi/jquery_jeditable
 
 # use apache + php
-FROM php:7.2-apache-stretch
+FROM php:7.3-apache-stretch
 
 # select version or branch here
 ENV JEDITABLE_VERSION master
@@ -18,7 +18,7 @@ LABEL org.label-schema.name="jquery-jeditable demo" \
 # install npm
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y --no-install-recommends install gnupg \
-    && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g documentation \
     && rm -rf /var/lib/apt/lists/*
