@@ -374,7 +374,7 @@
                                   if (false !== complete) {
                                       $(self).html(value);
                                       self.editing = false;
-                                      callback.apply(self, [self.innerHTML, settings]);
+                                      callback.apply(self, [self.innerText, settings]);
                                       if (!$.trim($(self).html())) {
                                           $(self).html(settings.placeholder);
                                       }
