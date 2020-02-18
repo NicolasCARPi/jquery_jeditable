@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.15
+
+* Remove deprecated .blur() calls and replace them with .on() (#211)
+
 ## 2.0.14
 
 * Remove deprecated jQuery functions and replace them by modern counterparts (#211)

@@ -318,21 +318,21 @@
                 /* Discard, submit or nothing with changes when clicking outside. */
                 /* Do nothing is usable when navigating with tab. */
                 if ('cancel' === settings.onblur) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         /* Prevent canceling if submit was clicked. */
                         t = self.setTimeout(function() {
                             reset.apply(form, [settings, self]);
                         }, 500);
                     });
                 } else if ('submit' === settings.onblur) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         /* Prevent double submit if submit was clicked. */
                         t = self.setTimeout(function() {
                             form.trigger('submit');
                         }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
-                    input.blur(function(e) {
+                    input.on('blur', function(e) {
                         // reset the form if the onblur function returns false
                         if (false === settings.onblur.apply(self, [input.val(), settings, form])) {
                             reset.apply(form, [settings, self]);
