@@ -312,6 +312,10 @@
                     if (e.which === 27) {
                         e.preventDefault();
                         reset.apply(form, [settings, self]);
+                    /* allow shift+enter to submit form (required for textarea) */
+                    } else if (e.which == 13 && e.shiftKey){
+                        e.preventDefault();
+                        form.trigger('submit');
                     }
                 });
 
