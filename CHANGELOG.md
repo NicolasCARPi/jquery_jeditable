@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.17
+
+* Upgrade jquery to 3.5.0 because of vulnerability in previous versions
+
+## 2.0.16
+
+* Get text instead of html in callback result (#214)
+* Enable shift+enter to submit form (#216)
+
 ## 2.0.15
 
 * Remove deprecated .blur() calls and replace them with .on() (#211)
