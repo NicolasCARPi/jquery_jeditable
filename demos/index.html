@@ -618,7 +618,7 @@ $(".url").editable("save.php", {
             $(".intercept").editable("json2.php", {
                 submit : 'OK',
                 intercept : function(jsondata) {
-					json = JSON.parse(jsondata);
+                    json = JSON.parse(jsondata);
                     console.log(json.status);
                     console.log(json.other);
                     return json.result;
