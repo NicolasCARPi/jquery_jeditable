@@ -19,7 +19,7 @@
  * @param {String} [options.inputcssclass] - CSS class to apply to input. 'inherit' to copy from parent
  * @param {Function} [options.intercept] - Intercept the returned data so you have a chance to process it before returning it in the page
  * @param {String|Function} [options.data] - Content loaded in the form
- * @param {String} [options.event='click'] - jQuery event such as 'click' of 'dblclick'. See https://api.jquery.com/category/events/
+ * @param {String} [options.event='click'] - jQuery event such as 'click' or 'dblclick'. See https://api.jquery.com/category/events/
  * @param {String} [options.formid] - Give an id to the form that is produced
  * @param {String|Number} [options.height='auto'] - Height of the element in pixels or 'auto' or 'none'
  * @param {String} [options.id='id'] - POST parameter name of edited div id
