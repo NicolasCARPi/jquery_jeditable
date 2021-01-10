@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.18
+
+* Upgrade dependencies
+* Formatting fix (remove tabs)
+* Add FUNDING.yml
+* Fix changelog (#218)
+
 ## 2.0.17
 
 * Upgrade jquery to 3.5.0 because of vulnerability in previous versions
