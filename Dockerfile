@@ -30,3 +30,4 @@ RUN sed -i -e "s:/var/www/html:/var/www/html/demos:" /etc/apache2/sites-enabled/
 # generate api doc
 WORKDIR /var/www/html
 RUN documentation build src -f html -o demos/api
+EXPOSE 80
