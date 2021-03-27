@@ -116,7 +116,7 @@
 * The demos folder now contains a page (index.html) with all the demo code
 * Removed Textile stuff
 * Removed SQLite from the demo
-* Add suport for configuring size and maxlength. by @bonkowski (#32)
+* Add support for configuring size and maxlength. by @bonkowski (#32)
 * Set "cache" to false on loadurl. Fix issue with IE8. by @spikex (#33)
 * Add package.json for npm hosting
 * Remove eval to allow compilation with Closure & Fix for newer jQuery. by @flavour (#158)
@@ -162,6 +162,6 @@
 ## 1.6.0
 
 * Onblur parameter can now be a function.
-* Support for any arbitary event for triggering Jeditable
+* Support for any arbitrary event for triggering Jeditable
 * Submitting of form will be canceled if submit() method of custom input returns false. 
 * Custom inputs now have access to reset() method. 

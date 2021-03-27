@@ -9,7 +9,7 @@
  * Autogrow Textarea Plugin Version v3.0
  * http://www.technoreply.com/autogrow-textarea-plugin-3-0
  *
- * THIS PLUGIN IS DELIVERD ON A PAY WHAT YOU WHANT BASIS. IF THE PLUGIN WAS USEFUL TO YOU, PLEASE CONSIDER BUYING THE PLUGIN HERE :
+ * THIS PLUGIN IS DELIVERD ON A PAY WHAT YOU WANT BASIS. IF THE PLUGIN WAS USEFUL TO YOU, PLEASE CONSIDER BUYING THE PLUGIN HERE :
  * https://sites.fastspring.com/technoreply/instant/autogrowtextareaplugin
  *
  * Date: October 15, 2012

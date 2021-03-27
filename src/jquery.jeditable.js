@@ -33,7 +33,7 @@
  * @param {Number} [options.max] - Maximum value for number type
  * @param {String} [options.maxlength] - The maximum number of character in the text field
  * @param {String} [options.method] - Method to use to send edited content (POST or PUT)
- * @param {Number} [options.min] - Mininum value for number type
+ * @param {Number} [options.min] - Minimum value for number type
  * @param {Boolean} [options.multiple] - Allow multiple selections in a select input
  * @param {String} [options.name='value'] - POST parameter name of edited content
  * @param {String|Function} [options.onblur='cancel'] - Use 'cancel', 'submit', 'ignore' or function. If function returns false, the form is cancelled.
@@ -149,7 +149,7 @@
                     return;
                 }
 
-                /* Prevent throwing an exeption if edit field is clicked again. */
+                /* Prevent throwing an exception if edit field is clicked again. */
                 if (self.editing) {
                     return;
                 }
@@ -200,7 +200,7 @@
                 if (settings.style) {
                     if ('inherit' === settings.style) {
                         form.attr('style', $(self).attr('style'));
-                        /* IE needs the second line or display wont be inherited. */
+                        /* IE needs the second line or display won't be inherited. */
                         form.css('display', $(self).css('display'));
                     } else {
                         form.attr('style', settings.style);
@@ -372,7 +372,7 @@
 
                           /* Check if given target is function */
                           if ($.isFunction(settings.target)) {
-                             /* Callback function to handle the target reponse */
+                             /* Callback function to handle the target response */
                               var responseHandler = function(value, complete) {
                                   isSubmitting = false;
                                   if (false !== complete) {
@@ -458,7 +458,7 @@
             self.reset = function(form) {
                 /* Prevent calling reset twice when blurring. */
                 if (self.editing) {
-                    /* Before reset hook, if it returns false abort reseting. */
+                    /* Before reset hook, if it returns false abort resetting. */
                     if (false !== onreset.apply(form, [settings, self])) {
                         $(self).text(self.revert);
                         self.editing   = false;
