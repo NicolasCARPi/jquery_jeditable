@@ -127,7 +127,7 @@
             $(this).data('event.editable', settings.event);
 
             /* If element is empty add something clickable (if requested) */
-            if (!$.trim($(this).html())) {
+            if (!$(this).html().trim()) {
                 $(this).html(settings.placeholder);
             }
 
@@ -160,9 +160,9 @@
                 }
 
                 /* execute the before function if any was specified */
-                if (settings.before && jQuery.isFunction(settings.before)) {
+                if (settings.before && (typeof settings.before === 'function')) {
                     settings.before(e);
-                } else if (settings.before && !jQuery.isFunction(settings.before)) {
+                } else if (settings.before && !(typeof settings.before === 'function')) {
                     throw "The 'before' option needs to be provided as a function!";
                 }
 
@@ -243,7 +243,7 @@
 
                     var loaddata = {};
                     loaddata[settings.id] = self.id;
-                    if ($.isFunction(settings.loaddata)) {
+                    if (typeof settings.loaddata === 'function') {
                         $.extend(loaddata, settings.loaddata.apply(self, [self.revert, settings]));
                     } else {
                         $.extend(loaddata, settings.loaddata);
@@ -262,7 +262,7 @@
                     });
                 } else if (settings.data) {
                     input_content = settings.data;
-                    if ($.isFunction(settings.data)) {
+                    if (typeof settings.data === 'function') {
                         input_content = settings.data.apply(self, [self.revert, settings]);
                     }
                 } else {
@@ -282,7 +282,7 @@
                 buttons.apply(form, [settings, self]);
 
                 /* Add created form to self. */
-                if (settings.showfn && $.isFunction(settings.showfn)) {
+                if (settings.showfn && (typeof settings.showfn === 'function')) {
                     form.hide();
                 }
 
@@ -292,7 +292,7 @@
                 $(self).append(form);
 
                 // execute the showfn
-                if (settings.showfn && $.isFunction(settings.showfn)) {
+                if (settings.showfn && (typeof settings.showfn === 'function')) {
                     settings.showfn(form);
                 }
 
@@ -304,7 +304,7 @@
 
                 /* Highlight input contents when requested. */
                 if (settings.select) {
-                    input.select();
+                    input.trigger('select');
                 }
 
                 /* discard changes if pressing esc */
@@ -335,7 +335,7 @@
                             form.trigger('submit');
                         }, 200);
                     });
-                } else if ($.isFunction(settings.onblur)) {
+                } else if (typeof settings.onblur === 'function') {
                     input.on('blur', function(e) {
                         // reset the form if the onblur function returns false
                         if (false === settings.onblur.apply(self, [input.val(), settings, form])) {
@@ -371,7 +371,7 @@
                         if (isSubmitting) {
 
                           /* Check if given target is function */
-                          if ($.isFunction(settings.target)) {
+                          if (typeof settings.target === 'function') {
                              /* Callback function to handle the target response */
                               var responseHandler = function(value, complete) {
                                   isSubmitting = false;
@@ -379,7 +379,7 @@
                                       $(self).html(value);
                                       self.editing = false;
                                       callback.apply(self, [self.innerText, settings]);
-                                      if (!$.trim($(self).html())) {
+                                      if (!$(self).html().trim()) {
                                           $(self).html(settings.placeholder);
                                       }
                                   }
@@ -397,7 +397,7 @@
                               submitdata[settings.name] = input.val();
                               submitdata[settings.id] = self.id;
                               /* Add extra data to be POST:ed. */
-                              if ($.isFunction(settings.submitdata)) {
+                              if (typeof settings.submitdata === 'function') {
                                   $.extend(submitdata, settings.submitdata.apply(self, [self.revert, settings, submitdata]));
                               } else {
                                   $.extend(submitdata, settings.submitdata);
@@ -430,7 +430,7 @@
                                       }
                                       self.editing = false;
                                       callback.apply(self, [result, settings, submitdata]);
-                                      if (!$.trim($(self).html())) {
+                                      if (!$(self).html().trim()) {
                                           $(self).html(settings.placeholder);
                                       }
                                   },
@@ -462,7 +462,7 @@
                     if (false !== onreset.apply(form, [settings, self])) {
                         $(self).text(self.revert);
                         self.editing   = false;
-                        if (!$.trim($(self).html())) {
+                        if (!$(self).html().trim()) {
                             $(self).html(settings.placeholder);
                         }
                         /* Show tooltip again. */
@@ -595,7 +595,7 @@ var _supportInType = function (type) {
 
                         $(cancel).on('click', function(event) {
                             var reset;
-                            if ($.isFunction($.editable.types[settings.type].reset)) {
+                            if (typeof $.editable.types[settings.type].reset === 'function') {
                                 reset = $.editable.types[settings.type].reset;
                             } else {
                                 reset = $.editable.types.defaults.reset;
@@ -725,7 +725,7 @@ var _supportInType = function (type) {
                             option = $('<option />').val(key).append(value);
 
                             // add the selected prop if it's the same as original or if the key is 'selected'
-                            if (json.selected === key || key === $.trim(original.revert)) {
+                            if (json.selected === key || key === String.prototype.trim.call(original.revert == null ? "" : original.revert)) {
                                 $(option).prop('selected', 'selected');
                             }
 
