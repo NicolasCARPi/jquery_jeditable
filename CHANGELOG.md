@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.19
+
+* Fix warnings from jquery-migrate (#230) by Shaun Case
+* Upgrade dependencies
+
 ## 2.0.18
 
 * Upgrade dependencies

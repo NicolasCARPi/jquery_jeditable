@@ -1,6 +1,6 @@
 {
   "name": "jquery-jeditable",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "description": "Edit in place plugin for jQuery",
   "main": "src/jquery.jeditable.js",
   "directories": {
