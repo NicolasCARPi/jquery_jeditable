@@ -21,11 +21,12 @@ RUN apt-get update && apt-get -y --no-install-recommends install gnupg \
     && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g documentation \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && a2enmod headers
 
 COPY . /var/www/html
 RUN ln -s /var/www/html/src /var/www/html/demos/src
-RUN sed -i -e "s:/var/www/html:/var/www/html/demos:" /etc/apache2/sites-enabled/000-default.conf
+COPY ./apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # generate api doc
 WORKDIR /var/www/html
