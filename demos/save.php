@@ -1,6 +1,6 @@
 <?php
 // sleep for a while so we can see the indicator in demo
-if ($_POST['slow']) {
+if (isset($_POST['slow'])) {
     usleep(500000);
 }
 

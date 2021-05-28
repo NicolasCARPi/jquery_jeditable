@@ -27,6 +27,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install gnupg \
 COPY . /var/www/html
 RUN ln -s /var/www/html/src /var/www/html/demos/src
 COPY ./apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY ./apache/php.ini /usr/local/etc/php/php.ini
 
 # generate api doc
 WORKDIR /var/www/html
