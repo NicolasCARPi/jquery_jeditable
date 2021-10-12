@@ -58,6 +58,15 @@ $(document).ready(function() {
         tooltip   : 'Double click to edit…'
     });
 
+    $('.editable-select').editable('save.php', {
+        type           : 'select',
+        indicator      : 'Saving ...',
+        loadurl        : 'fetch_options.php',
+        selectcssclass : 'custom-select-css',
+        style          : 'background-color: red',
+        cssclass       : 'custom-form-css'
+    });
+
     $('.edit_area').editable('save.php', {
         type      : 'textarea',
         cancel    : 'Cancel',
