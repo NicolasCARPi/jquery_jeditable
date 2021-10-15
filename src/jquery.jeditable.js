@@ -671,6 +671,25 @@ var _supportInType = function (type) {
                 if (settings.multiple) {
                     select.attr('multiple', 'multiple');
                 }
+                    
+                /* Apply css or style or both. */
+                if (settings.inputcssclass) {
+                    if ('inherit' === settings.inputcssclass) {
+                        select.attr('class', $(self).attr('class'));
+                    } else {
+                        select.attr('class', settings.inputcssclass);
+                    }
+                }
+
+                if (settings.style) {
+                    if ('inherit' === settings.style) {
+                        select.attr('style', $(self).attr('style'));
+                        /* IE needs the second line or display won't be inherited. */
+                        select.css('display', $(self).css('display'))
+                    } else {
+                        select.attr('style', settings.style);
+                    }
+                }
 
                 $(this).append(select);
                 return(select);
