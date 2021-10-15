@@ -65,12 +65,22 @@ $(document).ready(function() {
         indicator : '<img src="img/spinner.svg" />',
         tooltip   : 'Click to edit…'
     });
+
+    $('.editable_select').editable('save.php', {
+        type           : 'select',
+        indicator      : 'Saving ...',
+        loadurl        : 'api/load.php',
+        inputcssclass  : 'form-control',
+        cssclass       : 'form'
+    });
 });
 ~~~
 
 In the code above, the elements of class `edit` will become editable with a double click. It will show 'Saving…' when sending the data. The CSS class `custom-css` will be applied to the element. The button to submit will show the 'Save' text.
 
 The elements of class `edit_area` will become editable with a textarea. An image will be displayed during the save.
+
+The elements of class `edit_select` will become a selectable drop-down list.
 
 Both elements will have a tooltip showing when mouse is hovering.
 
