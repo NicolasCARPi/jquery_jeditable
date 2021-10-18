@@ -84,6 +84,10 @@ $(document).ready(function() {
     $(".editable-select").editable("save.php", {
         type   : "select",
         sortselectoptions: true,
+        // custom class for the select element
+        inputcssclass: 'some-class',
+        // do nothing onBlur
+        onblur: 'ignore',
         data   : '{"Wiki":"Wiki","Banana":"Banana","Apple":"Apple", "Pear":"Pear", "selected":"Pear"}',
         submitdata : function() { return {id : 42, something: 'else'};},
         style  : "inherit"
