@@ -447,7 +447,9 @@
                     }
 
                     /* Show tooltip again. */
-                    $(self).attr('title', settings.tooltip);
+                    if (settings.tooltip) {
+                      $(self).attr('title', settings.tooltip);
+                    }
                     return false;
                 });
             });
