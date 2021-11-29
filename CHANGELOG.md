@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.21
+
+* Fix tooltip getting overwritten (#241)
+* Update dev dependencies
+
 ## 2.0.20
 
 * Update dev dependencies
