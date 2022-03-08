@@ -4,6 +4,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cb32ce695b743d68257021455330c66)](https://www.codacy.com/app/elabftw/jquery_jeditable)
 [![GitHub license](https://img.shields.io/github/license/NicolasCARPi/jquery_jeditable.svg)](https://github.com/NicolasCARPi/jquery_jeditable/blob/master/LICENSE)
 
+# DEPRECATION NOTICE
+
+March 2022: This project is deprecated and should not be used in a fresh project. Have a look at [Malle](https://github.com/deltablot/malle/) library instead. It is more or less the same, but in typescript and without a jQuery dependency.
+
 ## Description
 
 Edit in place plugin for [jQuery](https://jquery.com/) (compatible with jQuery v3.4.0+).
