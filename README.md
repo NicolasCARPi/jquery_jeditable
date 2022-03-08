@@ -6,7 +6,12 @@
 
 # DEPRECATION NOTICE
 
-March 2022: This project is deprecated and should not be used in a fresh project. Have a look at [Malle](https://github.com/deltablot/malle/) library instead. It is more or less the same, but in typescript and without a jQuery dependency.
+**This project is deprecated** and should not be used in a fresh project. Have a look at [Malle](https://github.com/deltablot/malle/) library instead. It is more or less the same, but in typescript and without a jQuery dependency.
+
+## Alternative library
+
+Use [Malle](https://github.com/deltablot/malle/).
+
 
 ## Description
 
